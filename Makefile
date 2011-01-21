@@ -4,7 +4,8 @@ UI_FILES = Ui_PluginBuilder.py
 RESOURCE_FILES = resources.py
 
 default: compile
-	compile: $(UI_FILES) $(RESOURCE_FILES)
+
+compile: $(UI_FILES) $(RESOURCE_FILES)
 
 %.py : %.qrc
 	pyrcc4 -o $@  $<
