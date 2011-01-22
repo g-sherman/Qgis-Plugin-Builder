@@ -133,9 +133,6 @@
        <height>16777215</height>
       </size>
      </property>
-     <property name="inputMask">
-      <string>0.10; </string>
-     </property>
      <property name="text">
       <string>0.1</string>
      </property>
@@ -159,11 +156,8 @@
        <height>16777215</height>
       </size>
      </property>
-     <property name="inputMask">
-      <string>1.5; </string>
-     </property>
      <property name="text">
-      <string>1.5</string>
+      <string>1.0</string>
      </property>
     </widget>
    </item>

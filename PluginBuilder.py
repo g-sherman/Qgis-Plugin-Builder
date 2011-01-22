@@ -114,6 +114,7 @@ class PluginBuilder:
         
     def validate_entries(self):
         # check to see that all fields have been entered
+        msg = ''
         ui = self.dlg.ui
         if ui.lineEdit_class_name.text() == '' or \
           ui.lineEdit_title.text() == '' or \
@@ -123,9 +124,17 @@ class PluginBuilder:
           ui.lineEdit_menu_text == '' or \
           ui.lineEdit_company_name == '' or \
           ui.lineEdit_email_address == '':
+              msg = 'All fields are required to create a plugin\n'
+        try:
+            flt = float(ui.lineEdit_version_no)
+            flt = float(ui.lineEdit_min_version_no)
+        except:
+            msg += 'Version numbers must be numeric'
+        if msg != '':
               QMessageBox.warning(self.dlg, "Missing Information", \
-                      'All fields are required to create a plugin')
+                      msg)
         else:
+            
             self.dlg.accept()
 
 
