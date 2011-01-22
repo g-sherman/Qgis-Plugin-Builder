@@ -91,8 +91,9 @@ class PluginBuilder:
 
             # show the results
             res_dlg = ResultDialog()
+            res_dlg.ui.webView.setHtml("<b>It worked!</b>")
             res_dlg.show()
-            self.res_dlg.exec_()
+            res_dlg.exec_()
 
 
 
