@@ -1,5 +1,5 @@
 # Makefile for a PyQGIS plugin 
-UI_FILES = Ui_PluginBuilder.py
+UI_FILES = Ui_PluginBuilder.py Ui_Results.py
 
 RESOURCE_FILES = resources.py
 

@@ -88,6 +88,11 @@ class PluginBuilder:
             #resource = QFile(os.path.join(template_dir, 'resources.qrc'))
             #resource.copy(os.path.join(self.plugin_dir, 'resources.qrc'))
 
+            # show the results
+            res_dlg = ResultDialog()
+            res_dlg.show()
+            self.res_dlg.exec_()
+
 
 
         
@@ -107,25 +112,6 @@ class PluginBuilder:
         else:
             self.dlg.accept()
 
-    def create_makefile(self, spec):
-        # open the Makefile template and replace the TemplateClass keyword with the class_name
-        makefile_template = open(os.path.join(str(self.plugin_builder_dir), 'templateclass', 'Makefile'))
-        m = makefile_template.read()
-        makefile_template.close()
-        new_makefile = open(os.path.join(self.plugin_dir, 'Makefile'), 'w')
-        template = Template(m)
-        makefile = template.substitute(TemplateClass = spec.class_name)
-        new_makefile.write(makefile)
-        new_makefile.close()
-    def create_init(self, spec):
-        init_template = open(os.path.join(str(self.plugin_builder_dir), 'templateclass', '__init__.tmpl'))
-        s = init_template.read()
-        init_template.close()
-        template = Template(s)
-        init_py = template.substitute(spec.template_map)
-        init = open(os.path.join(self.plugin_dir, '__init__.py'), 'w')
-        init.write(init_py)
-        init.close()
 
     def populate_template(self, spec, template_name, output_name):
         template_file = open(os.path.join(str(self.plugin_builder_dir), 'templateclass', template_name))

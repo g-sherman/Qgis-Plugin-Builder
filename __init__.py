@@ -21,9 +21,9 @@ development.
  This script initializes the plugin, making it known to QGIS.
 """
 def name(): 
-  return "Create a QGIS  plugin template" 
+  return "Plugin Builder"
 def description():
-  return "Creates a QGIS plugin template for use as a starting point"
+  return "Creates a QGIS plugin template for use as a starting point in plugin development"
 def version(): 
   return "Version 0.1" 
 def qgisMinimumVersion():
