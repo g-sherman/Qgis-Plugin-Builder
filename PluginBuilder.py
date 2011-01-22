@@ -89,9 +89,16 @@ class PluginBuilder:
             #resource = QFile(os.path.join(template_dir, 'resources.qrc'))
             #resource.copy(os.path.join(self.plugin_dir, 'resources.qrc'))
 
+            # populate the results template
+            template_file = open(os.path.join(str(self.plugin_builder_dir), 'templateclass', 'results.tmpl'))
+            s = template_file.read()
+            template_file.close()
+            template = Template(s)
+            popped = template.substitute('PluginDIR' = self.plugin_dir)
+
             # show the results
             res_dlg = ResultDialog()
-            res_dlg.ui.webView.setHtml("<b>It worked!</b>")
+            res_dlg.ui.webView.setHtml(popped)
             res_dlg.show()
             res_dlg.exec_()
 
