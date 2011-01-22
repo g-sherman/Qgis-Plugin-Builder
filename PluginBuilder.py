@@ -37,11 +37,12 @@ class PluginBuilder:
     def __init__(self, iface):
         # Save reference to the QGIS interface
         self.iface = iface
-        self.plugin_builder_dir = QFileInfo(QgsApplication.qgisUserDbFilePath()).path() + "/python/plugins/pluginbuilder"
+        self.user_plugin_dir = QFileInfo(QgsApplication.qgisUserDbFilePath()).path() + "/python/plugins"
+        self.plugin_builder_dir = self.user_plugin_dir + "/pluginbuilder"
 
     def initGui(self):  
         # Create action that will start plugin configuration
-        self.action = QAction(QIcon(":/plugins/pluginbuilder/icon.png"), \
+        self.action = QAction(QIcon(":/plugins/pluginbuilder/plugin_builder.png"), \
             "Plugin Builder...", self.iface.mainWindow())
         # connect the action to the run method
         QObject.connect(self.action, SIGNAL("triggered()"), self.run) 
@@ -71,7 +72,9 @@ class PluginBuilder:
         if result == 1:
             spec = PluginSpec(self.dlg.ui)
             # get the location for the plugin
-            self.plugin_dir = QFileDialog.getExistingDirectory(self.dlg, "Select Plugin Location", ".")
+            self.plugin_dir = QFileDialog.getExistingDirectory(self.dlg, "Select the Directory for your Plugin", ".")
+            if self.plugin_dir == '':
+                return
             # create the plugin directory using the class name
             self.plugin_dir = os.path.join(str(self.plugin_dir), str(self.dlg.ui.lineEdit_class_name.text()))
             QDir().mkdir(self.plugin_dir)
@@ -89,10 +92,22 @@ class PluginBuilder:
             #resource = QFile(os.path.join(template_dir, 'resources.qrc'))
             #resource.copy(os.path.join(self.plugin_dir, 'resources.qrc'))
 
+            # populate the results template
+            template_file = open(os.path.join(str(self.plugin_builder_dir), 'templateclass', 'results.tmpl'))
+            s = template_file.read()
+            template_file.close()
+            template = Template(s)
+            result_map = {'PluginDir' : self.plugin_dir, 
+                    'TemplateClass' : spec.template_map['TemplateClass'],
+                    'templateclass' : spec.template_map['templateclass'],
+                    'UserPluginDir' : self.user_plugin_dir}
+            popped = template.substitute(result_map)
+
             # show the results
             res_dlg = ResultDialog()
+            res_dlg.ui.webView.setHtml(popped)
             res_dlg.show()
-            self.res_dlg.exec_()
+            res_dlg.exec_()
 
 
 
