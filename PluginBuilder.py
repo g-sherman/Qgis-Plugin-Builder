@@ -29,6 +29,7 @@ from qgis.core import *
 import resources
 # Import the code for the dialog
 from PluginBuilderDialog import PluginBuilderDialog
+from ResultDialog import ResultDialog
 from pluginspec import PluginSpec
 
 class PluginBuilder:
