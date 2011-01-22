@@ -72,7 +72,7 @@ class PluginBuilder:
         if result == 1:
             spec = PluginSpec(self.dlg.ui)
             # get the location for the plugin
-            self.plugin_dir = QFileDialog.getExistingDirectory(self.dlg, "Select Plugin Location", ".")
+            self.plugin_dir = QFileDialog.getExistingDirectory(self.dlg, "Select the Directory for your Plugin", ".")
             # create the plugin directory using the class name
             self.plugin_dir = os.path.join(str(self.plugin_dir), str(self.dlg.ui.lineEdit_class_name.text()))
             QDir().mkdir(self.plugin_dir)
