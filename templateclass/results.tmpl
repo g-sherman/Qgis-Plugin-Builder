@@ -1,7 +1,24 @@
 <html>
 <body>
 <h3>Plugin Builder Results</h3>
-Your plugin was creating in:<br>
+<div id='help' style='font-size:.8em;'>
+Your plugin $TemplateClass was creating in:<br>
 $PluginDir
+<p>
+Your QGIS plugin directory is located at:<br>
+$UserPluginDir
+<p>
+<b>What's Next</b>
+<ol>
+   <li>Unzip the plugin into your QGIS plugin directory
+   <li>Compile the ui file using puic4
+   <li>Compile the resources file using pyrcc4
+   <li>Test the plugin by enabling it in the QGIS plugin manager
+   <li>Customize it by editing the implementation file ${templateclass}.py
+   <li>Create your own custom icon, replacing default icon.png
+   <li>Modify your user interface by opening ${templateclass}.ui in Qt Designer (don't forget to compile it with pyuic4 after changing it)
+   <li>You can use the Makefile to compile your Ui and resource files when you make changes. This requires GNU make (gmake) 
+</ul>
+</div>
 </body>
 </html>

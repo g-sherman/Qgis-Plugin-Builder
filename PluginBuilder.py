@@ -37,7 +37,8 @@ class PluginBuilder:
     def __init__(self, iface):
         # Save reference to the QGIS interface
         self.iface = iface
-        self.plugin_builder_dir = QFileInfo(QgsApplication.qgisUserDbFilePath()).path() + "/python/plugins/pluginbuilder"
+        self.user_plugin_dir = QFileInfo(QgsApplication.qgisUserDbFilePath()).path() + "/python/plugins"
+        self.plugin_builder_dir = self.user_plugin_dir + "/python/plugins/pluginbuilder"
 
     def initGui(self):  
         # Create action that will start plugin configuration
@@ -94,7 +95,7 @@ class PluginBuilder:
             s = template_file.read()
             template_file.close()
             template = Template(s)
-            result_map = {'PluginDir' : self.plug_dir}
+            result_map = {'PluginDir' : self.plug_dir, 'TemplateClass' : spec.TemplateClass }
             popped = template.substitute(result_map)
 
             # show the results
