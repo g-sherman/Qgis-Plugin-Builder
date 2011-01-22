@@ -38,7 +38,7 @@ class PluginBuilder:
         # Save reference to the QGIS interface
         self.iface = iface
         self.user_plugin_dir = QFileInfo(QgsApplication.qgisUserDbFilePath()).path() + "/python/plugins"
-        self.plugin_builder_dir = self.user_plugin_dir + "/python/plugins/pluginbuilder"
+        self.plugin_builder_dir = self.user_plugin_dir + "/pluginbuilder"
 
     def initGui(self):  
         # Create action that will start plugin configuration
