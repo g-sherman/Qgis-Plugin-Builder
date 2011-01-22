@@ -65,7 +65,7 @@
    <item row="0" column="3">
     <widget class="QLineEdit" name="lineEdit_class_name">
      <property name="text">
-      <string>TestMe</string>
+      <string/>
      </property>
     </widget>
    </item>
@@ -88,7 +88,7 @@
       </size>
      </property>
      <property name="text">
-      <string>A Test Me plugin</string>
+      <string/>
      </property>
     </widget>
    </item>
@@ -111,7 +111,7 @@
       </size>
      </property>
      <property name="text">
-      <string>Does test stuff</string>
+      <string/>
      </property>
     </widget>
    </item>
@@ -186,7 +186,7 @@
       </size>
      </property>
      <property name="text">
-      <string>Test Me...</string>
+      <string/>
      </property>
     </widget>
    </item>
@@ -209,7 +209,7 @@
       </size>
      </property>
      <property name="text">
-      <string>GeoApt LLC</string>
+      <string/>
      </property>
     </widget>
    </item>
@@ -232,7 +232,7 @@
       </size>
      </property>
      <property name="text">
-      <string>gsherman@geoapt.com</string>
+      <string/>
      </property>
     </widget>
    </item>
