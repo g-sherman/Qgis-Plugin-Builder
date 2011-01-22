@@ -20,7 +20,7 @@ email                : gsherman@geoapt.com
 """
 
 from PyQt4 import QtCore, QtGui 
-from Ui_PluginBuilder import Ui_PluginBuilder
+from Ui_Results import Ui_Results
 # create the dialog for showing results
 class ResultDialog(QtGui.QDialog):
   def __init__(self): 
