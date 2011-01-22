@@ -63,7 +63,11 @@
     </widget>
    </item>
    <item row="0" column="3">
-    <widget class="QLineEdit" name="lineEdit_class_name"/>
+    <widget class="QLineEdit" name="lineEdit_class_name">
+     <property name="text">
+      <string>TestMe</string>
+     </property>
+    </widget>
    </item>
    <item row="1" column="2">
     <widget class="QLabel" name="label_2">
@@ -82,6 +86,9 @@
        <width>250</width>
        <height>0</height>
       </size>
+     </property>
+     <property name="text">
+      <string>A Test Me plugin</string>
      </property>
     </widget>
    </item>
@@ -103,6 +110,9 @@
        <height>0</height>
       </size>
      </property>
+     <property name="text">
+      <string>Does test stuff</string>
+     </property>
     </widget>
    </item>
    <item row="3" column="2">
@@ -122,6 +132,9 @@
        <width>60</width>
        <height>16777215</height>
       </size>
+     </property>
+     <property name="inputMask">
+      <string>0.10; </string>
      </property>
      <property name="text">
       <string>0.1</string>
@@ -146,8 +159,11 @@
        <height>16777215</height>
       </size>
      </property>
+     <property name="inputMask">
+      <string>1.5; </string>
+     </property>
      <property name="text">
-      <string>1.0</string>
+      <string>1.5</string>
      </property>
     </widget>
    </item>
@@ -169,6 +185,9 @@
        <height>0</height>
       </size>
      </property>
+     <property name="text">
+      <string>Test Me...</string>
+     </property>
     </widget>
    </item>
    <item row="6" column="2">
@@ -189,6 +208,9 @@
        <height>0</height>
       </size>
      </property>
+     <property name="text">
+      <string>GeoApt LLC</string>
+     </property>
     </widget>
    </item>
    <item row="7" column="2">
@@ -208,6 +230,9 @@
        <width>200</width>
        <height>0</height>
       </size>
+     </property>
+     <property name="text">
+      <string>gsherman@geoapt.com</string>
      </property>
     </widget>
    </item>
@@ -241,29 +266,13 @@
  <connections>
   <connection>
    <sender>buttonBox</sender>
-   <signal>accepted()</signal>
-   <receiver>PluginBuilder</receiver>
-   <slot>accept()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>157</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>buttonBox</sender>
    <signal>rejected()</signal>
    <receiver>PluginBuilder</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
+     <x>839</x>
+     <y>418</y>
     </hint>
     <hint type="destinationlabel">
      <x>286</x>
