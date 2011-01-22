@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>Ui_Results</class>
- <widget class="QDialog" name="dlgResults">
+ <widget class="QDialog" name="Ui_Results">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -47,7 +47,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>dlgResults</receiver>
+   <receiver>Ui_Results</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -63,7 +63,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>dlgResults</receiver>
+   <receiver>Ui_Results</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
