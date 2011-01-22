@@ -118,16 +118,16 @@ class PluginBuilder:
         ui = self.dlg.ui
         if ui.lineEdit_class_name.text() == '' or \
           ui.lineEdit_title.text() == '' or \
-          ui.lineEdit_description == '' or \
-          ui.lineEdit_version_no == '' or \
-          ui.lineEdit_min_version_no == '' or \
-          ui.lineEdit_menu_text == '' or \
-          ui.lineEdit_company_name == '' or \
-          ui.lineEdit_email_address == '':
+          ui.lineEdit_description.text() == '' or \
+          ui.lineEdit_version_no.text() == '' or \
+          ui.lineEdit_min_version_no.text() == '' or \
+          ui.lineEdit_menu_text.text() == '' or \
+          ui.lineEdit_company_name.text() == '' or \
+          ui.lineEdit_email_address.text() == '':
               msg = 'All fields are required to create a plugin\n'
         try:
-            flt = float(ui.lineEdit_version_no)
-            flt = float(ui.lineEdit_min_version_no)
+            flt = float(str(ui.lineEdit_version_no.text()))
+            flt = float(str(ui.lineEdit_min_version_no.text()))
         except:
             msg += 'Version numbers must be numeric'
         if msg != '':
