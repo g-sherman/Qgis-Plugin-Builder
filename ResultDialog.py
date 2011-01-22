@@ -26,6 +26,6 @@ class ResultDialog(QtGui.QDialog):
   def __init__(self): 
     QtGui.QDialog.__init__(self) 
     # Set up the user interface from Designer. 
-    self.ui = Ui_Results.py()
+    self.ui = Ui_Results()
     self.ui.setupUi(self) 
 
