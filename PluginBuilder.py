@@ -94,7 +94,8 @@ class PluginBuilder:
             s = template_file.read()
             template_file.close()
             template = Template(s)
-            popped = template.substitute(PluginDIR=self.plugin_dir)
+            result_map = {'PluginDir' : self.plug_dir}
+            popped = template.substitute(result_map)
 
             # show the results
             res_dlg = ResultDialog()
