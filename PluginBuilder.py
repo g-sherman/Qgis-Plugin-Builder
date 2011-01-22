@@ -42,7 +42,7 @@ class PluginBuilder:
 
     def initGui(self):  
         # Create action that will start plugin configuration
-        self.action = QAction(QIcon(":/plugins/pluginbuilder/icon.png"), \
+        self.action = QAction(QIcon(":/plugins/pluginbuilder/plugin_builder.png"), \
             "Plugin Builder...", self.iface.mainWindow())
         # connect the action to the run method
         QObject.connect(self.action, SIGNAL("triggered()"), self.run) 
