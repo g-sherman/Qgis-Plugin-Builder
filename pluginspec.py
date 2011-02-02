@@ -21,5 +21,3 @@ class PluginSpec:
                     'TemplateMenuText' : self.menu_text,
                     'PluginDirName' : self.class_name.lower()
                     }
-
-

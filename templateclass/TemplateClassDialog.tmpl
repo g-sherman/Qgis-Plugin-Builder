@@ -4,9 +4,9 @@ ${TemplateClass}Dialog
 A QGIS plugin
 $TemplateDescription
                              -------------------
-begin                : 2011-01-20 
+begin                : 2011-01-20
 copyright            : (C) 2011 by $TemplateAuthor
-email                : $TemplateEmail 
+email                : $TemplateEmail
  ***************************************************************************/
 
 /***************************************************************************
@@ -19,13 +19,12 @@ email                : $TemplateEmail
  ***************************************************************************/
 """
 
-from PyQt4 import QtCore, QtGui 
+from PyQt4 import QtCore, QtGui
 from ui_${templateclass} import Ui_${TemplateClass}
 # create the dialog for zoom to point
 class ${TemplateClass}Dialog(QtGui.QDialog):
-  def __init__(self): 
-    QtGui.QDialog.__init__(self) 
-    # Set up the user interface from Designer. 
-    self.ui = Ui_${TemplateClass}()
-    self.ui.setupUi(self) 
-
+    def __init__(self):
+        QtGui.QDialog.__init__(self)
+        # Set up the user interface from Designer.
+        self.ui = Ui_${TemplateClass}()
+        self.ui.setupUi(self)

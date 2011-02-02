@@ -4,9 +4,9 @@ PluginBuilderDialog
 A QGIS plugin
 Creates a skeleton QGIS plugin for use as a starting point
                              -------------------
-begin                : 2011-01-20 
+begin                : 2011-01-20
 copyright            : (C) 2011 by GeoApt LLC
-email                : gsherman@geoapt.com 
+email                : gsherman@geoapt.com
  ***************************************************************************/
 
 /***************************************************************************
@@ -19,13 +19,12 @@ email                : gsherman@geoapt.com
  ***************************************************************************/
 """
 
-from PyQt4 import QtCore, QtGui 
+from PyQt4 import QtCore, QtGui
 from Ui_PluginBuilder import Ui_PluginBuilder
 # create the dialog for zoom to point
 class PluginBuilderDialog(QtGui.QDialog):
-  def __init__(self): 
-    QtGui.QDialog.__init__(self) 
-    # Set up the user interface from Designer. 
-    self.ui = Ui_PluginBuilder()
-    self.ui.setupUi(self) 
-
+    def __init__(self):
+        QtGui.QDialog.__init__(self)
+        # Set up the user interface from Designer.
+        self.ui = Ui_PluginBuilder()
+        self.ui.setupUi(self)

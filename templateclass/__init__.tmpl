@@ -4,9 +4,9 @@ $TemplateClass
 A QGIS plugin
 $TemplateDescription
                              -------------------
-begin                : 2011-01-20 
+begin                : 2011-01-20
 copyright            : (C) 2011 by $TemplateAuthor
-email                : $TemplateEmail 
+email                : $TemplateEmail
  ***************************************************************************/
 
 /***************************************************************************
@@ -19,19 +19,17 @@ email                : $TemplateEmail
  ***************************************************************************/
  This script initializes the plugin, making it known to QGIS.
 """
-def name(): 
-  return "$TemplateTitle" 
+def name():
+    return "$TemplateTitle"
 def description():
-  return "$TemplateDescription"
-def version(): 
-  return "Version $TemplateVersion" 
+    return "$TemplateDescription"
+def version():
+    return "Version $TemplateVersion"
 def icon():
-  return "icon.png"
+    return "icon.png"
 def qgisMinimumVersion():
-  return "$TemplateQgisVersion"
-def classFactory(iface): 
-  # load $TemplateClass class from file $TemplateClass
-  from $templateclass import $TemplateClass 
-  return $TemplateClass(iface)
-
-
+    return "$TemplateQgisVersion"
+def classFactory(iface):
+    # load $TemplateClass class from file $TemplateClass
+    from $templateclass import $TemplateClass
+    return $TemplateClass(iface)

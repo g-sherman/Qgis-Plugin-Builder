@@ -4,9 +4,9 @@ PluginBuilder
 A QGIS plugin
 Creates a skeleton QGIS plugin for use as a starting point
                              -------------------
-begin                : 2011-01-20 
+begin                : 2011-01-20
 copyright            : (C) 2011 by GeoApt LLC
-email                : gsherman@geoapt.com 
+email                : gsherman@geoapt.com
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,7 +22,7 @@ email                : gsherman@geoapt.com
 import os
 from string import Template
 # Import the PyQt and QGIS libraries
-from PyQt4.QtCore import * 
+from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from qgis.core import *
 # Initialize Qt resources from file resources.py
@@ -40,12 +40,12 @@ class PluginBuilder:
         self.user_plugin_dir = QFileInfo(QgsApplication.qgisUserDbFilePath()).path() + "/python/plugins"
         self.plugin_builder_dir = self.user_plugin_dir + "/pluginbuilder"
 
-    def initGui(self):  
+    def initGui(self):
         # Create action that will start plugin configuration
         self.action = QAction(QIcon(":/plugins/pluginbuilder/plugin_builder.png"), \
             "Plugin Builder...", self.iface.mainWindow())
         # connect the action to the run method
-        QObject.connect(self.action, SIGNAL("triggered()"), self.run) 
+        QObject.connect(self.action, SIGNAL("triggered()"), self.run)
 
         # Add toolbar button and menu item
         self.iface.addToolBarIcon(self.action)
@@ -58,16 +58,16 @@ class PluginBuilder:
         self.iface.removeToolBarIcon(self.action)
 
     # run method that performs all the real work
-    def run(self): 
-        # create and show the dialog 
-        self.dlg = PluginBuilderDialog() 
+    def run(self):
+        # create and show the dialog
+        self.dlg = PluginBuilderDialog()
         #QMessageBox.warning(self.dlg, "Plugin Dir", self.plugin_builder_dir)
         # connect the ok button to our method
         QObject.connect(self.dlg.ui.buttonBox, SIGNAL("accepted()"), self.validate_entries)
 
         # show the dialog
         self.dlg.show()
-        result = self.dlg.exec_() 
+        result = self.dlg.exec_()
         # See if OK was pressed
         if result == 1:
             spec = PluginSpec(self.dlg.ui)
@@ -97,7 +97,7 @@ class PluginBuilder:
             s = template_file.read()
             template_file.close()
             template = Template(s)
-            result_map = {'PluginDir' : self.plugin_dir, 
+            result_map = {'PluginDir' : self.plugin_dir,
                     'TemplateClass' : spec.template_map['TemplateClass'],
                     'templateclass' : spec.template_map['templateclass'],
                     'UserPluginDir' : self.user_plugin_dir}
@@ -111,7 +111,7 @@ class PluginBuilder:
 
 
 
-        
+
     def validate_entries(self):
         # check to see that all fields have been entered
         msg = ''
@@ -124,17 +124,17 @@ class PluginBuilder:
           ui.lineEdit_menu_text.text() == '' or \
           ui.lineEdit_company_name.text() == '' or \
           ui.lineEdit_email_address.text() == '':
-              msg = 'All fields are required to create a plugin\n'
+            msg = 'All fields are required to create a plugin\n'
         try:
             flt = float(str(ui.lineEdit_version_no.text()))
             flt = float(str(ui.lineEdit_min_version_no.text()))
         except:
             msg += 'Version numbers must be numeric'
         if msg != '':
-              QMessageBox.warning(self.dlg, "Missing Information", \
-                      msg)
+            QMessageBox.warning(self.dlg, "Missing Information", \
+                    msg)
         else:
-            
+
             self.dlg.accept()
 
 
@@ -147,4 +147,3 @@ class PluginBuilder:
         plugin_file = open(os.path.join(self.plugin_dir, output_name), 'w')
         plugin_file.write(popped)
         plugin_file.close()
-
