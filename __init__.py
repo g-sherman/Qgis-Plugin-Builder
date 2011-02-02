@@ -1,9 +1,9 @@
 """
 /***************************************************************************
-PluginBuilder
+    PluginBuilder
 
-Creates a QGIS plugin template for use as a starting point in plugin
-development.
+    Creates a QGIS plugin template for use as a starting point in plugin
+    development.
                              -------------------
         begin                : 2011-01-20
         copyright            : (C) 2011 by GeoApt LLC

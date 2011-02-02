@@ -1,4 +1,6 @@
 *.pyc
 *.bak
 *.swp
+*.swo
+*.swn
 

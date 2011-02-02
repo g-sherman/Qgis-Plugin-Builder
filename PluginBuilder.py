@@ -1,12 +1,12 @@
 """
 /***************************************************************************
-PluginBuilder
-A QGIS plugin
-Creates a skeleton QGIS plugin for use as a starting point
+    PluginBuilder
+                                 A QGIS plugin
+    Creates a skeleton QGIS plugin for use as a starting point
                              -------------------
-begin                : 2011-01-20
-copyright            : (C) 2011 by GeoApt LLC
-email                : gsherman@geoapt.com
+        begin                : 2011-01-20
+        copyright            : (C) 2011 by GeoApt LLC
+        email                : gsherman@geoapt.com
  ***************************************************************************/
 
 /***************************************************************************
@@ -21,6 +21,7 @@ email                : gsherman@geoapt.com
 # Import Python stuff
 import os
 from string import Template
+import datetime
 # Import the PyQt and QGIS libraries
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
@@ -71,6 +72,11 @@ class PluginBuilder:
         # See if OK was pressed
         if result == 1:
             spec = PluginSpec(self.dlg.ui)
+            # Add the date stuff to the template map
+            now = datetime.date.today()
+            spec.template_map['TemplateYear'] = now.year
+            spec.template_map['TemplateBuildDate'] = "%i-%02i-%02i" % (now.year, now.month, now.day)
+
             # get the location for the plugin
             self.plugin_dir = QFileDialog.getExistingDirectory(self.dlg, "Select the Directory for your Plugin", ".")
             if self.plugin_dir == '':

@@ -1,12 +1,12 @@
 """
 /***************************************************************************
-PluginBuilderDialog
-A QGIS plugin
-Creates a skeleton QGIS plugin for use as a starting point
+    PluginBuilderDialog
+
+    Creates a skeleton QGIS plugin for use as a starting point
                              -------------------
-begin                : 2011-01-20
-copyright            : (C) 2011 by GeoApt LLC
-email                : gsherman@geoapt.com
+        begin                : 2011-01-20
+        copyright            : (C) 2011 by GeoApt LLC
+        email                : gsherman@geoapt.com
  ***************************************************************************/
 
 /***************************************************************************
