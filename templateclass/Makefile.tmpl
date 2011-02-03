@@ -19,6 +19,12 @@
 
 # Makefile for a PyQGIS plugin 
 
+PLUGINNAME = ${templateclass}
+
+PY_FILES = ${templateclass}.py ${templateclass}dialog.py __init__.py
+
+EXTRAS = icon.png 
+
 UI_FILES = ui_${templateclass}.py
 
 RESOURCE_FILES = resources.py
@@ -32,3 +38,14 @@ compile: $$(UI_FILES) $$(RESOURCE_FILES)
 
 %.py : %.ui
 	pyuic4 -o $$@ $$<
+
+# The deploy  target only works on unix like operating system where
+# the Python plugin directory is located at:
+# $$HOME/.qgis/python/plugins
+deploy: compile
+	mkdir -p $$(HOME)/.qgis/python/plugins/$$(PLUGINNAME)
+	cp -vf $$(PY_FILES) $$(HOME)/.qgis/python/plugins/$$(PLUGINNAME)
+	cp -vf $$(UI_FILES) $$(HOME)/.qgis/python/plugins/$$(PLUGINNAME)
+	cp -vf $$(RESOURCE_FILES) $$(HOME)/.qgis/python/plugins/$$(PLUGINNAME)
+	cp -vf $$(EXTRAS) $$(HOME)/.qgis/python/plugins/$$(PLUGINNAME)
+
