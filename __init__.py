@@ -32,5 +32,5 @@ def qgisMinimumVersion():
     return "1.0"
 def classFactory(iface):
     # load PluginBuilder class from file PluginBuilder
-    from PluginBuilder import PluginBuilder
+    from pluginbuilder import PluginBuilder
     return PluginBuilder(iface)

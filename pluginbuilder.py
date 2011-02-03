@@ -29,8 +29,8 @@ from qgis.core import *
 # Initialize Qt resources from file resources.py
 import resources
 # Import the code for the dialog
-from PluginBuilderDialog import PluginBuilderDialog
-from ResultDialog import ResultDialog
+from pluginbuilder_dialog import PluginBuilderDialog
+from result_dialog import ResultDialog
 from pluginspec import PluginSpec
 
 class PluginBuilder:

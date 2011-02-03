@@ -21,13 +21,13 @@
 #
 PLUGINNAME=pluginbuilder
 
-PY_FILES = PluginBuilder.py PluginBuilderDialog.py ResultDialog.py __init__.py pluginspec.py
+PY_FILES = pluginbuilder.py pluginbuilder_dialog.py result_dialog.py __init__.py pluginspec.py
 
 TEMPLATE_DIR = templateclass
 
 EXTRAS = help.html icon.png plugin_builder.png
 
-UI_FILES = Ui_PluginBuilder.py Ui_Results.py
+UI_FILES = ui_pluginbuilder.py ui_results.py
 
 RESOURCE_FILES = resources.py
 
@@ -52,3 +52,5 @@ deploy: compile
 	cp -vf $(EXTRAS) $(HOME)/.qgis/python/plugins/$(PLUGINNAME)
 	cp -rvf $(TEMPLATE_DIR) $(HOME)/.qgis/python/plugins/$(PLUGINNAME)
 
+clean:
+	rm $(UI_FILES)

@@ -20,7 +20,7 @@
 """
 
 from PyQt4 import QtCore, QtGui
-from Ui_PluginBuilder import Ui_PluginBuilder
+from ui_pluginbuilder import Ui_PluginBuilder
 # create the dialog for zoom to point
 class PluginBuilderDialog(QtGui.QDialog):
     def __init__(self):
