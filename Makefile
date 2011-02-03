@@ -53,4 +53,4 @@ deploy: compile
 	cp -rvf $(TEMPLATE_DIR) $(HOME)/.qgis/python/plugins/$(PLUGINNAME)
 
 clean:
-	rm $(UI_FILES)
+	rm $(UI_FILES) $(RESOURCE_FILES)
