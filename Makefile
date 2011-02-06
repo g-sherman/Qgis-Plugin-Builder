@@ -52,5 +52,11 @@ deploy: compile
 	cp -vf $(EXTRAS) $(HOME)/.qgis/python/plugins/$(PLUGINNAME)
 	cp -rvf $(TEMPLATE_DIR) $(HOME)/.qgis/python/plugins/$(PLUGINNAME)
 
+# Create a zip package. Requires passing a valid commit or tag as follows:
+#   make package VERSION=Version_0.3.2
+package: compile
+		rm -f pluginbuilder.zip
+		git archive --prefix=pluginbuilder/ -o pluginbuilder.zip $(VERSION)
+
 clean:
 	rm $(UI_FILES) $(RESOURCE_FILES)

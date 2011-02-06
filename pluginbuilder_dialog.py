@@ -21,7 +21,7 @@
 
 from PyQt4 import QtCore, QtGui
 from ui_pluginbuilder import Ui_PluginBuilder
-# create the dialog for zoom to point
+# create the dialog for the plugin builder
 class PluginBuilderDialog(QtGui.QDialog):
     def __init__(self):
         QtGui.QDialog.__init__(self)
