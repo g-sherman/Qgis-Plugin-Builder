@@ -66,6 +66,9 @@ class PluginBuilder:
         # connect the ok button to our method
         QObject.connect(self.dlg.ui.buttonBox, SIGNAL("accepted()"), self.validate_entries)
 
+        # populate the left panel
+        self.dlg.ui.webView.setUrl(QUrl("file:///%s/help.html" % self.plugin_builder_dir))
+
         # show the dialog
         self.dlg.show()
         result = self.dlg.exec_()

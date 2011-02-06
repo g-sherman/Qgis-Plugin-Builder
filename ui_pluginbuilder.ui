@@ -38,11 +38,6 @@
 	border-left: solid 2px black;
 }</string>
      </property>
-     <property name="url">
-      <url>
-       <string>file:///Users/gsherman/.qgis/python/plugins/pluginbuilder/help.html</string>
-      </url>
-     </property>
     </widget>
    </item>
    <item row="0" column="1" rowspan="9">

@@ -25,7 +25,7 @@ def name():
 def description():
     return "Creates a QGIS plugin template for use as a starting point in plugin development"
 def version():
-    return "Version 0.1"
+    return "Version 0.3"
 def icon():
     return 'plugin_builder.png'
 def qgisMinimumVersion():
