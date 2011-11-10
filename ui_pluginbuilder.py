@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_pluginbuilder.ui'
 #
-# Created: Thu Nov 10 08:00:21 2011
+# Created: Thu Nov 10 08:21:03 2011
 #      by: PyQt4 UI code generator 4.8.6
 #
 # WARNING! All changes made in this file will be lost!
@@ -18,7 +18,7 @@ class Ui_PluginBuilder(object):
     def setupUi(self, PluginBuilder):
         PluginBuilder.setObjectName(_fromUtf8("PluginBuilder"))
         PluginBuilder.resize(846, 456)
-        PluginBuilder.setWindowTitle(QtGui.QApplication.translate("PluginBuilder", "QGIS Plugin Builder", None, QtGui.QApplication.UnicodeUTF8))
+        PluginBuilder.setWindowTitle(QtGui.QApplication.translate("PluginBuilder", "QGIS Plugin Builder 1.8", None, QtGui.QApplication.UnicodeUTF8))
         self.gridLayout = QtGui.QGridLayout(PluginBuilder)
         self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
         self.webView = QtWebKit.QWebView(PluginBuilder)
