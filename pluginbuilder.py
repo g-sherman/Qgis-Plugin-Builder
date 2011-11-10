@@ -67,6 +67,8 @@ class PluginBuilder:
         QObject.connect(self.dlg.ui.buttonBox, SIGNAL("accepted()"), self.validate_entries)
 
         # populate the left panel
+        #QMessageBox.warning(self.dlg, "Help Path", "Setting help url to: file:///%s/help.html" % self.plugin_builder_dir)
+
         self.dlg.ui.webView.setUrl(QUrl("file:///%s/help.html" % self.plugin_builder_dir))
 
         # show the dialog
@@ -112,6 +114,27 @@ class PluginBuilder:
                     'UserPluginDir' : self.user_plugin_dir}
             popped = template.substitute(result_map)
 
+            # create the metadata file
+            md = open(os.path.join(str(self.plugin_dir), 'metadata.txt'), 'w')
+            metadata_comment = """# This file contains metadata for your plugin. Beginning
+# with version 1.8 this is the preferred way to supply information about a
+# plugin. The current method of embedding metadata in __init__.py will
+# be supported until version 2.0
+
+# This file should be included when you package your plugin.\n\n"""
+
+            md.write(metadata_comment)
+            md.write("[general]\n")
+            md.write("name=%s\n" % spec.title)
+            md.write("description=%s\n" % spec.description)
+            md.write("version=%s\n" % spec.version_no)
+            md.write("qgisMinimumVersion=%s\n" % spec.min_version_no)
+            md.write("class_name=%s\n" % spec.class_name)
+            md.write("author=%s\n" % spec.author)
+            md.write("email_address=%s\n" % spec.email_address)
+            md.close()
+
+            
             # show the results
             res_dlg = ResultDialog()
             res_dlg.ui.webView.setHtml(popped)

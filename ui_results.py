@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'ui_results.ui'
 #
-# Created: Wed Feb  2 21:21:26 2011
-#      by: PyQt4 UI code generator 4.8.2
+# Created: Thu Nov 10 07:24:24 2011
+#      by: PyQt4 UI code generator 4.8.6
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -18,6 +18,7 @@ class Ui_Results(object):
     def setupUi(self, Results):
         Results.setObjectName(_fromUtf8("Results"))
         Results.resize(751, 576)
+        Results.setWindowTitle(QtGui.QApplication.translate("Results", "Plugin Builder Results", None, QtGui.QApplication.UnicodeUTF8))
         self.gridLayout = QtGui.QGridLayout(Results)
         self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
         self.webView = QtWebKit.QWebView(Results)
@@ -39,6 +40,6 @@ class Ui_Results(object):
         QtCore.QMetaObject.connectSlotsByName(Results)
 
     def retranslateUi(self, Results):
-        Results.setWindowTitle(QtGui.QApplication.translate("Results", "Plugin Builder Results", None, QtGui.QApplication.UnicodeUTF8))
+        pass
 
 from PyQt4 import QtWebKit
