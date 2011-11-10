@@ -1,0 +1,15 @@
+# This file contains metadata for your plugin. Beginning
+# with version 1.8 this is the preferred way to supply information about a
+# plugin. The current method of embedding metadata in __init__.py will
+# be supported until version 2.0
+
+# This file should be included when you package your plugin.
+
+[general]
+name=Plugin Builder
+description=Creates a QGIS plugin template for use as a starting point in plugin development
+version=Version 1.8.0
+qgisMinimumVersion=1.0
+class_name=PluginBuilder
+author=GeoApt LLC
+email_address=gsherman@geoapt.com
