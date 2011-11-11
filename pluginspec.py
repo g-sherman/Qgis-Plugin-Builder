@@ -18,6 +18,8 @@
  *                                                                         *
  ***************************************************************************/
 """
+from string import capwords
+
 # Class to store all information needed to create the plugin
 class PluginSpec:
 
@@ -30,6 +32,7 @@ class PluginSpec:
         self.min_version_no = ui.lineEdit_min_version_no.text()
         self.title = ui.lineEdit_title.text()
         self.version_no = ui.lineEdit_version_no.text()
+        self.website = ui.lineEdit_website.text()
 
         self.template_map = {'TemplateClass' : self.class_name,
                     'templateclass' : self.class_name.lower(),

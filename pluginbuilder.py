@@ -21,6 +21,7 @@
 # Import Python stuff
 import os
 from string import Template
+from string import capwords
 import datetime
 # Import the PyQt and QGIS libraries
 from PyQt4.QtCore import *
@@ -86,7 +87,10 @@ class PluginBuilder:
             self.plugin_dir = QFileDialog.getExistingDirectory(self.dlg, "Select the Directory for your Plugin", ".")
             if self.plugin_dir == '':
                 return
+            # remove spaces from the plugin name
+            
             # create the plugin directory using the class name
+
             self.plugin_dir = os.path.join(str(self.plugin_dir), str(self.dlg.ui.lineEdit_class_name.text()))
             QDir().mkdir(self.plugin_dir)
             # process the user entries
@@ -130,8 +134,10 @@ class PluginBuilder:
             md.write("version=%s\n" % spec.version_no)
             md.write("qgisMinimumVersion=%s\n" % spec.min_version_no)
             md.write("class_name=%s\n" % spec.class_name)
-            md.write("author=%s\n" % spec.author)
-            md.write("email_address=%s\n" % spec.email_address)
+            md.write("website=%s\n" % spec.website)
+            md.write("[author]\n")
+            md.write("name=%s\n" % spec.author)
+            md.write("email=%s\n" % spec.email_address)
             md.close()
 
             
@@ -156,12 +162,17 @@ class PluginBuilder:
           ui.lineEdit_menu_text.text() == '' or \
           ui.lineEdit_company_name.text() == '' or \
           ui.lineEdit_email_address.text() == '':
-            msg = 'All fields are required to create a plugin\n'
+            msg = 'All fields except Website are required to create a plugin\n'
         try:
             flt = float(str(ui.lineEdit_version_no.text()))
             flt = float(str(ui.lineEdit_min_version_no.text()))
         except:
             msg += 'Version numbers must be numeric'
+        # validate plugin name
+        if str(ui.lineEdit_class_name.text()).find(' ') > -1:
+            class_name = capwords(str(ui.lineEdit_class_name.text()))
+            ui.lineEdit_class_name.setText(class_name.replace(' ',''))
+            msg += 'The Class name must use CamelCase. No spaces are allowed'
         if msg != '':
             QMessageBox.warning(self.dlg, "Missing Information", \
                     msg)
