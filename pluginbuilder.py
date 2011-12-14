@@ -104,6 +104,9 @@ class PluginBuilder:
             template_dir = os.path.join(str(self.plugin_builder_dir), 'templateclass')
             icon = QFile(os.path.join(template_dir, 'icon.png'))
             icon.copy(os.path.join(self.plugin_dir, 'icon.png'))
+            release_script = QFile(os.path.join(template_dir, 'release.sh'))
+            release_script.copy(os.path.join(self.plugin_dir, 'release.sh'))
+
             #resource = QFile(os.path.join(template_dir, 'resources.qrc'))
             #resource.copy(os.path.join(self.plugin_dir, 'resources.qrc'))
 
@@ -137,13 +140,13 @@ class PluginBuilder:
             md.write("description=%s\n" % spec.description)
             md.write("version=%s\n\n" % spec.version_no)
             md.write("# end of mandatory metadata\n\n")
-            mdwrite("# Optional items:\n\n")
-            mdwrite(" # Uncomment the following line and add your changelog entries:\n")
-            mdwrite("# changelog=\n\n")
-            mdwrite("# tags are comma separated with spaces allowed\n")
-            mdwrite("tags=%s\n\n" % spec.tags)
+            md.write("# Optional items:\n\n")
+            md.write(" # Uncomment the following line and add your changelog entries:\n")
+            md.write("# changelog=\n\n")
+            md.write("# tags are comma separated with spaces allowed\n")
+            md.write("tags=%s\n\n" % spec.tags)
 
-            md.write("homepage=%s\n" % spec.website)
+            md.write("homepage=%s\n" % spec.homepage)
             md.write("tracker=%s\n" % spec.tracker)
             md.write("repository=%s\n" % spec.repository)
             md.write("icon=%s\n" % spec.icon)
@@ -191,7 +194,7 @@ class PluginBuilder:
         if str(ui.lineEdit_class_name.text()).find(' ') > -1:
             class_name = capwords(str(ui.lineEdit_class_name.text()))
             ui.lineEdit_class_name.setText(class_name.replace(' ',''))
-            msg += 'The Class name must use CamelCase. No spaces are allowed'
+            msg += 'The Class name must use CamelCase. No spaces are allowed---the name has been modified for you.'
         if msg != '':
             QMessageBox.warning(self.dlg, "Missing Information", \
                     msg)
