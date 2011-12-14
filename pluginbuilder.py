@@ -125,17 +125,36 @@ class PluginBuilder:
 # plugin. The current method of embedding metadata in __init__.py will
 # be supported until version 2.0
 
-# This file should be included when you package your plugin.\n\n"""
+# This file should be included when you package your plugin.
+
+# Mandatory items:
+\n\n"""
 
             md.write(metadata_comment)
             md.write("[general]\n")
             md.write("name=%s\n" % spec.title)
-            md.write("description=%s\n" % spec.description)
-            md.write("version=%s\n" % spec.version_no)
             md.write("qgisMinimumVersion=%s\n" % spec.min_version_no)
-            md.write("class_name=%s\n" % spec.class_name)
-            md.write("website=%s\n" % spec.website)
-            md.write("[author]\n")
+            md.write("description=%s\n" % spec.description)
+            md.write("version=%s\n\n" % spec.version_no)
+            md.write("# end of mandatory metadata\n\n")
+            mdwrite("# Optional items:\n\n")
+            mdwrite(" # Uncomment the following line and add your changelog entries:\n")
+            mdwrite("# changelog=\n\n")
+            mdwrite("# tags are comma separated with spaces allowed\n")
+            mdwrite("tags=%s\n\n" % spec.tags)
+
+            md.write("homepage=%s\n" % spec.website)
+            md.write("tracker=%s\n" % spec.tracker)
+            md.write("repository=%s\n" % spec.repository)
+            md.write("icon=%s\n" % spec.icon)
+
+            md.write("# experimental flag\n")
+            md.write("experimental=%s\n\n" % spec.experimental)
+
+            md.write("# deprecated flag (applies to the whole plugin, not just a single version\n")
+            md.write("deprecated=%s\n\n" % spec.deprecated)
+
+            md.write("# Author contact information\n")
             md.write("name=%s\n" % spec.author)
             md.write("email=%s\n" % spec.email_address)
             md.close()
