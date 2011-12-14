@@ -20,5 +20,5 @@ icon=plugin_builder.png
 experimental=False
 deprecated=False
 
-name=GeoApt LLC
+author=GeoApt LLC
 email=gsherman@geoapt.com

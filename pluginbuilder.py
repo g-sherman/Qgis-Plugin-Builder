@@ -158,7 +158,7 @@ class PluginBuilder:
             md.write("deprecated=%s\n\n" % spec.deprecated)
 
             md.write("# Author contact information\n")
-            md.write("name=%s\n" % spec.author)
+            md.write("author=%s\n" % spec.author)
             md.write("email=%s\n" % spec.email_address)
             md.close()
 
