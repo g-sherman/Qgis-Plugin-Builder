@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 /***************************************************************************
  $TemplateClass
@@ -32,33 +33,33 @@ class ${TemplateClass}:
     def __init__(self, iface):
         # Save reference to the QGIS interface
         self.iface = iface
+        # Create the dialog and keep reference
+        self.dlg = ${TemplateClass}Dialog()
 
     def initGui(self):
         # Create action that will start plugin configuration
         self.action = QAction(QIcon(":/plugins/${PluginDirName}/icon.png"), \
-            "$TemplateMenuText", self.iface.mainWindow())
+            u"$TemplateMenuText", self.iface.mainWindow())
         # connect the action to the run method
         QObject.connect(self.action, SIGNAL("triggered()"), self.run)
 
         # Add toolbar button and menu item
         self.iface.addToolBarIcon(self.action)
-        self.iface.addPluginToMenu("&${TemplateMenuText}", self.action)
+        self.iface.addPluginToMenu(u"&${TemplateMenuText}", self.action)
 
     def unload(self):
         # Remove the plugin menu item and icon
-        self.iface.removePluginMenu("&${TemplateMenuText}",self.action)
+        self.iface.removePluginMenu(u"&${TemplateMenuText}",self.action)
         self.iface.removeToolBarIcon(self.action)
 
     # run method that performs all the real work
     def run(self):
-
-        # create and show the dialog
-        dlg = ${TemplateClass}Dialog()
         # show the dialog
-        dlg.show()
-        result = dlg.exec_()
+        self.dlg.show()
+        # Run the dialog event loop
+        result = self.dlg.exec_()
         # See if OK was pressed
         if result == 1:
             # do something useful (delete the line containing pass and
-            # substitute with your code
+            # substitute with your code)
             pass

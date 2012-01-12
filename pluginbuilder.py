@@ -23,6 +23,7 @@ import os
 from string import Template
 from string import capwords
 import datetime
+import codecs
 # Import the PyQt and QGIS libraries
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
@@ -104,6 +105,9 @@ class PluginBuilder:
             template_dir = os.path.join(str(self.plugin_builder_dir), 'templateclass')
             icon = QFile(os.path.join(template_dir, 'icon.png'))
             icon.copy(os.path.join(self.plugin_dir, 'icon.png'))
+            release_script = QFile(os.path.join(template_dir, 'release.sh'))
+            release_script.copy(os.path.join(self.plugin_dir, 'release.sh'))
+
             #resource = QFile(os.path.join(template_dir, 'resources.qrc'))
             #resource.copy(os.path.join(self.plugin_dir, 'resources.qrc'))
 
@@ -119,7 +123,7 @@ class PluginBuilder:
             popped = template.substitute(result_map)
 
             # create the metadata file
-            md = open(os.path.join(str(self.plugin_dir), 'metadata.txt'), 'w')
+            md = codecs.open(os.path.join(str(self.plugin_dir), 'metadata.txt'), 'w', "utf-8")
             metadata_comment = """# This file contains metadata for your plugin. Beginning
 # with version 1.8 this is the preferred way to supply information about a
 # plugin. The current method of embedding metadata in __init__.py will
@@ -137,13 +141,13 @@ class PluginBuilder:
             md.write("description=%s\n" % spec.description)
             md.write("version=%s\n\n" % spec.version_no)
             md.write("# end of mandatory metadata\n\n")
-            mdwrite("# Optional items:\n\n")
-            mdwrite(" # Uncomment the following line and add your changelog entries:\n")
-            mdwrite("# changelog=\n\n")
-            mdwrite("# tags are comma separated with spaces allowed\n")
-            mdwrite("tags=%s\n\n" % spec.tags)
+            md.write("# Optional items:\n\n")
+            md.write(" # Uncomment the following line and add your changelog entries:\n")
+            md.write("# changelog=\n\n")
+            md.write("# tags are comma separated with spaces allowed\n")
+            md.write("tags=%s\n\n" % spec.tags)
 
-            md.write("homepage=%s\n" % spec.website)
+            md.write("homepage=%s\n" % spec.homepage)
             md.write("tracker=%s\n" % spec.tracker)
             md.write("repository=%s\n" % spec.repository)
             md.write("icon=%s\n" % spec.icon)
@@ -155,7 +159,7 @@ class PluginBuilder:
             md.write("deprecated=%s\n\n" % spec.deprecated)
 
             md.write("# Author contact information\n")
-            md.write("name=%s\n" % spec.author)
+            md.write("author=%s\n" % spec.author)
             md.write("email=%s\n" % spec.email_address)
             md.close()
 
@@ -181,22 +185,28 @@ class PluginBuilder:
           ui.lineEdit_menu_text.text() == '' or \
           ui.lineEdit_company_name.text() == '' or \
           ui.lineEdit_email_address.text() == '':
-            msg = 'All fields except Website are required to create a plugin\n'
+            msg = 'Some required fields are missing. Please complete the form.\n'
         try:
             flt = float(str(ui.lineEdit_version_no.text()))
             flt = float(str(ui.lineEdit_min_version_no.text()))
-        except:
-            msg += 'Version numbers must be numeric'
+        except ValueError:
+            msg += 'Version numbers must be numeric.\n'
         # validate plugin name
+        # check that we have only ascii char in class name
+        try:
+            unicode(ui.lineEdit_class_name.text()).decode('ascii')
+        except UnicodeEncodeError:
+            ui.lineEdit_class_name.setText(unicode(ui.lineEdit_class_name.text()).encode('ascii','ignore'))
+            msg += 'The Class name must be ASCII characters only, the name has been modified for you. \n'
+        # check space and force CamelCase
         if str(ui.lineEdit_class_name.text()).find(' ') > -1:
             class_name = capwords(str(ui.lineEdit_class_name.text()))
             ui.lineEdit_class_name.setText(class_name.replace(' ',''))
-            msg += 'The Class name must use CamelCase. No spaces are allowed'
+            msg += 'The Class name must use CamelCase. No spaces are allowed, the name has been modified for you.\n'
         if msg != '':
-            QMessageBox.warning(self.dlg, "Missing Information", \
+            QMessageBox.warning(self.dlg, "Information missing or invalid", \
                     msg)
         else:
-
             self.dlg.accept()
 
 
@@ -206,6 +216,6 @@ class PluginBuilder:
         template_file.close()
         template = Template(s)
         popped = template.substitute(spec.template_map)
-        plugin_file = open(os.path.join(self.plugin_dir, output_name), 'w')
+        plugin_file = codecs.open(os.path.join(self.plugin_dir, output_name), 'w', "utf-8")
         plugin_file.write(popped)
         plugin_file.close()
