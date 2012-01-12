@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 /***************************************************************************
  $TemplateClass
@@ -36,17 +37,17 @@ class ${TemplateClass}:
     def initGui(self):
         # Create action that will start plugin configuration
         self.action = QAction(QIcon(":/plugins/${PluginDirName}/icon.png"), \
-            "$TemplateMenuText", self.iface.mainWindow())
+            u"$TemplateMenuText", self.iface.mainWindow())
         # connect the action to the run method
         QObject.connect(self.action, SIGNAL("triggered()"), self.run)
 
         # Add toolbar button and menu item
         self.iface.addToolBarIcon(self.action)
-        self.iface.addPluginToMenu("&${TemplateMenuText}", self.action)
+        self.iface.addPluginToMenu(u"&${TemplateMenuText}", self.action)
 
     def unload(self):
         # Remove the plugin menu item and icon
-        self.iface.removePluginMenu("&${TemplateMenuText}",self.action)
+        self.iface.removePluginMenu(u"&${TemplateMenuText}",self.action)
         self.iface.removeToolBarIcon(self.action)
 
     # run method that performs all the real work
