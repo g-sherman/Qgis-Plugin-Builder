@@ -33,6 +33,8 @@ class ${TemplateClass}:
     def __init__(self, iface):
         # Save reference to the QGIS interface
         self.iface = iface
+        # Create the dialog and keep reference
+        self.dlg = ${TemplateClass}Dialog()
 
     def initGui(self):
         # Create action that will start plugin configuration
@@ -52,14 +54,12 @@ class ${TemplateClass}:
 
     # run method that performs all the real work
     def run(self):
-
-        # create and show the dialog
-        dlg = ${TemplateClass}Dialog()
         # show the dialog
-        dlg.show()
-        result = dlg.exec_()
+        self.dlg.show()
+        # Run the dialog event loop
+        result = self.dlg.exec_()
         # See if OK was pressed
         if result == 1:
             # do something useful (delete the line containing pass and
-            # substitute with your code
+            # substitute with your code)
             pass
