@@ -32,7 +32,15 @@ class PluginSpec:
         self.min_version_no = ui.lineEdit_min_version_no.text()
         self.title = ui.lineEdit_title.text()
         self.version_no = ui.lineEdit_version_no.text()
-        self.website = ui.lineEdit_website.text()
+        self.homepage = ui.lineEdit_homepage.text()
+        self.tracker = ui.lineEdit_tracker.text()
+        self.repository = ui.lineEdit_repository.text()
+        self.tags = ui.lineEdit_tags.text()
+        # icon selection from disk will be added at a later version
+        self.icon = 'icon.png'
+        self.experimental = ui.checkBox_experimental.isChecked()
+        # deprecated is always false for a new plugin
+        self.deprecated = False
 
         self.template_map = {'TemplateClass' : self.class_name,
                     'templateclass' : self.class_name.lower(),
