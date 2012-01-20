@@ -34,7 +34,7 @@ default: compile
 compile: $$(UI_FILES) $$(RESOURCE_FILES)
 
 %.py : %.qrc
-	pyrcc4 -o $$@  $$<
+	pyrcc4 -o $$*_rc.py  $$<
 
 %.py : %.ui
 	pyuic4 -o $$@ $$<
