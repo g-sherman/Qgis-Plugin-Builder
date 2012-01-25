@@ -17,6 +17,8 @@
 # *                                                                         *
 # ***************************************************************************/
 
+# CONFIGURATION
+PLUGIN_UPLOAD = $(CURDIR)/plugin_upload.py
 # Makefile for a PyQGIS plugin 
 
 PLUGINNAME = ${templateclass}
@@ -49,6 +51,28 @@ deploy: compile
 	cp -vf $$(RESOURCE_FILES) $$(HOME)/.qgis/python/plugins/$$(PLUGINNAME)
 	cp -vf $$(EXTRAS) $$(HOME)/.qgis/python/plugins/$$(PLUGINNAME)
 
+# The dclean target removes compiled python files from plugin directory
+# also delets any .svn entry
+dclean:
+	find $$(HOME)/.qgis/python/plugins/$$(PLUGINNAME) -iname "*.pyc" -delete
+	find $$(HOME)/.qgis/python/plugins/$$(PLUGINNAME) -iname ".svn" -prune -exec rm -Rf {} \;
+
+# The derase deletes deployed plugin
+derase:
+	rm -Rf $$(HOME)/.qgis/python/plugins/$$(PLUGINNAME)
+
+# The zip target deploys the plugin and creates a zip file with the deployed
+# content. You can then upload the zip file on http://plugins.qgis.org
+zip: deploy dclean 
+	rm -f $$(PLUGINNAME).zip
+	cd $$(HOME)/.qgis/python/plugins; zip -9r $$(CURDIR)/$$(PLUGINNAME).zip $$(PLUGINNAME)
+
+
+# the zip target deploys the plugin and creates a zip file that you can
+# use on a plugin repository
+zip: deploy
+	zip -r $$(PLUGINNAME).zip $$(HOME)/.qgis/python/plugins/$$(PLUGINNAME)
+
 # Create a zip package of the plugin named $$(PLUGINNAME).zip. 
 # This requires use of git (your plugin development directory must be a 
 # git repository).
@@ -58,3 +82,9 @@ package: compile
 		rm -f $$(PLUGINNAME).zip
 		git archive --prefix=$$(PLUGINNAME)/ -o $$(PLUGINNAME).zip $$(VERSION)
 		echo "Created package: $$(PLUGINNAME).zip"
+
+upload: zip
+	$$(PLUGIN_UPLOAD) $$(PLUGINNAME).zip
+    
+clean:
+	rm $$(UI_FILES) $$(RESOURCE_FILES)
