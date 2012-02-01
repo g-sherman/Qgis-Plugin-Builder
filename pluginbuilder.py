@@ -107,6 +107,9 @@ class PluginBuilder:
             icon.copy(os.path.join(self.plugin_dir, 'icon.png'))
             release_script = QFile(os.path.join(template_dir, 'release.sh'))
             release_script.copy(os.path.join(self.plugin_dir, 'release.sh'))
+            plugin_upload = QFile(os.path.join(template_dir, 'plugin_upload.py'))
+            plugin_upload.copy(os.path.join(self.plugin_dir, 'plugin_upload.py'))
+            QFile.setPermissions(os.path.join(self.plugin_dir, 'plugin_upload.py'), 755)
 
             #resource = QFile(os.path.join(template_dir, 'resources.qrc'))
             #resource.copy(os.path.join(self.plugin_dir, 'resources.qrc'))
