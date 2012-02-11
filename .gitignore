@@ -1,0 +1,6 @@
+# ignore swap files
+*swp
+templateclass/*swp
+# ignore compiled python files
+*pyc
+templateclass/*pyc
