@@ -19,7 +19,16 @@
 
 # CONFIGURATION
 PLUGIN_UPLOAD = $(CURDIR)/plugin_upload.py
+
 # Makefile for a PyQGIS plugin 
+
+# translation
+I18N = i18n
+SOURCES = ${templateclass}.py ui_${templateclass}.py __init__.py ${templateclass}dialog.py
+#TRANSLATIONS = $(I18N)/${templateclass}_de.ts
+TRANSLATIONS = 
+
+# global
 
 PLUGINNAME = ${templateclass}
 
@@ -44,12 +53,13 @@ compile: $$(UI_FILES) $$(RESOURCE_FILES)
 # The deploy  target only works on unix like operating system where
 # the Python plugin directory is located at:
 # $$HOME/.qgis/python/plugins
-deploy: compile
+deploy: compile transcompile
 	mkdir -p $$(HOME)/.qgis/python/plugins/$$(PLUGINNAME)
 	cp -vf $$(PY_FILES) $$(HOME)/.qgis/python/plugins/$$(PLUGINNAME)
 	cp -vf $$(UI_FILES) $$(HOME)/.qgis/python/plugins/$$(PLUGINNAME)
 	cp -vf $$(RESOURCE_FILES) $$(HOME)/.qgis/python/plugins/$$(PLUGINNAME)
 	cp -vf $$(EXTRAS) $$(HOME)/.qgis/python/plugins/$$(PLUGINNAME)
+	cp -vfr $$(I18N) $$(HOME)/.qgis/python/plugins/$$(PLUGINNAME)
 
 # The dclean target removes compiled python files from plugin directory
 # also delets any .svn entry
@@ -85,6 +95,21 @@ package: compile
 
 upload: zip
 	$$(PLUGIN_UPLOAD) $$(PLUGINNAME).zip
-    
+
+# transup
+# update .ts translation files
+transup:
+	pylupdate4 Makefile
+
+# transcompile
+# compile translation files into .qm binary format
+transcompile:
+	lrelease $$(I18N)/*.ts
+
+# transclean
+# deletes all .qm files
+transclean:
+	rm -f $$(I18N)/*.qm
+
 clean:
 	rm $$(UI_FILES) $$(RESOURCE_FILES)
