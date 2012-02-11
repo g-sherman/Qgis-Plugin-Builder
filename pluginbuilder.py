@@ -110,6 +110,10 @@ class PluginBuilder:
             plugin_upload = QFile(os.path.join(template_dir, 'plugin_upload.py'))
             plugin_upload.copy(os.path.join(self.plugin_dir, 'plugin_upload.py'))
             QFile.setPermissions(os.path.join(self.plugin_dir, 'plugin_upload.py'), 755)
+            # create a i18n directory
+            QDir().mkdir(self.plugin_dir + "/i18n")
+            # create a documentation directory
+            QDir().mkdir(self.plugin_dir + "/help")
 
             #resource = QFile(os.path.join(template_dir, 'resources.qrc'))
             #resource.copy(os.path.join(self.plugin_dir, 'resources.qrc'))
