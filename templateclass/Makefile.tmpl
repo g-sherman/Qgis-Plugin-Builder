@@ -40,6 +40,8 @@ UI_FILES = ui_${templateclass}.py
 
 RESOURCE_FILES = resources_rc.py
 
+HELP = help
+
 default: compile
 
 compile: $$(UI_FILES) $$(RESOURCE_FILES)
@@ -60,6 +62,7 @@ deploy: compile transcompile
 	cp -vf $$(RESOURCE_FILES) $$(HOME)/.qgis/python/plugins/$$(PLUGINNAME)
 	cp -vf $$(EXTRAS) $$(HOME)/.qgis/python/plugins/$$(PLUGINNAME)
 	cp -vfr $$(I18N) $$(HOME)/.qgis/python/plugins/$$(PLUGINNAME)
+	cp -vfr $$(HELP) $$(HOME)/.qgis/python/plugins/$$(PLUGINNAME)
 
 # The dclean target removes compiled python files from plugin directory
 # also delets any .svn entry
