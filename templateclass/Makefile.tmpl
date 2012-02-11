@@ -80,12 +80,6 @@ zip: deploy dclean
 	rm -f $$(PLUGINNAME).zip
 	cd $$(HOME)/.qgis/python/plugins; zip -9r $$(CURDIR)/$$(PLUGINNAME).zip $$(PLUGINNAME)
 
-
-# the zip target deploys the plugin and creates a zip file that you can
-# use on a plugin repository
-zip: deploy
-	zip -r $$(PLUGINNAME).zip $$(HOME)/.qgis/python/plugins/$$(PLUGINNAME)
-
 # Create a zip package of the plugin named $$(PLUGINNAME).zip. 
 # This requires use of git (your plugin development directory must be a 
 # git repository).
