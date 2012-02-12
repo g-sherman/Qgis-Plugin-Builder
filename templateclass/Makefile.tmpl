@@ -40,7 +40,7 @@ UI_FILES = ui_${templateclass}.py
 
 RESOURCE_FILES = resources_rc.py
 
-HELP = help
+HELP = help/build/html
 
 default: compile
 
@@ -55,14 +55,14 @@ compile: $$(UI_FILES) $$(RESOURCE_FILES)
 # The deploy  target only works on unix like operating system where
 # the Python plugin directory is located at:
 # $$HOME/.qgis/python/plugins
-deploy: compile transcompile
+deploy: compile doc transcompile
 	mkdir -p $$(HOME)/.qgis/python/plugins/$$(PLUGINNAME)
 	cp -vf $$(PY_FILES) $$(HOME)/.qgis/python/plugins/$$(PLUGINNAME)
 	cp -vf $$(UI_FILES) $$(HOME)/.qgis/python/plugins/$$(PLUGINNAME)
 	cp -vf $$(RESOURCE_FILES) $$(HOME)/.qgis/python/plugins/$$(PLUGINNAME)
 	cp -vf $$(EXTRAS) $$(HOME)/.qgis/python/plugins/$$(PLUGINNAME)
 	cp -vfr $$(I18N) $$(HOME)/.qgis/python/plugins/$$(PLUGINNAME)
-	cp -vfr $$(HELP) $$(HOME)/.qgis/python/plugins/$$(PLUGINNAME)
+	cp -vfr $$(HELP) $$(HOME)/.qgis/python/plugins/$$(PLUGINNAME)/help
 
 # The dclean target removes compiled python files from plugin directory
 # also delets any .svn entry
@@ -110,3 +110,7 @@ transclean:
 
 clean:
 	rm $$(UI_FILES) $$(RESOURCE_FILES)
+
+# build documentation with sphinx
+doc: 
+	cd help; make html
