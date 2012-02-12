@@ -112,8 +112,20 @@ class PluginBuilder:
             QFile.setPermissions(os.path.join(self.plugin_dir, 'plugin_upload.py'), 755)
             # create a i18n directory
             QDir().mkdir(self.plugin_dir + "/i18n")
-            # create a documentation directory
+            # Create sphinx default project for help
             QDir().mkdir(self.plugin_dir + "/help")
+            QDir().mkdir(self.plugin_dir + "/help/build")
+            QDir().mkdir(self.plugin_dir + "/help/source")
+            QDir().mkdir(self.plugin_dir + "/help/source/_static")
+            QDir().mkdir(self.plugin_dir + "/help/source/_templates")
+            # copy doc makefiles
+            QFile.copy(os.path.join(template_dir, "help/make.bat"),
+                    os.path.join(self.plugin_dir, "help/make.bat"))
+            QFile.copy(os.path.join(template_dir, "help/Makefile"),
+                    os.path.join(self.plugin_dir, "help/Makefile")))
+            # populate and write help files
+            self.populate_template(spec, 'help/source/conf.py.tmpl', "help/source/conf.py")
+            self.populate_template(spec, 'help/source/index.rst.tmpl', "help/source/index.rst")
 
             #resource = QFile(os.path.join(template_dir, 'resources.qrc'))
             #resource.copy(os.path.join(self.plugin_dir, 'resources.qrc'))
