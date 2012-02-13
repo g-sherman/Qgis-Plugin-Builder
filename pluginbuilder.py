@@ -145,7 +145,7 @@ class PluginBuilder:
             md.write("version=%s\n\n" % spec.version_no)
             md.write("# end of mandatory metadata\n\n")
             md.write("# Optional items:\n\n")
-            md.write(" # Uncomment the following line and add your changelog entries:\n")
+            md.write("# Uncomment the following line and add your changelog entries:\n")
             md.write("# changelog=\n\n")
             md.write("# tags are comma separated with spaces allowed\n")
             md.write("tags=%s\n\n" % spec.tags)
