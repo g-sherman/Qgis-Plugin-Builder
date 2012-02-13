@@ -19,7 +19,16 @@
 
 # CONFIGURATION
 PLUGIN_UPLOAD = $(CURDIR)/plugin_upload.py
+
 # Makefile for a PyQGIS plugin 
+
+# translation
+I18N = i18n
+SOURCES = ${templateclass}.py ui_${templateclass}.py __init__.py ${templateclass}dialog.py
+#TRANSLATIONS = $(I18N)/${templateclass}_de.ts
+TRANSLATIONS = 
+
+# global
 
 PLUGINNAME = ${templateclass}
 
@@ -30,6 +39,8 @@ EXTRAS = icon.png
 UI_FILES = ui_${templateclass}.py
 
 RESOURCE_FILES = resources_rc.py
+
+HELP = help/build/html
 
 default: compile
 
@@ -44,12 +55,14 @@ compile: $$(UI_FILES) $$(RESOURCE_FILES)
 # The deploy  target only works on unix like operating system where
 # the Python plugin directory is located at:
 # $$HOME/.qgis/python/plugins
-deploy: compile
+deploy: compile doc transcompile
 	mkdir -p $$(HOME)/.qgis/python/plugins/$$(PLUGINNAME)
 	cp -vf $$(PY_FILES) $$(HOME)/.qgis/python/plugins/$$(PLUGINNAME)
 	cp -vf $$(UI_FILES) $$(HOME)/.qgis/python/plugins/$$(PLUGINNAME)
 	cp -vf $$(RESOURCE_FILES) $$(HOME)/.qgis/python/plugins/$$(PLUGINNAME)
 	cp -vf $$(EXTRAS) $$(HOME)/.qgis/python/plugins/$$(PLUGINNAME)
+	cp -vfr $$(I18N) $$(HOME)/.qgis/python/plugins/$$(PLUGINNAME)
+	cp -vfr $$(HELP) $$(HOME)/.qgis/python/plugins/$$(PLUGINNAME)/help
 
 # The dclean target removes compiled python files from plugin directory
 # also delets any .svn entry
@@ -67,12 +80,6 @@ zip: deploy dclean
 	rm -f $$(PLUGINNAME).zip
 	cd $$(HOME)/.qgis/python/plugins; zip -9r $$(CURDIR)/$$(PLUGINNAME).zip $$(PLUGINNAME)
 
-
-# the zip target deploys the plugin and creates a zip file that you can
-# use on a plugin repository
-zip: deploy
-	zip -r $$(PLUGINNAME).zip $$(HOME)/.qgis/python/plugins/$$(PLUGINNAME)
-
 # Create a zip package of the plugin named $$(PLUGINNAME).zip. 
 # This requires use of git (your plugin development directory must be a 
 # git repository).
@@ -85,6 +92,25 @@ package: compile
 
 upload: zip
 	$$(PLUGIN_UPLOAD) $$(PLUGINNAME).zip
-    
+
+# transup
+# update .ts translation files
+transup:
+	pylupdate4 Makefile
+
+# transcompile
+# compile translation files into .qm binary format
+transcompile:
+	lrelease $$(I18N)/*.ts
+
+# transclean
+# deletes all .qm files
+transclean:
+	rm -f $$(I18N)/*.qm
+
 clean:
 	rm $$(UI_FILES) $$(RESOURCE_FILES)
+
+# build documentation with sphinx
+doc: 
+	cd help; make html
