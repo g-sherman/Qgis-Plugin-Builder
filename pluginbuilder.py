@@ -122,7 +122,7 @@ class PluginBuilder:
             QFile.copy(os.path.join(template_dir, "help/make.bat"),
                     os.path.join(self.plugin_dir, "help/make.bat"))
             QFile.copy(os.path.join(template_dir, "help/Makefile"),
-                    os.path.join(self.plugin_dir, "help/Makefile")))
+                    os.path.join(self.plugin_dir, "help/Makefile"))
             # populate and write help files
             self.populate_template(spec, 'help/source/conf.py.tmpl', "help/source/conf.py")
             self.populate_template(spec, 'help/source/index.rst.tmpl', "help/source/index.rst")
