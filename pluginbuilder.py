@@ -109,7 +109,10 @@ class PluginBuilder:
             release_script.copy(os.path.join(self.plugin_dir, 'release.sh'))
             plugin_upload = QFile(os.path.join(template_dir, 'plugin_upload.py'))
             plugin_upload.copy(os.path.join(self.plugin_dir, 'plugin_upload.py'))
-            QFile.setPermissions(os.path.join(self.plugin_dir, 'plugin_upload.py'), 755)
+            QFile.setPermissions(os.path.join(self.plugin_dir, 'plugin_upload.py'),
+                    QFile.ReadOwner | QFile.WriteOwner | QFile.ExeOwner | QFile.ReadUser |
+                    QFile.WriteUser | QFile.ExeUser | QFile.ReadGroup | QFile.ExeGroup |
+                    QFile.ReadOther | QFile.ExeOther)
             # create a i18n directory
             QDir().mkdir(self.plugin_dir + "/i18n")
             # Create sphinx default project for help
