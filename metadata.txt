@@ -8,7 +8,7 @@
 [general]
 name=Plugin Builder
 description=Creates a QGIS plugin template for use as a starting point in plugin development
-version=Version 1.8.2
+version=Version 1.8.3
 qgisMinimumVersion=1.0
 
 changelog=2011-12-14 Version 1.82: Updated metadata generation to match current spec.

@@ -164,7 +164,7 @@ class PluginBuilder:
             md.write("version=%s\n\n" % spec.version_no)
             md.write("# end of mandatory metadata\n\n")
             md.write("# Optional items:\n\n")
-            md.write(" # Uncomment the following line and add your changelog entries:\n")
+            md.write("# Uncomment the following line and add your changelog entries:\n")
             md.write("# changelog=\n\n")
             md.write("# tags are comma separated with spaces allowed\n")
             md.write("tags=%s\n\n" % spec.tags)
@@ -224,7 +224,7 @@ class PluginBuilder:
         if str(ui.lineEdit_class_name.text()).find(' ') > -1:
             class_name = capwords(str(ui.lineEdit_class_name.text()))
             ui.lineEdit_class_name.setText(class_name.replace(' ',''))
-            msg += 'The Class name must use CamelCase. No spaces are allowed, the name has been modified for you.\n'
+            msg += 'The Class name must use CamelCase. No spaces are allowed; the name has been modified for you.'
         if msg != '':
             QMessageBox.warning(self.dlg, "Information missing or invalid", \
                     msg)
