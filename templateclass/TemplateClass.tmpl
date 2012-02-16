@@ -36,7 +36,7 @@ class ${TemplateClass}:
         # Create the dialog and keep reference
         self.dlg = ${TemplateClass}Dialog()
         # initialize plugin directory
-        self.plugin_dir = QFileInfo(QgsApplication.qgisUserDbFilePath()).path() + "/python/plugins/${templateclass)"
+        self.plugin_dir = QFileInfo(QgsApplication.qgisUserDbFilePath()).path() + "/python/plugins/${templateclass}"
         # initialize locale
         localePath = ""
         locale = QSettings().value("locale/userLocale").toString()[0:2]
