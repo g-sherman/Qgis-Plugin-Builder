@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>QGIS Plugin Builder 1.8.2</string>
+   <string>QGIS Plugin Builder 1.8.3</string>
   </property>
   <property name="sizeGripEnabled">
    <bool>false</bool>
