@@ -109,10 +109,11 @@ class PluginBuilder:
             release_script.copy(os.path.join(self.plugin_dir, 'release.sh'))
             plugin_upload = QFile(os.path.join(template_dir, 'plugin_upload.py'))
             plugin_upload.copy(os.path.join(self.plugin_dir, 'plugin_upload.py'))
-            QFile.setPermissions(os.path.join(self.plugin_dir, 'plugin_upload.py'),
-                    QFile.ReadOwner | QFile.WriteOwner | QFile.ExeOwner | QFile.ReadUser |
-                    QFile.WriteUser | QFile.ExeUser | QFile.ReadGroup | QFile.ExeGroup |
-                    QFile.ReadOther | QFile.ExeOther)
+            QFile.setPermissions(os.path.join(
+                self.plugin_dir, 'plugin_upload.py'),
+                QFile.ReadOwner | QFile.WriteOwner | QFile.ExeOwner | QFile.ReadUser |
+                QFile.WriteUser | QFile.ExeUser | QFile.ReadGroup | QFile.ExeGroup |
+                QFile.ReadOther | QFile.ExeOther)
             # create a i18n directory
             QDir().mkdir(self.plugin_dir + "/i18n")
             # Create sphinx default project for help
@@ -138,10 +139,10 @@ class PluginBuilder:
             s = template_file.read()
             template_file.close()
             template = Template(s)
-            result_map = {'PluginDir' : self.plugin_dir,
-                    'TemplateClass' : spec.template_map['TemplateClass'],
-                    'templateclass' : spec.template_map['templateclass'],
-                    'UserPluginDir' : self.user_plugin_dir}
+            result_map = {'PluginDir': self.plugin_dir,
+                    'TemplateClass': spec.template_map['TemplateClass'],
+                    'templateclass': spec.template_map['templateclass'],
+                    'UserPluginDir': self.user_plugin_dir}
             popped = template.substitute(result_map)
 
             # create the metadata file
@@ -185,7 +186,7 @@ class PluginBuilder:
             md.write("email=%s\n" % spec.email_address)
             md.close()
 
-            
+
             # show the results
             res_dlg = ResultDialog()
             res_dlg.ui.webView.setHtml(popped)
@@ -200,14 +201,14 @@ class PluginBuilder:
         msg = ''
         ui = self.dlg.ui
         if ui.lineEdit_class_name.text() == '' or \
-          ui.lineEdit_title.text() == '' or \
-          ui.lineEdit_description.text() == '' or \
-          ui.lineEdit_version_no.text() == '' or \
-          ui.lineEdit_min_version_no.text() == '' or \
-          ui.lineEdit_menu_text.text() == '' or \
-          ui.lineEdit_company_name.text() == '' or \
-          ui.lineEdit_email_address.text() == '':
-            msg = 'Some required fields are missing. Please complete the form.\n'
+            ui.lineEdit_title.text() == '' or \
+            ui.lineEdit_description.text() == '' or \
+            ui.lineEdit_version_no.text() == '' or \
+            ui.lineEdit_min_version_no.text() == '' or \
+            ui.lineEdit_menu_text.text() == '' or \
+            ui.lineEdit_company_name.text() == '' or \
+            ui.lineEdit_email_address.text() == '':
+                msg = 'Some required fields are missing. Please complete the form.\n'
         try:
             flt = float(str(ui.lineEdit_version_no.text()))
             flt = float(str(ui.lineEdit_min_version_no.text()))
@@ -218,26 +219,33 @@ class PluginBuilder:
         try:
             unicode(ui.lineEdit_class_name.text()).decode('ascii')
         except UnicodeEncodeError:
-            ui.lineEdit_class_name.setText(unicode(ui.lineEdit_class_name.text()).encode('ascii','ignore'))
-            msg += 'The Class name must be ASCII characters only, the name has been modified for you. \n'
+            ui.lineEdit_class_name.setText(
+                unicode(
+                    ui.lineEdit_class_name.text()).encode('ascii', 'ignore'))
+            msg += 'The Class name must be ASCII characters only, '
+            msg += 'the name has been modified for you. \n'
         # check space and force CamelCase
         if str(ui.lineEdit_class_name.text()).find(' ') > -1:
             class_name = capwords(str(ui.lineEdit_class_name.text()))
-            ui.lineEdit_class_name.setText(class_name.replace(' ',''))
-            msg += 'The Class name must use CamelCase. No spaces are allowed; the name has been modified for you.'
+            ui.lineEdit_class_name.setText(class_name.replace(' ', ''))
+            msg += 'The Class name must use CamelCase. '
+            msg += 'No spaces are allowed; the name has been modified for you.'
         if msg != '':
-            QMessageBox.warning(self.dlg, "Information missing or invalid", \
-                    msg)
+            QMessageBox.warning(self.dlg,
+                                "Information missing or invalid",
+                                msg)
         else:
             self.dlg.accept()
 
-
     def populate_template(self, spec, template_name, output_name):
-        template_file = open(os.path.join(str(self.plugin_builder_dir), 'templateclass', template_name))
+        template_file = open(
+            os.path.join(str(self.plugin_builder_dir),
+                         'templateclass', template_name))
         s = template_file.read()
         template_file.close()
         template = Template(s)
         popped = template.substitute(spec.template_map)
-        plugin_file = codecs.open(os.path.join(self.plugin_dir, output_name), 'w', "utf-8")
+        plugin_file = codecs.open(
+            os.path.join(self.plugin_dir, output_name), 'w', "utf-8")
         plugin_file.write(popped)
         plugin_file.close()

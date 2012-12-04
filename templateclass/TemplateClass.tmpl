@@ -28,6 +28,7 @@ import resources_rc
 # Import the code for the dialog
 from ${templateclass}dialog import ${TemplateClass}Dialog
 
+
 class ${TemplateClass}:
 
     def __init__(self, iface):
@@ -36,11 +37,13 @@ class ${TemplateClass}:
         # Create the dialog and keep reference
         self.dlg = ${TemplateClass}Dialog()
         # initialize plugin directory
-        self.plugin_dir = QFileInfo(QgsApplication.qgisUserDbFilePath()).path() + "/python/plugins/${templateclass}"
+        self.plugin_dir = QFileInfo(
+            QgsApplication.qgisUserDbFilePath()).path() +
+            "/python/plugins/${templateclass}"
         # initialize locale
         localePath = ""
         locale = QSettings().value("locale/userLocale").toString()[0:2]
-       
+
         if QFileInfo(self.plugin_dir).exists():
             localePath = self.plugin_dir + "/i18n/${templateclass}_" + locale + ".qm"
 
@@ -50,11 +53,11 @@ class ${TemplateClass}:
 
             if qVersion() > '4.3.3':
                 QCoreApplication.installTranslator(self.translator)
-   
 
     def initGui(self):
         # Create action that will start plugin configuration
-        self.action = QAction(QIcon(":/plugins/${PluginDirName}/icon.png"), \
+        self.action = QAction(
+            QIcon(":/plugins/${PluginDirName}/icon.png"),
             u"$TemplateMenuText", self.iface.mainWindow())
         # connect the action to the run method
         QObject.connect(self.action, SIGNAL("triggered()"), self.run)
@@ -65,7 +68,7 @@ class ${TemplateClass}:
 
     def unload(self):
         # Remove the plugin menu item and icon
-        self.iface.removePluginMenu(u"&${TemplateMenuText}",self.action)
+        self.iface.removePluginMenu(u"&${TemplateMenuText}", self.action)
         self.iface.removeToolBarIcon(self.action)
 
     # run method that performs all the real work
