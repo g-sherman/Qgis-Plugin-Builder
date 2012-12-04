@@ -20,16 +20,28 @@
  ***************************************************************************/
  This script initializes the plugin, making it known to QGIS.
 """
+
+
 def name():
     return "Plugin Builder"
+
+
 def description():
-    return "Creates a QGIS plugin template for use as a starting point in plugin development"
+    return "Creates a QGIS plugin template for developing a new plugin"
+
+
 def version():
-    return "Version 1.8.3"
+    return "Version 1.8.4"
+
+
 def icon():
     return 'plugin_builder.png'
+
+
 def qgisMinimumVersion():
     return "1.0"
+
+
 def classFactory(iface):
     # load PluginBuilder class from file PluginBuilder
     from pluginbuilder import PluginBuilder
