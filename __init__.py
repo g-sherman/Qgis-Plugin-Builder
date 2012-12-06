@@ -39,8 +39,13 @@ def icon():
 
 
 def qgisMinimumVersion():
-    return "1.0"
+    return "1.8"
 
+def author():
+    return "gsherman"
+
+def email():
+    return "gsherman@geoapt.com"
 
 def classFactory(iface):
     # load PluginBuilder class from file PluginBuilder
