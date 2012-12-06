@@ -143,11 +143,11 @@ class PluginBuilder:
                     'TemplateClass': spec.template_map['TemplateClass'],
                     'templateclass': spec.template_map['templateclass'],
                     'UserPluginDir': self.user_plugin_dir}
-            popped = template.substitute(result_map)
+            results_popped = template.substitute(result_map)
 
             # write the results info to the README HTML file
             readme = codecs.open(os.path.join(str(self.plugin_dir), 'README.html'), 'w', "utf-8")
-            readme.write(popped)
+            readme.write(results_popped)
             readme.close()
 
             # populate the results readme text template
@@ -209,7 +209,7 @@ class PluginBuilder:
 
             # show the results
             res_dlg = ResultDialog()
-            res_dlg.ui.webView.setHtml(popped)
+            res_dlg.ui.webView.setHtml(results_popped)
             res_dlg.show()
             res_dlg.exec_()
 
