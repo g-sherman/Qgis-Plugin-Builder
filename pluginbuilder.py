@@ -162,7 +162,9 @@ class PluginBuilder:
             md.write("name=%s\n" % spec.title)
             md.write("qgisMinimumVersion=%s\n" % spec.min_version_no)
             md.write("description=%s\n" % spec.description)
-            md.write("version=%s\n\n" % spec.version_no)
+            md.write("version=%s\n" % spec.version_no)
+            md.write("author=%s\n" % spec.author)
+            md.write("email=%s\n\n" % spec.email_address)
             md.write("# end of mandatory metadata\n\n")
             md.write("# Optional items:\n\n")
             md.write("# Uncomment the following line and add your changelog entries:\n")
@@ -181,9 +183,6 @@ class PluginBuilder:
             md.write("# deprecated flag (applies to the whole plugin, not just a single version\n")
             md.write("deprecated=%s\n\n" % spec.deprecated)
 
-            md.write("# Author contact information\n")
-            md.write("author=%s\n" % spec.author)
-            md.write("email=%s\n" % spec.email_address)
             md.close()
 
 
