@@ -54,9 +54,12 @@ deploy: compile
 
 # Create a zip package. Requires passing a valid commit or tag as follows:
 #   make package VERSION=Version_0.3.2
+# Get the last commit hash
+COMMITHASH=$(shell git rev-parse HEAD)
 package: compile
-		rm -f pluginbuilder.zip
-		git archive --prefix=pluginbuilder/ -o pluginbuilder.zip $(VERSION)
+		rm -f $(PLUGINNAME).zip
+		git archive --prefix=$(PLUGINNAME)/ -o $(PLUGINNAME).zip $(COMMITHASH)
+		@echo "Created package: $(PLUGINNAME).zip" 
 
 clean:
 	rm $(UI_FILES) $(RESOURCE_FILES)

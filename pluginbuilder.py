@@ -162,9 +162,9 @@ class PluginBuilder:
             popped = template.substitute(result_map)
 
             # write the results info to the README txt file
-            readme = codecs.open(os.path.join(str(self.plugin_dir), 'README.txt'), 'w', "utf-8")
-            readme.write(popped)
-            readme.close()
+            readme_txt = codecs.open(os.path.join(str(self.plugin_dir), 'README.txt'), 'w', "utf-8")
+            readme_txt.write(popped)
+            readme_txt.close()
 
             # create the metadata file
             md = codecs.open(os.path.join(str(self.plugin_dir), 'metadata.txt'), 'w', "utf-8")
