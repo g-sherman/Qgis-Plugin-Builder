@@ -151,7 +151,7 @@ class PluginBuilder:
             readme.close()
 
             # populate the results readme text template
-            template_file = open(os.path.join(str(self.plugin_builder_dir), 'templateclass', 'readme.tmpl'))
+            template_file = open(os.path.join(str(self.plugin_dir), 'templateclass', 'readme.tmpl'))
             s = template_file.read()
             template_file.close()
             template = Template(s)
