@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_pluginbuilder.ui'
 #
-# Created: Wed Dec  5 15:36:03 2012
+# Created: Thu Dec  6 13:32:46 2012
 #      by: PyQt4 UI code generator 4.9.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -243,7 +243,7 @@ class Ui_PluginBuilder(object):
         QtCore.QMetaObject.connectSlotsByName(PluginBuilder)
 
     def retranslateUi(self, PluginBuilder):
-        PluginBuilder.setWindowTitle(QtGui.QApplication.translate("PluginBuilder", "QGIS Plugin Builder 1.8.4", None, QtGui.QApplication.UnicodeUTF8))
+        PluginBuilder.setWindowTitle(QtGui.QApplication.translate("PluginBuilder", "QGIS Plugin Builder 1.8.5", None, QtGui.QApplication.UnicodeUTF8))
         self.label_10.setText(QtGui.QApplication.translate("PluginBuilder", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
