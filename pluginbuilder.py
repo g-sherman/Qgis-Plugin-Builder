@@ -134,7 +134,7 @@ class PluginBuilder:
             #resource = QFile(os.path.join(template_dir, 'resources.qrc'))
             #resource.copy(os.path.join(self.plugin_dir, 'resources.qrc'))
 
-            # populate the results template
+            # populate the results html template
             template_file = open(os.path.join(str(self.plugin_builder_dir), 'templateclass', 'results.tmpl'))
             s = template_file.read()
             template_file.close()
@@ -145,7 +145,23 @@ class PluginBuilder:
                     'UserPluginDir': self.user_plugin_dir}
             popped = template.substitute(result_map)
 
-            # write the results info to the README
+            # write the results info to the README HTML file
+            readme = codecs.open(os.path.join(str(self.plugin_dir), 'README.html'), 'w', "utf-8")
+            readme.write(popped)
+            readme.close()
+
+            # populate the results readme text template
+            template_file = open(os.path.join(str(self.plugin_builder_dir), 'templateclass', 'readme.tmpl'))
+            s = template_file.read()
+            template_file.close()
+            template = Template(s)
+            result_map = {'PluginDir': self.plugin_dir,
+                    'TemplateClass': spec.template_map['TemplateClass'],
+                    'templateclass': spec.template_map['templateclass'],
+                    'UserPluginDir': self.user_plugin_dir}
+            popped = template.substitute(result_map)
+
+            # write the results info to the README txt file
             readme = codecs.open(os.path.join(str(self.plugin_dir), 'README.txt'), 'w', "utf-8")
             readme.write(popped)
             readme.close()
