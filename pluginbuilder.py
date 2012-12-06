@@ -145,6 +145,11 @@ class PluginBuilder:
                     'UserPluginDir': self.user_plugin_dir}
             popped = template.substitute(result_map)
 
+            # write the results info to the README
+            readme = codecs.open(os.path.join(str(self.plugin_dir), 'README.txt'), 'w', "utf-8")
+            readme.write(popped)
+            readme.close()
+
             # create the metadata file
             md = codecs.open(os.path.join(str(self.plugin_dir), 'metadata.txt'), 'w', "utf-8")
             metadata_comment = """# This file contains metadata for your plugin. Beginning
