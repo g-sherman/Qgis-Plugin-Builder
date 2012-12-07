@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_pluginbuilder.ui'
 #
-# Created: Thu Dec  6 13:32:46 2012
+# Created: Fri Dec  7 08:27:05 2012
 #      by: PyQt4 UI code generator 4.9.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -250,7 +250,7 @@ class Ui_PluginBuilder(object):
 "</style></head><body style=\" font-family:\'Sans Serif\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:16pt; font-weight:600;\">QGIS Plugin Builder</span></p></body></html>", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setText(QtGui.QApplication.translate("PluginBuilder", "Class name", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_2.setText(QtGui.QApplication.translate("PluginBuilder", "Descriptive title", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_2.setText(QtGui.QApplication.translate("PluginBuilder", "Plugin name", None, QtGui.QApplication.UnicodeUTF8))
         self.label_3.setText(QtGui.QApplication.translate("PluginBuilder", "Description", None, QtGui.QApplication.UnicodeUTF8))
         self.label_4.setText(QtGui.QApplication.translate("PluginBuilder", "Version number", None, QtGui.QApplication.UnicodeUTF8))
         self.lineEdit_version_no.setText(QtGui.QApplication.translate("PluginBuilder", "0.1", None, QtGui.QApplication.UnicodeUTF8))
