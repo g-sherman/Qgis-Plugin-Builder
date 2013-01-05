@@ -34,8 +34,6 @@ class ${TemplateClass}:
     def __init__(self, iface):
         # Save reference to the QGIS interface
         self.iface = iface
-        # Create the dialog and keep reference
-        self.dlg = ${TemplateClass}Dialog()
         # initialize plugin directory
         self.plugin_dir = QFileInfo(QgsApplication.qgisUserDbFilePath()).path() + "/python/plugins/${templateclass}"
         # initialize locale
@@ -51,6 +49,9 @@ class ${TemplateClass}:
 
             if qVersion() > '4.3.3':
                 QCoreApplication.installTranslator(self.translator)
+
+        # Create the dialog (after translation) and keep reference
+        self.dlg = ${TemplateClass}Dialog()
 
     def initGui(self):
         # Create action that will start plugin configuration
