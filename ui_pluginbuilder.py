@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_pluginbuilder.ui'
 #
-# Created: Wed Jan  2 07:36:18 2013
+# Created: Sat Jan  5 14:11:50 2013
 #      by: PyQt4 UI code generator 4.9.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -17,7 +17,7 @@ except AttributeError:
 class Ui_PluginBuilder(object):
     def setupUi(self, PluginBuilder):
         PluginBuilder.setObjectName(_fromUtf8("PluginBuilder"))
-        PluginBuilder.resize(893, 601)
+        PluginBuilder.resize(908, 601)
         PluginBuilder.setSizeGripEnabled(False)
         self.gridLayout = QtGui.QGridLayout(PluginBuilder)
         self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
@@ -234,7 +234,7 @@ class Ui_PluginBuilder(object):
         self.gridLayout.addWidget(self.line_2, 15, 0, 1, 1)
         self.buttonBox = QtGui.QDialogButtonBox(PluginBuilder)
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Cancel|QtGui.QDialogButtonBox.Ok)
+        self.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Cancel|QtGui.QDialogButtonBox.Help|QtGui.QDialogButtonBox.Ok)
         self.buttonBox.setObjectName(_fromUtf8("buttonBox"))
         self.gridLayout.addWidget(self.buttonBox, 15, 3, 1, 1)
 

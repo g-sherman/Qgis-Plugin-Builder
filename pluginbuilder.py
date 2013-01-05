@@ -68,9 +68,9 @@ class PluginBuilder:
         # connect the ok button to our method
         QObject.connect(self.dlg.ui.buttonBox, SIGNAL("accepted()"), self.validate_entries)
 
-        # populate the left panel
-        #QMessageBox.warning(self.dlg, "Help Path", "Setting help url to: file:///%s/help.html" % self.plugin_builder_dir)
+        QObject.connect(self.dlg.ui.buttonBox, SIGNAL("helpRequested()"), self.show_help)
 
+        # populate the left panel
         self.dlg.ui.webView.setUrl(QUrl("file:///%s/help.html" % self.plugin_builder_dir))
 
         # show the dialog
@@ -269,3 +269,6 @@ class PluginBuilder:
             os.path.join(self.plugin_dir, output_name), 'w', "utf-8")
         plugin_file.write(popped)
         plugin_file.close()
+
+    def show_help(self):
+        QMessageBox.information(None, "Help", "This will show help")
