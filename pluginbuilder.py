@@ -40,7 +40,7 @@ class PluginBuilder:
     def __init__(self, iface):
         # Save reference to the QGIS interface
         self.iface = iface
-        self.user_plugin_dir = QFileInfo(QgsApplication.qgisUserDbFilePath()).path() + "/python/plugins"
+        self.user_plugin_dir = QFileInfo(QgsApplication.qgisUserDbFilePath()).path() + "python/plugins"
         self.plugin_builder_dir = self.user_plugin_dir + "/pluginbuilder"
 
     def initGui(self):
@@ -271,4 +271,6 @@ class PluginBuilder:
         plugin_file.close()
 
     def show_help(self):
-        QMessageBox.information(None, "Help", "This will show help")
+        help_file = "file://"+ self.plugin_builder_dir + "/help/index.html"
+        QMessageBox.information(None, "Help File", help_file)
+        QDesktopServices.openUrl(QUrl(help_file))

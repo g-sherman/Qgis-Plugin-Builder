@@ -27,6 +27,8 @@ TEMPLATE_DIR = templateclass
 
 EXTRAS = help.html icon.png plugin_builder.png metadata.txt
 
+HELP_BUILD = help/build/html/*
+
 UI_FILES = ui_pluginbuilder.py ui_results.py
 
 RESOURCE_FILES = resources.py
@@ -46,13 +48,14 @@ compile: $(UI_FILES) $(RESOURCE_FILES)
 # $HOME/.qgis/python/plugins
 deploy: compile
 	mkdir -p $(HOME)/.qgis/python/plugins/$(PLUGINNAME)
+	mkdir -p $(HOME)/.qgis/python/plugins/$(PLUGINNAME)/help
 	cp -vf $(PY_FILES) $(HOME)/.qgis/python/plugins/$(PLUGINNAME)
 	cp -vf $(UI_FILES) $(HOME)/.qgis/python/plugins/$(PLUGINNAME)
 	cp -vf $(RESOURCE_FILES) $(HOME)/.qgis/python/plugins/$(PLUGINNAME)
 	cp -vf $(EXTRAS) $(HOME)/.qgis/python/plugins/$(PLUGINNAME)
 	cp -rvf $(TEMPLATE_DIR) $(HOME)/.qgis/python/plugins/$(PLUGINNAME)
-
-# Create a zip package. Requires passing a valid commit or tag as follows:
+	cp -rvf $(HELP_BUILD) $(HOME)/.qgis/python/plugins/$(PLUGINNAME)/help
+# eCreate a zip package. Requires passing a valid commit or tag as follows:
 #   make package VERSION=Version_0.3.2
 # Get the last commit hash
 COMMITHASH=$(shell git rev-parse HEAD)

@@ -283,7 +283,7 @@ p, li { white-space: pre-wrap; }
         </size>
        </property>
        <property name="text">
-        <string>1.0</string>
+        <string>1.8</string>
        </property>
       </widget>
      </item>

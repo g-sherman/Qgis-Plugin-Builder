@@ -67,7 +67,7 @@ class ${TemplateClass}:
 
     def unload(self):
         # Remove the plugin menu item and icon
-        self.iface.removePluginMenu(u"&${TemplateMenuText}", self.action)
+        self.iface.removePluginMenu(u"&${TemplateTitle}", self.action)
         self.iface.removeToolBarIcon(self.action)
 
     # run method that performs all the real work
