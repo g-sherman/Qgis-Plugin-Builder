@@ -9,6 +9,8 @@ QGIS Plugin Builder
 .. toctree::
    :maxdepth: 2
 
+.. index:: Concepts
+
 Concepts
 =================
 
@@ -24,6 +26,8 @@ The steps to using Plugin Builder are fairly simple:
 #. Compile your resource and user interface files
 #. Install the plugin
 #. Test it
+
+.. index:: Plugins; creating
 
 Running Plugin Builder
 ======================
@@ -57,7 +61,7 @@ Required Parameters
 
 :Description: This is a one line description of the plugin's function and is displayed in both the Plugin Manager and Plugin Installer. Keep it short yet descriptive so the purpose of the plugin can be easily determined.  
  
-:Version number: This is the version number of your plugin. Plugin Builder suggests 0.1, but you can start with any number. The Plugin Installer uses the version number to identify which plugins you have installed are upgradeable so it is important to increment it as your release new versions.  
+:Version number: This is the version number of your plugin. Plugin Builder suggests 0.1, but you can start with any number. The Plugin Installer uses the version number to identify which plugins you have installed are upgradeable so it is important to increment it as you release new versions.  
 
 :Minimum QGIS version: This is the minimum version of QGIS required for your plugin to work. If your plugin uses features only present in a newer version, be sure to set this field accordingly to prevent problems for those running older versions. Version 1.8.6 of Plugin Builder defaults this field to 1.8.
 
@@ -94,9 +98,9 @@ There are several optional but highly recommended fields that you should conside
 :Experimental: Check this box if your plugin is considered experimental, meaning it is either incomplete or may cause unintended consequences. This allows users to filter out experimental plugins in the Plugin Installer if they choose not to live on the bleeding edge.
 
 
-
-
 .. index:: compiling
+
+.. index:: Plugins; compiling
 
 Compiling 
 ==========
@@ -130,6 +134,8 @@ Once the resource and UI files are compiled, the generated plugin can be loaded 
 
 .. index:: deploying
 
+.. index:: Plugins; deploying
+
 Deploying
 =====================
 
@@ -161,6 +167,7 @@ If your operating system supports gmake (GNU make), you can use the deploy targe
   make deploy
 
 .. index:: deploying; environment variable method
+.. index:: QGIS_PLUGINPATH
 
 The Environment Variable Method
 ................................
@@ -170,6 +177,7 @@ Using the ``QGIS_PLUGINPATH`` environment variable you can tell QGIS to look in 
 To use this method, set the ``QGIS_PLUGINPATH`` environment variable to point to your development directory before starting QGIS. When QGIS starts up, all the directories in ``QGIS_PLUGINPATH`` will be searched and those containing valid plugins will be added to the Plugin Manager.
 
 .. index:: testing
+.. index:: Plugins; testing
 
 Testing
 =====================
@@ -183,6 +191,7 @@ If the plugin throws an error make sure you have compiled the resource and UI fi
 Once the generated plugin is working it's your turn to customize the user interface and add the needed code to make it do something useful.
 
 .. index:: Makefile
+   double: Makefile; using
 
 Using the Makefile
 ==================
@@ -195,7 +204,7 @@ The following targets are supported
 
 :clean: Delete the compiled UI and resource files
 :compile: Compile the resource and UI files. This is the default target.
-:dclean: Same as derase but also removes any .svn entries
+:dclean: Same as ``derase`` but also removes any .svn entries
 :deploy: Deploy the plugin 
 :derase: Remove the deployed plugin
 :doc: Build the documentation using Sphinx
@@ -207,21 +216,25 @@ The following targets are supported
 :zip: Deploy the plugin and create a zip file suitable for uploading to the QGIS repository
 
 .. index:: documentation
+.. index:: Plugin; documenting
 
 Documenting your Plugin
 =======================
 
 .. index:: Sphinx
 
-Plugin Builder creates a `Sphinx <http://sphinx-doc.org>`_ project for you in the ``help`` subdirectory of your plugin. To build the documentation you will need to install Sphinx using ``pip`` or ``easy_install``. Once installed, you can build the documentation using ``make doc`` or change to the ``help`` subdirectory and use ``make html`` (this works on any platform).
+Plugin Builder creates a `Sphinx <http://sphinx-doc.org>`_ project for you in the ``help`` subdirectory of your plugin. To build the documentation you will need to install Sphinx using `pip <http://pypi.python.org/pypi/pip>`_ or `easy_install <http://peak.telecommunity.com/DevCenter/EasyInstall>`_. Once installed, you can build the documentation using ``make doc`` or change to the ``help`` subdirectory and use ``make html`` (this works on any platform).
 
 Sphinx supports building other formats, including latex, text, qthelp, and epub.
 
 Of course you need to actually *write* something to document your plugin by editing ``help/source/index.rst``. 
 
-Once your documentation is complete you can distribute it with your plugin, as well as publishing it on a website.
+Once your documentation is complete you can distribute it with your plugin, as well as publishing it on a website. You can also add a Help button to the button box group on the dialog and connect it to a method to show your help file in the user's default web browser. See the code in ``pluginbuilder.py`` for an example.
+
+For an example of writing your documentation using Sphinx, you can `view <_sources/index.txt>`_ the source of this document.
 
 .. index:: repository
+.. index:: Plugins; repository
    
 The Repository
 ============================
@@ -229,10 +242,10 @@ When your plugin is ready to be shared with the QGIS community, upload it to the
 
 When you add it to the repository, your plugin will show up in the Plugin Installer in QGIS, making it available for download and install by the community.
 
-Indices and tables
-==================
+.. Indices and tables
+  ==================
 
-* :ref:`genindex`
+.. * :ref:`genindex`
 
 .. * :ref:`modindex`
 

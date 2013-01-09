@@ -55,6 +55,16 @@ deploy: compile
 	cp -vf $(EXTRAS) $(HOME)/.qgis/python/plugins/$(PLUGINNAME)
 	cp -rvf $(TEMPLATE_DIR) $(HOME)/.qgis/python/plugins/$(PLUGINNAME)
 	cp -rvf $(HELP_BUILD) $(HOME)/.qgis/python/plugins/$(PLUGINNAME)/help
+
+# remove the deployed plugin
+dclean: 
+	rm -rf $(HOME)/.qgis/python/plugins/$(PLUGINNAME)
+
+zip: dclean deploy
+	rm -f $(PLUGINNAME).zip
+	cd $(HOME)/.qgis/python/plugins; zip -9vr $(CURDIR)/$(PLUGINNAME).zip $(PLUGINNAME)
+	
+
 # eCreate a zip package. Requires passing a valid commit or tag as follows:
 #   make package VERSION=Version_0.3.2
 # Get the last commit hash

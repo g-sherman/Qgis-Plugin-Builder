@@ -20,6 +20,7 @@
 """
 # Import Python stuff
 import os
+import urllib
 from string import Template
 from string import capwords
 import datetime
@@ -271,6 +272,7 @@ class PluginBuilder:
         plugin_file.close()
 
     def show_help(self):
-        help_file = "file://"+ self.plugin_builder_dir + "/help/index.html"
-        QMessageBox.information(None, "Help File", help_file)
+        help_file = "file:///"+ self.plugin_builder_dir + "/help/index.html"
+        # For testing path:
+        #QMessageBox.information(None, "Help File", help_file)
         QDesktopServices.openUrl(QUrl(help_file))

@@ -57,7 +57,7 @@
 </div>
 </div>
 <div class="section" id="concepts">
-<h1>Concepts<a class="headerlink" href="#concepts" title="Permalink to this headline">¶</a></h1>
+<span id="index-0"></span><h1>Concepts<a class="headerlink" href="#concepts" title="Permalink to this headline">¶</a></h1>
 <p>Plugin Builder provides you a working template from which you can create
 your own plugin.</p>
 <p>The steps to using Plugin Builder are fairly simple:</p>
@@ -72,14 +72,14 @@ your own plugin.</p>
 </ol>
 </div>
 <div class="section" id="running-plugin-builder">
-<h1>Running Plugin Builder<a class="headerlink" href="#running-plugin-builder" title="Permalink to this headline">¶</a></h1>
+<span id="index-1"></span><h1>Running Plugin Builder<a class="headerlink" href="#running-plugin-builder" title="Permalink to this headline">¶</a></h1>
 <p>When you run Plugin Builder you will see a dialog with text fields on the right and descriptions on the left:</p>
 <img alt="_images/pluginbuilder.png" src="_images/pluginbuilder.png" style="width: 900px;" />
 <p>The descriptions give you a hint about what is required for each field. The
 following sections describe the required and optional parameters in greater
 detail.</p>
 <div class="section" id="required-parameters">
-<span id="index-0"></span><h2>Required Parameters<a class="headerlink" href="#required-parameters" title="Permalink to this headline">¶</a></h2>
+<span id="index-2"></span><h2>Required Parameters<a class="headerlink" href="#required-parameters" title="Permalink to this headline">¶</a></h2>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -112,7 +112,7 @@ detail.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">This is a one line description of the plugin&#8217;s function and is displayed in both the Plugin Manager and Plugin Installer. Keep it short yet descriptive so the purpose of the plugin can be easily determined.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Version number:</th><td class="field-body">This is the version number of your plugin. Plugin Builder suggests 0.1, but you can start with any number. The Plugin Installer uses the version number to identify which plugins you have installed are upgradeable so it is important to increment it as your release new versions.</td>
+<tr class="field-even field"><th class="field-name">Version number:</th><td class="field-body">This is the version number of your plugin. Plugin Builder suggests 0.1, but you can start with any number. The Plugin Installer uses the version number to identify which plugins you have installed are upgradeable so it is important to increment it as you release new versions.</td>
 </tr>
 <tr class="field-odd field"><th class="field-name" colspan="2">Minimum QGIS version:</th></tr>
 <tr class="field-odd field"><td>&nbsp;</td><td class="field-body">This is the minimum version of QGIS required for your plugin to work. If your plugin uses features only present in a newer version, be sure to set this field accordingly to prevent problems for those running older versions. Version 1.8.6 of Plugin Builder defaults this field to 1.8.</td>
@@ -138,7 +138,7 @@ item; if you do your menu will look like this:</p>
 </table>
 </div>
 <div class="section" id="optional-parameters">
-<span id="index-1"></span><h2>Optional Parameters<a class="headerlink" href="#optional-parameters" title="Permalink to this headline">¶</a></h2>
+<span id="index-3"></span><h2>Optional Parameters<a class="headerlink" href="#optional-parameters" title="Permalink to this headline">¶</a></h2>
 <p>There are several optional but highly recommended fields that you should consider completing when generating a new plugin.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -156,39 +156,39 @@ item; if you do your menu will look like this:</p>
 </tr>
 </tbody>
 </table>
-</div>
+<span class="target" id="index-4"></span></div>
 </div>
 <div class="section" id="compiling">
-<span id="index-2"></span><h1>Compiling<a class="headerlink" href="#compiling" title="Permalink to this headline">¶</a></h1>
+<span id="index-5"></span><h1>Compiling<a class="headerlink" href="#compiling" title="Permalink to this headline">¶</a></h1>
 <p>After you generate your plugin there are two files that must be compiled before it is functional in QGIS:</p>
 <ul class="simple">
 <li>resources.qrc</li>
 <li>The .ui file</li>
 </ul>
 <div class="section" id="the-resource-file">
-<span id="index-3"></span><h2>The Resource File<a class="headerlink" href="#the-resource-file" title="Permalink to this headline">¶</a></h2>
+<span id="index-6"></span><h2>The Resource File<a class="headerlink" href="#the-resource-file" title="Permalink to this headline">¶</a></h2>
 <p>The resource file contains definitions of media used in your plugin. Upon generation, this contains one entry for icon.png, the icon file for the plugin.</p>
 <p>To compile the resource file into Python code, use the <tt class="docutils literal"><span class="pre">pyrcc4</span></tt> utility that comes as part of your PyQt installation:</p>
 <div class="highlight-python"><pre>pyrcc4 -o resources.py resources.qrc</pre>
 </div>
 </div>
 <div class="section" id="the-ui-file">
-<span id="index-4"></span><h2>The UI File<a class="headerlink" href="#the-ui-file" title="Permalink to this headline">¶</a></h2>
+<span id="index-7"></span><h2>The UI File<a class="headerlink" href="#the-ui-file" title="Permalink to this headline">¶</a></h2>
 <p>The <tt class="docutils literal"><span class="pre">.ui</span></tt> file contains the definition of the user interface and must be compiled to Python code using <tt class="docutils literal"><span class="pre">pyuic4</span></tt>. For a generated plugin named mynewplugin, the UI file will be named <tt class="docutils literal"><span class="pre">ui_mynewplugin.ui</span></tt> and to compile it you would you would use:</p>
 <div class="highlight-python"><pre>pyuic4 -o ui_mynewplugin.py ui_mynewplugin.ui</pre>
 </div>
 <p>Once the resource and UI files are compiled, the generated plugin can be loaded in QGIS.</p>
-</div>
+<span class="target" id="index-8"></span></div>
 </div>
 <div class="section" id="deploying">
-<span id="index-5"></span><h1>Deploying<a class="headerlink" href="#deploying" title="Permalink to this headline">¶</a></h1>
+<span id="index-9"></span><h1>Deploying<a class="headerlink" href="#deploying" title="Permalink to this headline">¶</a></h1>
 <p>To deploy your new plugin during development, you have two choices:</p>
 <ol class="arabic simple">
 <li>Copy the entire plugin directory to your QGIS plugins directory</li>
 <li>Use the <tt class="docutils literal"><span class="pre">QGIS_PLUGINPATH</span></tt> environment variable to point to the directory where your development plugin(s) are located</li>
 </ol>
 <div class="section" id="the-copy-method">
-<span id="index-6"></span><h2>The Copy Method<a class="headerlink" href="#the-copy-method" title="Permalink to this headline">¶</a></h2>
+<span id="index-10"></span><h2>The Copy Method<a class="headerlink" href="#the-copy-method" title="Permalink to this headline">¶</a></h2>
 <p>To deploy in this fashion, simply copy your plugin directory to the location of your QGIS plugins. By platform, this location is:</p>
 <ul>
 <li><dl class="first docutils">
@@ -214,24 +214,24 @@ item; if you do your menu will look like this:</p>
 <p>If your operating system supports gmake (GNU make), you can use the deploy target of the Makefile in your plugin directory to deploy directly to <tt class="docutils literal"><span class="pre">.qgis/python/plugins</span></tt>:</p>
 <div class="highlight-python"><pre>make deploy</pre>
 </div>
-</div>
+<span class="target" id="index-11"></span></div>
 <div class="section" id="the-environment-variable-method">
-<span id="index-7"></span><h2>The Environment Variable Method<a class="headerlink" href="#the-environment-variable-method" title="Permalink to this headline">¶</a></h2>
+<span id="index-12"></span><h2>The Environment Variable Method<a class="headerlink" href="#the-environment-variable-method" title="Permalink to this headline">¶</a></h2>
 <p>Using the <tt class="docutils literal"><span class="pre">QGIS_PLUGINPATH</span></tt> environment variable you can tell QGIS to look in an additional location for plugins. This can be handy for development, allowing you to test your plugin without copying it to <tt class="docutils literal"><span class="pre">.qgis/python/plugins</span></tt>.</p>
 <p>To use this method, set the <tt class="docutils literal"><span class="pre">QGIS_PLUGINPATH</span></tt> environment variable to point to your development directory before starting QGIS. When QGIS starts up, all the directories in <tt class="docutils literal"><span class="pre">QGIS_PLUGINPATH</span></tt> will be searched and those containing valid plugins will be added to the Plugin Manager.</p>
-</div>
+<span class="target" id="index-13"></span></div>
 </div>
 <div class="section" id="testing">
-<span id="index-8"></span><h1>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h1>
+<span id="index-14"></span><h1>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h1>
 <p>With your new plugin deployed, start up QGIS, open the Plugin Manager, and enable it. Then click on the tool or the menu item for the plugin to run it. If all is well, you should see something similar to this:</p>
 <img alt="_images/plugin_test.png" class="align-center" src="_images/plugin_test.png" />
 <p>If the plugin throws an error make sure you have compiled the resource and UI file before deploying and testing.</p>
 <p>Once the generated plugin is working it&#8217;s your turn to customize the user interface and add the needed code to make it do something useful.</p>
 </div>
 <div class="section" id="using-the-makefile">
-<span id="index-9"></span><h1>Using the Makefile<a class="headerlink" href="#using-the-makefile" title="Permalink to this headline">¶</a></h1>
+<span id="index-15"></span><h1>Using the Makefile<a class="headerlink" href="#using-the-makefile" title="Permalink to this headline">¶</a></h1>
 <p>The make file can be used to compile and deploy your plugin, assuming you are using an operating environment that supports <a class="reference external" href="http://gnu.org/software/make">GNU make</a>. It also provides a number of other actions to aid in plugin development.</p>
-<p id="index-10">The following targets are supported</p>
+<p id="index-16">The following targets are supported</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -240,7 +240,7 @@ item; if you do your menu will look like this:</p>
 </tr>
 <tr class="field-even field"><th class="field-name">compile:</th><td class="field-body">Compile the resource and UI files. This is the default target.</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">dclean:</th><td class="field-body">Same as derase but also removes any .svn entries</td>
+<tr class="field-odd field"><th class="field-name">dclean:</th><td class="field-body">Same as <tt class="docutils literal"><span class="pre">derase</span></tt> but also removes any .svn entries</td>
 </tr>
 <tr class="field-even field"><th class="field-name">deploy:</th><td class="field-body">Deploy the plugin</td>
 </tr>
@@ -262,24 +262,19 @@ item; if you do your menu will look like this:</p>
 </tr>
 </tbody>
 </table>
-</div>
+<span class="target" id="index-17"></span></div>
 <div class="section" id="documenting-your-plugin">
-<span id="index-11"></span><h1>Documenting your Plugin<a class="headerlink" href="#documenting-your-plugin" title="Permalink to this headline">¶</a></h1>
-<p id="index-12">Plugin Builder creates a <a class="reference external" href="http://sphinx-doc.org">Sphinx</a> project for you in the <tt class="docutils literal"><span class="pre">help</span></tt> subdirectory of your plugin. To build the documentation you will need to install Sphinx using <tt class="docutils literal"><span class="pre">pip</span></tt> or <tt class="docutils literal"><span class="pre">easy_install</span></tt>. Once installed, you can build the documentation using <tt class="docutils literal"><span class="pre">make</span> <span class="pre">doc</span></tt> or change to the <tt class="docutils literal"><span class="pre">help</span></tt> subdirectory and use <tt class="docutils literal"><span class="pre">make</span> <span class="pre">html</span></tt> (this works on any platform).</p>
+<span id="index-18"></span><h1>Documenting your Plugin<a class="headerlink" href="#documenting-your-plugin" title="Permalink to this headline">¶</a></h1>
+<p id="index-19">Plugin Builder creates a <a class="reference external" href="http://sphinx-doc.org">Sphinx</a> project for you in the <tt class="docutils literal"><span class="pre">help</span></tt> subdirectory of your plugin. To build the documentation you will need to install Sphinx using <a class="reference external" href="http://pypi.python.org/pypi/pip">pip</a> or <a class="reference external" href="http://peak.telecommunity.com/DevCenter/EasyInstall">easy_install</a>. Once installed, you can build the documentation using <tt class="docutils literal"><span class="pre">make</span> <span class="pre">doc</span></tt> or change to the <tt class="docutils literal"><span class="pre">help</span></tt> subdirectory and use <tt class="docutils literal"><span class="pre">make</span> <span class="pre">html</span></tt> (this works on any platform).</p>
 <p>Sphinx supports building other formats, including latex, text, qthelp, and epub.</p>
 <p>Of course you need to actually <em>write</em> something to document your plugin by editing <tt class="docutils literal"><span class="pre">help/source/index.rst</span></tt>.</p>
-<p>Once your documentation is complete you can distribute it with your plugin, as well as publishing it on a website.</p>
-</div>
+<p>Once your documentation is complete you can distribute it with your plugin, as well as publishing it on a website. You can also add a Help button to the button box group on the dialog and connect it to a method to show your help file in the user&#8217;s default web browser. See the code in <tt class="docutils literal"><span class="pre">pluginbuilder.py</span></tt> for an example.</p>
+<p>For an example of writing your documentation using Sphinx, you can <a class="reference external" href="_sources/index.txt">view</a> the source of this document.</p>
+<span class="target" id="index-20"></span></div>
 <div class="section" id="the-repository">
-<span id="index-13"></span><h1>The Repository<a class="headerlink" href="#the-repository" title="Permalink to this headline">¶</a></h1>
+<span id="index-21"></span><h1>The Repository<a class="headerlink" href="#the-repository" title="Permalink to this headline">¶</a></h1>
 <p>When your plugin is ready to be shared with the QGIS community, upload it to the QGIS plugin repository at <a class="reference external" href="http://plugins.qgis.org/plugins">http://plugins.qgis.org/plugins</a>. Make sure to package it properly in zip format and test the zip before adding it to the repository.</p>
 <p>When you add it to the repository, your plugin will show up in the Plugin Installer in QGIS, making it available for download and install by the community.</p>
-</div>
-<div class="section" id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
-<ul class="simple">
-<li><a class="reference internal" href="genindex.html"><em>Index</em></a></li>
-</ul>
 </div>
 
 
@@ -313,7 +308,6 @@ item; if you do your menu will look like this:</p>
 <li><a class="reference internal" href="#using-the-makefile">Using the Makefile</a></li>
 <li><a class="reference internal" href="#documenting-your-plugin">Documenting your Plugin</a></li>
 <li><a class="reference internal" href="#the-repository">The Repository</a></li>
-<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 </ul>
 
 <div id="searchbox" style="display: none">
