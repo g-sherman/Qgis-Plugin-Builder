@@ -63,7 +63,7 @@ Required Parameters
  
 :Version number: This is the version number of your plugin. Plugin Builder suggests 0.1, but you can start with any number. The Plugin Installer uses the version number to identify which plugins you have installed are upgradeable so it is important to increment it as you release new versions.  
 
-:Minimum QGIS version: This is the minimum version of QGIS required for your plugin to work. If your plugin uses features only present in a newer version, be sure to set this field accordingly to prevent problems for those running older versions. Version 1.8.6 of Plugin Builder defaults this field to 1.8.
+:Minimum QGIS version: This is the minimum version of QGIS required for your plugin to work. If your plugin uses features only present in a newer version, be sure to set this field accordingly to prevent problems for those running older versions. Version 2.0 of Plugin Builder defaults this field to 2.0.
 
 :Text for the menu item: This is the text that will appear in the menu. In the example below, the plugin name is Frog Pond and the text for the menu item is displayed to the right of it:
 

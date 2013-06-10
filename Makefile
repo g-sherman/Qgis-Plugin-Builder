@@ -19,6 +19,8 @@
 # ***************************************************************************/
 # Makefile for a PyQGIS plugin 
 #
+DOTQGIS=.qgis2
+
 PLUGINNAME=pluginbuilder
 
 PY_FILES = pluginbuilder.py pluginbuilder_dialog.py result_dialog.py __init__.py pluginspec.py
@@ -45,24 +47,24 @@ compile: $(UI_FILES) $(RESOURCE_FILES)
 
 # The deploy  target only works on unix like operating system where
 # the Python plugin directory is located at:
-# $HOME/.qgis/python/plugins
+# $HOME/$(DOTQGIS)/python/plugins
 deploy: compile
-	mkdir -p $(HOME)/.qgis/python/plugins/$(PLUGINNAME)
-	mkdir -p $(HOME)/.qgis/python/plugins/$(PLUGINNAME)/help
-	cp -vf $(PY_FILES) $(HOME)/.qgis/python/plugins/$(PLUGINNAME)
-	cp -vf $(UI_FILES) $(HOME)/.qgis/python/plugins/$(PLUGINNAME)
-	cp -vf $(RESOURCE_FILES) $(HOME)/.qgis/python/plugins/$(PLUGINNAME)
-	cp -vf $(EXTRAS) $(HOME)/.qgis/python/plugins/$(PLUGINNAME)
-	cp -rvf $(TEMPLATE_DIR) $(HOME)/.qgis/python/plugins/$(PLUGINNAME)
-	cp -rvf $(HELP_BUILD) $(HOME)/.qgis/python/plugins/$(PLUGINNAME)/help
+	mkdir -p $(HOME)/$(DOTQGIS)/python/plugins/$(PLUGINNAME)
+	mkdir -p $(HOME)/$(DOTQGIS)/python/plugins/$(PLUGINNAME)/help
+	cp -vf $(PY_FILES) $(HOME)/$(DOTQGIS)/python/plugins/$(PLUGINNAME)
+	cp -vf $(UI_FILES) $(HOME)/$(DOTQGIS)/python/plugins/$(PLUGINNAME)
+	cp -vf $(RESOURCE_FILES) $(HOME)/$(DOTQGIS)/python/plugins/$(PLUGINNAME)
+	cp -vf $(EXTRAS) $(HOME)/$(DOTQGIS)/python/plugins/$(PLUGINNAME)
+	cp -rvf $(TEMPLATE_DIR) $(HOME)/$(DOTQGIS)/python/plugins/$(PLUGINNAME)
+	cp -rvf $(HELP_BUILD) $(HOME)/$(DOTQGIS)/python/plugins/$(PLUGINNAME)/help
 
 # remove the deployed plugin
 dclean: 
-	rm -rf $(HOME)/.qgis/python/plugins/$(PLUGINNAME)
+	rm -rf $(HOME)/$(DOTQGIS)/python/plugins/$(PLUGINNAME)
 
 zip: dclean deploy
 	rm -f $(PLUGINNAME).zip
-	cd $(HOME)/.qgis/python/plugins; zip -9vr $(CURDIR)/$(PLUGINNAME).zip $(PLUGINNAME)
+	cd $(HOME)/$(DOTQGIS)/python/plugins; zip -9vr $(CURDIR)/$(PLUGINNAME).zip $(PLUGINNAME)
 	
 
 # eCreate a zip package. Requires passing a valid commit or tag as follows:

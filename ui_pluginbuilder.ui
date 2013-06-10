@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>QGIS Plugin Builder 1.8.6</string>
+   <string>QGIS Plugin Builder 2.0</string>
   </property>
   <property name="sizeGripEnabled">
    <bool>false</bool>
@@ -283,7 +283,7 @@ p, li { white-space: pre-wrap; }
         </size>
        </property>
        <property name="text">
-        <string>1.8</string>
+        <string>2.0</string>
        </property>
       </widget>
      </item>

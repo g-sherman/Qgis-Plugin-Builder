@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'ui_pluginbuilder.ui'
 #
-# Created: Sat Jan  5 15:44:50 2013
-#      by: PyQt4 UI code generator 4.9.1
+# Created: Mon Jun 10 08:20:26 2013
+#      by: PyQt4 UI code generator 4.9.3
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -243,7 +243,7 @@ class Ui_PluginBuilder(object):
         QtCore.QMetaObject.connectSlotsByName(PluginBuilder)
 
     def retranslateUi(self, PluginBuilder):
-        PluginBuilder.setWindowTitle(QtGui.QApplication.translate("PluginBuilder", "QGIS Plugin Builder 1.8.6", None, QtGui.QApplication.UnicodeUTF8))
+        PluginBuilder.setWindowTitle(QtGui.QApplication.translate("PluginBuilder", "QGIS Plugin Builder 2.0", None, QtGui.QApplication.UnicodeUTF8))
         self.label_10.setText(QtGui.QApplication.translate("PluginBuilder", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
@@ -255,7 +255,7 @@ class Ui_PluginBuilder(object):
         self.label_4.setText(QtGui.QApplication.translate("PluginBuilder", "Version number", None, QtGui.QApplication.UnicodeUTF8))
         self.lineEdit_version_no.setText(QtGui.QApplication.translate("PluginBuilder", "0.1", None, QtGui.QApplication.UnicodeUTF8))
         self.label_5.setText(QtGui.QApplication.translate("PluginBuilder", "Minimum QGIS version", None, QtGui.QApplication.UnicodeUTF8))
-        self.lineEdit_min_version_no.setText(QtGui.QApplication.translate("PluginBuilder", "1.8", None, QtGui.QApplication.UnicodeUTF8))
+        self.lineEdit_min_version_no.setText(QtGui.QApplication.translate("PluginBuilder", "2.0", None, QtGui.QApplication.UnicodeUTF8))
         self.label_6.setText(QtGui.QApplication.translate("PluginBuilder", "Text for the menu item", None, QtGui.QApplication.UnicodeUTF8))
         self.label_7.setText(QtGui.QApplication.translate("PluginBuilder", "Author/Company", None, QtGui.QApplication.UnicodeUTF8))
         self.label_8.setText(QtGui.QApplication.translate("PluginBuilder", "Email address", None, QtGui.QApplication.UnicodeUTF8))
