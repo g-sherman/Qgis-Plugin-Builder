@@ -8,10 +8,10 @@
 [general]
 name=Plugin Builder
 description=Creates a QGIS plugin template for use as a starting point in plugin development
-version=Version 2.0
+version=Version 2.0.1
 qgisMinimumVersion=2.0
 
-changelog=2013-06-10 Update to sip v2 api
+changelog=2013-10-20 Minor under the hood changes; no new features.
 
 homepage=http://hub.qgis.org/projects/plugin-builder
 tracker=http://hub.qgis.org/projects/plugin-builder/issues

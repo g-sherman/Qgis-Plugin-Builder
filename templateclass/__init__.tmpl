@@ -21,32 +21,6 @@
  This script initializes the plugin, making it known to QGIS.
 """
 
-
-def name():
-    return "$TemplateTitle"
-
-
-def description():
-    return "$TemplateDescription"
-
-
-def version():
-    return "Version $TemplateVersion"
-
-
-def icon():
-    return "icon.png"
-
-
-def qgisMinimumVersion():
-    return "$TemplateQgisVersion"
-
-def author():
-    return "$TemplateAuthor"
-
-def email():
-    return "$TemplateEmail"
-
 def classFactory(iface):
     # load $TemplateClass class from file $TemplateClass
     from $templateclass import $TemplateClass
