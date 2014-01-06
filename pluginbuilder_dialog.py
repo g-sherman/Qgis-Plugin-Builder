@@ -5,7 +5,7 @@
     Creates a skeleton QGIS plugin for use as a starting point
                              -------------------
         begin                : 2011-01-20
-        copyright            : (C) 2011 by GeoApt LLC
+        copyright            : (C) 2011-2014 by GeoApt LLC
         email                : gsherman@geoapt.com
  ***************************************************************************/
 

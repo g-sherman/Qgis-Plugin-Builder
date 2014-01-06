@@ -97,6 +97,16 @@ There are several optional but highly recommended fields that you should conside
 
 :Experimental: Check this box if your plugin is considered experimental, meaning it is either incomplete or may cause unintended consequences. This allows users to filter out experimental plugins in the Plugin Installer if they choose not to live on the bleeding edge.
 
+Results
+=======
+
+When you click OK, Plugin Builder creates your new plugin for you and displays the results:
+
+.. image:: images/plugin_results.png
+
+The results dialog tells you where your plugin was saved, the location of your QGIS plugin directory, and what to do next. This same information is contained in the 
+``README.html`` and ``README.html`` files in your generated plugin directory.
+
 
 .. index:: compiling
 
