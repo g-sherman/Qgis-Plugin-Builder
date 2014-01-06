@@ -11,7 +11,7 @@ description=Creates a QGIS plugin template for use as a starting point in plugin
 version=Version 2.0.3
 qgisMinimumVersion=2.0
 
-changelog=2013-10-20 Minor under the hood changes; no new features.
+changelog=2014-01-06 Multiple inheritance for the dialog; PEP8 compliance for generated files; Updated documentation.
 
 homepage=http://hub.qgis.org/projects/plugin-builder
 tracker=http://hub.qgis.org/projects/plugin-builder/issues
