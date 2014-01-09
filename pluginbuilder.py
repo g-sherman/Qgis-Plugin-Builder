@@ -89,6 +89,13 @@ class PluginBuilder:
             self.plugin_dir = QFileDialog.getExistingDirectory(self.dlg, "Select the Directory for your Plugin", ".")
             if self.plugin_dir == '':
                 return
+            else:
+                while not QFileInfo(self.plugin_dir).isWritable():
+                    QMessageBox.critical(None, "Error", "Directory is not writeable")
+                    self.plugin_dir = QFileDialog.getExistingDirectory(self.dlg, "Select the Directory for your Plugin", ".")
+                    if self.plugin_dir == '':
+                        return
+
             # remove spaces from the plugin name
             
             # create the plugin directory using the class name
