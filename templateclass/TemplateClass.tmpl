@@ -31,15 +31,26 @@ import os.path
 
 
 class ${TemplateClass}:
+    """QGIS Plugin Implementation."""
 
     def __init__(self, iface):
+        """Constructor.
+
+        :param iface: An interface instance that will be passed to this class
+            which provides the hook by which you can manipulate the QGIS
+            application at run time.
+        :type iface: QgsInterface
+        """
         # Save reference to the QGIS interface
         self.iface = iface
         # initialize plugin directory
         self.plugin_dir = os.path.dirname(__file__)
         # initialize locale
         locale = QSettings().value("locale/userLocale")[0:2]
-        localePath = os.path.join(self.plugin_dir, 'i18n', '${templateclass}_{}.qm'.format(locale))
+        localePath = os.path.join(
+            self.plugin_dir,
+            'i18n',
+            '${templateclass}_{}.qm'.format(locale))
 
         if os.path.exists(localePath):
             self.translator = QTranslator()
@@ -52,30 +63,36 @@ class ${TemplateClass}:
         self.dlg = ${TemplateClass}Dialog()
 
     def initGui(self):
+        """Create the menu entries and toolbar icons inside the QGIS GUI."""
         # Create action that will start plugin configuration
         self.action = QAction(
             QIcon(":/plugins/${PluginDirName}/icon.png"),
-            u"$TemplateMenuText", self.iface.mainWindow())
+            u"$TemplateMenuText",
+            self.iface.mainWindow())
         # connect the action to the run method
         self.action.triggered.connect(self.run)
 
         # Add toolbar button and menu item
         self.iface.addToolBarIcon(self.action)
-        self.iface.addPluginToMenu(u"&${TemplateTitle}", self.action)
+        self.iface.addPluginToMenu(
+            u"&${TemplateTitle}",
+            self.action)
 
     def unload(self):
-        # Remove the plugin menu item and icon
-        self.iface.removePluginMenu(u"&${TemplateTitle}", self.action)
+        """Removes the plugin menu item and icon from QGIS GUI."""
+        self.iface.removePluginMenu(
+            u"&${TemplateTitle}",
+            self.action)
         self.iface.removeToolBarIcon(self.action)
 
-    # run method that performs all the real work
     def run(self):
+        """Run method that performs all the real work
         # show the dialog
         self.dlg.show()
         # Run the dialog event loop
         result = self.dlg.exec_()
         # See if OK was pressed
-        if result == 1:
-            # do something useful (delete the line containing pass and
-            # substitute with your code)
+        if result:
+            # Do something useful here - delete the line containing pass and
+            # substitute with your code.
             pass
