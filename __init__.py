@@ -23,5 +23,5 @@
 
 def classFactory(iface):
     # load PluginBuilder class from file PluginBuilder
-    from pluginbuilder import PluginBuilder
+    from plugin_builder import PluginBuilder
     return PluginBuilder(iface)

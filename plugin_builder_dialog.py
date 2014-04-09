@@ -1,3 +1,4 @@
+# coding=utf-8
 """
 /***************************************************************************
     PluginBuilderDialog
@@ -19,12 +20,20 @@
  ***************************************************************************/
 """
 
-from PyQt4 import QtCore, QtGui
+from PyQt4 import QtGui
 from ui_pluginbuilder import Ui_PluginBuilder
 # create the dialog for the plugin builder
-class PluginBuilderDialog(QtGui.QDialog):
+
+
+class PluginBuilderDialog(QtGui.QDialog, Ui_PluginBuilder):
+    """Dialog for defining the new plugin properties.
+
+    Note we use multiple inheritance so you can reference any gui elements
+    directly from this class without needing to go trh
+
+    """
     def __init__(self):
+        """Constructor."""
         QtGui.QDialog.__init__(self)
         # Set up the user interface from Designer.
-        self.ui = Ui_PluginBuilder()
-        self.ui.setupUi(self)
+        self.setupUi(self)

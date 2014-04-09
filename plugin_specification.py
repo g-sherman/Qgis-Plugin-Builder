@@ -1,3 +1,4 @@
+# coding=utf-8
 """
 /***************************************************************************
     PluginSpec
@@ -18,11 +19,10 @@
  *                                                                         *
  ***************************************************************************/
 """
-from string import capwords
 
-# Class to store all information needed to create the plugin
-class PluginSpec:
 
+class PluginSpecification:
+    """Store for all information needed to create the plugin."""
     def __init__(self, ui):
         self.class_name = str(ui.lineEdit_class_name.text())
         self.author = ui.lineEdit_company_name.text()
@@ -42,14 +42,15 @@ class PluginSpec:
         # deprecated is always false for a new plugin
         self.deprecated = False
 
-        self.template_map = {'TemplateClass' : self.class_name,
-                    'templateclass' : self.class_name.lower(),
-                    'TemplateTitle' : self.title,
-                    'TemplateDescription' : self.description,
-                    'TemplateVersion' : self.version_no,
-                    'TemplateQgisVersion' : self.min_version_no,
-                    'TemplateAuthor' : self.author,
-                    'TemplateEmail' : self.email_address,
-                    'TemplateMenuText' : self.menu_text,
-                    'PluginDirName' : self.class_name.lower()
-                    }
+        self.template_map = {
+            'TemplateClass': self.class_name,
+            'templateclass': self.class_name.lower(),
+            'TemplateTitle': self.title,
+            'TemplateDescription': self.description,
+            'TemplateVersion': self.version_no,
+            'TemplateQgisVersion': self.min_version_no,
+            'TemplateAuthor': self.author,
+            'TemplateEmail': self.email_address,
+            'TemplateMenuText': self.menu_text,
+            'PluginDirName': self.class_name.lower()
+        }
