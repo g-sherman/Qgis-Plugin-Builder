@@ -22,23 +22,32 @@
 
 
 class PluginSpecification:
-    """Store for all information needed to create the plugin."""
-    def __init__(self, ui):
-        self.class_name = str(ui.lineEdit_class_name.text())
-        self.author = ui.lineEdit_company_name.text()
-        self.description = ui.lineEdit_description.text()
-        self.email_address = ui.lineEdit_email_address.text()
-        self.menu_text = ui.lineEdit_menu_text.text()
-        self.min_version_no = ui.lineEdit_min_version_no.text()
-        self.title = ui.lineEdit_title.text()
-        self.version_no = ui.lineEdit_version_no.text()
-        self.homepage = ui.lineEdit_homepage.text()
-        self.tracker = ui.lineEdit_tracker.text()
-        self.repository = ui.lineEdit_repository.text()
-        self.tags = ui.lineEdit_tags.text()
+    """A convenience store with information needed to create the plugin."""
+    def __init__(self, dialog):
+        """Constructor.
+
+        After calling the constructor, the class properties
+        self.template_map, self.experimental etc. will be set.
+
+        :param dialog: A plugin builder dialog with populated options.
+        :type dialog: PluginBuilderDialog
+
+        """
+        self.class_name = str(dialog.class_name.text())
+        self.author = dialog.company_name.text()
+        self.description = dialog.description.text()
+        self.email_address = dialog.email_address.text()
+        self.menu_text = dialog.menu_text.text()
+        self.min_version_no = dialog.min_version_no.text()
+        self.title = dialog.title.text()
+        self.version_no = dialog.version_no.text()
+        self.homepage = dialog.homepage.text()
+        self.tracker = dialog.tracker.text()
+        self.repository = dialog.repository.text()
+        self.tags = dialog.tags.text()
         # icon selection from disk will be added at a later version
         self.icon = 'icon.png'
-        self.experimental = ui.checkBox_experimental.isChecked()
+        self.experimental = dialog.experimental.isChecked()
         # deprecated is always false for a new plugin
         self.deprecated = False
 

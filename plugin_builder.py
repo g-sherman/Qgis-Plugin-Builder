@@ -101,7 +101,7 @@ class PluginBuilder:
         result = self.dlg.exec_()
         # See if OK was pressed
         if result == 1:
-            specification = PluginSpecification(self.dlg.ui)
+            specification = PluginSpecification(self.dlg)
             # Add the date stuff to the template map
             now = datetime.date.today()
             specification.template_map['TemplateYear'] = now.year
@@ -129,7 +129,7 @@ class PluginBuilder:
             # create the plugin directory using the class name
             self.plugin_dir = os.path.join(
                 str(self.plugin_dir),
-                str(self.dlg.lineEdit_class_name.text()))
+                str(self.dlg.class_name.text()))
             QDir().mkdir(self.plugin_dir)
             # process the user entries
             self.populate_template(
@@ -296,37 +296,37 @@ class PluginBuilder:
         msg = ''
         dlg = self.dlg
         if dlg.lineEdit_class_name.text() == '' or \
-            dlg.lineEdit_title.text() == '' or \
-            dlg.lineEdit_description.text() == '' or \
-            dlg.lineEdit_version_no.text() == '' or \
-            dlg.lineEdit_min_version_no.text() == '' or \
-            dlg.lineEdit_menu_text.text() == '' or \
-            dlg.lineEdit_company_name.text() == '' or \
-            dlg.lineEdit_email_address.text() == '':
+            dlg.title.text() == '' or \
+            dlg.description.text() == '' or \
+            dlg.version_no.text() == '' or \
+            dlg.min_version_no.text() == '' or \
+            dlg.menu_text.text() == '' or \
+            dlg.company_name.text() == '' or \
+            dlg.email_address.text() == '':
                 msg = (
                     'Some required fields are missing. '
                     'Please complete the form.\n')
         try:
             # Assigning to _ is python sugar for a variable that will be unused
-            _ = float(str(dlg.lineEdit_version_no.text()))
-            _ = float(str(dlg.lineEdit_min_version_no.text()))
+            _ = float(str(dlg.version_no.text()))
+            _ = float(str(dlg.min_version_no.text()))
         except ValueError:
             msg += 'Version numbers must be numeric.\n'
         # validate plugin name
         # check that we have only ascii char in class name
         try:
-            unicode(dlg.lineEdit_class_name.text()).decode('ascii')
+            unicode(dlg.class_name.text()).decode('ascii')
         except UnicodeEncodeError:
-            dlg.lineEdit_class_name.setText(
+            dlg.class_name.setText(
                 unicode(
-                    dlg.lineEdit_class_name.text()).encode('ascii', 'ignore'))
+                    dlg.class_name.text()).encode('ascii', 'ignore'))
             msg += (
                 'The Class name must be ASCII characters only, '
                 'the name has been modified for you. \n')
         # check space and force CamelCase
-        if str(dlg.lineEdit_class_name.text()).find(' ') > -1:
-            class_name = capwords(str(dlg.lineEdit_class_name.text()))
-            dlg.lineEdit_class_name.setText(class_name.replace(' ', ''))
+        if str(dlg.class_name.text()).find(' ') > -1:
+            class_name = capwords(str(dlg.class_name.text()))
+            dlg.class_name.setText(class_name.replace(' ', ''))
             msg += (
                 'The Class name must use CamelCase. '
                 'No spaces are allowed; the name has been modified for you.')
