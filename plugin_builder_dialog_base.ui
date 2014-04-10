@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>PluginBuilder</class>
- <widget class="QDialog" name="PluginBuilder">
+ <class>PluginBuilderDialogBase</class>
+ <widget class="QDialog" name="PluginBuilderDialogBase">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -18,7 +18,7 @@
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0" rowspan="15">
-    <widget class="QWebView" name="webView">
+    <widget class="QWebView" name="web_view">
      <property name="minimumSize">
       <size>
        <width>380</width>
@@ -89,7 +89,7 @@ p, li { white-space: pre-wrap; }
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_class_name">
+      <widget class="QLineEdit" name="class_name">
        <property name="minimumSize">
         <size>
          <width>300</width>
@@ -134,7 +134,7 @@ p, li { white-space: pre-wrap; }
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_title">
+      <widget class="QLineEdit" name="title">
        <property name="minimumSize">
         <size>
          <width>300</width>
@@ -179,7 +179,7 @@ p, li { white-space: pre-wrap; }
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_description">
+      <widget class="QLineEdit" name="description">
        <property name="minimumSize">
         <size>
          <width>300</width>
@@ -224,7 +224,7 @@ p, li { white-space: pre-wrap; }
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_version_no">
+      <widget class="QLineEdit" name="version_no">
        <property name="minimumSize">
         <size>
          <width>60</width>
@@ -269,7 +269,7 @@ p, li { white-space: pre-wrap; }
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_min_version_no">
+      <widget class="QLineEdit" name="min_version_no">
        <property name="minimumSize">
         <size>
          <width>60</width>
@@ -314,7 +314,7 @@ p, li { white-space: pre-wrap; }
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_menu_text">
+      <widget class="QLineEdit" name="menu_text">
        <property name="minimumSize">
         <size>
          <width>300</width>
@@ -359,7 +359,7 @@ p, li { white-space: pre-wrap; }
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_company_name">
+      <widget class="QLineEdit" name="company_name">
        <property name="minimumSize">
         <size>
          <width>300</width>
@@ -404,7 +404,7 @@ p, li { white-space: pre-wrap; }
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_email_address">
+      <widget class="QLineEdit" name="email_address">
        <property name="minimumSize">
         <size>
          <width>300</width>
@@ -459,7 +459,7 @@ p, li { white-space: pre-wrap; }
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_tracker">
+      <widget class="QLineEdit" name="tracker">
        <property name="minimumSize">
         <size>
          <width>300</width>
@@ -501,7 +501,7 @@ p, li { white-space: pre-wrap; }
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_homepage">
+      <widget class="QLineEdit" name="homepage">
        <property name="minimumSize">
         <size>
          <width>300</width>
@@ -543,7 +543,7 @@ p, li { white-space: pre-wrap; }
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_repository">
+      <widget class="QLineEdit" name="repository">
        <property name="minimumSize">
         <size>
          <width>300</width>
@@ -585,7 +585,7 @@ p, li { white-space: pre-wrap; }
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_tags">
+      <widget class="QLineEdit" name="tags">
        <property name="minimumSize">
         <size>
          <width>300</width>
@@ -603,7 +603,7 @@ p, li { white-space: pre-wrap; }
     </layout>
    </item>
    <item row="14" column="3">
-    <widget class="QCheckBox" name="checkBox_experimental">
+    <widget class="QCheckBox" name="experimental">
      <property name="text">
       <string>Flag the plugin as experimental</string>
      </property>
@@ -617,7 +617,7 @@ p, li { white-space: pre-wrap; }
     </widget>
    </item>
    <item row="15" column="3">
-    <widget class="QDialogButtonBox" name="buttonBox">
+    <widget class="QDialogButtonBox" name="button_box">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
@@ -632,15 +632,15 @@ p, li { white-space: pre-wrap; }
   <customwidget>
    <class>QWebView</class>
    <extends>QWidget</extends>
-   <header>QtWebKit/QWebView</header>
+   <header>QtWebKitWidgets/QWebView</header>
   </customwidget>
  </customwidgets>
  <resources/>
  <connections>
   <connection>
-   <sender>buttonBox</sender>
+   <sender>button_box</sender>
    <signal>rejected()</signal>
-   <receiver>PluginBuilder</receiver>
+   <receiver>PluginBuilderDialogBase</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

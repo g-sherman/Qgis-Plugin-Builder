@@ -21,15 +21,15 @@
 """
 
 from PyQt4 import QtGui
-from ui_pluginbuilder import Ui_PluginBuilder
-# create the dialog for the plugin builder
+from plugin_builder_dialog_base import Ui_PluginBuilderDialogBase
 
 
-class PluginBuilderDialog(QtGui.QDialog, Ui_PluginBuilder):
+class PluginBuilderDialog(QtGui.QDialog, Ui_PluginBuilderDialogBase):
     """Dialog for defining the new plugin properties.
 
     Note we use multiple inheritance so you can reference any gui elements
-    directly from this class without needing to go trh
+    directly from this class without needing to go through self.ui and
+    so that qt autoconnect slots work.
 
     """
     def __init__(self):

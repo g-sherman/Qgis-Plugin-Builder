@@ -17,13 +17,13 @@
 # *   (at your option) any later version.                                   *
 # *                                                                         *
 # ***************************************************************************/
-# Makefile for a PyQGIS plugin 
+# Makefile for a PyQGIS plugin
 #
 DOTQGIS=.qgis2
 
 PLUGINNAME=pluginbuilder
 
-PY_FILES = pluginbuilder.py pluginbuilder_dialog.py result_dialog.py __init__.py pluginspec.py
+PY_FILES = plugin_builder.py plugin_builder_dialog.py result_dialog.py __init__.py plugin_specification.py
 
 TEMPLATE_DIR = templateclass
 
@@ -31,7 +31,7 @@ EXTRAS = help.html icon.png plugin_builder.png metadata.txt
 
 HELP_BUILD = help/build/html/*
 
-UI_FILES = ui_pluginbuilder.py ui_results.py
+UI_FILES = plugin_builder_dialog_base.py results_dialog_base.py
 
 RESOURCE_FILES = resources.py
 
@@ -59,13 +59,13 @@ deploy: compile
 	cp -rvf $(HELP_BUILD) $(HOME)/$(DOTQGIS)/python/plugins/$(PLUGINNAME)/help
 
 # remove the deployed plugin
-dclean: 
+dclean:
 	rm -rf $(HOME)/$(DOTQGIS)/python/plugins/$(PLUGINNAME)
 
 zip: dclean deploy
 	rm -f $(PLUGINNAME).zip
 	cd $(HOME)/$(DOTQGIS)/python/plugins; zip -9vr $(CURDIR)/$(PLUGINNAME).zip $(PLUGINNAME)
-	
+
 
 # eCreate a zip package. Requires passing a valid commit or tag as follows:
 #   make package VERSION=Version_0.3.2
@@ -74,7 +74,7 @@ COMMITHASH=$(shell git rev-parse HEAD)
 package: compile
 		rm -f $(PLUGINNAME).zip
 		git archive --prefix=$(PLUGINNAME)/ -o $(PLUGINNAME).zip $(COMMITHASH)
-		@echo "Created package: $(PLUGINNAME).zip" 
+		@echo "Created package: $(PLUGINNAME).zip"
 
 clean:
 	rm $(UI_FILES) $(RESOURCE_FILES)

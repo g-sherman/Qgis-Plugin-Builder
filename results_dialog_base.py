@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'ui_results.ui'
+# Form implementation generated from reading ui file 'results_dialog_base.ui'
 #
 # Created: Wed Dec  5 15:36:03 2012
 #      by: PyQt4 UI code generator 4.9.1
