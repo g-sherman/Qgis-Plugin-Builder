@@ -21,7 +21,7 @@
 """
 
 
-class PluginSpecification:
+class PluginSpecification(object):
     """A convenience store with information needed to create the plugin."""
     def __init__(self, dialog):
         """Constructor.
