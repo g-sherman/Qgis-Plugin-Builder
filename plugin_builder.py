@@ -21,6 +21,8 @@
 """
 # Import Python stuff
 import os
+import errno
+import shutil
 from string import Template
 from string import capwords
 import datetime
@@ -189,6 +191,11 @@ class PluginBuilder:
             self.populate_template(
                 specification,
                 'help/source/index.rst.tmpl', 'help/source/index.rst')
+
+            # copy the unit tests folder
+            test_source = os.path.join(
+                os.path.dirname(__file__), 'templateclass', 'test')
+            copy(test_source, self.plugin_dir)
 
             #resource = QFile(os.path.join(template_dir, 'resources.qrc'))
             #resource.copy(os.path.join(self.plugin_dir, 'resources.qrc'))
@@ -366,3 +373,26 @@ class PluginBuilder:
         #QMessageBox.information(None, 'Help File', help_file)
         # noinspection PyCallByClass,PyTypeChecker
         QDesktopServices.openUrl(QUrl(help_file))
+
+
+def copy(source, destination):
+    """Copy files recursively.
+
+    Taken from: http://www.pythoncentral.io/
+                how-to-recursively-copy-a-directory-folder-in-python/
+
+    :param source: Source directory.
+    :type source: str
+
+    :param destination: Destinatio directory.
+    :type destination: str
+
+    """
+    try:
+        shutil.copytree(source, destination)
+    except OSError as e:
+        # If the error was caused because the source wasn't a directory
+        if e.errno == errno.ENOTDIR:
+            shutil.copy(source, destination)
+        else:
+            print('Directory not copied. Error: %s' % e)
