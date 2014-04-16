@@ -22,11 +22,11 @@
 
 from PyQt4 import QtGui
 from ui_${templateclass} import Ui_${TemplateClass}
-# create the dialog for zoom to point
 
 
 class ${TemplateClass}Dialog(QtGui.QDialog, Ui_${TemplateClass}):
     def __init__(self):
+        """Constructor."""
         QtGui.QDialog.__init__(self)
         # Set up the user interface from Designer.
         # After setupUI you can access any designer object by doing
