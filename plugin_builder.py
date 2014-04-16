@@ -89,11 +89,11 @@ class PluginBuilder:
         self.dlg = PluginBuilderDialog()
 
         # connect the ok button to our method
-        self.dlg.buttonBox.accepted.connect(self.validate_entries)
-        self.dlg.buttonBox.helpRequested(self.show_help)
+        self.dlg.button_box.accepted.connect(self.validate_entries)
+        self.dlg.button_box.helpRequested.connect(self.show_help)
 
         # populate the left panel
-        self.dlg.webView.setUrl(
+        self.dlg.web_view.setUrl(
             QUrl('file:///%s/help.html' % self.plugin_builder_dir))
 
         # show the dialog
@@ -287,7 +287,7 @@ class PluginBuilder:
             metadata_file.close()
             # show the results
             res_dlg = ResultDialog()
-            res_dlg.webView.setHtml(results_popped)
+            res_dlg.web_view.setHtml(results_popped)
             res_dlg.show()
             res_dlg.exec_()
 
@@ -295,7 +295,7 @@ class PluginBuilder:
         """Check to see that all fields have been entered."""
         msg = ''
         dlg = self.dlg
-        if dlg.lineEdit_class_name.text() == '' or \
+        if dlg.class_name.text() == '' or \
             dlg.title.text() == '' or \
             dlg.description.text() == '' or \
             dlg.version_no.text() == '' or \
