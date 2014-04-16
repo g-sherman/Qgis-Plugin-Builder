@@ -1,7 +1,8 @@
 #!/usr/bin/env python
-# This script uploads a plugin package on the server
-#
-# Author: A. Pasotti, V. Picavet
+# coding=utf-8
+"""This script uploads a plugin package on the server.
+Authors: A. Pasotti, V. Picavet
+"""
 
 import sys
 import getpass
@@ -15,18 +16,19 @@ PORT = '80'
 ENDPOINT = '/plugins/RPC2/'
 VERBOSE = False
 
-def main(options, args):
+
+def main(parameters, arguments):
     """Main entry point.
 
-    :param options: Command line options.
-    :param args: Command line arguments.
+    :param parameters: Command line parameters.
+    :param arguments: Command line arguments.
     """
     address = "%s://%s:%s@%s:%s%s" % (
         PROTOCOL,
-        options.username,
-        options.password,
-        options.server,
-        options.port,
+        parameters.username,
+        parameters.password,
+        parameters.server,
+        parameters.port,
         ENDPOINT)
     print "Connecting to: %s" % hide_password(address)
 
@@ -34,7 +36,7 @@ def main(options, args):
 
     try:
         plugin_id, version_id = server.plugin.upload(
-            xmlrpclib.Binary(open(args[0]).read()))
+            xmlrpclib.Binary(open(arguments[0]).read()))
         print "Plugin ID: %s" % plugin_id
         print "Version ID: %s" % version_id
     except xmlrpclib.ProtocolError, err:
@@ -48,7 +50,8 @@ def main(options, args):
         print "Fault code: %d" % err.faultCode
         print "Fault string: %s" % err.faultString
 
-def hide_password(url, start = 6):
+
+def hide_password(url, start=6):
     """Returns the http url with password part replaced with '*'.
 
     :param url: URL to upload the plugin to.
@@ -91,7 +94,7 @@ if __name__ == "__main__":
     if not options.username:
         # interactive mode
         username = getpass.getuser()
-        print "Please enter user name [%s] :"%username,
+        print "Please enter user name [%s] :" % username,
         res = raw_input()
         if res != "":
             options.username = res
@@ -101,4 +104,3 @@ if __name__ == "__main__":
         # interactive mode
         options.password = getpass.getpass()
     main(options, args)
-
