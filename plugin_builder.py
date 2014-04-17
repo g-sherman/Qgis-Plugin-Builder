@@ -94,10 +94,6 @@ class PluginBuilder:
         self.dlg.button_box.accepted.connect(self.validate_entries)
         self.dlg.button_box.helpRequested.connect(self.show_help)
 
-        # populate the left panel
-        self.dlg.web_view.setUrl(
-            QUrl('file:///%s/help.html' % self.plugin_builder_dir))
-
         # show the dialog
         self.dlg.show()
         result = self.dlg.exec_()
@@ -254,11 +250,11 @@ class PluginBuilder:
             metadata_file.write('[general]\n')
             metadata_file.write('name=%s\n' % specification.title)
             metadata_file.write(
-                'qgisMinimumVersion=%s\n' % specification.min_version_no)
+                'qgisMinimumVersion=%s\n' % specification.qgis_minimum_version)
             metadata_file.write(
                 'description=%s\n' % specification.description)
             metadata_file.write(
-                'version=%s\n' % specification.version_no)
+                'version=%s\n' % specification.plugin_version)
             metadata_file.write(
                 'author=%s\n' % specification.author)
             metadata_file.write(
@@ -305,18 +301,19 @@ class PluginBuilder:
         if dlg.class_name.text() == '' or \
             dlg.title.text() == '' or \
             dlg.description.text() == '' or \
-            dlg.version_no.text() == '' or \
-            dlg.min_version_no.text() == '' or \
+            dlg.module_name.text() == '' or \
+            dlg.plugin_version.text() == '' or \
+            dlg.qgis_minimum_version.text() == '' or \
             dlg.menu_text.text() == '' or \
-            dlg.company_name.text() == '' or \
+            dlg.author.text() == '' or \
             dlg.email_address.text() == '':
                 msg = (
                     'Some required fields are missing. '
                     'Please complete the form.\n')
         try:
             # Assigning to _ is python sugar for a variable that will be unused
-            _ = float(str(dlg.version_no.text()))
-            _ = float(str(dlg.min_version_no.text()))
+            _ = float(str(dlg.plugin_version.text()))
+            _ = float(str(dlg.qgis_minimum_version.text()))
         except ValueError:
             msg += 'Version numbers must be numeric.\n'
         # validate plugin name

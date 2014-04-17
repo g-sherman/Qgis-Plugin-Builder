@@ -34,13 +34,14 @@ class PluginSpecification(object):
 
         """
         self.class_name = str(dialog.class_name.text())
-        self.author = dialog.company_name.text()
+        self.author = dialog.author.text()
         self.description = dialog.description.text()
+        self.module_name = dialog.module_name.text()
         self.email_address = dialog.email_address.text()
         self.menu_text = dialog.menu_text.text()
-        self.min_version_no = dialog.min_version_no.text()
+        self.qgis_minimum_version = dialog.qgis_minimum_version.text()
         self.title = dialog.title.text()
-        self.version_no = dialog.version_no.text()
+        self.plugin_version = dialog.plugin_version.text()
         self.homepage = dialog.homepage.text()
         self.tracker = dialog.tracker.text()
         self.repository = dialog.repository.text()
@@ -56,8 +57,9 @@ class PluginSpecification(object):
             'templateclass': self.class_name.lower(),
             'TemplateTitle': self.title,
             'TemplateDescription': self.description,
-            'TemplateVersion': self.version_no,
-            'TemplateQgisVersion': self.min_version_no,
+            'TemplateModuleName': self.module_name,
+            'TemplateVersion': self.plugin_version,
+            'TemplateQgisVersion': self.qgis_minimum_version,
             'TemplateAuthor': self.author,
             'TemplateEmail': self.email_address,
             'TemplateMenuText': self.menu_text,

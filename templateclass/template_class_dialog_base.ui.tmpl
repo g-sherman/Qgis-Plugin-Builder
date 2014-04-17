@@ -1,6 +1,6 @@
 <ui version="4.0" >
- <class>$TemplateClassBase</class>
- <widget class="QDialog" name="$TemplateClassDialogBase" >
+ <class>${TemplateClass}DialogBase</class>
+ <widget class="QDialog" name="${TemplateClass}DialogBase" >
   <property name="geometry" >
    <rect>
     <x>0</x>
@@ -34,7 +34,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>$TemplateClass</receiver>
+   <receiver>${TemplateClass}</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="source_label" >
@@ -50,7 +50,7 @@
   <connection>
    <sender>button_box</sender>
    <signal>rejected()</signal>
-   <receiver>$TemplateClassBase</receiver>
+   <receiver>${TemplateClass}Base</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="source_label" >
