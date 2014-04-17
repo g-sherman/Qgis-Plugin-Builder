@@ -18,6 +18,7 @@
 # ***************************************************************************/
 
 # CONFIGURATION
+
 PLUGIN_UPLOAD = $$(CURDIR)/plugin_upload.py
 
 QGISDIR=.qgis2
@@ -117,3 +118,20 @@ clean:
 # build documentation with sphinx
 doc:
 	cd help; make html
+
+pylint:
+        @echo
+        @echo "-----------------"
+        @echo "Pylint violations"
+        @echo "-----------------"
+        @pylint --reports=n --rcfile=pylintrc safe . || true
+
+
+# Run pep8 style checking
+#http://pypi.python.org/pypi/pep8
+pep8:
+        @echo
+        @echo "-----------"
+        @echo "PEP8 issues"
+        @echo "-----------"
+        @pep8 --repeat --ignore=E203,E121,E122,E123,E124,E125,E126,E127,E128 --exclude pydev,template_class_dialog_base.py,resources_rc.py . || true

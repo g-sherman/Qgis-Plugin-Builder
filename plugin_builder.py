@@ -139,13 +139,13 @@ class PluginBuilder:
             self.populate_template(
                 specification, '__init__.tmpl', '__init__.py')
             self.populate_template(
-                specification, 'TemplateClass.tmpl',
+                specification, 'template_class.tmpl',
                 '%s.py' % specification.class_name.lower())
             self.populate_template(
-                specification, 'TemplateClassDialog.tmpl',
+                specification, 'template_class_dialog.tmpl',
                 '%sdialog.py' % specification.class_name.lower())
             self.populate_template(
-                specification, 'Ui_TemplateClass.tmpl',
+                specification, 'template_class_dialog_base.ui.tmpl',
                 'ui_%s.ui' % specification.class_name.lower())
             self.populate_template(
                 specification, 'resources.tmpl', 'resources.qrc')

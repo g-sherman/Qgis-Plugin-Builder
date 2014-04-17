@@ -1,6 +1,6 @@
 <ui version="4.0" >
- <class>$TemplateClass</class>
- <widget class="QDialog" name="$TemplateClass" >
+ <class>$TemplateClassBase</class>
+ <widget class="QDialog" name="$TemplateClassDialogBase" >
   <property name="geometry" >
    <rect>
     <x>0</x>
@@ -12,7 +12,7 @@
   <property name="windowTitle" >
    <string>$TemplateClass</string>
   </property>
-  <widget class="QDialogButtonBox" name="buttonBox" >
+  <widget class="QDialogButtonBox" name="button_box" >
    <property name="geometry" >
     <rect>
      <x>30</x>
@@ -37,27 +37,27 @@
    <receiver>$TemplateClass</receiver>
    <slot>accept()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="source_label" >
      <x>248</x>
      <y>254</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destination_label" >
      <x>157</x>
      <y>274</y>
     </hint>
    </hints>
   </connection>
   <connection>
-   <sender>buttonBox</sender>
+   <sender>button_box</sender>
    <signal>rejected()</signal>
-   <receiver>$TemplateClass</receiver>
+   <receiver>$TemplateClassBase</receiver>
    <slot>reject()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="source_label" >
      <x>316</x>
      <y>260</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destination_label" >
      <x>286</x>
      <y>274</y>
     </hint>
