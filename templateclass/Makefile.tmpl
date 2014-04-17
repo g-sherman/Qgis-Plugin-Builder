@@ -49,13 +49,13 @@ default: compile
 compile: $$(UI_FILES) $$(RESOURCE_FILES)
 
 %_rc.py : %.qrc
-    pyrcc4 -o $$*_rc.py  $$<
+	pyrcc4 -o $$*_rc.py  $$<
 
 %.py : %.ui
-    pyuic4 -o $$@ $$<
+	pyuic4 -o $$@ $$<
 
 %.qm : %.ts
-    lrelease $$<
+	lrelease $$<
 
 
 deploy: compile doc transcompile
