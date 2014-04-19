@@ -54,7 +54,6 @@ class PluginSpecification(object):
 
         self.template_map = {
             'TemplateClass': self.class_name,
-            'templateclass': self.class_name.lower(),
             'TemplateTitle': self.title,
             'TemplateDescription': self.description,
             'TemplateModuleName': self.module_name,
@@ -63,5 +62,5 @@ class PluginSpecification(object):
             'TemplateAuthor': self.author,
             'TemplateEmail': self.email_address,
             'TemplateMenuText': self.menu_text,
-            'PluginDirName': self.class_name.lower()
+            'PluginDirectoryName': self.class_name.lower()
         }

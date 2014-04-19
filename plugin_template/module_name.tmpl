@@ -24,7 +24,7 @@ from PyQt4.QtGui import QAction, QIcon
 # Initialize Qt resources from file resources.py
 import resources_rc
 # Import the code for the dialog
-from foodialog import FooDialog
+from ${TemplateModuleName}_dialog import ${TemplateClass}Dialog
 import os.path
 
 
@@ -48,7 +48,7 @@ class ${TemplateClass}:
         locale_path = os.path.join(
             self.plugin_dir,
             'i18n',
-            '${templateclass}_{}.qm'.format(locale))
+            '${TemplateClass}_{}.qm'.format(locale))
 
         if os.path.exists(locale_path):
             self.translator = QTranslator()
@@ -67,7 +67,7 @@ class ${TemplateClass}:
         """Create the menu entries and toolbar icons inside the QGIS GUI."""
         # Create action that will start plugin configuration
         self.action = QAction(
-            QIcon(":/plugins/${PluginDirName}/icon.png"),
+            QIcon(":/plugins/${PluginDirectoryName}/icon.png"),
             u"$TemplateMenuText",
             self.iface.mainWindow())
         # connect the action to the run method

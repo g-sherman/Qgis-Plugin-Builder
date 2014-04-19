@@ -63,8 +63,8 @@ class PluginBuilder:
 
         # class members
         self.action = None
-        self.dlg = None
-        self.plugin_dir = None
+        self.dialog = None
+        self.plugin_path = None
 
     # noinspection PyPep8Naming
     def initGui(self):
@@ -88,18 +88,18 @@ class PluginBuilder:
     def run(self):
         """Run method that performs all the real work"""
         # create and show the dialog
-        self.dlg = PluginBuilderDialog()
+        self.dialog = PluginBuilderDialog()
 
         # connect the ok button to our method
-        self.dlg.button_box.accepted.connect(self.validate_entries)
-        self.dlg.button_box.helpRequested.connect(self.show_help)
+        self.dialog.button_box.accepted.connect(self.validate_entries)
+        self.dialog.button_box.helpRequested.connect(self.show_help)
 
         # show the dialog
-        self.dlg.show()
-        result = self.dlg.exec_()
+        self.dialog.show()
+        result = self.dialog.exec_()
         # See if OK was pressed
         if result == 1:
-            specification = PluginSpecification(self.dlg)
+            specification = PluginSpecification(self.dialog)
             # Add the date stuff to the template map
             now = datetime.date.today()
             specification.template_map['TemplateYear'] = now.year
@@ -108,78 +108,78 @@ class PluginBuilder:
 
             # get the location for the plugin
             # noinspection PyCallByClass,PyTypeChecker
-            self.plugin_dir = QFileDialog.getExistingDirectory(
-                self.dlg, 'Select the Directory for your Plugin', '.')
-            if self.plugin_dir == '':
+            self.plugin_path = QFileDialog.getExistingDirectory(
+                self.dialog, 'Select the Directory for your Plugin', '.')
+            if self.plugin_path == '':
                 return
             else:
-                while not QFileInfo(self.plugin_dir).isWritable():
+                while not QFileInfo(self.plugin_path).isWritable():
                     # noinspection PyTypeChecker,PyArgumentList
                     QMessageBox.critical(
                         None, 'Error', 'Directory is not writeable')
                     # noinspection PyCallByClass,PyTypeChecker
-                    self.plugin_dir = QFileDialog.getExistingDirectory(
-                        self.dlg, 'Select the Directory for your Plugin', '.')
-                    if self.plugin_dir == '':
+                    self.plugin_path = QFileDialog.getExistingDirectory(
+                        self.dialog, 'Select the Directory for your Plugin', '.')
+                    if self.plugin_path == '':
                         return
 
             # remove spaces from the plugin name
             # create the plugin directory using the class name
-            self.plugin_dir = os.path.join(
-                str(self.plugin_dir),
-                str(self.dlg.class_name.text()))
-            QDir().mkdir(self.plugin_dir)
+            self.plugin_path = os.path.join(
+                str(self.plugin_path),
+                str(self.dialog.class_name.text()))
+            QDir().mkdir(self.plugin_path)
             # process the user entries
             self.populate_template(
                 specification, 'Makefile.tmpl', 'Makefile')
             self.populate_template(
                 specification, '__init__.tmpl', '__init__.py')
             self.populate_template(
-                specification, 'template_class.tmpl',
-                '%s.py' % specification.class_name.lower())
+                specification, 'module_name.tmpl',
+                '%s.py' % specification.module_name)
             self.populate_template(
-                specification, 'template_class_dialog.tmpl',
-                '%sdialog.py' % specification.class_name.lower())
+                specification, 'module_name_dialog.tmpl',
+                '%s_dialog.py' % specification.module_name)
             self.populate_template(
-                specification, 'template_class_dialog_base.ui.tmpl',
-                'ui_%s.ui' % specification.class_name.lower())
+                specification, 'module_name_dialog_base.ui.tmpl',
+                '%s_dialog_base.ui' % specification.module_name)
             self.populate_template(
                 specification, 'resources.tmpl', 'resources.qrc')
             # copy the non-generated files to the new plugin dir
             template_dir = os.path.join(
-                str(self.plugin_builder_dir), 'templateclass')
+                str(self.plugin_builder_dir), 'plugin_template')
             icon = QFile(os.path.join(template_dir, 'icon.png'))
-            icon.copy(os.path.join(self.plugin_dir, 'icon.png'))
+            icon.copy(os.path.join(self.plugin_path, 'icon.png'))
             release_script = QFile(os.path.join(template_dir, 'release.sh'))
-            release_script.copy(os.path.join(self.plugin_dir, 'release.sh'))
+            release_script.copy(os.path.join(self.plugin_path, 'release.sh'))
             plugin_upload = QFile(
                 os.path.join(template_dir, 'plugin_upload.py'))
             plugin_upload.copy(
-                os.path.join(self.plugin_dir, 'plugin_upload.py'))
+                os.path.join(self.plugin_path, 'plugin_upload.py'))
             # noinspection PyCallByClass,PyTypeChecker
             QFile.setPermissions(os.path.join(
-                self.plugin_dir, 'plugin_upload.py'),
+                self.plugin_path, 'plugin_upload.py'),
                 QFile.ReadOwner | QFile.WriteOwner | QFile.ExeOwner |
                 QFile.ReadUser | QFile.WriteUser | QFile.ExeUser |
                 QFile.ReadGroup | QFile.ExeGroup | QFile.ReadOther |
                 QFile.ExeOther)
             # create a i18n directory
-            QDir().mkdir(self.plugin_dir + '/i18n')
+            QDir().mkdir(self.plugin_path + '/i18n')
             # Create sphinx default project for help
-            QDir().mkdir(self.plugin_dir + '/help')
-            QDir().mkdir(self.plugin_dir + '/help/build')
-            QDir().mkdir(self.plugin_dir + '/help/source')
-            QDir().mkdir(self.plugin_dir + '/help/source/_static')
-            QDir().mkdir(self.plugin_dir + '/help/source/_templates')
+            QDir().mkdir(self.plugin_path + '/help')
+            QDir().mkdir(self.plugin_path + '/help/build')
+            QDir().mkdir(self.plugin_path + '/help/source')
+            QDir().mkdir(self.plugin_path + '/help/source/_static')
+            QDir().mkdir(self.plugin_path + '/help/source/_templates')
             # copy doc makefiles
             # noinspection PyCallByClass,PyTypeChecker
             QFile.copy(
                 os.path.join(template_dir, 'help/make.bat'),
-                os.path.join(self.plugin_dir, 'help/make.bat'))
+                os.path.join(self.plugin_path, 'help/make.bat'))
             # noinspection PyCallByClass,PyTypeChecker
             QFile.copy(
                 os.path.join(template_dir, 'help/Makefile'),
-                os.path.join(self.plugin_dir, 'help/Makefile'))
+                os.path.join(self.plugin_path, 'help/Makefile'))
             # populate and write help files
             self.populate_template(
                 specification,
@@ -190,53 +190,53 @@ class PluginBuilder:
 
             # copy the unit tests folder
             test_source = os.path.join(
-                os.path.dirname(__file__), 'templateclass', 'test')
-            copy(test_source, self.plugin_dir)
+                os.path.dirname(__file__), 'plugin_template', 'test')
+            copy(test_source, self.plugin_path)
 
             #resource = QFile(os.path.join(template_dir, 'resources.qrc'))
-            #resource.copy(os.path.join(self.plugin_dir, 'resources.qrc'))
+            #resource.copy(os.path.join(self.plugin_path, 'resources.qrc'))
 
             # populate the results html template
             template_file = open(os.path.join(
-                str(self.plugin_builder_dir), 'templateclass', 'results.tmpl'))
+                str(self.plugin_builder_dir),
+                'plugin_template',
+                'results.tmpl'))
             content = template_file.read()
             template_file.close()
             template = Template(content)
             result_map = {
-                'PluginDir': self.plugin_dir,
+                'PluginDir': self.plugin_path,
                 'TemplateClass': specification.template_map['TemplateClass'],
-                'templateclass': specification.template_map['templateclass'],
                 'UserPluginDir': self.user_plugin_dir}
             results_popped = template.substitute(result_map)
 
             # write the results info to the README HTML file
             readme = codecs.open(os.path.join(
-                str(self.plugin_dir), 'README.html'), 'w', 'utf-8')
+                str(self.plugin_path), 'README.html'), 'w', 'utf-8')
             readme.write(results_popped)
             readme.close()
 
             # populate the results readme text template
             template_file = open(os.path.join(
-                str(self.plugin_builder_dir), 'templateclass', 'readme.tmpl'))
+                str(self.plugin_builder_dir), 'plugin_template', 'readme.tmpl'))
             content = template_file.read()
             template_file.close()
             template = Template(content)
             result_map = {
-                'PluginDir': self.plugin_dir,
+                'PluginDir': self.plugin_path,
                 'TemplateClass': specification.template_map['TemplateClass'],
-                'templateclass': specification.template_map['templateclass'],
                 'UserPluginDir': self.user_plugin_dir}
             popped = template.substitute(result_map)
 
             # write the results info to the README txt file
             readme_txt = codecs.open(
-                os.path.join(str(self.plugin_dir), 'README.txt'), 'w', 'utf-8')
+                os.path.join(str(self.plugin_path), 'README.txt'), 'w', 'utf-8')
             readme_txt.write(popped)
             readme_txt.close()
 
             # create the metadata file
             metadata_file = codecs.open(os.path.join(
-                str(self.plugin_dir), 'metadata.txt'), 'w', 'utf-8')
+                str(self.plugin_path), 'metadata.txt'), 'w', 'utf-8')
             metadata_comment = (
                 '# This file contains metadata for your plugin. Since \n'
                 '# version 2.0 of QGIS this is the proper way to supply \n'
@@ -284,7 +284,7 @@ class PluginBuilder:
             metadata_file.write(
                 'experimental=%s\n\n' % specification.experimental)
             metadata_file.write(
-                '# deprecated flag (applies to the whole plugin, not \n'
+                '# deprecated flag (applies to the whole plugin, not '
                 'just a single version)\n')
             metadata_file.write('deprecated=%s\n\n' % specification.deprecated)
             metadata_file.close()
@@ -296,8 +296,8 @@ class PluginBuilder:
 
     def validate_entries(self):
         """Check to see that all fields have been entered."""
-        msg = ''
-        dlg = self.dlg
+        message = ''
+        dlg = self.dialog
         if dlg.class_name.text() == '' or \
             dlg.title.text() == '' or \
             dlg.description.text() == '' or \
@@ -307,7 +307,7 @@ class PluginBuilder:
             dlg.menu_text.text() == '' or \
             dlg.author.text() == '' or \
             dlg.email_address.text() == '':
-                msg = (
+                message = (
                     'Some required fields are missing. '
                     'Please complete the form.\n')
         try:
@@ -315,7 +315,7 @@ class PluginBuilder:
             _ = float(str(dlg.plugin_version.text()))
             _ = float(str(dlg.qgis_minimum_version.text()))
         except ValueError:
-            msg += 'Version numbers must be numeric.\n'
+            message += 'Version numbers must be numeric.\n'
         # validate plugin name
         # check that we have only ascii char in class name
         try:
@@ -324,27 +324,29 @@ class PluginBuilder:
             dlg.class_name.setText(
                 unicode(
                     dlg.class_name.text()).encode('ascii', 'ignore'))
-            msg += (
+            message += (
                 'The Class name must be ASCII characters only, '
                 'the name has been modified for you. \n')
         # check space and force CamelCase
         if str(dlg.class_name.text()).find(' ') > -1:
             class_name = capwords(str(dlg.class_name.text()))
             dlg.class_name.setText(class_name.replace(' ', ''))
-            msg += (
+            message += (
                 'The Class name must use CamelCase. '
                 'No spaces are allowed; the name has been modified for you.')
-        if msg != '':
+        # noinspection PyArgumentList
+        if message != '':
             QMessageBox.warning(
-                self.dlg, 'Information missing or invalid', msg)
+                self.dialog, 'Information missing or invalid', message)
         else:
-            self.dlg.accept()
+            self.dialog.accept()
 
-    def populate_template(self, spec, template_name, output_name):
+    def populate_template(self, specification, template_name, output_name):
         """Populate the template based on user data.
 
-        :param spec: Descriptive data that will be used to create the plugin.
-        :type spec: PluginSpecification
+        :param specification: Descriptive data that will be used to create
+            the plugin.
+        :type specification: PluginSpecification
 
         :param template_name: Name for the template.
         :type template_name: str
@@ -353,13 +355,13 @@ class PluginBuilder:
         :type output_name: str
         """
         template_file = open(os.path.join(
-            str(self.plugin_builder_dir), 'templateclass', template_name))
+            str(self.plugin_builder_dir), 'plugin_template', template_name))
         content = template_file.read()
         template_file.close()
         template = Template(content)
-        popped = template.substitute(spec.template_map)
+        popped = template.substitute(specification.template_map)
         plugin_file = codecs.open(
-            os.path.join(self.plugin_dir, output_name), 'w', 'utf-8')
+            os.path.join(self.plugin_path, output_name), 'w', 'utf-8')
         plugin_file.write(popped)
         plugin_file.close()
 

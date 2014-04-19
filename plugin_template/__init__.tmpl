@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 /***************************************************************************
- ${TemplateClass}Dialog
+ ${TemplateClass}
                                  A QGIS plugin
  $TemplateDescription
                              -------------------
@@ -18,19 +18,10 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
+ This script initializes the plugin, making it known to QGIS.
 """
 
-from PyQt4 import QtGui
-from ui_${templateclass} import Ui_${TemplateClass}DialogBase
-
-
-class ${TemplateClass}Dialog(QtGui.QDialog, Ui_${TemplateClass}DialogBase):
-    def __init__(self):
-        """Constructor."""
-        QtGui.QDialog.__init__(self)
-        # Set up the user interface from Designer.
-        # After setupUI you can access any designer object by doing
-        # self.<objectname>, and you can use autoconnect slots - see
-        # http://qt-project.org/doc/qt-4.8/designer-using-a-ui-file.html
-        # #widgets-and-dialogs-with-auto-connect
-        self.setupUi(self)
+def classFactory(iface):
+    # load ${TemplateClass} class from file ${TemplateClass}
+    from ${TemplateModuleName} import ${TemplateClass}
+    return ${TemplateClass}(iface)

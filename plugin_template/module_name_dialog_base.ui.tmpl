@@ -10,7 +10,7 @@
    </rect>
   </property>
   <property name="windowTitle" >
-   <string>$TemplateClass</string>
+   <string>${TemplateTitle}</string>
   </property>
   <widget class="QDialogButtonBox" name="button_box" >
    <property name="geometry" >
@@ -32,9 +32,9 @@
  <resources/>
  <connections>
   <connection>
-   <sender>buttonBox</sender>
+   <sender>button_box</sender>
    <signal>accepted()</signal>
-   <receiver>${TemplateClass}</receiver>
+   <receiver>${TemplateClass}DialogBase</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="source_label" >
@@ -50,7 +50,7 @@
   <connection>
    <sender>button_box</sender>
    <signal>rejected()</signal>
-   <receiver>${TemplateClass}Base</receiver>
+   <receiver>${TemplateClass}DialogBase</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="source_label" >

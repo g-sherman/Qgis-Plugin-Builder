@@ -1,7 +1,7 @@
 # ignore swap files
 *swp
-templateclass/*swp
+plugin_template/*swp
 # ignore compiled python files
 *pyc
-templateclass/*pyc
+plugin_template/*pyc
 .idea
