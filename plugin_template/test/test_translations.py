@@ -35,20 +35,18 @@ class SafeTranslationsTest(unittest.TestCase):
             os.environ.__delitem__('LANG')
 
     def test_qgis_translations(self):
+        """Test that translations work."""
         parent_path = os.path.join(__file__, os.path.pardir, os.path.pardir)
         dir_path = os.path.abspath(parent_path)
         file_path = os.path.join(
-            dir_path, 'i18n', 'inasafe_id.qm')
+            dir_path, 'i18n', 'id.qm')
         translator = QTranslator()
         translator.load(file_path)
         QCoreApplication.installTranslator(translator)
 
-        expected_msg = (
-            'Tidak ada informasi gaya yang ditemukan pada lapisan %s')
-        real_msg = QCoreApplication.translate(
-            "@default", 'No styleInfo was found for layer %s')
-        msg = 'expected %s but got %s' % (expected_msg, real_msg)
-        assert expected_msg == real_msg, msg
+        expected_message = 'Goeie more'
+        real_message = QCoreApplication.translate("@default", 'Good morning')
+        self.assertEqual(real_message, expected_message)
 
 
 if __name__ == "__main__":
