@@ -27,6 +27,7 @@ from string import Template
 from string import capwords
 import datetime
 import codecs
+
 # Import the PyQt and QGIS libraries
 from PyQt4.QtCore import QFileInfo, QUrl, QFile, QDir
 from PyQt4.QtGui import (
@@ -36,6 +37,7 @@ from qgis.core import QgsApplication
 # Do not remove this import even though your IDE / pylint may report it unused
 # noinspection PyUnresolvedReferences
 import resources
+
 # Import the code for the dialog
 from plugin_builder_dialog import PluginBuilderDialog
 from result_dialog import ResultDialog
@@ -163,8 +165,10 @@ class PluginBuilder:
                 QFile.ReadUser | QFile.WriteUser | QFile.ExeUser |
                 QFile.ReadGroup | QFile.ExeGroup | QFile.ReadOther |
                 QFile.ExeOther)
+
             # create a i18n directory
             QDir().mkdir(self.plugin_path + '/i18n')
+
             # Create sphinx default project for help
             QDir().mkdir(self.plugin_path + '/help')
             QDir().mkdir(self.plugin_path + '/help/build')
@@ -191,7 +195,7 @@ class PluginBuilder:
             # copy the unit tests folder
             test_source = os.path.join(
                 os.path.dirname(__file__), 'plugin_template', 'test')
-            copy(test_source, self.plugin_path)
+            copy(test_source, os.path.join(self.plugin_path, 'test'))
 
             #resource = QFile(os.path.join(template_dir, 'resources.qrc'))
             #resource.copy(os.path.join(self.plugin_path, 'resources.qrc'))
@@ -383,7 +387,7 @@ def copy(source, destination):
     :param source: Source directory.
     :type source: str
 
-    :param destination: Destinatio directory.
+    :param destination: Destination directory.
     :type destination: str
 
     """
