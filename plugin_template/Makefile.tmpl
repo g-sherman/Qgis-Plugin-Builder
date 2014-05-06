@@ -39,8 +39,6 @@ PY_FILES = \
 
 EXTRAS = icon.png metadata.txt
 
-COMPILED_UI_FILES = ${TemplateModuleName}_dialog_base.py
-
 COMPILED_RESOURCE_FILES = resources_rc.py
 
 
@@ -50,19 +48,16 @@ COMPILED_RESOURCE_FILES = resources_rc.py
 
 HELP = help/build/html
 
-PLUGIN_UPLOAD = $$(CURDIR)/plugin_upload.py
+PLUGIN_UPLOAD = $$(c)/plugin_upload.py
 
 QGISDIR=.qgis2
 
 default: compile
 
-compile: $$(COMPILED_UI_FILES) $$(COMPILED_RESOURCE_FILES)
+compile: $$(COMPILED_RESOURCE_FILES)
 
 %_rc.py : %.qrc
 	pyrcc4 -o $$*_rc.py  $$<
-
-%.py : %.ui
-	pyuic4 -o $$@ $$<
 
 %.qm : %.ts
 	lrelease $$<
@@ -74,7 +69,7 @@ test: compile
 	@echo "----------------------"
 
 	@# Preceding dash means that make will continue in case of errors
-	@-export PYTHONPATH=`pwd`:$(PYTHONPATH); \
+	@-export PYTHONPATH=`pwd`:$$(PYTHONPATH); \
 		export QGIS_DEBUG=0; \
 		export QGIS_LOG_FILE=/dev/null; \
 		nosetests -v --with-id --with-coverage --cover-package=. \
@@ -97,7 +92,7 @@ deploy: compile doc transcompile
 	cp -vfr $$(HELP) $$(HOME)/$$(QGISDIR)/python/plugins/$$(PLUGINNAME)/help
 
 # The dclean target removes compiled python files from plugin directory
-# also delets any .svn entry
+# also deletes any .svn entry
 dclean:
 	@echo
 	@echo "-----------------------------------"
@@ -195,4 +190,4 @@ pep8:
 	@echo "-----------"
 	@echo "PEP8 issues"
 	@echo "-----------"
-	@pep8 --repeat --ignore=E203,E121,E122,E123,E124,E125,E126,E127,E128 --exclude pydev,${TemplateModuleName}_dialog_base.py,resources_rc.py . || true
+	@pep8 --repeat --ignore=E203,E121,E122,E123,E124,E125,E126,E127,E128 --exclude pydev,resources_rc.py . || true

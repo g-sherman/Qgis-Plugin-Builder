@@ -31,19 +31,14 @@ EXTRAS = help.html icon.png plugin_builder.png metadata.txt
 
 HELP_BUILD = help/build/html/*
 
-UI_FILES = plugin_builder_dialog_base.py results_dialog_base.py
-
 RESOURCE_FILES = resources.py
 
 default: compile
 
-compile: $(UI_FILES) $(RESOURCE_FILES)
+compile: $(RESOURCE_FILES)
 
 %.py : %.qrc
 	pyrcc4 -o $@  $<
-
-%.py : %.ui
-	pyuic4 -o $@ $<
 
 # The deploy  target only works on unix like operating system where
 # the Python plugin directory is located at:

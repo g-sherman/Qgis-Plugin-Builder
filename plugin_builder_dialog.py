@@ -20,11 +20,14 @@
  ***************************************************************************/
 """
 
-from PyQt4 import QtGui
-from plugin_builder_dialog_base import Ui_PluginBuilderDialogBase
+import os
+from PyQt4 import QtGui, uic
+
+BASE_CLASS = uic.loadUiType(os.path.join(
+    os.path.dirname(__file__), 'plugin_builder_dialog_base.ui'))[0]
 
 
-class PluginBuilderDialog(QtGui.QDialog, Ui_PluginBuilderDialogBase):
+class PluginBuilderDialog(QtGui.QDialog, BASE_CLASS):
     """Dialog for defining the new plugin properties.
 
     Note we use multiple inheritance so you can reference any gui elements
@@ -32,8 +35,8 @@ class PluginBuilderDialog(QtGui.QDialog, Ui_PluginBuilderDialogBase):
     so that qt autoconnect slots work.
 
     """
-    def __init__(self):
+    def __init__(self, parent=None):
         """Constructor."""
-        QtGui.QDialog.__init__(self)
+        super(PluginBuilderDialog, self).__init__(parent)
         # Set up the user interface from Designer.
         self.setupUi(self)

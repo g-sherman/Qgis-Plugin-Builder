@@ -20,13 +20,17 @@
  ***************************************************************************/
 """
 
-from PyQt4 import QtCore, QtGui
-from results_dialog_base import Ui_ResultsDialogBase
+import os
+
+from PyQt4 import QtCore, QtGui, uic
+
+BASE_CLASS = uic.loadUiType(os.path.join(
+    os.path.dirname(__file__), 'results_dialog_base.ui'))[0]
 
 
-class ResultDialog(QtGui.QDialog, Ui_ResultsDialogBase):
+class ResultDialog(QtGui.QDialog, BASE_CLASS):
     """Dialog for showing the results of the plugin creation process."""
-    def __init__(self):
-        QtGui.QDialog.__init__(self)
+    def __init__(self, parent=None):
+        super(ResultDialog, self).__init__(parent)
         # Set up the user interface from Designer.
         self.setupUi(self)
