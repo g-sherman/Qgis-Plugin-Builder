@@ -19,6 +19,7 @@
 # ***************************************************************************/
 # Makefile for a PyQGIS plugin
 #
+
 DOTQGIS=.qgis2
 
 PLUGINNAME=pluginbuilder

@@ -197,6 +197,11 @@ class PluginBuilder:
                 os.path.dirname(__file__), 'plugin_template', 'test')
             copy(test_source, os.path.join(self.plugin_path, 'test'))
 
+            # copy the scripts folder
+            scripts_source = os.path.join(
+                os.path.dirname(__file__), 'plugin_template', 'scripts')
+            copy(scripts_source, os.path.join(self.plugin_path, 'scripts'))
+
             #resource = QFile(os.path.join(template_dir, 'resources.qrc'))
             #resource.copy(os.path.join(self.plugin_path, 'resources.qrc'))
 

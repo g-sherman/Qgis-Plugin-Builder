@@ -21,14 +21,17 @@
 # Edit the following to match your sources lists
 #################################################
 
+
+#Add iso code for any locales you want to support here (space separated)
+LOCALES = af en
+
 # translation
 SOURCES = \
 	__init__.py \
 	${TemplateModuleName}.py \
 	${TemplateModuleName}_dialog.py
 
-#TRANSLATIONS = i18n/${TemplateModuleName}_en.ts
-TRANSLATIONS =
+TRANSLATIONS = i18n/af.ts
 
 PLUGINNAME = ${TemplateClass}
 
@@ -145,7 +148,7 @@ transup:
 	@echo "------------------------------------------------"
 	@echo "Updating translation files with any new strings."
 	@echo "------------------------------------------------"
-	pylupdate4 Makefile
+	@scripts/update-strings.sh $$(LOCALES)
 
 transcompile:
 	@echo

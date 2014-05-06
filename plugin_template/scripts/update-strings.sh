@@ -4,7 +4,7 @@ LOCALES=$*
 # Get newest .py files so we don't update strings unnecessarily
 
 CHANGED_FILES=0
-PYTHON_FILES=$(find . -name '*.py')
+PYTHON_FILES=`find . -regex ".*\(ui\|py\)$" -type f`
 for PYTHON_FILE in $PYTHON_FILES
 do
   CHANGED=$(stat -c %Y $PYTHON_FILE)
@@ -40,7 +40,6 @@ done
 if [ $UPDATE == true ]
 # retrieve all python files
 then
-  PYTHON_FILES=`find . -regex ".*\(ui\|py\)$" -type f`
   print $PYTHON_FILES
   # update .ts
   echo "Please provide translations by editing the translation files below:"
@@ -49,8 +48,7 @@ then
     echo "safe_qgis/i18n/inasafe_"$LOCALE".ts"
     # Note we don't use pylupdate with qt .pro file approach as it is flakey
     # about what is made available.
-    set -x
-    pylupdate4 -noobsolete PYTHON_FILES -ts i18n/${LOCALE}.ts
+    pylupdate4 -noobsolete $PYTHON_FILES -ts i18n/${LOCALE}.ts
   done
 else
   echo "No need to edit any translation files (.ts) because no python files"
