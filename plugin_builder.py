@@ -166,9 +166,6 @@ class PluginBuilder:
                 QFile.ReadGroup | QFile.ExeGroup | QFile.ReadOther |
                 QFile.ExeOther)
 
-            # create a i18n directory
-            QDir().mkdir(self.plugin_path + '/i18n')
-
             # Create sphinx default project for help
             QDir().mkdir(self.plugin_path + '/help')
             QDir().mkdir(self.plugin_path + '/help/build')
@@ -201,6 +198,11 @@ class PluginBuilder:
             scripts_source = os.path.join(
                 os.path.dirname(__file__), 'plugin_template', 'scripts')
             copy(scripts_source, os.path.join(self.plugin_path, 'scripts'))
+
+            # copy the i18n folder
+            scripts_source = os.path.join(
+                os.path.dirname(__file__), 'plugin_template', 'i18n')
+            copy(scripts_source, os.path.join(self.plugin_path, 'i18n'))
 
             #resource = QFile(os.path.join(template_dir, 'resources.qrc'))
             #resource.copy(os.path.join(self.plugin_path, 'resources.qrc'))
