@@ -20,14 +20,18 @@
  ***************************************************************************/
 """
 
-from PyQt4 import QtGui
-from ${TemplateModuleName}_dialog_base import Ui_${TemplateClass}DialogBase
+import os
+
+from PyQt4 import QtGui, uic
+
+FORM_CLASS, _ = uic.loadUiType(os.path.join(
+    os.path.dirname(__file__), '${TemplateModuleName}_dialog_base.ui'))
 
 
-class ${TemplateClass}Dialog(QtGui.QDialog, Ui_${TemplateClass}DialogBase):
-    def __init__(self):
+class ${TemplateClass}Dialog(QtGui.QDialog, FORM_CLASS):
+    def __init__(self, parent=None):
         """Constructor."""
-        QtGui.QDialog.__init__(self)
+        super(${TemplateClass}Dialog, self).__init__(parent)
         # Set up the user interface from Designer.
         # After setupUI you can access any designer object by doing
         # self.<objectname>, and you can use autoconnect slots - see

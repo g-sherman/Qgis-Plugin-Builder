@@ -23,11 +23,11 @@
 import os
 from PyQt4 import QtGui, uic
 
-BASE_CLASS = uic.loadUiType(os.path.join(
-    os.path.dirname(__file__), 'plugin_builder_dialog_base.ui'))[0]
+FORM_CLASS, _ = uic.loadUiType(os.path.join(
+    os.path.dirname(__file__), 'plugin_builder_dialog_base.ui'))
 
 
-class PluginBuilderDialog(QtGui.QDialog, BASE_CLASS):
+class PluginBuilderDialog(QtGui.QDialog, FORM_CLASS):
     """Dialog for defining the new plugin properties.
 
     Note we use multiple inheritance so you can reference any gui elements
