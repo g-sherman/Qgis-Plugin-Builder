@@ -21,7 +21,16 @@
  This script initializes the plugin, making it known to QGIS.
 """
 
+
+# pylint: disable=C0103
+# noinspection PyPep8Naming
 def classFactory(iface):
-    # load ${TemplateClass} class from file ${TemplateClass}
+    """Load ${TemplateClass} class from file ${TemplateClass}.
+
+    :param iface: A QGIS interface instance.
+    :type iface: QgsInterface
+    """
+    #
     from ${TemplateModuleName} import ${TemplateClass}
     return ${TemplateClass}(iface)
+# pylint: enable=C0103
