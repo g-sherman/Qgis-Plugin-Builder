@@ -20,15 +20,11 @@ __date__ = '20/01/2011'
 __copyright__ = ('Copyright 2012, Australia Indonesia Facility for '
                  'Disaster Reduction')
 
-import sys
 import os
 import unittest
 
 from qgis.core import QgsProviderRegistry
 
-PATH = os.path.abspath(os.path.join(
-    os.path.dirname(__file__), '..', 'plugin_template'))
-sys.path.insert(0, PATH)
 
 from test.utilities import get_qgis_app
 from utilities import temp_dir, unique_filename
@@ -64,9 +60,11 @@ class BuilderTest(unittest.TestCase):
         Path to copy to must not pre-exist so we create a parent dir
         and generate a temp dir name without actually creating it.
         """
+        path = os.path.abspath(os.path.join(
+            os.path.dirname(__file__), '..', 'plugin_template'))
         temp_path = temp_dir()
         temp_name = unique_filename(prefix='plugin_builder_')
         new_path = os.path.join(temp_path, temp_name)
-        copy(os.path.join(PATH, 'test'), new_path)
+        copy(os.path.join(path, 'test'), new_path)
         test_file_path = os.path.join(new_path, 'test_init.py')
         self.assertTrue(os.path.exists(test_file_path), test_file_path)
