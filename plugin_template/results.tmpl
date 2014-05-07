@@ -1,6 +1,9 @@
 <html>
-<body style='background-color:##D7ECF8;'>
+<body>
 <h3>Plugin Builder Results</h3>
+
+Congratulations! You just built a plugin for QGIS! Easy eh?<br/>
+
 <div id='help' style='font-size:.9em;'>
 Your plugin <b>${TemplateClass}</b> was created in:<br>
 &nbsp;&nbsp;<b>${PluginDir}</b>
@@ -8,16 +11,15 @@ Your plugin <b>${TemplateClass}</b> was created in:<br>
 Your QGIS plugin directory is located at:<br>
 &nbsp;&nbsp;<b>${UserPluginDir}</b>
 <p>
-<b>What's Next</b>
+<h3>What's Next</h3>
 <ol>
     <li>Copy the entire directory containing your new plugin to the QGIS plugin directory
-    <li>Compile the ui file using pyuic4
-    <li>Compile the resources file using pyrcc4
-    <li>Test the generated sources using ``make test`` (or run tests from your IDE)
+    <li>Compile the resources file using pyrcc4 (simply run <b>make</b> if you have automake)
+    <li>Test the generated sources using <b>make test</b> (or run tests from your IDE)
     <li>Test the plugin by enabling it in the QGIS plugin manager
-    <li>Customize it by editing the implementation file <b>${TemplateClass}.py</b>
+    <li>Customize it by editing the implementation file <b>${TemplateModuleName}.py</b>
     <li>Create your own custom icon, replacing the default <b>icon.png</b>
-    <li>Modify your user interface by opening <b>${TemplateClass}.ui</b> in Qt Designer
+    <li>Modify your user interface by opening <b>${TemplateModuleName}_dialog_base.ui</b> in Qt Designer
     <li>You can use the <b>Makefile</b> to compile your resource files when you
         make changes. This requires GNU make (gmake)
 </ul>

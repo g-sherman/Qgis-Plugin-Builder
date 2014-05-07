@@ -210,6 +210,8 @@ class PluginBuilder:
             #resource.copy(os.path.join(self.plugin_path, 'resources.qrc'))
 
             # populate the results html template
+            template_module_name = \
+                specification.template_map['TemplateModuleName']
             template_file = open(os.path.join(
                 str(self.plugin_builder_dir),
                 'plugin_template',
@@ -220,6 +222,7 @@ class PluginBuilder:
             result_map = {
                 'PluginDir': self.plugin_path,
                 'TemplateClass': specification.template_map['TemplateClass'],
+                'TemplateModuleName': template_module_name,
                 'UserPluginDir': self.user_plugin_dir}
             results_popped = template.substitute(result_map)
 
@@ -237,8 +240,7 @@ class PluginBuilder:
             content = template_file.read()
             template_file.close()
             template = Template(content)
-            template_module_name = \
-                specification.template_map['TemplateModuleName']
+
             result_map = {
                 'PluginDir': self.plugin_path,
                 'TemplateClass': specification.template_map['TemplateClass'],
