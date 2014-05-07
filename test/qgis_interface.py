@@ -6,10 +6,14 @@
      the Free Software Foundation; either version 2 of the License, or
      (at your option) any later version.
 
+     NOTE: This file is duplicated in the plugin template - figure out how
+     to have only one copy in this source tree.
+
 .. note:: This source code was copied from the 'postgis viewer' application
      with original authors:
      Copyright (c) 2010 by Ivan Mincik, ivan.mincik@gista.sk
      Copyright (c) 2011 German Carrillo, geotux_tuxman@linuxmail.org
+     Copyright (c) 2014 Tim Sutton, tim@linfiniti.com
 
 """
 

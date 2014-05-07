@@ -1,5 +1,11 @@
 # coding=utf-8
-"""Utilities for testing."""
+"""Utilities for testing.
+
+Note: Shameless duplication exists here with what is in the
+template plugin file structure. Figure out how to have DRY.
+
+Tim Sutton
+"""
 
 import getpass
 import os

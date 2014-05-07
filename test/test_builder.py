@@ -40,15 +40,10 @@ class QGISTest(unittest.TestCase):
     def test_qgis_environment(self):
         """QGIS environment has the expected providers"""
 
-        r = QgsProviderRegistry.instance()
-        #for item in r.providerList():
-        #    print str(item)
-
-        #print 'Provider count: %s' % len(r.providerList())
-        assert 'gdal' in r.providerList()
-        assert 'ogr' in r.providerList()
-        assert 'postgres' in r.providerList()
-        #assert 'wfs' in r.providerList()
+        registry = QgsProviderRegistry.instance()
+        self.assertIn('gdal', registry.providerList())
+        self.assertIn('ogr', registry.providerList())
+        self.assertIn('postgres', registry.providerList())
 
 
 class BuilderTest(unittest.TestCase):
