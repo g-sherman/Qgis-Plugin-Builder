@@ -87,3 +87,21 @@ test: compile
 		export QGIS_LOG_FILE=/dev/null; \
 		nosetests -v --with-id --with-coverage --cover-package=. \
 		3>&1 1>&2 2>&3 3>&- || true
+
+
+pylint:
+	@echo
+	@echo "-----------------"
+	@echo "Pylint violations"
+	@echo "-----------------"
+	@pylint --reports=n --rcfile=pylintrc . || true
+
+
+# Run pep8 style checking
+#http://pypi.python.org/pypi/pep8
+pep8:
+	@echo
+	@echo "-----------"
+	@echo "PEP8 issues"
+	@echo "-----------"
+	@pep8 --repeat --ignore=E203,E121,E122,E123,E124,E125,E126,E127,E128 --exclude pydev,resources.py,conf.py . || true

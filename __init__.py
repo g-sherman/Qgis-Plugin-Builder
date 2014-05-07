@@ -1,3 +1,4 @@
+# coding=utf-8
 """
 /***************************************************************************
     PluginBuilder
@@ -21,7 +22,15 @@
  This script initializes the plugin, making it known to QGIS.
 """
 
+
+# pylint: disable=C0103
+# noinspection PyPep8Naming
 def classFactory(iface):
-    # load PluginBuilder class from file PluginBuilder
-    from plugin_builder import PluginBuilder
+    """Load PluginBuilder class from file PluginBuilder.
+
+    :param iface: A QGIS interface instance.
+    :type iface: QgsInterface
+    """
+    from .plugin_builder import PluginBuilder
     return PluginBuilder(iface)
+# pylint: enable=C0103

@@ -231,7 +231,9 @@ class PluginBuilder:
 
             # populate the results readme text template
             template_file = open(os.path.join(
-                str(self.plugin_builder_dir), 'plugin_template', 'readme.tmpl'))
+                str(self.plugin_builder_dir),
+                'plugin_template',
+                'readme.tmpl'))
             content = template_file.read()
             template_file.close()
             template = Template(content)
@@ -245,8 +247,8 @@ class PluginBuilder:
             popped = template.substitute(result_map)
 
             # write the results info to the README txt file
-            readme_txt = codecs.open(
-                os.path.join(str(self.plugin_path), 'README.txt'), 'w', 'utf-8')
+            readme_txt = codecs.open(os.path.join(
+                str(self.plugin_path), 'README.txt'), 'w', 'utf-8')
             readme_txt.write(popped)
             readme_txt.close()
 
@@ -315,14 +317,14 @@ class PluginBuilder:
         message = ''
         dlg = self.dialog
         if dlg.class_name.text() == '' or \
-            dlg.title.text() == '' or \
-            dlg.description.text() == '' or \
-            dlg.module_name.text() == '' or \
-            dlg.plugin_version.text() == '' or \
-            dlg.qgis_minimum_version.text() == '' or \
-            dlg.menu_text.text() == '' or \
-            dlg.author.text() == '' or \
-            dlg.email_address.text() == '':
+           dlg.title.text() == '' or \
+           dlg.description.text() == '' or \
+           dlg.module_name.text() == '' or \
+           dlg.plugin_version.text() == '' or \
+           dlg.qgis_minimum_version.text() == '' or \
+           dlg.menu_text.text() == '' or \
+           dlg.author.text() == '' or \
+           dlg.email_address.text() == '':
                 message = (
                     'Some required fields are missing. '
                     'Please complete the form.\n')
