@@ -168,6 +168,12 @@ class PluginBuilder:
                 QFile.ReadGroup | QFile.ExeGroup | QFile.ReadOther |
                 QFile.ExeOther)
 
+            # Copy over pylintrc
+            # noinspection PyCallByClass,PyTypeChecker
+            QFile.copy(
+                os.path.join(template_dir, 'pylintrc'),
+                os.path.join(self.plugin_path, 'pylintrc'))
+
             # Create sphinx default project for help
             QDir().mkdir(self.plugin_path + '/help')
             QDir().mkdir(self.plugin_path + '/help/build')
