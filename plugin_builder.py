@@ -105,8 +105,8 @@ class PluginBuilder:
             # Add the date stuff to the template map
             now = datetime.date.today()
             specification.template_map['TemplateYear'] = now.year
-            specification.template_map['TemplateBuildDate'] = '%i-%02i-%02i' % (
-                now.year, now.month, now.day)
+            specification.template_map['TemplateBuildDate'] = \
+                '%i-%02i-%02i' % (now.year, now.month, now.day)
 
             # get the location for the plugin
             # noinspection PyCallByClass,PyTypeChecker
@@ -121,7 +121,9 @@ class PluginBuilder:
                         None, 'Error', 'Directory is not writeable')
                     # noinspection PyCallByClass,PyTypeChecker
                     self.plugin_path = QFileDialog.getExistingDirectory(
-                        self.dialog, 'Select the Directory for your Plugin', '.')
+                        self.dialog,
+                        'Select the Directory for your Plugin',
+                        '.')
                     if self.plugin_path == '':
                         return
 
@@ -233,9 +235,12 @@ class PluginBuilder:
             content = template_file.read()
             template_file.close()
             template = Template(content)
+            template_module_name = \
+                specification.template_map['TemplateModuleName']
             result_map = {
                 'PluginDir': self.plugin_path,
                 'TemplateClass': specification.template_map['TemplateClass'],
+                'TemplateModuleName': template_module_name,
                 'UserPluginDir': self.user_plugin_dir}
             popped = template.substitute(result_map)
 

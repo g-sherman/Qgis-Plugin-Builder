@@ -23,15 +23,13 @@
 
 
 #Add iso code for any locales you want to support here (space separated)
-LOCALES = af en
+LOCALES = af
 
 # translation
 SOURCES = \
 	__init__.py \
 	${TemplateModuleName}.py \
 	${TemplateModuleName}_dialog.py
-
-TRANSLATIONS = i18n/af.ts
 
 PLUGINNAME = ${TemplateClass}
 
@@ -65,7 +63,7 @@ compile: $$(COMPILED_RESOURCE_FILES)
 %.qm : %.ts
 	lrelease $$<
 
-test: compile
+test: compile transcompile
 	@echo
 	@echo "----------------------"
 	@echo "Regression Test Suite"
@@ -155,7 +153,7 @@ transcompile:
 	@echo "----------------------------------------"
 	@echo "Compiled translation files to .qm files."
 	@echo "----------------------------------------"
-	$$(TRANSLATIONS:.ts=.qm)
+	@scripts/compile-strings.sh $$(LOCALES)
 
 transclean:
 	@echo

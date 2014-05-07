@@ -44,7 +44,7 @@ class TestInit(unittest.TestCase):
 
         file_path = os.path.abspath(os.path.join(
             os.path.dirname(__file__), os.pardir,
-            '../metadata.txt'))
+            'metadata.txt'))
         LOGGER.info(file_path)
         metadata = []
         parser = ConfigParser.ConfigParser()
@@ -58,7 +58,7 @@ class TestInit(unittest.TestCase):
             message = ('Cannot find metadata "%s" in metadata source (%s).' % (
                 expectation, file_path))
 
-            self.assertIn(expectation in dict(metadata), message)
+            self.assertIn(expectation, dict(metadata), message)
 
 if __name__ == '__main__':
     unittest.main()

@@ -5,7 +5,7 @@
     <message>
         <location filename="test_translations.py" line="48"/>
         <source>Good morning</source>
-        <translation>Goie more</translation>
+        <translation>Goeie more</translation>
     </message>
 </context>
 </TS>

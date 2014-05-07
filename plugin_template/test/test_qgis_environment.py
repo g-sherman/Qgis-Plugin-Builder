@@ -1,9 +1,6 @@
 # coding=utf-8
-"""
-InaSAFE Disaster risk assessment tool developed by AusAid -
-**ISClipper test suite.**
+"""Tests for QGIS functionality.
 
-Contact : ole.moller.nielsen@gmail.com
 
 .. note:: This program is free software; you can redistribute it and/or modify
      it under the terms of the GNU General Public License as published by
@@ -34,18 +31,12 @@ class QGISTest(unittest.TestCase):
         """QGIS environment has the expected providers"""
 
         r = QgsProviderRegistry.instance()
-        #for item in r.providerList():
-        #    print str(item)
-
-        #print 'Provider count: %s' % len(r.providerList())
-        assert 'gdal' in r.providerList()
-        assert 'ogr' in r.providerList()
-        assert 'postgres' in r.providerList()
-        #assert 'wfs' in r.providerList()
+        self.assertIn('gdal', r.providerList())
+        self.assertIn('ogr', r.providerList())
+        self.assertIn('postgres', r.providerList())
 
     def test_projection(self):
         """Test that QGIS properly parses a wkt string.
-        see https://github.com/AIFDR/inasafe/issues/349
         """
         crs = QgsCoordinateReferenceSystem()
         wkt = (
