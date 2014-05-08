@@ -1,7 +1,6 @@
 <RCC> 
-  <qresource prefix="/plugins/pluginbuilder" > 
+  <qresource prefix="/plugins/plugin_builder3" > 
     <file>icon.png</file> 
-    <file>plugin_builder.png</file>
   </qresource> 
 </RCC> 
 

@@ -73,7 +73,7 @@ class PluginBuilder:
         """Create the menu entries and toolbar icons inside the QGIS GUI."""
         # Create action that will start plugin configuration
         self.action = QAction(
-            QIcon(':/plugins/plugin_builder/plugin_builder.png'),
+            QIcon(':/plugins/plugin_builder3/icon.png'),
             'Plugin Builder 3', self.iface.mainWindow())
         # connect the action to the run method
         self.action.triggered.connect(self.run)
