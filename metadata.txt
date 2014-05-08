@@ -15,7 +15,7 @@ changelog=2014-05-08 Completely overhauld plugin builder so that the generated p
 
 homepage=http://hub.qgis.org/projects/plugin-builder
 tracker=http://hub.qgis.org/projects/plugin-builder/issues
-icon=plugin_builder.png
+icon=icon.png
 
 experimental=True
 deprecated=False
