@@ -80,11 +80,11 @@ class PluginBuilder:
 
         # Add toolbar button and menu item
         self.iface.addToolBarIcon(self.action)
-        self.iface.addPluginToMenu('&Plugin Builder 3 ...', self.action)
+        self.iface.addPluginToMenu('&Plugin Builder 3', self.action)
 
     def unload(self):
         """Removes the plugin menu item and icon from QGIS GUI."""
-        self.iface.removePluginMenu('&Plugin Builder 3...', self.action)
+        self.iface.removePluginMenu('&Plugin Builder 3', self.action)
         self.iface.removeToolBarIcon(self.action)
 
     def run(self):
