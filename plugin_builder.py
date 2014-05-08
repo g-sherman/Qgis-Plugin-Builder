@@ -1,4 +1,4 @@
-# coding=utf-8
+#coding=utf-8
 """
 /***************************************************************************
     PluginBuilder
@@ -74,17 +74,17 @@ class PluginBuilder:
         # Create action that will start plugin configuration
         self.action = QAction(
             QIcon(':/plugins/plugin_builder/plugin_builder.png'),
-            'Plugin Builder...', self.iface.mainWindow())
+            'Plugin Builder 3', self.iface.mainWindow())
         # connect the action to the run method
         self.action.triggered.connect(self.run)
 
         # Add toolbar button and menu item
         self.iface.addToolBarIcon(self.action)
-        self.iface.addPluginToMenu('&Plugin Builder...', self.action)
+        self.iface.addPluginToMenu('&Plugin Builder 3 ...', self.action)
 
     def unload(self):
         """Removes the plugin menu item and icon from QGIS GUI."""
-        self.iface.removePluginMenu('&Plugin Builder...', self.action)
+        self.iface.removePluginMenu('&Plugin Builder 3...', self.action)
         self.iface.removeToolBarIcon(self.action)
 
     def run(self):
