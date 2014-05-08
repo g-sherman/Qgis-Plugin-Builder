@@ -84,11 +84,18 @@ test: compile
 	@echo "----------------------"
 
 	@# Preceding dash means that make will continue in case of errors
-	@-export PYTHONPATH=`pwd`:$$(PYTHONPATH); \
+	@-export PYTHONPATH=`pwd`:$(PYTHONPATH); \
 		export QGIS_DEBUG=0; \
 		export QGIS_LOG_FILE=/dev/null; \
 		nosetests -v --with-id --with-coverage --cover-package=. \
 		3>&1 1>&2 2>&3 3>&- || true
+	@echo
+	@echo "----------------------"
+	@echo "If you get a 'no module named qgis.core error, try sourcing"
+	@echo "the helper script we have provided first then run make test."
+	@echo "e.g. source run-env-linux.sh <path to qgis install>; make test"
+	@echo "----------------------"
+
 
 
 pylint:
