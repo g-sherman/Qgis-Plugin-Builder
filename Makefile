@@ -75,7 +75,7 @@ package: compile
 		@echo "Created package: $(PLUGINNAME).zip"
 
 clean:
-	rm $(UI_FILES) $(RESOURCE_FILES)
+	rm $(RESOURCE_FILES)
 
 test: compile
 	@echo
