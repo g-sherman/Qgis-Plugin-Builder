@@ -75,6 +75,11 @@ test: compile transcompile
 		export QGIS_LOG_FILE=/dev/null; \
 		nosetests -v --with-id --with-coverage --cover-package=. \
 		3>&1 1>&2 2>&3 3>&- || true
+	@echo "----------------------"
+	@echo "If you get a 'no module named qgis.core error, try sourcing"
+	@echo "the helper script we have provided first then run make test."
+	@echo "e.g. source run-env-linux.sh <path to qgis install>; make test"
+	@echo "----------------------"
 
 deploy: compile doc transcompile
 	@echo
@@ -146,6 +151,7 @@ transup:
 	@echo "------------------------------------------------"
 	@echo "Updating translation files with any new strings."
 	@echo "------------------------------------------------"
+        @chmod +x scripts/update-strings.sh
 	@scripts/update-strings.sh $$(LOCALES)
 
 transcompile:
@@ -153,6 +159,7 @@ transcompile:
 	@echo "----------------------------------------"
 	@echo "Compiled translation files to .qm files."
 	@echo "----------------------------------------"
+        @chmod +x scripts/compile-strings.sh
 	@scripts/compile-strings.sh $$(LOCALES)
 
 transclean:
@@ -182,6 +189,12 @@ pylint:
 	@echo "Pylint violations"
 	@echo "-----------------"
 	@pylint --reports=n --rcfile=pylintrc . || true
+	@echo
+	@echo "----------------------"
+	@echo "If you get a 'no module named qgis.core error, try sourcing"
+	@echo "the helper script we have provided first then run make pylint."
+	@echo "e.g. source run-env-linux.sh <path to qgis install>; make pylint"
+	@echo "----------------------"
 
 
 # Run pep8 style checking
