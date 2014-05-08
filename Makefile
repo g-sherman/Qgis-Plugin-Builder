@@ -22,11 +22,11 @@
 
 DOTQGIS=.qgis2
 
-PLUGINNAME=pluginbuilder
+PLUGINNAME=pluginbuilder3
 
 PY_FILES = plugin_builder.py plugin_builder_dialog.py result_dialog.py __init__.py plugin_specification.py
 
-UI_FILES = plugin_builder_dialog_base.ui
+UI_FILES = plugin_builder_dialog_base.ui results_dialog_base.ui
 
 TEMPLATE_DIR = plugin_template
 
