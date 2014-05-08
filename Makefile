@@ -28,9 +28,9 @@ PY_FILES = plugin_builder.py plugin_builder_dialog.py result_dialog.py __init__.
 
 UI_FILES = plugin_builder_dialog_base.ui
 
-TEMPLATE_DIR = template_class
+TEMPLATE_DIR = plugin_template
 
-EXTRAS = help.html icon.png plugin_builder.png metadata.txt
+EXTRAS = icon.png plugin_builder.png metadata.txt
 
 HELP_BUILD = help/build/html/*
 
