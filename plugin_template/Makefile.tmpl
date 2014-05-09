@@ -151,7 +151,7 @@ transup:
 	@echo "------------------------------------------------"
 	@echo "Updating translation files with any new strings."
 	@echo "------------------------------------------------"
-        @chmod +x scripts/update-strings.sh
+	@chmod +x scripts/update-strings.sh
 	@scripts/update-strings.sh $$(LOCALES)
 
 transcompile:
@@ -159,7 +159,7 @@ transcompile:
 	@echo "----------------------------------------"
 	@echo "Compiled translation files to .qm files."
 	@echo "----------------------------------------"
-        @chmod +x scripts/compile-strings.sh
+	@chmod +x scripts/compile-strings.sh
 	@scripts/compile-strings.sh $$(LOCALES)
 
 transclean:
