@@ -76,13 +76,13 @@ class ${TemplateClass}:
         # Add toolbar button and menu item
         self.iface.addToolBarIcon(self.action)
         self.iface.addPluginToMenu(
-            u"&${TemplateTitle}",
+            self.tr(u"&${TemplateTitle}"),
             self.action)
 
     def unload(self):
         """Removes the plugin menu item and icon from QGIS GUI."""
         self.iface.removePluginMenu(
-            u"&${TemplateTitle}",
+            self.tr(u"&${TemplateTitle}"),
             self.action)
         self.iface.removeToolBarIcon(self.action)
 
