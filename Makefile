@@ -17,33 +17,31 @@
 # *   (at your option) any later version.                                   *
 # *                                                                         *
 # ***************************************************************************/
-# Makefile for a PyQGIS plugin 
+# Makefile for a PyQGIS plugin
 #
+
 DOTQGIS=.qgis2
 
-PLUGINNAME=pluginbuilder
+PLUGINNAME=pluginbuilder3
 
-PY_FILES = pluginbuilder.py pluginbuilder_dialog.py result_dialog.py __init__.py pluginspec.py
+PY_FILES = plugin_builder.py plugin_builder_dialog.py result_dialog.py __init__.py plugin_specification.py
 
-TEMPLATE_DIR = templateclass
+UI_FILES = plugin_builder_dialog_base.ui results_dialog_base.ui
 
-EXTRAS = help.html icon.png plugin_builder.png metadata.txt
+TEMPLATE_DIR = plugin_template
+
+EXTRAS = icon.png plugin_builder.png metadata.txt
 
 HELP_BUILD = help/build/html/*
-
-UI_FILES = ui_pluginbuilder.py ui_results.py
 
 RESOURCE_FILES = resources.py
 
 default: compile
 
-compile: $(UI_FILES) $(RESOURCE_FILES)
+compile: $(RESOURCE_FILES)
 
 %.py : %.qrc
 	pyrcc4 -o $@  $<
-
-%.py : %.ui
-	pyuic4 -o $@ $<
 
 # The deploy  target only works on unix like operating system where
 # the Python plugin directory is located at:
@@ -59,13 +57,13 @@ deploy: compile
 	cp -rvf $(HELP_BUILD) $(HOME)/$(DOTQGIS)/python/plugins/$(PLUGINNAME)/help
 
 # remove the deployed plugin
-dclean: 
+dclean:
 	rm -rf $(HOME)/$(DOTQGIS)/python/plugins/$(PLUGINNAME)
 
 zip: dclean deploy
 	rm -f $(PLUGINNAME).zip
 	cd $(HOME)/$(DOTQGIS)/python/plugins; zip -9vr $(CURDIR)/$(PLUGINNAME).zip $(PLUGINNAME)
-	
+
 
 # eCreate a zip package. Requires passing a valid commit or tag as follows:
 #   make package VERSION=Version_0.3.2
@@ -74,7 +72,45 @@ COMMITHASH=$(shell git rev-parse HEAD)
 package: compile
 		rm -f $(PLUGINNAME).zip
 		git archive --prefix=$(PLUGINNAME)/ -o $(PLUGINNAME).zip $(COMMITHASH)
-		@echo "Created package: $(PLUGINNAME).zip" 
+		@echo "Created package: $(PLUGINNAME).zip"
 
 clean:
-	rm $(UI_FILES) $(RESOURCE_FILES)
+	rm $(RESOURCE_FILES)
+
+test: compile
+	@echo
+	@echo "----------------------"
+	@echo "Regression Test Suite"
+	@echo "----------------------"
+
+	@# Preceding dash means that make will continue in case of errors
+	@-export PYTHONPATH=`pwd`:$(PYTHONPATH); \
+		export QGIS_DEBUG=0; \
+		export QGIS_LOG_FILE=/dev/null; \
+		nosetests -v --with-id --with-coverage --cover-package=. \
+		3>&1 1>&2 2>&3 3>&- || true
+	@echo
+	@echo "----------------------"
+	@echo "If you get a 'no module named qgis.core error, try sourcing"
+	@echo "the helper script we have provided first then run make test."
+	@echo "e.g. source run-env-linux.sh <path to qgis install>; make test"
+	@echo "----------------------"
+
+
+
+pylint:
+	@echo
+	@echo "-----------------"
+	@echo "Pylint violations"
+	@echo "-----------------"
+	@pylint --reports=n --rcfile=pylintrc . || true
+
+
+# Run pep8 style checking
+#http://pypi.python.org/pypi/pep8
+pep8:
+	@echo
+	@echo "-----------"
+	@echo "PEP8 issues"
+	@echo "-----------"
+	@pep8 --repeat --ignore=E203,E121,E122,E123,E124,E125,E126,E127,E128 --exclude pydev,resources.py,conf.py . || true
