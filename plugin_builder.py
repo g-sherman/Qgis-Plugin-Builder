@@ -21,12 +21,17 @@
 """
 # Import Python stuff
 import os
+import sys
 import errno
 import shutil
 from string import Template
 from string import capwords
 import datetime
 import codecs
+
+# Need this for dealing with output paths on Windows that contain spaces
+if sys.platform == 'win32':
+    import win32api
 
 # Import the PyQt and QGIS libraries
 from PyQt4.QtCore import QFileInfo, QUrl, QFile, QDir
@@ -86,7 +91,6 @@ class PluginBuilder:
         """Removes the plugin menu item and icon from QGIS GUI."""
         self.iface.removePluginMenu('&Plugin Builder 3', self.action)
         self.iface.removeToolBarIcon(self.action)
-
 
     def _get_plugin_path(self):
         """Prompt the user for the path where the plugin should be written to.
@@ -460,14 +464,22 @@ class PluginBuilder:
         :param output_name:  Name of the output file to create.
         :type output_name: str
         """
-        template_file = open(os.path.join(
-            str(self.plugin_builder_dir), 'plugin_template', template_name))
+        template_file_path = os.path.join(str(self.plugin_builder_dir),
+                                          'plugin_template', template_name)
+        output_name_path = os.path.join(self.plugin_dir, output_name)
+
+        if sys.platform == 'win32':
+            # get short path name on windows
+            template_file_path = win32api.GetShortPathName(template_file_path)
+            output_name_path = win32api.GetShortPathName(output_name_path)
+
+        template_file = open(template_file_path)
         content = template_file.read()
         template_file.close()
         template = Template(content)
         popped = template.substitute(specification.template_map)
         plugin_file = codecs.open(
-            os.path.join(self.plugin_path, output_name), 'w', 'utf-8')
+            output_name_path, 'w', 'utf-8')
         plugin_file.write(popped)
         plugin_file.close()
 
