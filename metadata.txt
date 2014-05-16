@@ -2,7 +2,7 @@
 # with version 1.8 this is the preferred way to supply information about a
 # plugin. The current method of embedding metadata in __init__.py will
 # be supported until version 2.0
-
+# git sha : $Format:%H$
 # This file should be included when you package your plugin.
 
 [general]

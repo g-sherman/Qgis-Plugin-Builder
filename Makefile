@@ -5,6 +5,7 @@
 #    development.
 #                             -------------------
 #        begin                : 2011-01-20
+#        git sha              : $Format:%H$
 #        copyright            : (C) 2011 by GeoApt LLC
 #        email                : gsherman@geoapt.com
 # ***************************************************************************/
