@@ -6,12 +6,12 @@
 # This file should be included when you package your plugin.
 
 [general]
-name=Plugin Builder 3
+name=Plugin Builder
 description=Creates a QGIS plugin template for use as a starting point in plugin development
-version=Version 3.0.0
+version=Version 2.1.0
 qgisMinimumVersion=2.0
 
-changelog=2014-05-08 Completely overhauld plugin builder so that the generated plugin is python standards friendly and has a usable test framework from the outset.
+changelog=2014-05-08 Completely overhauled plugin builder so that the generated plugin is python standards friendly and has a usable test framework from the outset.
 
 homepage=http://hub.qgis.org/projects/plugin-builder
 tracker=http://hub.qgis.org/projects/plugin-builder/issues
