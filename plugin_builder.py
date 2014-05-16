@@ -87,7 +87,6 @@ class PluginBuilder:
         self.iface.removePluginMenu('&Plugin Builder', self.action)
         self.iface.removeToolBarIcon(self.action)
 
-
     def _get_plugin_path(self):
         """Prompt the user for the path where the plugin should be written to.
         """
