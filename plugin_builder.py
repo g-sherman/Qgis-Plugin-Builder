@@ -394,10 +394,10 @@ class PluginBuilder:
         self._prepare_readme(specification, template_module_name)
         self._prepare_metadata(specification)
         # show the results
-        res_dlg = ResultDialog()
-        res_dlg.web_view.setHtml(results_popped)
-        res_dlg.show()
-        res_dlg.exec_()
+        results_dialog = ResultDialog()
+        results_dialog.web_view.setHtml(results_popped)
+        results_dialog.show()
+        results_dialog.exec_()
 
     def validate_entries(self):
         """Check to see that all fields have been entered."""
