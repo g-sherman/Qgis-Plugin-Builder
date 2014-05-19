@@ -6,6 +6,7 @@
     Creates a skeleton QGIS plugin for use as a starting point
                              -------------------
         begin                : 2011-01-20
+        git sha              : $Format:%H$
         copyright            : (C) 2011-2014 by GeoApt LLC
         email                : gsherman@geoapt.com
  ***************************************************************************/
@@ -22,7 +23,7 @@
 
 import os
 
-from PyQt4 import QtCore, QtGui, uic
+from PyQt4 import QtGui, uic
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'results_dialog_base.ui'))

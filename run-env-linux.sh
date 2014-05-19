@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Tim Sutton 2014
+# git sha : $Format:%H$
+
 QGIS_PREFIX_PATH=/usr/local/qgis-2.0
 if [ -n "$1" ]; then
     QGIS_PREFIX_PATH=$1

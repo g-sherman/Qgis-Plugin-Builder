@@ -5,6 +5,7 @@
 #    development.
 #                             -------------------
 #        begin                : 2011-01-20
+#        git sha              : $Format:%H$
 #        copyright            : (C) 2011 by GeoApt LLC
 #        email                : gsherman@geoapt.com
 # ***************************************************************************/
@@ -22,7 +23,7 @@
 
 DOTQGIS=.qgis2
 
-PLUGINNAME=pluginbuilder3
+PLUGINNAME=pluginbuilder
 
 PY_FILES = plugin_builder.py plugin_builder_dialog.py result_dialog.py __init__.py plugin_specification.py
 

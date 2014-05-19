@@ -6,6 +6,7 @@
     Creates a skeleton QGIS plugin for use as a starting point
                              -------------------
         begin                : 2011-01-20
+        git sha              : $Format:%H$
         copyright            : (C) 2011-2014 by GeoApt LLC
         email                : gsherman@geoapt.com
  ***************************************************************************/
@@ -78,18 +79,18 @@ class PluginBuilder:
         """Create the menu entries and toolbar icons inside the QGIS GUI."""
         # Create action that will start plugin configuration
         self.action = QAction(
-            QIcon(':/plugins/plugin_builder3/icon.png'),
-            'Plugin Builder 3', self.iface.mainWindow())
+            QIcon(':/plugins/plugin_builder/icon.png'),
+            'Plugin Builder', self.iface.mainWindow())
         # connect the action to the run method
         self.action.triggered.connect(self.run)
 
         # Add toolbar button and menu item
         self.iface.addToolBarIcon(self.action)
-        self.iface.addPluginToMenu('&Plugin Builder 3', self.action)
+        self.iface.addPluginToMenu('&Plugin Builder', self.action)
 
     def unload(self):
         """Removes the plugin menu item and icon from QGIS GUI."""
-        self.iface.removePluginMenu('&Plugin Builder 3', self.action)
+        self.iface.removePluginMenu('&Plugin Builder', self.action)
         self.iface.removeToolBarIcon(self.action)
 
     def _get_plugin_path(self):
@@ -399,10 +400,10 @@ class PluginBuilder:
         self._prepare_readme(specification, template_module_name)
         self._prepare_metadata(specification)
         # show the results
-        res_dlg = ResultDialog()
-        res_dlg.web_view.setHtml(results_popped)
-        res_dlg.show()
-        res_dlg.exec_()
+        results_dialog = ResultDialog()
+        results_dialog.web_view.setHtml(results_popped)
+        results_dialog.show()
+        results_dialog.exec_()
 
     def validate_entries(self):
         """Check to see that all fields have been entered."""
