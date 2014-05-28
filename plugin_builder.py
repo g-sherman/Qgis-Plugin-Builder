@@ -67,7 +67,7 @@ class PluginBuilder:
         # noinspection PyArgumentList
         self.user_plugin_dir = QFileInfo(
             QgsApplication.qgisUserDbFilePath()).path() + 'python/plugins'
-        self.plugin_builder_dir = os.path.dirname(__file__)
+        self.plugin_builder_path = os.path.dirname(__file__)
 
         # class members
         self.action = None
@@ -234,7 +234,7 @@ class PluginBuilder:
         """
         # populate the results readme text template
         template_file = open(os.path.join(
-            str(self.plugin_builder_dir),
+            str(self.plugin_builder_path),
             'plugin_template',
             'readme.tmpl'))
         content = template_file.read()
@@ -322,7 +322,7 @@ class PluginBuilder:
         template_module_name = \
             specification.template_map['TemplateModuleName']
         template_file = open(os.path.join(
-            str(self.plugin_builder_dir),
+            str(self.plugin_builder_path),
             'plugin_template',
             'results.tmpl'))
         content = template_file.read()
@@ -349,7 +349,7 @@ class PluginBuilder:
             str(self.dialog.class_name.text()))
         QDir().mkdir(self.plugin_path)
         template_dir = os.path.join(
-            str(self.plugin_builder_dir), 'plugin_template')
+            str(self.plugin_builder_path), 'plugin_template')
         return template_dir
 
     def run(self):
@@ -465,9 +465,9 @@ class PluginBuilder:
         :param output_name:  Name of the output file to create.
         :type output_name: str
         """
-        template_file_path = os.path.join(str(self.plugin_builder_dir),
+        template_file_path = os.path.join(str(self.plugin_builder_path),
                                           'plugin_template', template_name)
-        output_name_path = os.path.join(self.plugin_dir, output_name)
+        output_name_path = os.path.join(self.plugin_path, output_name)
 
         if sys.platform == 'win32':
             # get short path name on windows
@@ -486,7 +486,7 @@ class PluginBuilder:
 
     def show_help(self):
         """Display application help to the user."""
-        help_file = 'file:///%s/help/index.html' % self.plugin_builder_dir
+        help_file = 'file:///%s/help/index.html' % self.plugin_builder_path
         # For testing path:
         #QMessageBox.information(None, 'Help File', help_file)
         # noinspection PyCallByClass,PyTypeChecker
