@@ -27,7 +27,6 @@ import errno
 import shutil
 from string import Template
 from string import capwords
-import datetime
 import codecs
 
 # Need this for dealing with output paths on Windows that contain spaces
@@ -240,11 +239,14 @@ class PluginBuilder:
         content = template_file.read()
         template_file.close()
         template = Template(content)
+        # TODO: update this to simply pass the specification.template_map
         result_map = {
             'PluginDir': self.plugin_path,
             'TemplateClass': specification.template_map['TemplateClass'],
             'TemplateModuleName': template_module_name,
-            'UserPluginDir': self.user_plugin_dir}
+            'UserPluginDir': self.user_plugin_dir,
+            'TemplateVCSFormat': specification.template_map[
+                'TemplateVCSFormat']}
         popped = template.substitute(result_map)
         # write the results info to the README txt file
         readme_txt = codecs.open(os.path.join(
@@ -332,7 +334,9 @@ class PluginBuilder:
             'PluginDir': self.plugin_path,
             'TemplateClass': specification.template_map['TemplateClass'],
             'TemplateModuleName': template_module_name,
-            'UserPluginDir': self.user_plugin_dir}
+            'UserPluginDir': self.user_plugin_dir,
+            'TemplateVCSFormat': specification.template_map[
+                'TemplateVCSFormat']}
         results_popped = template.substitute(result_map)
         # write the results info to the README HTML file
         readme = codecs.open(os.path.join(
@@ -368,12 +372,6 @@ class PluginBuilder:
             return
 
         specification = PluginSpecification(self.dialog)
-        # Add the date stuff to the template map
-        now = datetime.date.today()
-        specification.template_map['TemplateYear'] = now.year
-        specification.template_map['TemplateBuildDate'] = \
-            '%i-%02i-%02i' % (now.year, now.month, now.day)
-
         # get the location for the plugin
         # noinspection PyCallByClass,PyTypeChecker
         self.plugin_path = QFileDialog.getExistingDirectory(
@@ -479,8 +477,7 @@ class PluginBuilder:
         template_file.close()
         template = Template(content)
         popped = template.substitute(specification.template_map)
-        plugin_file = codecs.open(
-            output_name_path, 'w', 'utf-8')
+        plugin_file = codecs.open(output_name_path, 'w', 'utf-8')
         plugin_file.write(popped)
         plugin_file.close()
 

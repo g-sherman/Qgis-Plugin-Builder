@@ -4,7 +4,7 @@
 # ${TemplateDescription}
 #							 -------------------
 #		begin				: $TemplateBuildDate
-#		git sha				: $Format:%H$
+#		git sha				: $TemplateVCSFormat
 #		copyright			: (C) $TemplateYear by $TemplateAuthor
 #		email				: $TemplateEmail
 # ***************************************************************************/
@@ -192,7 +192,7 @@ pylint:
 	@pylint --reports=n --rcfile=pylintrc . || true
 	@echo
 	@echo "----------------------"
-	@echo "If you get a 'no module named qgis.core error, try sourcing"
+	@echo "If you get a 'no module named qgis.core' error, try sourcing"
 	@echo "the helper script we have provided first then run make pylint."
 	@echo "e.g. source run-env-linux.sh <path to qgis install>; make pylint"
 	@echo "----------------------"
