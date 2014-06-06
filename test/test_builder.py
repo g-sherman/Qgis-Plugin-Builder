@@ -132,3 +132,14 @@ class BuilderTest(unittest.TestCase):
         builder = PluginBuilder(iface)
         builder.plugin_path = temp_path
         builder._prepare_code(self.specification, temp_path)
+
+    def test_prepare_results_html(self):
+        """Test the prepare results helper works."""
+        temp_path = temp_dir()
+        iface = QgisInterface(None)
+        builder = PluginBuilder(iface)
+        builder.plugin_path = temp_path
+        results_popped, template_module_name = builder._prepare_results_html(
+            self.specification)
+        self.assertIn('You just built a plugin for QGIS!', results_popped)
+        self.assertEquals(template_module_name, 'fake_module')

@@ -331,7 +331,9 @@ class PluginBuilder:
             'PluginDir': self.plugin_path,
             'TemplateClass': specification.template_map['TemplateClass'],
             'TemplateModuleName': template_module_name,
-            'UserPluginDir': self.user_plugin_dir}
+            'UserPluginDir': self.user_plugin_dir,
+            'TemplateVCSFormat': specification.template_map[
+                'TemplateVCSFormat']}
         results_popped = template.substitute(result_map)
         # write the results info to the README HTML file
         readme = codecs.open(os.path.join(
