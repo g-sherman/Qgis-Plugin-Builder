@@ -2,7 +2,7 @@
 # coding=utf-8
 """This script uploads a plugin package on the server.
         Authors: A. Pasotti, V. Picavet
-        git sha              : $Format:%H$
+        git sha              : $TemplateVCSFormat
 """
 
 import sys

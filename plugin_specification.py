@@ -20,6 +20,7 @@
  *                                                                         *
  ***************************************************************************/
 """
+import datetime
 
 
 class PluginSpecification(object):
@@ -52,7 +53,13 @@ class PluginSpecification(object):
         self.experimental = dialog.experimental.isChecked()
         # deprecated is always false for a new plugin
         self.deprecated = False
-
+        # Add the date stuff to the template map
+        now = datetime.date.today()
+        self.build_year = now.year
+        self.build_date = '%i-%02i-%02i' % (now.year, now.month, now.day)
+        # Git will replace this with the sha - I do it a funny way below so
+        # that this line below does not itself get substituted by git!
+        self.vcs_format = '$Format:' + '%H$'
         self.template_map = {
             'TemplateClass': self.class_name,
             'TemplateTitle': self.title,
@@ -63,5 +70,8 @@ class PluginSpecification(object):
             'TemplateAuthor': self.author,
             'TemplateEmail': self.email_address,
             'TemplateMenuText': self.menu_text,
-            'PluginDirectoryName': self.class_name.lower()
+            'PluginDirectoryName': self.class_name.lower(),
+            'TemplateBuildDate': self.build_date,
+            'TemplateYear': self.build_year,
+            'TemplateVCSFormat': self.vcs_format
         }
