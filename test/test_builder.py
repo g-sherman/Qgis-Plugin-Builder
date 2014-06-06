@@ -143,3 +143,21 @@ class BuilderTest(unittest.TestCase):
             self.specification)
         self.assertIn('You just built a plugin for QGIS!', results_popped)
         self.assertEquals(template_module_name, 'fake_module')
+
+    def test_prepare_readme(self):
+        """Test we can generate the readme ok."""
+        temp_path = temp_dir()
+        iface = QgisInterface(None)
+        builder = PluginBuilder(iface)
+        builder.plugin_path = temp_path
+        builder._prepare_readme(self.specification, 'fake_module')
+        # TODO: go and look in the file and see if it is ok
+
+    def test_prepare_metadata(self):
+        """Test we can generate the metadata."""
+        temp_path = temp_dir()
+        iface = QgisInterface(None)
+        builder = PluginBuilder(iface)
+        builder.plugin_path = temp_path
+        builder._prepare_results_html(self.specification)
+        # TODO: go and look in the file and see if it is ok

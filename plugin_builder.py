@@ -239,11 +239,14 @@ class PluginBuilder:
         content = template_file.read()
         template_file.close()
         template = Template(content)
+        # TODO: update this to simply pass the specification.template_map
         result_map = {
             'PluginDir': self.plugin_path,
             'TemplateClass': specification.template_map['TemplateClass'],
             'TemplateModuleName': template_module_name,
-            'UserPluginDir': self.user_plugin_dir}
+            'UserPluginDir': self.user_plugin_dir,
+            'TemplateVCSFormat': specification.template_map[
+                'TemplateVCSFormat']}
         popped = template.substitute(result_map)
         # write the results info to the README txt file
         readme_txt = codecs.open(os.path.join(
