@@ -43,6 +43,7 @@ EXTRAS = icon.png metadata.txt
 
 COMPILED_RESOURCE_FILES = resources_rc.py
 
+PEP8EXCLUDE=pydev,resources_rc.py,conf.py,third_party,ui
 
 #################################################
 # Normally you would not need to edit below here
@@ -52,13 +53,15 @@ HELP = help/build/html
 
 PLUGIN_UPLOAD = $$(c)/plugin_upload.py
 
+RESOURCE_SRC=$$(shell grep '^ *<file' resources.qrc | sed 's@</file>@@g;s/.*>//g' | tr '\n' ' ')
+
 QGISDIR=.qgis2
 
 default: compile
 
 compile: $$(COMPILED_RESOURCE_FILES)
 
-%_rc.py : %.qrc
+%_rc.py : %.qrc $$(RESOURCES_SRC)
 	pyrcc4 -o $$*_rc.py  $$<
 
 %.qm : %.ts
@@ -205,4 +208,7 @@ pep8:
 	@echo "-----------"
 	@echo "PEP8 issues"
 	@echo "-----------"
-	@pep8 --repeat --ignore=E203,E121,E122,E123,E124,E125,E126,E127,E128 --exclude pydev,resources_rc.py,conf.py . || true
+	@pep8 --repeat --ignore=E203,E121,E122,E123,E124,E125,E126,E127,E128 --exclude $$(PEP8EXCLUDE) . || true
+	@echo "-----------"
+	@echo "Ignored in PEP8 check:"
+	@echo $$(PEP8EXCLUDE)
