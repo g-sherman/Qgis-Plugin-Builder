@@ -20,8 +20,9 @@ Your QGIS plugin directory is located at:<br>
     <li>Customize it by editing the implementation file <b>${TemplateModuleName}.py</b>
     <li>Create your own custom icon, replacing the default <b>icon.png</b>
     <li>Modify your user interface by opening <b>${TemplateModuleName}_dialog_base.ui</b> in Qt Designer
-    <li>You can use the <b>Makefile</b> to compile your resource files when you
-        make changes. This requires GNU make (gmake)
+    <li>You can use the <b>Makefile</b> to compile and deploy when you
+        make changes. This requires GNU make (gmake). The Makefile is ready to use, however you 
+        will have to edit it to add addional Python source files, dialogs, and translations.
 </ul>
 </div>
 <div style='font-size:.9em;'>
@@ -31,6 +32,6 @@ For more information, see the PyQGIS Developer Cookbook at:
 </p>
 </div>
 <img src="http://geoapt.com/geoapt_logo_p.png" alt='GeoApt LLC' title='GeoApt LLC' align='absmiddle'>
-&copy;2011-2014 GeoApt LLC - geoapt.com - Git revision : $TemplateVCSFormat
+&copy;2011-2014 GeoApt LLC - geoapt.com - Git revision : $Format: %H$
 </body>
 </html>
