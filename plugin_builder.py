@@ -34,7 +34,7 @@ if sys.platform == 'win32':
     import win32api
 
 # Import the PyQt and QGIS libraries
-from PyQt4.QtCore import QFileInfo, QUrl, QFile, QDir
+from PyQt4.QtCore import QFileInfo, QUrl, QFile, QDir, QSettings
 from PyQt4.QtGui import (
     QAction, QIcon, QFileDialog, QMessageBox, QDesktopServices)
 from qgis.core import QgsApplication
@@ -103,7 +103,7 @@ class PluginBuilder:
             self.plugin_path = QFileDialog.getExistingDirectory(
                 self.dialog,
                 'Select the Directory for your Plugin',
-                '.')
+                self._last_used_path())
             if self.plugin_path == '':
                 return False
         return True
@@ -356,6 +356,13 @@ class PluginBuilder:
             str(self.plugin_builder_path), 'plugin_template')
         return template_dir
 
+    def _last_used_path(self):
+        return QSettings().value('PluginBuilder/last_path', '.')
+
+    def _set_last_used_path(self, value):
+        QSettings().setValue('PluginBuilder/last_path', value)
+
+
     def run(self):
         """Run method that performs all the real work"""
         # create and show the dialog
@@ -375,13 +382,14 @@ class PluginBuilder:
         # get the location for the plugin
         # noinspection PyCallByClass,PyTypeChecker
         self.plugin_path = QFileDialog.getExistingDirectory(
-            self.dialog, 'Select the Directory for your Plugin', '.')
+            self.dialog, 'Select the Directory for your Plugin', self._last_used_path())
         if self.plugin_path == '':
             return
         else:
             if not self._get_plugin_path():
                 return False
 
+        self._set_last_used_path(self.plugin_path)
         template_dir = self._create_plugin_directory()
         self._prepare_code(specification, template_dir)
         self._prepare_help(template_dir)
