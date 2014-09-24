@@ -28,6 +28,7 @@ import shutil
 from string import Template
 from string import capwords
 import codecs
+import ConfigParser
 
 # Need this for dealing with output paths on Windows that contain spaces
 if sys.platform == 'win32':
@@ -367,6 +368,12 @@ class PluginBuilder:
         """Run method that performs all the real work"""
         # create and show the dialog
         self.dialog = PluginBuilderDialog()
+
+        # get version
+        cfg = ConfigParser.ConfigParser()
+        cfg.read(os.path.join(self.plugin_builder_path, 'metadata.txt'))
+        version = cfg.get('general', 'version')
+        self.dialog.setWindowTitle('QGIS Plugin Builder - {}'.format(version))
 
         # connect the ok button to our method
         self.dialog.button_box.accepted.connect(self.validate_entries)
