@@ -24,7 +24,16 @@
 
 
 #Add iso code for any locales you want to support here (space separated)
-LOCALES = af
+# default is no locales
+# LOCALES = af
+LOCALES =
+
+# If locales are enabled, set the name of the lrelease binary on your system. If
+# you have trouble compiling the translations, you may have to specify the full path to
+# lrelease
+#LRELEASE = lrelease
+#LRELEASE = lrelease-qt4
+
 
 # translation
 SOURCES = \
@@ -38,6 +47,9 @@ PY_FILES = \
 	${TemplateModuleName}.py \
 	${TemplateModuleName}_dialog.py \
 	__init__.py
+
+UI_FILES = \
+    ${TemplateModuleName}_dialog_base.ui
 
 EXTRAS = icon.png metadata.txt
 
@@ -65,7 +77,7 @@ compile: $$(COMPILED_RESOURCE_FILES)
 	pyrcc4 -o $$*_rc.py  $$<
 
 %.qm : %.ts
-	lrelease $$<
+	$$(LRELEASE) $$<
 
 test: compile transcompile
 	@echo
@@ -95,7 +107,7 @@ deploy: compile doc transcompile
 	# $$HOME/$$(QGISDIR)/python/plugins
 	mkdir -p $$(HOME)/$$(QGISDIR)/python/plugins/$$(PLUGINNAME)
 	cp -vf $$(PY_FILES) $$(HOME)/$$(QGISDIR)/python/plugins/$$(PLUGINNAME)
-	cp -vf $$(COMPILED_UI_FILES) $$(HOME)/$$(QGISDIR)/python/plugins/$$(PLUGINNAME)
+	cp -vf $$(UI_FILES) $$(HOME)/$$(QGISDIR)/python/plugins/$$(PLUGINNAME)
 	cp -vf $$(COMPILED_RESOURCE_FILES) $$(HOME)/$$(QGISDIR)/python/plugins/$$(PLUGINNAME)
 	cp -vf $$(EXTRAS) $$(HOME)/$$(QGISDIR)/python/plugins/$$(PLUGINNAME)
 	cp -vfr i18n $$(HOME)/$$(QGISDIR)/python/plugins/$$(PLUGINNAME)
@@ -164,7 +176,7 @@ transcompile:
 	@echo "Compiled translation files to .qm files."
 	@echo "----------------------------------------"
 	@chmod +x scripts/compile-strings.sh
-	@scripts/compile-strings.sh $$(LOCALES)
+	@scripts/compile-strings.sh $$(LRELEASE) $$(LOCALES)
 
 transclean:
 	@echo
