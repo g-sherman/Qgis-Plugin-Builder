@@ -65,7 +65,7 @@ your own plugin.</p>
 <li>Fill out the required information</li>
 <li>Click OK</li>
 <li>Designate where to store your new plugin</li>
-<li>Compile your resource and user interface files</li>
+<li>Compile your resource  file</li>
 <li>Install the plugin</li>
 <li>Test it</li>
 </ol>
@@ -76,7 +76,7 @@ your own plugin.</p>
 field contains a hint inside it in greyed out text that will disappear when
 you start typing text into it. There is also a tooltip containing help
 information that will appear when you hover over each text field:</p>
-<a class="reference internal image-reference" href="_images/pluginbuilder.png"><img alt="_images/pluginbuilder.png" src="_images/pluginbuilder.png" style="width: 900px;" /></a>
+<a class="reference internal image-reference" href="_images/pluginbuilder.png"><img alt="_images/pluginbuilder.png" src="_images/pluginbuilder.png" style="width: 500px;" /></a>
 <p>The descriptions give you a hint about what is required for each field. The
 following sections describe the required and optional parameters in greater
 detail.</p>
@@ -91,9 +91,8 @@ detail.</p>
 </tbody>
 </table>
 <p>your plugin. The name should be in CamelCase with no spaces. Plugin Builder
-will accept an all lower case class name but this should be avoided since it</p>
-<blockquote>
-<div>isn&#8217;t in line with Python coding style. Examples of valid class names are:</div></blockquote>
+will accept an all lower case class name but this should be avoided since it
+isn&#8217;t in line with Python coding style. Examples of valid class names are:</p>
 <ul class="simple">
 <li>MyPlugin</li>
 <li>PluginBuilder</li>
@@ -214,7 +213,7 @@ consider completing when generating a new plugin.</p>
 </tbody>
 </table>
 <p>create a project with tracking for your plugin(s) at
-<a class="reference external" href="http://hub.qgis.org/projects/new">http://hub.qgis.org/projects/new</a>.</p>
+<a class="reference external" href="http://hub.qgis.org/projects/new">http://hub.qgis.org/projects/new</a> or of course you can use <a class="reference external" href="http://github.com">http://github.com</a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -274,8 +273,7 @@ it is functional in QGIS.</p>
 generation, this contains one entry for icon.png, the icon file for the plugin.</p>
 <p>To compile the resource file into Python code, use the <tt class="docutils literal"><span class="pre">pyrcc4</span></tt> utility
 that comes as part of your PyQt installation:</p>
-<div class="highlight-python"><div class="highlight"><pre>pyrcc4 -o resources.py resources.qrc
-</pre></div>
+<div class="highlight-python"><pre>pyrcc4 -o resources.py resources.qrc</pre>
 </div>
 <p>Once the resource file is compiled, the generated plugin can be loaded in QGIS.</p>
 <span class="target" id="index-7"></span></div>
@@ -317,8 +315,7 @@ the directory.</p>
 <p>If your operating system supports gmake (GNU make), you can use the deploy
 target of the Makefile in your plugin directory to deploy directly to
 <tt class="docutils literal"><span class="pre">.qgis2/python/plugins</span></tt>:</p>
-<div class="highlight-python"><div class="highlight"><pre>make deploy
-</pre></div>
+<div class="highlight-python"><pre>make deploy</pre>
 </div>
 <span class="target" id="index-10"></span></div>
 <div class="section" id="the-environment-variable-method">
@@ -429,7 +426,9 @@ community.</p>
         <div class="sphinxsidebarwrapper">
   <h3><a href="#">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">QGIS Plugin Builder</a></li>
+<li><a class="reference internal" href="#">QGIS Plugin Builder</a><ul>
+</ul>
+</li>
 <li><a class="reference internal" href="#concepts">Concepts</a></li>
 <li><a class="reference internal" href="#running-plugin-builder">Running Plugin Builder</a><ul>
 <li><a class="reference internal" href="#required-parameters">Required Parameters</a></li>
@@ -477,7 +476,7 @@ community.</p>
     </div>
     <div class="footer">
         &copy; Copyright 2011-2014, Gary Sherman.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
     </div>
   </body>
 </html>
