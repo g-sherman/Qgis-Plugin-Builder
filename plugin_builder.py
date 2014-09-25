@@ -487,7 +487,11 @@ class PluginBuilder:
         if sys.platform == 'win32':
             # get short path name on windows
             template_file_path = win32api.GetShortPathName(template_file_path)
-            output_name_path = win32api.GetShortPathName(output_name_path)
+            # need to do it this way because GetShortPathName doesn't work
+            # for non-existent directories
+            output_name_path = os.path.join(
+                win32api.GetShortPathName(self.plugin_path),
+                output_name)
 
         template_file = open(template_file_path)
         content = template_file.read()
