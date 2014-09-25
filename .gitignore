@@ -5,3 +5,5 @@ plugin_template/*swp
 *pyc
 plugin_template/*pyc
 .idea
+# ignore the help build dir
+help/build
