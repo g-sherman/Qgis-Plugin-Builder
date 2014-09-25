@@ -192,6 +192,8 @@ class PluginBuilder:
         self.populate_template(
             specification, 'Makefile.tmpl', 'Makefile')
         self.populate_template(
+            specification, 'pb_tool.tmpl', 'pb_tool.cfg')
+        self.populate_template(
             specification, '__init__.tmpl', '__init__.py')
         self.populate_template(
             specification, 'module_name.tmpl',
