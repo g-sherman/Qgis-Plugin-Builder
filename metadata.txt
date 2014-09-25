@@ -11,7 +11,7 @@ description=Creates a QGIS plugin template for use as a starting point in plugin
 version=Version 2.6.0
 qgisMinimumVersion=2.0
 
-changelog=2014-09-23 Fixup Make file issues; remember last used directory when creating a plugin
+changelog=2014-09-23 Fixup Make file issues; remember last used directory when creating a plugin; add support for Plugin Builder Tool (pb_tool)
 
 homepage=http://hub.qgis.org/projects/plugin-builder
 tracker=http://hub.qgis.org/projects/plugin-builder/issues
