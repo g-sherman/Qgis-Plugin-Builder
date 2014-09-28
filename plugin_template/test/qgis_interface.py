@@ -27,7 +27,7 @@ import logging
 from PyQt4.QtCore import QObject, pyqtSlot, pyqtSignal
 from qgis.core import QgsMapLayerRegistry
 from qgis.gui import QgsMapCanvasLayer
-LOGGER = logging.getLogger('InaSAFE')
+LOGGER = logging.getLogger('QGIS')
 
 
 #noinspection PyMethodMayBeStatic,PyPep8Naming
