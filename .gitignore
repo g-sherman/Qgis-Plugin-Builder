@@ -5,5 +5,10 @@ plugin_template/*swp
 *pyc
 plugin_template/*pyc
 .idea
+.coverage
+.noseids
+nohup.out
+resources.py
+
 # ignore the help build dir
 help/build
