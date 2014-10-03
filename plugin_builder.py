@@ -28,13 +28,14 @@ import shutil
 from string import Template
 from string import capwords
 import codecs
+import ConfigParser
 
 # Need this for dealing with output paths on Windows that contain spaces
 if sys.platform == 'win32':
     import win32api
 
 # Import the PyQt and QGIS libraries
-from PyQt4.QtCore import QFileInfo, QUrl, QFile, QDir
+from PyQt4.QtCore import QFileInfo, QUrl, QFile, QDir, QSettings
 from PyQt4.QtGui import (
     QAction, QIcon, QFileDialog, QMessageBox, QDesktopServices)
 from qgis.core import QgsApplication
@@ -103,7 +104,7 @@ class PluginBuilder:
             self.plugin_path = QFileDialog.getExistingDirectory(
                 self.dialog,
                 'Select the Directory for your Plugin',
-                '.')
+                self._last_used_path())
             if self.plugin_path == '':
                 return False
         return True
@@ -190,6 +191,8 @@ class PluginBuilder:
         # process the user entries
         self.populate_template(
             specification, 'Makefile.tmpl', 'Makefile')
+        self.populate_template(
+            specification, 'pb_tool.tmpl', 'pb_tool.cfg')
         self.populate_template(
             specification, '__init__.tmpl', '__init__.py')
         self.populate_template(
@@ -356,10 +359,23 @@ class PluginBuilder:
             str(self.plugin_builder_path), 'plugin_template')
         return template_dir
 
+    def _last_used_path(self):
+        return QSettings().value('PluginBuilder/last_path', '.')
+
+    def _set_last_used_path(self, value):
+        QSettings().setValue('PluginBuilder/last_path', value)
+
+
     def run(self):
         """Run method that performs all the real work"""
         # create and show the dialog
         self.dialog = PluginBuilderDialog()
+
+        # get version
+        cfg = ConfigParser.ConfigParser()
+        cfg.read(os.path.join(self.plugin_builder_path, 'metadata.txt'))
+        version = cfg.get('general', 'version')
+        self.dialog.setWindowTitle('QGIS Plugin Builder - {}'.format(version))
 
         # connect the ok button to our method
         self.dialog.button_box.accepted.connect(self.validate_entries)
@@ -375,13 +391,14 @@ class PluginBuilder:
         # get the location for the plugin
         # noinspection PyCallByClass,PyTypeChecker
         self.plugin_path = QFileDialog.getExistingDirectory(
-            self.dialog, 'Select the Directory for your Plugin', '.')
+            self.dialog, 'Select the Directory for your Plugin', self._last_used_path())
         if self.plugin_path == '':
             return
         else:
             if not self._get_plugin_path():
                 return False
 
+        self._set_last_used_path(self.plugin_path)
         template_dir = self._create_plugin_directory()
         self._prepare_code(specification, template_dir)
         self._prepare_help(template_dir)
@@ -470,7 +487,11 @@ class PluginBuilder:
         if sys.platform == 'win32':
             # get short path name on windows
             template_file_path = win32api.GetShortPathName(template_file_path)
-            output_name_path = win32api.GetShortPathName(output_name_path)
+            # need to do it this way because GetShortPathName doesn't work
+            # for non-existent directories
+            output_name_path = os.path.join(
+                win32api.GetShortPathName(self.plugin_path),
+                output_name)
 
         template_file = open(template_file_path)
         content = template_file.read()

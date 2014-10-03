@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>554</width>
-    <height>435</height>
+    <height>578</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -37,8 +37,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>523</width>
-        <height>584</height>
+        <width>528</width>
+        <height>512</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_2">
@@ -504,14 +504,13 @@ Acme Corp.</string>
           </size>
          </property>
          <property name="toolTip">
-          <string>Your email address (used in the copyright header) e.g. bill@gates
-.com</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Your email address (used in the copyright header) e.g. jack@qgis&lt;/p&gt;&lt;p&gt;.org&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="text">
           <string/>
          </property>
          <property name="placeholderText">
-          <string>e.g. bill@gates.com</string>
+          <string>e.g. jack@qgis.org</string>
          </property>
         </widget>
        </item>

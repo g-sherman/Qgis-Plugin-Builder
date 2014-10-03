@@ -23,7 +23,7 @@ The steps to using Plugin Builder are fairly simple:
 #. Fill out the required information
 #. Click OK
 #. Designate where to store your new plugin
-#. Compile your resource and user interface files
+#. Compile your resource  file
 #. Install the plugin
 #. Test it
 
@@ -38,7 +38,7 @@ you start typing text into it. There is also a tooltip containing help
 information that will appear when you hover over each text field:
 
 .. image:: images/pluginbuilder.png
-   :width: 900 px
+   :width: 500 px
 
 The descriptions give you a hint about what is required for each field. The
 following sections describe the required and optional parameters in greater
@@ -52,7 +52,7 @@ Required Parameters
 :Class name: This is the name that will be used to create the Python class for
 your plugin. The name should be in CamelCase with no spaces. Plugin Builder
 will accept an all lower case class name but this should be avoided since it
-    isn't in line with Python coding style. Examples of valid class names are:
+isn't in line with Python coding style. Examples of valid class names are:
 
 * MyPlugin
 * PluginBuilder
@@ -122,7 +122,7 @@ consider completing when generating a new plugin.
 
 :Bug tracker: A URL pointing to the bug/issue tracker for your plugin. You can
 create a project with tracking for your plugin(s) at
-http://hub.qgis.org/projects/new.
+http://hub.qgis.org/projects/new or of course you can use http://github.com.
 
 :Home page: The URL of the home page for your plugin. This can be the same as
 the project page you create on hub.qgis.org or a site of your own.

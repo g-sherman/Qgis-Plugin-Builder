@@ -66,7 +66,7 @@ zip: dclean deploy
 	cd $(HOME)/$(DOTQGIS)/python/plugins; zip -9vr $(CURDIR)/$(PLUGINNAME).zip $(PLUGINNAME)
 
 
-# eCreate a zip package. Requires passing a valid commit or tag as follows:
+# Create a zip package. Requires passing a valid commit or tag as follows:
 #   make package VERSION=Version_0.3.2
 # Get the last commit hash
 COMMITHASH=$(shell git rev-parse HEAD)

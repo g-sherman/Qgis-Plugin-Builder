@@ -10,3 +10,5 @@ plugin_template/*pyc
 nohup.out
 resources.py
 
+# ignore the help build dir
+help/build
