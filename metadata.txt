@@ -11,13 +11,15 @@ description=Creates a QGIS plugin template for use as a starting point in plugin
 version=Version 2.8.0
 qgisMinimumVersion=2.0
 
-changelog=2014-09-23 Fixup Make file issues; remember last used directory when creating a plugin; add support for Plugin Builder Tool (pb_tool)
+changelog=2015-02-19 Add text for suggested repository and issue tracking; update documentation; add section on Plugin Builder Tool (pb_tool) to the docs.
 
-homepage=http://hub.qgis.org/projects/plugin-builder
-tracker=http://hub.qgis.org/projects/plugin-builder/issues
+homepage=http://g-sherman.github.io/Qgis-Plugin-Builder
+tracker=https://github.com/g-sherman/Qgis-Plugin-Builder/issues
+repository=https://github.com/g-sherman/Qgis-Plugin-Builder
+tags=development
 icon=icon.png
 
-experimental=True
+experimental=False
 deprecated=False
 
 author=GeoApt LLC
