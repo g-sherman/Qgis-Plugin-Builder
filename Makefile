@@ -25,13 +25,13 @@ DOTQGIS=.qgis2
 
 PLUGINNAME=pluginbuilder
 
-PY_FILES = plugin_builder.py plugin_builder_dialog.py result_dialog.py __init__.py plugin_specification.py
+PY_FILES = plugin_builder.py plugin_builder_dialog.py result_dialog.py __init__.py plugin_specification.py select_tags_dialog.py
 
-UI_FILES = plugin_builder_dialog_base.ui results_dialog_base.ui
+UI_FILES = plugin_builder_dialog_base.ui results_dialog_base.ui select_tags_dialog_base.ui
 
 TEMPLATE_DIR = plugin_template
 
-EXTRAS = icon.png plugin_builder.png metadata.txt
+EXTRAS = icon.png plugin_builder.png metadata.txt taglist.txt
 
 HELP_BUILD = help/build/html/*
 

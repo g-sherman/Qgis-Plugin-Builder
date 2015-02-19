@@ -38,7 +38,7 @@ you start typing text into it. There is also a tooltip containing help
 information that will appear when you hover over each text field:
 
 .. image:: images/pluginbuilder.png
-   :width: 500 px
+   :width: 600 px
 
 The descriptions give you a hint about what is required for each field. The
 following sections describe the required and optional parameters in greater
@@ -49,95 +49,112 @@ detail.
 Required Parameters
 ...................
 
-:Class name: This is the name that will be used to create the Python class for
-your plugin. The name should be in CamelCase with no spaces. Plugin Builder
-will accept an all lower case class name but this should be avoided since it
-isn't in line with Python coding style. Examples of valid class names are:
+**Class name**
+  This is the name that will be used to create the Python class for
+  your plugin. The name should be in CamelCase with no spaces. Plugin Builder
+  will accept an all lower case class name but this should be avoided since it
+  isn't in line with Python coding style. Examples of valid class names are:
 
-* MyPlugin
-* PluginBuilder
-* ScriptRunner
+  * MyPlugin
+  * PluginBuilder
+  * ScriptRunner
 
-:Module name: This is the name that will be used to create the Python module (
-file) for your plugin. The name should be in lowercase with words separated
-using underscores. Plugin Builder will accept any case module name but
-this should be avoided since it isn't in line with Python coding style.
-Examples of valid module names are:
+**Module name**
+  This is the name that will be used to create the Python module (
+  file) for your plugin. The name should be in lowercase with words separated
+  using underscores. Plugin Builder will accept any case module name but
+  this should be avoided since it isn't in line with Python coding style.
+  Examples of valid module names are:
 
-* detect_features
-* detector
+  * detect_features
+  * detector
 
-:Plugin name: This is a title for your plugin and will be displayed in the
-QGIS plugin manager and the plugin installer. It will also be used as the
-menu name that appears in the QGIS Plugin menu. You can use the Class name,
-or make it more readable. Some examples:
+**Plugin name**
+  This is a title for your plugin and will be displayed in the
+  QGIS plugin manager and the plugin installer. It will also be used as the
+  menu name that appears in the QGIS Plugin menu. You can use the Class name,
+  or make it more readable. Some examples:
 
-* My Plugin
-* Plugin Builder
-* ScriptRunner
+  * My Plugin
+  * Plugin Builder
+  * ScriptRunner
 
-:Description: This is a one line description of the plugin's function and is
-displayed in both the Plugin Manager and Plugin Installer. Keep it short
-yet descriptive so the purpose of the plugin can be easily determined.
+**Description**
+  This is a one line description of the plugin's function and is
+  displayed in both the Plugin Manager and Plugin Installer. Keep it short
+  yet descriptive so the purpose of the plugin can be easily determined.
 
-:Version number: This is the version number of your plugin. Plugin Builder
-suggests 0.1, but you can start with any number. The Plugin Installer uses the
-version number to identify which plugins you have installed are upgradeable so
-it is important to increment it as you release new versions.
+**Version number** 
+  This is the version number of your plugin. Plugin Builder
+  suggests 0.1, but you can start with any number. The Plugin Installer uses the
+  version number to identify which plugins you have installed are upgradeable so
+  it is important to increment it as you release new versions.
 
-:Minimum QGIS version: This is the minimum version of QGIS required for your
-plugin to work. If your plugin uses features only present in a newer version,
-be sure to set this field accordingly to prevent problems for those running
-older versions. Version 2.0 of Plugin Builder defaults this field to 2.0.
+**Minimum QGIS version**
+  This is the minimum version of QGIS required for your
+  plugin to work. If your plugin uses features only present in a newer version,
+  be sure to set this field accordingly to prevent problems for those running
+  older versions. Version 2.0 of Plugin Builder defaults this field to 2.0.
 
-:Text for the menu item: This is the text that will appear in the menu.
-In the example below, the plugin name is Frog Pond and the text for the menu
-item is displayed to the right of it:
+**Text for the menu item**
+  This is the text that will appear in the menu.
+  In the example below, the plugin name is Frog Pond and the text for the menu
+  item is displayed to the right of it:
 
-.. image:: images/plugin_menu.png
-   :align: center
+  .. image:: images/plugin_menu.png
+     :align: center
 
-In general you shouldn't use the same text for the plugin name and the menu
-item; if you do your menu will look like this:
+  In general you shouldn't use the same text for the plugin name and the menu
+  item; if you do your menu will look like this:
 
-.. image:: images/redundant_menu.png
-   :align: center
+  .. image:: images/redundant_menu.png
+     :align: center
 
-:Author/Company: Put your name or company name here---this information is used
-in writing the copyright statement in the source files of your plugin, as well
-as being displayed in the Plugin Installer and on the
-`QGIS plugin repository <http://plugins.qgis.org/plugins>`_.
+**Author/Company**
+  Put your name or company name here---this information is used
+  in writing the copyright statement in the source files of your plugin, as well
+  as being displayed in the Plugin Installer and on the
+  `QGIS plugin repository <http://plugins.qgis.org/plugins>`_.
 
-:Email address: Put an address where users of your plugin can contact you.
-This information is written to the copyright header of your source files and
-also displayed on the QGIS plugin repository listing for your plugin.
+**Email address**
+  Put an address where users of your plugin can contact you.
+  This information is written to the copyright header of your source files and
+  also displayed on the QGIS plugin repository listing for your plugin.
 
-.. index:: parameters; optional
+.. index:: parameters; recommended
 
-Optional Parameters
+Recommended Parameters
 ...................
 
-There are several optional but highly recommended fields that you should
-consider completing when generating a new plugin.
+There are several fields that you should seriously
+consider completing when generating a new plugin. This will help ensure your
+plugin is accepted and users can be successful using it.
 
-:Bug tracker: A URL pointing to the bug/issue tracker for your plugin. You can
-create a project with tracking for your plugin(s) at
-http://hub.qgis.org/projects/new or of course you can use http://github.com.
+**Bug tracker**
+  A URL pointing to the bug/issue tracker for your plugin. You can
+  create a project with tracking for your plugin(s) at
+  http://github.com or you can use http://hub.qgis.org/projects/new.
 
-:Home page: The URL of the home page for your plugin. This can be the same as
-the project page you create on hub.qgis.org or a site of your own.
+**Home page**
+  The URL of the home page for your plugin. This can be the same as
+  the project page you create on github.com, hub.qgis.org, or a site of your own.
 
-:Repository: The URL of the source code repository for your plugin. This
-allows others submit patches and improvements for your approval, as well as
-providing you with the benefit of source code control.
+**Repository**
+  The URL of the source code repository for your plugin. This allows others
+  submit patches and improvements for your approval, as well as providing you
+  with the benefit of source code control. Consider using http://github.com to
+  store your code.
 
-:Tags: Tags are a comma separated list of keywords describing the function(s)
-of your plugin.
+**Tags** 
+  Tags are a comma separated list of keywords describing the function(s)
+  of your plugin. You can enter your own or select from a list of tags by
+  clicking the button to the right of the "Tags" field.
 
-:Experimental: Check this box if your plugin is considered experimental,
-meaning it is either incomplete or may cause unintended consequences. This
-allows users to filter out experimental plugins in the Plugin Installer if
-they choose not to live on the bleeding edge.
+**Experimental**
+  Check this box if your plugin is considered experimental,
+  meaning it is either incomplete or may cause unintended consequences. This
+  allows users to filter out experimental plugins in the Plugin Installer if
+  they choose not to live on the bleeding edge.
 
 Results
 =======
@@ -149,7 +166,7 @@ displays the results:
 
 The results dialog tells you where your plugin was saved, the location of your
 QGIS plugin directory, and what to do next. This same information is contained
-in the ``README.html`` and ``README.html`` files in your generated plugin
+in the ``README.html`` and ``README.txt`` files in your generated plugin
 directory.
 
 
@@ -187,8 +204,9 @@ Deploying
 To deploy your new plugin during development, you have two choices:
 
 #. Copy the entire plugin directory to your QGIS plugins directory
+
 #. Use the ``QGIS_PLUGINPATH`` environment variable to point to the directory
-where your development plugin(s) are located
+   where your development plugin(s) are located
 
 .. index:: deploying; copy method
 
@@ -205,7 +223,8 @@ of your QGIS plugins. By platform, this location is:
       ``/Users/gsherman/.qgis2/python/plugins``
 
 * Windows: ``%HOMEPATH%\.qgis2\python\plugins``, by default,
-       ``C:\Documents and Settings\gsherman\.qgis2\python\plugins``
+       * ``C:\Users\gsherman\.qgis2\python\plugins`` on versions later than XP,
+       * ``C:\Documents and Settings\gsherman\.qgis2\python\plugins`` on XP
 
 Since each plugin must be contained in its own subdirectory in
 ``.qgis2/python/plugins``, make sure you copy the directory, not the files in

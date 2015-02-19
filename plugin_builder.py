@@ -37,7 +37,8 @@ if sys.platform == 'win32':
 # Import the PyQt and QGIS libraries
 from PyQt4.QtCore import QFileInfo, QUrl, QFile, QDir, QSettings
 from PyQt4.QtGui import (
-    QAction, QIcon, QFileDialog, QMessageBox, QDesktopServices)
+    QAction, QIcon, QFileDialog, QMessageBox, QDesktopServices,
+    QStandardItemModel, QStandardItem)
 from qgis.core import QgsApplication
 # Initialize Qt resources from file resources.py
 # Do not remove this import even though your IDE / pylint may report it unused
@@ -47,6 +48,7 @@ import resources
 # Import the code for the dialog
 from plugin_builder_dialog import PluginBuilderDialog
 from result_dialog import ResultDialog
+from select_tags_dialog import SelectTagsDialog
 from plugin_specification import PluginSpecification
 
 
@@ -365,6 +367,34 @@ class PluginBuilder:
     def _set_last_used_path(self, value):
         QSettings().setValue('PluginBuilder/last_path', value)
 
+    def _select_tags(self):
+        tag_dialog = SelectTagsDialog()
+        tag_file = os.path.join(str(self.plugin_builder_path),
+                                          'taglist.txt')
+
+        if sys.platform == 'win32':
+            # get short path name on windows
+            tag_file = win32api.GetShortPathName(tag_file)
+        with open(tag_file) as tf:
+            tags = tf.readlines()
+
+        model = QStandardItemModel()
+        
+        for tag in tags:
+            item = QStandardItem(tag[:-1])
+            model.appendRow(item)
+
+        tag_dialog.listView.setModel(model)
+        tag_dialog.show()
+        ok = tag_dialog.exec_()
+        if ok:
+            selected = tag_dialog.listView.selectedIndexes()
+            seltags = []
+            for tag in selected:
+                seltags.append(tag.data())
+            taglist = ", ".join(seltags)
+            self.dialog.tags.setText(taglist)
+        #QMessageBox.information(None, "Selection", seltags)
 
     def run(self):
         """Run method that performs all the real work"""
@@ -380,6 +410,7 @@ class PluginBuilder:
         # connect the ok button to our method
         self.dialog.button_box.accepted.connect(self.validate_entries)
         self.dialog.button_box.helpRequested.connect(self.show_help)
+        self.dialog.select_tags.clicked.connect(self._select_tags)
 
         # show the dialog
         self.dialog.show()
