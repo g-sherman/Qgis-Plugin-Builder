@@ -316,8 +316,81 @@ QGIS repository</td>
 </tbody>
 </table>
 <span class="target" id="index-16"></span></div>
+<div class="section" id="using-pb-tool">
+<span id="index-17"></span><h1>Using pb_tool<a class="headerlink" href="#using-pb-tool" title="Permalink to this headline">¶</a></h1>
+<p><em>pb_tool</em> is a Python command line tool for compiling and deploying QGIS plugins on Linux, Mac OS X, and Windows.</p>
+<div class="section" id="features">
+<h2>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h2>
+<p><em>pb_tool</em> provides commands to aid in developing, testing, and deploying
+a QGIS Python Plugin:</p>
+<ul class="simple">
+<li>Compile resource and UI files</li>
+<li>Deploy to your plugins directory for testing in QGIS</li>
+<li>Create a zip file for upload to a repository</li>
+<li>Clean both compiled and deployed files</li>
+<li>Build and clean documentation</li>
+<li>Build translation files</li>
+<li>Works on Windows, OS X, and Linux</li>
+</ul>
+</div>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>You can install the tool using pip:</p>
+<blockquote>
+<div>pip install pb_tool</div></blockquote>
+<p>To upgrade to the latest version, use:</p>
+<blockquote>
+<div>pip install &#8211;upgrade pb_tool</div></blockquote>
+<p>You can also install using easy_install:</p>
+<blockquote>
+<div>easy_install pb_tool</div></blockquote>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p><em>pb_tool</em> requires a configuration file in order to do anything. Plugin Builder creates a working configuration file for you. By default,
+<em>pb_tool</em> assumes a file name of pb_tool.cfg, although you can specify a
+different one using the <tt class="docutils literal"><span class="pre">--config</span></tt> options in most commands.</p>
+<p>To display the available commands, just enter <cite>pb_tool</cite> on the command line:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ pb_tool
+Usage: pb_tool [OPTIONS] COMMAND [ARGS]...
+
+  Simple Python tool to compile and deploy a QGIS plugin. For help on a
+  command use --help after the command: pb_tool deploy --help.
+
+  pb_tool requires a configuration file (default: pb_tool.cfg) that declares
+  the files and resources used in your plugin. Plugin Builder 2.6.0 creates
+  a config file when you generate a new plugin template.
+
+  See http://g-sherman.github.io/plugin_build_tool for for an example config
+  file. You can also use the create command to generate a best-guess config
+  file for an existing project, then tweak as needed.
+
+Options:
+  --help  Show this message and exit.
+
+Commands:
+  clean       Remove compiled resource and ui files
+  clean_docs  Remove the built HTML help files from the...
+  compile     Compile the resource and ui files
+  create      Create a config file based on source files in...
+  dclean      Remove the deployed plugin from the...
+  deploy      Deploy the plugin to QGIS plugin directory...
+  doc         Build HTML version of the help files using...
+  list        List the contents of the configuration file
+  translate   Build translations using lrelease.
+  validate    Check the pb_tool.cfg file for mandatory...
+  version     Return the version of pb_tool and exit
+  zip         Package the plugin into a zip file suitable...
+</pre></div>
+</div>
+<p>For more information on using <em>pb_tool</em>, see:
+<a class="reference external" href="http://g-sherman.github.io/plugin_build_tool">http://g-sherman.github.io/plugin_build_tool</a></p>
+<p>For help on getting started using <em>pb_tool</em> with Plugin Builder, see:
+<a class="reference external" href="http://spatialgalaxy.com/2014/10/09/qgis-plugin-development-with-pb-tool">http://spatialgalaxy.com/2014/10/09/qgis-plugin-development-with-pb-tool</a></p>
+</div>
+</div>
 <div class="section" id="documenting-your-plugin">
-<span id="index-17"></span><h1>Documenting your Plugin<a class="headerlink" href="#documenting-your-plugin" title="Permalink to this headline">¶</a></h1>
+<h1>Documenting your Plugin<a class="headerlink" href="#documenting-your-plugin" title="Permalink to this headline">¶</a></h1>
 <p id="index-18">Plugin Builder creates a <a class="reference external" href="http://sphinx-doc.org">Sphinx</a> project for you in
 the <tt class="docutils literal"><span class="pre">help</span></tt> subdirectory of your plugin. To build the documentation you will
 need to install Sphinx using <a class="reference external" href="http://pypi.python.org/pypi/pip">pip</a>
@@ -372,6 +445,12 @@ community.</p>
 </li>
 <li><a class="reference internal" href="#testing">Testing</a></li>
 <li><a class="reference internal" href="#using-the-makefile">Using the Makefile</a></li>
+<li><a class="reference internal" href="#using-pb-tool">Using pb_tool</a><ul>
+<li><a class="reference internal" href="#features">Features</a></li>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#usage">Usage</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#documenting-your-plugin">Documenting your Plugin</a></li>
 <li><a class="reference internal" href="#the-repository">The Repository</a></li>
 </ul>
