@@ -292,7 +292,7 @@ class PluginBuilder:
         metadata_file.write(
             '# End of mandatory metadata\n\n')
         metadata_file.write(
-            '# Optional items:\n\n')
+            '# Recommended items:\n\n')
         metadata_file.write(
             '# Uncomment the following line and add your changelog:\n')
         metadata_file.write(
@@ -369,7 +369,12 @@ class PluginBuilder:
 
     def _select_tags(self):
         tag_dialog = SelectTagsDialog()
-        tag_file = os.path.join(str(self.plugin_builder_path),
+        # if the user has their own taglist, use it
+        user_tag_list = os.path.join(os.path.expanduser("~"), '.plugin_tags.txt')
+        if os.path.exists(user_tag_list):
+            tag_file = user_tag_list
+        else:
+            tag_file = os.path.join(str(self.plugin_builder_path),
                                           'taglist.txt')
 
         if sys.platform == 'win32':
