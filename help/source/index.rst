@@ -150,6 +150,14 @@ plugin is accepted and users can be successful using it.
   of your plugin. You can enter your own or select from a list of tags by
   clicking the button to the right of the "Tags" field.
 
+  You can create a **customized list of tags** to use instead of the standard
+  set by creating a plain text file named *.plugin_tags.txt* in your home
+  directory. The file should contain a single tag per line. For example::
+
+    composer
+    csv
+    database
+
 **Experimental**
   Check this box if your plugin is considered experimental,
   meaning it is either incomplete or may cause unintended consequences. This
