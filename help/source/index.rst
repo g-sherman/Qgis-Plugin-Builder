@@ -305,6 +305,86 @@ The following targets are supported
 .. index:: documentation
 .. index:: Plugin; documenting
 
+Using pb_tool
+=============
+
+*pb_tool* is a Python command line tool for compiling and deploying QGIS plugins on Linux, Mac OS X, and Windows.
+
+Features
+.........
+
+*pb_tool* provides commands to aid in developing, testing, and deploying
+a QGIS Python Plugin:
+
+* Compile resource and UI files
+* Deploy to your plugins directory for testing in QGIS
+* Create a zip file for upload to a repository
+* Clean both compiled and deployed files
+* Build and clean documentation
+* Build translation files
+* Works on Windows, OS X, and Linux
+
+Installation
+.............
+
+You can install the tool using pip:
+
+    pip install pb_tool
+
+To upgrade to the latest version, use:
+
+    pip install --upgrade pb_tool
+
+You can also install using easy_install:
+
+    easy_install pb_tool
+
+Usage
+.....
+
+*pb_tool* requires a configuration file in order to do anything. Plugin Builder creates a working configuration file for you. By default,
+*pb_tool* assumes a file name of pb_tool.cfg, although you can specify a
+different one using the ``--config`` options in most commands.
+
+To display the available commands, just enter `pb_tool` on the command line::
+
+    $ pb_tool
+    Usage: pb_tool [OPTIONS] COMMAND [ARGS]...
+
+      Simple Python tool to compile and deploy a QGIS plugin. For help on a
+      command use --help after the command: pb_tool deploy --help.
+
+      pb_tool requires a configuration file (default: pb_tool.cfg) that declares
+      the files and resources used in your plugin. Plugin Builder 2.6.0 creates
+      a config file when you generate a new plugin template.
+
+      See http://g-sherman.github.io/plugin_build_tool for for an example config
+      file. You can also use the create command to generate a best-guess config
+      file for an existing project, then tweak as needed.
+
+    Options:
+      --help  Show this message and exit.
+
+    Commands:
+      clean       Remove compiled resource and ui files
+      clean_docs  Remove the built HTML help files from the...
+      compile     Compile the resource and ui files
+      create      Create a config file based on source files in...
+      dclean      Remove the deployed plugin from the...
+      deploy      Deploy the plugin to QGIS plugin directory...
+      doc         Build HTML version of the help files using...
+      list        List the contents of the configuration file
+      translate   Build translations using lrelease.
+      validate    Check the pb_tool.cfg file for mandatory...
+      version     Return the version of pb_tool and exit
+      zip         Package the plugin into a zip file suitable...
+
+For more information on using *pb_tool*, see:
+http://g-sherman.github.io/plugin_build_tool
+
+For help on getting started using *pb_tool* with Plugin Builder, see:
+http://spatialgalaxy.com/2014/10/09/qgis-plugin-development-with-pb-tool
+
 Documenting your Plugin
 =======================
 
