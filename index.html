@@ -169,9 +169,18 @@ submit patches and improvements for your approval, as well as providing you
 with the benefit of source code control. Consider using <a class="reference external" href="http://github.com">http://github.com</a> to
 store your code.</dd>
 <dt><strong>Tags</strong></dt>
-<dd>Tags are a comma separated list of keywords describing the function(s)
+<dd><p class="first">Tags are a comma separated list of keywords describing the function(s)
 of your plugin. You can enter your own or select from a list of tags by
-clicking the button to the right of the &#8220;Tags&#8221; field.</dd>
+clicking the button to the right of the &#8220;Tags&#8221; field.</p>
+<p>You can create a <strong>customized list of tags</strong> to use instead of the standard
+set by creating a plain text file named <em>.plugin_tags.txt</em> in your home
+directory. The file should contain a single tag per line. For example:</p>
+<div class="last highlight-python"><div class="highlight"><pre><span class="n">composer</span>
+<span class="n">csv</span>
+<span class="n">database</span>
+</pre></div>
+</div>
+</dd>
 <dt><strong>Experimental</strong></dt>
 <dd>Check this box if your plugin is considered experimental,
 meaning it is either incomplete or may cause unintended consequences. This
