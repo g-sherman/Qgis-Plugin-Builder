@@ -121,6 +121,20 @@ Required Parameters
   This information is written to the copyright header of your source files and
   also displayed on the QGIS plugin repository listing for your plugin.
 
+**Menu**
+  Choose an appropriate location for your plugin's menu based on its main
+  functionality. This will place your menu under one of the following main
+  menus:
+  
+   * Plugins
+   * Database
+   * Raster
+   * Vector
+   * Web
+     
+  If none of the specific categories apply (Database, Raster, Vector, Web), choose *Plugins*. 
+  Your choice is also written to the *category* field in metadata.txt.
+
 .. index:: parameters; recommended
 
 Recommended Parameters
@@ -157,20 +171,6 @@ plugin is accepted and users can be successful using it.
     composer
     csv
     database
-
-**Menu**
-  Choose an appropriate location for your plugin's menu based on its main
-  functionality. This will place your menu under one of the following main
-  menus:
-  
-   * Plugins
-   * Database
-   * Raster
-   * Vector
-   * Web
-     
-  If none of the specific categories apply (Database, Raster, Vector, Web), choose *Plugins*. 
-  Your choice is also written to the *category* field in metadata.txt.
 
 **Experimental**
   Check this box if your plugin is considered experimental,
