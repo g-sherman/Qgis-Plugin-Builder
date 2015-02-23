@@ -47,6 +47,7 @@ class PluginSpecification(object):
         self.homepage = dialog.homepage.text()
         self.tracker = dialog.tracker.text()
         self.repository = dialog.repository.text()
+        self.menu = dialog.menu_location.currentText()
         self.tags = dialog.tags.text()
         # icon selection from disk will be added at a later version
         self.icon = 'icon.png'
@@ -60,6 +61,13 @@ class PluginSpecification(object):
         # Git will replace this with the sha - I do it a funny way below so
         # that this line below does not itself get substituted by git!
         self.vcs_format = '$Format:' + '%H$'
+        # Munge the plugin menu function based on user choice
+        if self.menu == 'Plugins':
+            add_method = 'addPluginToMenu'
+            remove_method = 'removePluginMenu'
+        else:
+            add_method = 'addPluginTo{}Menu'.format(self.menu)
+            remove_method = 'removePlugin{}Menu'.format(self.menu)
         self.template_map = {
             'TemplateClass': self.class_name,
             'TemplateTitle': self.title,
@@ -70,6 +78,8 @@ class PluginSpecification(object):
             'TemplateAuthor': self.author,
             'TemplateEmail': self.email_address,
             'TemplateMenuText': self.menu_text,
+            'TemplateMenuAddMethod': add_method,
+            'TemplateMenuRemoveMethod': remove_method,
             'PluginDirectoryName': self.class_name.lower(),
             'TemplateBuildDate': self.build_date,
             'TemplateYear': self.build_year,

@@ -308,6 +308,8 @@ class PluginBuilder:
         metadata_file.write(
             'repository=%s\n' % specification.repository)
         metadata_file.write(
+            'category=%s\n' % specification.menu)
+        metadata_file.write(
             'icon=%s\n' % specification.icon)
         metadata_file.write(
             '# experimental flag\n')
