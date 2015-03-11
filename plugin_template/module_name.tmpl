@@ -175,6 +175,8 @@ class ${TemplateClass}:
                 self.tr(u'&${TemplateTitle}'),
                 action)
             self.iface.removeToolBarIcon(action)
+        # remove the toolbar
+        del self.toolbar
 
 
     def run(self):
