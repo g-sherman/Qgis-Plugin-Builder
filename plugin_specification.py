@@ -21,6 +21,7 @@
  ***************************************************************************/
 """
 import datetime
+import os
 
 
 class PluginSpecification(object):
@@ -40,20 +41,28 @@ class PluginSpecification(object):
         self.description = dialog.description.text()
         self.module_name = dialog.module_name.text()
         self.email_address = dialog.email_address.text()
-        self.menu_text = dialog.menu_text.text()
         self.qgis_minimum_version = dialog.qgis_minimum_version.text()
         self.title = dialog.title.text()
         self.plugin_version = dialog.plugin_version.text()
         self.homepage = dialog.homepage.text()
         self.tracker = dialog.tracker.text()
         self.repository = dialog.repository.text()
-        self.menu = dialog.menu_location.currentText()
         self.tags = dialog.tags.text()
         # icon selection from disk will be added at a later version
         self.icon = 'icon.png'
         self.experimental = dialog.experimental.isChecked()
         # deprecated is always false for a new plugin
         self.deprecated = False
+        # TODO: extract into template specific code
+        self.menu_text = dialog.template_subframe.menu_text.text()
+        self.menu = dialog.template_subframe.menu_location.currentText()
+        # Builder flags
+        self.gen_i18n = dialog.i18n_cb.isChecked()
+        self.gen_help = dialog.help_cb.isChecked()
+        self.gen_tests = dialog.tests_cb.isChecked()
+        self.gen_scripts = dialog.scripts_cb.isChecked()
+        self.gen_makefile = dialog.makefile_cb.isChecked()
+        self.gen_pb_tool = dialog.pb_tool_cb.isChecked()
         # Add the date stuff to the template map
         now = datetime.date.today()
         self.build_year = now.year
