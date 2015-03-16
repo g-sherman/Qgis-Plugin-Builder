@@ -23,7 +23,7 @@
 
 import os
 from PyQt4 import QtGui, uic
-from PyQt4.QtGui import QMessageBox
+from PyQt4.QtGui import QMessageBox, QFrame
 from string import capwords
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
@@ -43,6 +43,7 @@ class PluginBuilderDialog(QtGui.QDialog, FORM_CLASS):
         super(PluginBuilderDialog, self).__init__(parent)
         # Set up the user interface from Designer.
         self.setupUi(self)
+        self.template_subframe = None
         self.update_prev_next_buttons()
         self.update_template()
         self.stackedWidget.currentChanged.connect(self.update_prev_next_buttons)
@@ -70,11 +71,15 @@ class PluginBuilderDialog(QtGui.QDialog, FORM_CLASS):
         self.stackedWidget.setCurrentIndex(i - 1)
 
     def update_template(self):
+        if self.template_subframe is not None:
+            self.template_subframe.setParent(None)
+        subframe = QFrame(self.template_frame)
+        self.frame_layout.addWidget(subframe, 1, 0, 1, 2)
         templ_dir = self.template_cbox.currentText()
         self.template_subframe = uic.loadUi(os.path.join(
             os.path.dirname(__file__),
             'plugin_templates', templ_dir, 'wizard_form_base.ui'),
-            self.template_frame)
+            subframe)
 
     def validate_entries(self):
         """Check to see that all fields have been entered."""

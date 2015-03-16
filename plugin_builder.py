@@ -127,14 +127,16 @@ class PluginBuilder:
         test_source = os.path.join(self.shared_dir, 'test')
         test_destination = os.path.join(self.plugin_path, 'test')
         copy(test_source, test_destination)
-        self.populate_template(
-            specification, self.template_dir,
-            'test/test_module_name_dialog.templ',
-            'test/test_%s_dialog.py' % specification.module_name)
-        self.populate_template(
-            specification, self.template_dir,
-            'test/test_resources.templ',
-            'test/test_resources.py')
+        # Read template specific settings (FIXME: test only)
+        if self.template_dir.endswith("toolbutton_with_dialog"):
+            self.populate_template(
+                specification, self.template_dir,
+                'test/test_module_name_dialog.templ',
+                'test/test_%s_dialog.py' % specification.module_name)
+            self.populate_template(
+                specification, self.template_dir,
+                'test/test_resources.templ',
+                'test/test_resources.py')
 
     def _prepare_scripts(self):
         """Copy the scripts folder."""
@@ -177,26 +179,34 @@ class PluginBuilder:
         # process the user entries
         if specification.gen_makefile:
             self.populate_template(
-                specification, self.template_dir, 'Makefile.tmpl', 'Makefile')
+                specification, self.shared_dir, 'Makefile.tmpl', 'Makefile')
         if specification.gen_pb_tool:
             self.populate_template(
-                specification, self.template_dir, 'pb_tool.tmpl', 'pb_tool.cfg')
+                specification, self.shared_dir, 'pb_tool.tmpl', 'pb_tool.cfg')
         self.populate_template(
             specification, self.shared_dir, '__init__.tmpl', '__init__.py')
         self.populate_template(
             specification, self.template_dir, 'module_name.tmpl',
             '%s.py' % specification.module_name)
-        self.populate_template(
-            specification, self.template_dir, 'module_name_dialog.tmpl',
-            '%s_dialog.py' % specification.module_name)
-        self.populate_template(
-            specification, self.template_dir, 'module_name_dialog_base.ui.tmpl',
-            '%s_dialog_base.ui' % specification.module_name)
-        self.populate_template(
-            specification, self.template_dir, 'resources.tmpl', 'resources.qrc')
-        # copy the non-generated files to the new plugin dir
-        icon = QFile(os.path.join(self.template_dir, 'icon.png'))
-        icon.copy(os.path.join(self.plugin_path, 'icon.png'))
+        if self.template_dir.endswith("toolbutton_with_dialog"):
+            self.populate_template(
+                specification, self.template_dir, 'module_name_dialog.tmpl',
+                '%s_dialog.py' % specification.module_name)
+            self.populate_template(
+                specification, self.template_dir, 'module_name_dialog_base.ui.tmpl',
+                '%s_dialog_base.ui' % specification.module_name)
+            self.populate_template(
+                specification, self.template_dir, 'resources.tmpl', 'resources.qrc')
+            # copy the non-generated files to the new plugin dir
+            icon = QFile(os.path.join(self.template_dir, 'icon.png'))
+            icon.copy(os.path.join(self.plugin_path, 'icon.png'))
+        else:  # FIXME: test only
+            self.populate_template(
+                specification, self.template_dir, 'module_name_algorithm.tmpl',
+                '%s_algorithm.py' % specification.module_name)
+            self.populate_template(
+                specification, self.template_dir, 'module_name_provider.tmpl',
+                '%s_provider.py' % specification.module_name)
         if specification.gen_scripts:
             release_script = QFile(os.path.join(self.shared_dir, 'release.sh'))
             release_script.copy(os.path.join(self.plugin_path, 'release.sh'))
@@ -294,7 +304,7 @@ class PluginBuilder:
         metadata_file.write(
             'repository=%s\n' % specification.repository)
         metadata_file.write(
-            'category=%s\n' % specification.menu)
+            'category=%s\n' % specification.category)
         metadata_file.write(
             'icon=%s\n' % specification.icon)
         metadata_file.write(
@@ -367,7 +377,7 @@ class PluginBuilder:
             tags = tf.readlines()
 
         model = QStandardItemModel()
-        
+
         for tag in tags:
             item = QStandardItem(tag[:-1])
             model.appendRow(item)
@@ -423,6 +433,26 @@ class PluginBuilder:
             self.dialog.template_cbox.currentText(), 'template')
         self.shared_dir = os.path.join(
             str(self.plugin_builder_path), 'plugin_templates', 'shared')
+
+        # Read template specific settings (FIXME: test only)
+        if self.template_dir.endswith("toolbutton_with_dialog"):
+            menu_text = self.dialog.template_subframe.menu_text.text()
+            menu = self.dialog.template_subframe.menu_location.currentText()
+            # Munge the plugin menu function based on user choice
+            if menu == 'Plugins':
+                add_method = 'addPluginToMenu'
+                remove_method = 'removePluginMenu'
+            else:
+                add_method = 'addPluginTo{}Menu'.format(menu)
+                remove_method = 'removePlugin{}Menu'.format(menu)
+            specification.template_map.update({
+                'TemplateMenuText': menu_text,
+                'TemplateMenuAddMethod': add_method,
+                'TemplateMenuRemoveMethod': remove_method,
+            })
+            specification.category = menu
+        else:
+            specification.category = 'Analysis'
 
         self._prepare_code(specification)
         if specification.gen_help:

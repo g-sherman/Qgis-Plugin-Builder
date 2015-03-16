@@ -53,9 +53,6 @@ class PluginSpecification(object):
         self.experimental = dialog.experimental.isChecked()
         # deprecated is always false for a new plugin
         self.deprecated = False
-        # TODO: extract into template specific code
-        self.menu_text = dialog.template_subframe.menu_text.text()
-        self.menu = dialog.template_subframe.menu_location.currentText()
         # Builder flags
         self.gen_i18n = dialog.i18n_cb.isChecked()
         self.gen_help = dialog.help_cb.isChecked()
@@ -70,13 +67,6 @@ class PluginSpecification(object):
         # Git will replace this with the sha - I do it a funny way below so
         # that this line below does not itself get substituted by git!
         self.vcs_format = '$Format:' + '%H$'
-        # Munge the plugin menu function based on user choice
-        if self.menu == 'Plugins':
-            add_method = 'addPluginToMenu'
-            remove_method = 'removePluginMenu'
-        else:
-            add_method = 'addPluginTo{}Menu'.format(self.menu)
-            remove_method = 'removePlugin{}Menu'.format(self.menu)
         self.template_map = {
             'TemplateClass': self.class_name,
             'TemplateTitle': self.title,
@@ -86,9 +76,6 @@ class PluginSpecification(object):
             'TemplateQgisVersion': self.qgis_minimum_version,
             'TemplateAuthor': self.author,
             'TemplateEmail': self.email_address,
-            'TemplateMenuText': self.menu_text,
-            'TemplateMenuAddMethod': add_method,
-            'TemplateMenuRemoveMethod': remove_method,
             'PluginDirectoryName': self.class_name.lower(),
             'TemplateBuildDate': self.build_date,
             'TemplateYear': self.build_year,
