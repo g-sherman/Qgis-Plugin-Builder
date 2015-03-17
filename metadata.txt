@@ -8,10 +8,10 @@
 [general]
 name=Plugin Builder
 description=Creates a QGIS plugin template for use as a starting point in plugin development
-version=Version 2.8.2
+version=Version 2.8.3
 qgisMinimumVersion=2.0
 
-changelog=2015-03-11 Remove the plugin toolbar during unload
+changelog=2015-03-17 Remove win32api requirement on Windows
 
 homepage=http://g-sherman.github.io/Qgis-Plugin-Builder
 tracker=https://github.com/g-sherman/Qgis-Plugin-Builder/issues
