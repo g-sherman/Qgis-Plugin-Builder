@@ -25,6 +25,7 @@ import os
 from PyQt4 import QtGui, uic
 from PyQt4.QtGui import QMessageBox, QFrame
 from string import capwords
+from plugin_templates import templates
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'plugin_builder_dialog_base.ui'))
@@ -44,6 +45,9 @@ class PluginBuilderDialog(QtGui.QDialog, FORM_CLASS):
         # Set up the user interface from Designer.
         self.setupUi(self)
         self.template_subframe = None
+        self.templates = templates()
+        for templ in self.templates:
+            self.template_cbox.addItem(templ.descr())
         self.update_prev_next_buttons()
         self.update_template()
         self.stackedWidget.currentChanged.connect(self.update_prev_next_buttons)
@@ -70,15 +74,16 @@ class PluginBuilderDialog(QtGui.QDialog, FORM_CLASS):
         i = self.stackedWidget.currentIndex()
         self.stackedWidget.setCurrentIndex(i - 1)
 
+    def template(self):
+        return self.templates[self.template_cbox.currentIndex()]
+
     def update_template(self):
         if self.template_subframe is not None:
             self.template_subframe.setParent(None)
         subframe = QFrame(self.template_frame)
         self.frame_layout.addWidget(subframe, 1, 0, 1, 2)
-        templ_dir = self.template_cbox.currentText()
         self.template_subframe = uic.loadUi(os.path.join(
-            os.path.dirname(__file__),
-            'plugin_templates', templ_dir, 'wizard_form_base.ui'),
+            self.template().subdir(), 'wizard_form_base.ui'),
             subframe)
 
     def validate_entries(self):
