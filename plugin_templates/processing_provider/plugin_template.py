@@ -35,7 +35,12 @@ class ProcessingProviderPluginTemplate(PluginTemplate):
 
     def template_map(self, specification, dialog):
         self.category = 'Analysis'
+        frame = dialog.template_subframe
         return {
+            'TemplateAlgoName': frame.algo_name_text.text(),
+            'TemplateAlgoGroup': frame.algo_group_text.text(),
+            'TemplateProviderName': frame.provider_name_text.text(),
+            'TemplateProviderDescr': frame.provider_descr_text.text()
         }
 
     def template_files(self, specification):

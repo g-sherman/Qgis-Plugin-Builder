@@ -189,7 +189,7 @@
       </size>
      </property>
      <property name="toolTip">
-      <string>"This is the providers full name. e.g. Example algorithms.</string>
+      <string>This is the providers full name. e.g. Example algorithms.</string>
      </property>
      <property name="text">
       <string/>
@@ -226,6 +226,12 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>algo_name_text</tabstop>
+  <tabstop>algo_group_text</tabstop>
+  <tabstop>provider_name_text</tabstop>
+  <tabstop>provider_descr_text</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
