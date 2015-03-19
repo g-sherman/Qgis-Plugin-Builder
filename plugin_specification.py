@@ -79,5 +79,11 @@ class PluginSpecification(object):
             'PluginDirectoryName': self.class_name.lower(),
             'TemplateBuildDate': self.build_date,
             'TemplateYear': self.build_year,
-            'TemplateVCSFormat': self.vcs_format
+            'TemplateVCSFormat': self.vcs_format,
+            # Makefile defaults
+            'TemplatePyFiles': '',
+            'TemplateUiFiles': '',
+            'TemplateExtraFiles': '',
+            'TemplateQrcFiles': '',
+            'TemplateRcFiles': ''
         }

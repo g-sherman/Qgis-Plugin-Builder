@@ -43,7 +43,7 @@ class ToolbuttonWithDialogPluginTemplate(PluginTemplate):
         else:
             add_method = 'addPluginTo{}Menu'.format(menu)
             remove_method = 'removePlugin{}Menu'.format(menu)
-        specification.category = menu
+        self.category = menu
         return {
             # Makefile
             'TemplatePyFiles': '%s_dialog.py' % specification.module_name,

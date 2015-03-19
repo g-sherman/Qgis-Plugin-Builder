@@ -34,14 +34,8 @@ class ProcessingProviderPluginTemplate(PluginTemplate):
         return os.path.dirname(__file__)
 
     def template_map(self, specification, dialog):
-        specification.category = 'Analysis'
+        self.category = 'Analysis'
         return {
-            # Makefile
-            'TemplatePyFiles': '',
-            'TemplateUiFiles': '',
-            'TemplateExtraFiles': '',
-            'TemplateQrcFiles': '',
-            'TemplateRcFiles': '',
         }
 
     def template_files(self, specification):
