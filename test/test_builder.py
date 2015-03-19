@@ -60,6 +60,13 @@ class FakePluginSpecification(object):
         # icon selection from disk will be added at a later version
         self.icon = 'icon.png'
         self.experimental = False
+        # Builder flags
+        self.gen_i18n = True
+        self.gen_help = True
+        self.gen_tests = True
+        self.gen_scripts = True
+        self.gen_makefile = True
+        self.gen_pb_tool = True
         # deprecated is always false for a new plugin
         self.deprecated = False
         self.build_year = 2001
@@ -77,11 +84,20 @@ class FakePluginSpecification(object):
             'TemplateQgisVersion': self.qgis_minimum_version,
             'TemplateAuthor': self.author,
             'TemplateEmail': self.email_address,
-            'TemplateMenuText': self.menu_text,
             'PluginDirectoryName': self.class_name.lower(),
             'TemplateBuildDate': self.build_date,
             'TemplateYear': self.build_year,
-            'TemplateVCSFormat': self.vcs_format
+            'TemplateVCSFormat': self.vcs_format,
+            # Makefile
+            'TemplatePyFiles': '%s_dialog.py' % self.module_name,
+            'TemplateUiFiles': '%s_dialog_base.ui' % self.module_name,
+            'TemplateExtraFiles': 'icon.png',
+            'TemplateQrcFiles': 'resources.qrc',
+            'TemplateRcFiles': "resources_rc.py",
+            # Menu
+            'TemplateMenuText': self.menu_text,
+            'TemplateMenuAddMethod': 'addPluginToMenu',
+            'TemplateMenuRemoveMethod': 'removePluginMenu'
         }
 
 
@@ -103,13 +119,17 @@ class BuilderTest(unittest.TestCase):
     def __init__(self, *args, **kwargs):
         super(BuilderTest, self).__init__(*args, **kwargs)
         # Define class members here....
-        self.templates_path = None
+        self.shared_dir = None
+        self.template_dir = None
         self.specification = FakePluginSpecification()
 
     def setUp(self):
         """Setup run before each test."""
-        self.templates_path = os.path.abspath(os.path.join(
-            os.path.dirname(__file__), '..', 'plugin_template'))
+        self.shared_dir = os.path.abspath(os.path.join(
+            os.path.dirname(__file__), '..', 'plugin_templates', 'shared'))
+        self.template_dir = os.path.abspath(os.path.join(
+            os.path.dirname(__file__), '..', 'plugin_templates',
+            'toolbutton_with_dialog', 'template'))
 
     def test_dir_copy(self):
         """Test that we can copy a directory of files.
@@ -121,7 +141,7 @@ class BuilderTest(unittest.TestCase):
         temp_path = temp_dir()
         temp_name = unique_filename(prefix='plugin_builder_')
         new_path = os.path.join(temp_path, temp_name)
-        copy(os.path.join(self.templates_path, 'test'), new_path)
+        copy(os.path.join(self.shared_dir, 'test'), new_path)
         test_file_path = os.path.join(new_path, 'test_init.py')
         self.assertTrue(os.path.exists(test_file_path), test_file_path)
 
@@ -130,14 +150,18 @@ class BuilderTest(unittest.TestCase):
         temp_path = temp_dir()
         iface = QgisInterface(None)
         builder = PluginBuilder(iface)
+        builder.shared_dir = self.shared_dir
+        builder.template_dir = self.template_dir
         builder.plugin_path = temp_path
-        builder._prepare_code(self.specification, temp_path)
+        builder._prepare_code(self.specification)
 
     def test_prepare_results_html(self):
         """Test the prepare results helper works."""
         temp_path = temp_dir()
         iface = QgisInterface(None)
         builder = PluginBuilder(iface)
+        builder.shared_dir = self.shared_dir
+        builder.template_dir = self.template_dir
         builder.plugin_path = temp_path
         results_popped, template_module_name = builder._prepare_results_html(
             self.specification)
@@ -149,6 +173,8 @@ class BuilderTest(unittest.TestCase):
         temp_path = temp_dir()
         iface = QgisInterface(None)
         builder = PluginBuilder(iface)
+        builder.shared_dir = self.shared_dir
+        builder.template_dir = self.template_dir
         builder.plugin_path = temp_path
         builder._prepare_readme(self.specification, 'fake_module')
         # TODO: go and look in the file and see if it is ok
@@ -158,6 +184,8 @@ class BuilderTest(unittest.TestCase):
         temp_path = temp_dir()
         iface = QgisInterface(None)
         builder = PluginBuilder(iface)
+        builder.shared_dir = self.shared_dir
+        builder.template_dir = self.template_dir
         builder.plugin_path = temp_path
         builder._prepare_results_html(self.specification)
         # TODO: go and look in the file and see if it is ok
