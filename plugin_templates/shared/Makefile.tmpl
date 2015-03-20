@@ -38,21 +38,19 @@ LOCALES =
 # translation
 SOURCES = \
 	__init__.py \
-	${TemplateModuleName}.py \
-	${TemplateModuleName}_dialog.py
+	${TemplateModuleName}.py ${TemplatePyFiles}
 
 PLUGINNAME = ${TemplateClass}
 
 PY_FILES = \
-	${TemplateModuleName}.py \
-	${TemplateModuleName}_dialog.py \
-	__init__.py
+	__init__.py \
+	${TemplateModuleName}.py ${TemplatePyFiles}
 
-UI_FILES = ${TemplateModuleName}_dialog_base.ui
+UI_FILES = ${TemplateUiFiles}
 
-EXTRAS = icon.png metadata.txt
+EXTRAS = metadata.txt ${TemplateExtraFiles}
 
-COMPILED_RESOURCE_FILES = resources_rc.py
+COMPILED_RESOURCE_FILES = ${TemplateRcFiles}
 
 PEP8EXCLUDE=pydev,resources_rc.py,conf.py,third_party,ui
 
@@ -65,7 +63,7 @@ HELP = help/build/html
 
 PLUGIN_UPLOAD = $$(c)/plugin_upload.py
 
-RESOURCE_SRC=$$(shell grep '^ *<file' resources.qrc | sed 's@</file>@@g;s/.*>//g' | tr '\n' ' ')
+RESOURCE_SRC=$$(shell grep '^ *<file' ${TemplateQrcFiles} | sed 's@</file>@@g;s/.*>//g' | tr '\n' ' ')
 
 QGISDIR=.qgis2
 

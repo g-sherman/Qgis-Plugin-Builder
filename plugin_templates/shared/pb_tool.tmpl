@@ -42,19 +42,19 @@ name: ${TemplateClass}
 
 [files]
 # Python  files that should be deployed with the plugin
-python_files: __init__.py ${TemplateModuleName}.py ${TemplateModuleName}_dialog.py 
+python_files: __init__.py ${TemplateModuleName}.py ${TemplatePyFiles}
 
 # The main dialog file that is loaded (not compiled)
-main_dialog: ${TemplateModuleName}_dialog_base.ui
+main_dialog: ${TemplateUiFiles}
 
 # Other ui files for dialogs you create (these will be compiled)
 compiled_ui_files: 
 
 # Resource file(s) that will be compiled
-resource_files: resources.qrc
+resource_files: ${TemplateQrcFiles}
 
 # Other files required for the plugin
-extras: icon.png metadata.txt
+extras: metadata.txt ${TemplateExtraFiles}
 
 # Other directories to be deployed with the plugin.
 # These must be subdirectories under the plugin directory
