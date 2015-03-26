@@ -21,6 +21,7 @@
  ***************************************************************************/
 """
 import datetime
+import os
 
 
 class PluginSpecification(object):
@@ -40,20 +41,25 @@ class PluginSpecification(object):
         self.description = dialog.description.text()
         self.module_name = dialog.module_name.text()
         self.email_address = dialog.email_address.text()
-        self.menu_text = dialog.menu_text.text()
         self.qgis_minimum_version = dialog.qgis_minimum_version.text()
         self.title = dialog.title.text()
         self.plugin_version = dialog.plugin_version.text()
         self.homepage = dialog.homepage.text()
         self.tracker = dialog.tracker.text()
         self.repository = dialog.repository.text()
-        self.menu = dialog.menu_location.currentText()
         self.tags = dialog.tags.text()
         # icon selection from disk will be added at a later version
         self.icon = 'icon.png'
         self.experimental = dialog.experimental.isChecked()
         # deprecated is always false for a new plugin
         self.deprecated = False
+        # Builder flags
+        self.gen_i18n = dialog.i18n_cb.isChecked()
+        self.gen_help = dialog.help_cb.isChecked()
+        self.gen_tests = dialog.tests_cb.isChecked()
+        self.gen_scripts = dialog.scripts_cb.isChecked()
+        self.gen_makefile = dialog.makefile_cb.isChecked()
+        self.gen_pb_tool = dialog.pb_tool_cb.isChecked()
         # Add the date stuff to the template map
         now = datetime.date.today()
         self.build_year = now.year
@@ -61,13 +67,6 @@ class PluginSpecification(object):
         # Git will replace this with the sha - I do it a funny way below so
         # that this line below does not itself get substituted by git!
         self.vcs_format = '$Format:' + '%H$'
-        # Munge the plugin menu function based on user choice
-        if self.menu == 'Plugins':
-            add_method = 'addPluginToMenu'
-            remove_method = 'removePluginMenu'
-        else:
-            add_method = 'addPluginTo{}Menu'.format(self.menu)
-            remove_method = 'removePlugin{}Menu'.format(self.menu)
         self.template_map = {
             'TemplateClass': self.class_name,
             'TemplateTitle': self.title,
@@ -77,11 +76,14 @@ class PluginSpecification(object):
             'TemplateQgisVersion': self.qgis_minimum_version,
             'TemplateAuthor': self.author,
             'TemplateEmail': self.email_address,
-            'TemplateMenuText': self.menu_text,
-            'TemplateMenuAddMethod': add_method,
-            'TemplateMenuRemoveMethod': remove_method,
             'PluginDirectoryName': self.class_name.lower(),
             'TemplateBuildDate': self.build_date,
             'TemplateYear': self.build_year,
-            'TemplateVCSFormat': self.vcs_format
+            'TemplateVCSFormat': self.vcs_format,
+            # Makefile defaults
+            'TemplatePyFiles': '',
+            'TemplateUiFiles': '',
+            'TemplateExtraFiles': '',
+            'TemplateQrcFiles': '',
+            'TemplateRcFiles': ''
         }

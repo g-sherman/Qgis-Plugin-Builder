@@ -26,7 +26,6 @@ import sys
 import errno
 import shutil
 from string import Template
-from string import capwords
 import codecs
 import ConfigParser
 
@@ -115,50 +114,30 @@ class PluginBuilder:
         :type specification: PluginSpecification
         """
         self.populate_template(
-            specification,
+            specification, self.shared_dir,
             'help/source/conf.py.tmpl', 'help/source/conf.py')
         self.populate_template(
-            specification,
+            specification, self.shared_dir,
             'help/source/index.rst.tmpl', 'help/source/index.rst')
         # copy the unit tests folder
-        test_source = os.path.join(
-            os.path.dirname(__file__), 'plugin_template', 'test')
+        test_source = os.path.join(self.shared_dir, 'test')
         test_destination = os.path.join(self.plugin_path, 'test')
         copy(test_source, test_destination)
-        # These are templates so we don't copy it directly.
-        os.remove(os.path.join(
-            test_destination, 'test_module_name_dialog.templ'))
-        os.remove(os.path.join(
-            test_destination, 'test_resources.templ'))
-        self.populate_template(
-            specification,
-            'test/test_module_name_dialog.templ',
-            'test/test_%s_dialog.py' % specification.module_name)
-        self.populate_template(
-            specification,
-            'test/test_resources.templ',
-            'test/test_resources.py')
 
     def _prepare_scripts(self):
         """Copy the scripts folder."""
-        scripts_source = os.path.join(
-            os.path.dirname(__file__), 'plugin_template', 'scripts')
+        scripts_source = os.path.join(self.shared_dir, 'scripts')
         copy(scripts_source, os.path.join(self.plugin_path, 'scripts'))
         # copy the i18n folder
-        scripts_source = os.path.join(
-            os.path.dirname(__file__), 'plugin_template', 'i18n')
+        scripts_source = os.path.join(self.shared_dir, 'i18n')
         copy(scripts_source, os.path.join(self.plugin_path, 'i18n'))
 
-    def _prepare_help(self, template_dir):
-        """Prepare the help directory.
-
-        :param template_dir: Directory where template is.
-        :type template_dir: str
-        """
+    def _prepare_help(self):
+        """Prepare the help directory."""
         # Copy over pylintrc
         # noinspection PyCallByClass,PyTypeChecker
         QFile.copy(
-            os.path.join(template_dir, 'pylintrc'),
+            os.path.join(self.shared_dir, 'pylintrc'),
             os.path.join(self.plugin_path, 'pylintrc'))
         # Create sphinx default project for help
         QDir().mkdir(self.plugin_path + '/help')
@@ -169,57 +148,65 @@ class PluginBuilder:
         # copy doc makefiles
         # noinspection PyCallByClass,PyTypeChecker
         QFile.copy(
-            os.path.join(template_dir, 'help/make.bat'),
+            os.path.join(self.shared_dir, 'help/make.bat'),
             os.path.join(self.plugin_path, 'help/make.bat'))
         # noinspection PyCallByClass,PyTypeChecker
         QFile.copy(
-            os.path.join(template_dir, 'help/Makefile'),
+            os.path.join(self.shared_dir, 'help/Makefile'),
             os.path.join(self.plugin_path, 'help/Makefile'))
 
-    def _prepare_code(self, specification, template_dir):
+    def _prepare_code(self, specification):
         """Prepare the code turning templates into python.
 
         :param specification: Specification instance containing template
             replacement keys/values.
         :type specification: PluginSpecification
-
-        :param template_dir: Directory where template is.
-        :type template_dir: str
         """
         # process the user entries
+        if specification.gen_makefile:
+            self.populate_template(
+                specification, self.shared_dir, 'Makefile.tmpl', 'Makefile')
+        if specification.gen_pb_tool:
+            self.populate_template(
+                specification, self.shared_dir, 'pb_tool.tmpl', 'pb_tool.cfg')
         self.populate_template(
-            specification, 'Makefile.tmpl', 'Makefile')
+            specification, self.template_dir, '__init__.tmpl', '__init__.py')
         self.populate_template(
-            specification, 'pb_tool.tmpl', 'pb_tool.cfg')
-        self.populate_template(
-            specification, '__init__.tmpl', '__init__.py')
-        self.populate_template(
-            specification, 'module_name.tmpl',
+            specification, self.template_dir, 'module_name.tmpl',
             '%s.py' % specification.module_name)
-        self.populate_template(
-            specification, 'module_name_dialog.tmpl',
-            '%s_dialog.py' % specification.module_name)
-        self.populate_template(
-            specification, 'module_name_dialog_base.ui.tmpl',
-            '%s_dialog_base.ui' % specification.module_name)
-        self.populate_template(
-            specification, 'resources.tmpl', 'resources.qrc')
+        if specification.gen_scripts:
+            release_script = QFile(os.path.join(self.shared_dir, 'release.sh'))
+            release_script.copy(os.path.join(self.plugin_path, 'release.sh'))
+            plugin_upload = QFile(
+                os.path.join(self.shared_dir, 'plugin_upload.py'))
+            plugin_upload.copy(
+                os.path.join(self.plugin_path, 'plugin_upload.py'))
+            # noinspection PyCallByClass,PyTypeChecker
+            QFile.setPermissions(
+                os.path.join(self.plugin_path, 'plugin_upload.py'),
+                QFile.ReadOwner | QFile.WriteOwner | QFile.ExeOwner |
+                QFile.ReadUser | QFile.WriteUser | QFile.ExeUser |
+                QFile.ReadGroup | QFile.ExeGroup | QFile.ReadOther |
+                QFile.ExeOther)
+
+    def _prepare_specific_files(self, specification):
+        """Prepare specific templates and files.
+
+        :param specification: Specification instance containing template
+            replacement keys/values.
+        :type specification: PluginSpecification
+        """
+        for template_name, output_name in \
+                self.template.template_files(specification).iteritems():
+            self.populate_template(
+                specification, self.template_dir,
+                template_name, output_name)
+
         # copy the non-generated files to the new plugin dir
-        icon = QFile(os.path.join(template_dir, 'icon.png'))
-        icon.copy(os.path.join(self.plugin_path, 'icon.png'))
-        release_script = QFile(os.path.join(template_dir, 'release.sh'))
-        release_script.copy(os.path.join(self.plugin_path, 'release.sh'))
-        plugin_upload = QFile(
-            os.path.join(template_dir, 'plugin_upload.py'))
-        plugin_upload.copy(
-            os.path.join(self.plugin_path, 'plugin_upload.py'))
-        # noinspection PyCallByClass,PyTypeChecker
-        QFile.setPermissions(
-            os.path.join(self.plugin_path, 'plugin_upload.py'),
-            QFile.ReadOwner | QFile.WriteOwner | QFile.ExeOwner |
-            QFile.ReadUser | QFile.WriteUser | QFile.ExeUser |
-            QFile.ReadGroup | QFile.ExeGroup | QFile.ReadOther |
-            QFile.ExeOther)
+        for template_file, output_name in \
+                self.template.copy_files(specification).iteritems():
+            file = QFile(os.path.join(self.template_dir, template_file))
+            file.copy(os.path.join(self.plugin_path, output_name))
 
     def _prepare_readme(self, specification, template_module_name):
         """Prepare the README file.
@@ -234,8 +221,7 @@ class PluginBuilder:
         """
         # populate the results readme text template
         template_file = open(os.path.join(
-            str(self.plugin_builder_path),
-            'plugin_template',
+            self.template_dir,
             'readme.tmpl'))
         content = template_file.read()
         template_file.close()
@@ -304,7 +290,7 @@ class PluginBuilder:
         metadata_file.write(
             'repository=%s\n' % specification.repository)
         metadata_file.write(
-            'category=%s\n' % specification.menu)
+            'category=%s\n' % self.template.category)
         metadata_file.write(
             'icon=%s\n' % specification.icon)
         metadata_file.write(
@@ -327,9 +313,7 @@ class PluginBuilder:
         template_module_name = \
             specification.template_map['TemplateModuleName']
         template_file = open(os.path.join(
-            str(self.plugin_builder_path),
-            'plugin_template',
-            'results.tmpl'))
+            self.template_dir, 'results.tmpl'))
         content = template_file.read()
         template_file.close()
         template = Template(content)
@@ -355,9 +339,6 @@ class PluginBuilder:
             str(self.plugin_path),
             str(self.dialog.class_name.text()))
         QDir().mkdir(self.plugin_path)
-        template_dir = os.path.join(
-            str(self.plugin_builder_path), 'plugin_template')
-        return template_dir
 
     def _last_used_path(self):
         return QSettings().value('PluginBuilder/last_path', '.')
@@ -379,7 +360,7 @@ class PluginBuilder:
             tags = tf.readlines()
 
         model = QStandardItemModel()
-        
+
         for tag in tags:
             item = QStandardItem(tag[:-1])
             model.appendRow(item)
@@ -408,7 +389,6 @@ class PluginBuilder:
         self.dialog.setWindowTitle('QGIS Plugin Builder - {}'.format(version))
 
         # connect the ok button to our method
-        self.dialog.button_box.accepted.connect(self.validate_entries)
         self.dialog.button_box.helpRequested.connect(self.show_help)
         self.dialog.select_tags.clicked.connect(self._select_tags)
 
@@ -430,15 +410,29 @@ class PluginBuilder:
                 return False
 
         self._set_last_used_path(self.plugin_path)
-        template_dir = self._create_plugin_directory()
-        self._prepare_code(specification, template_dir)
-        self._prepare_help(template_dir)
-        self._prepare_tests(specification)
+        self._create_plugin_directory()
+        self.template = self.dialog.template()
+        self.template_dir = os.path.join(
+            self.template.subdir(), 'template')
+        self.shared_dir = os.path.join(
+            str(self.plugin_builder_path), 'plugin_templates', 'shared')
 
-        self._prepare_scripts()
+        template_map = self.template.template_map(specification, self.dialog)
+        specification.template_map.update(template_map)
 
-        #resource = QFile(os.path.join(template_dir, 'resources.qrc'))
+        self._prepare_code(specification)
+        if specification.gen_help:
+            self._prepare_help()
+        if specification.gen_tests:
+            self._prepare_tests(specification)
+
+        if specification.gen_scripts:
+            self._prepare_scripts()
+
+        #resource = QFile(os.path.join(self.template_dir, 'resources.qrc'))
         #resource.copy(os.path.join(self.plugin_path, 'resources.qrc'))
+
+        self._prepare_specific_files(specification)
 
         results_popped, template_module_name = self._prepare_results_html(
             specification)
@@ -451,59 +445,16 @@ class PluginBuilder:
         results_dialog.show()
         results_dialog.exec_()
 
-    def validate_entries(self):
-        """Check to see that all fields have been entered."""
-        message = ''
-        dialog = self.dialog
-        if dialog.class_name.text() == '' or \
-           dialog.title.text() == '' or \
-           dialog.description.text() == '' or \
-           dialog.module_name.text() == '' or \
-           dialog.plugin_version.text() == '' or \
-           dialog.qgis_minimum_version.text() == '' or \
-           dialog.menu_text.text() == '' or \
-           dialog.author.text() == '' or \
-           dialog.email_address.text() == '':
-                message = (
-                    'Some required fields are missing. '
-                    'Please complete the form.\n')
-        try:
-            # Assigning to _ is python sugar for a variable that will be unused
-            _ = float(str(dialog.plugin_version.text()))
-            _ = float(str(dialog.qgis_minimum_version.text()))
-        except ValueError:
-            message += 'Version numbers must be numeric.\n'
-        # validate plugin name
-        # check that we have only ascii char in class name
-        try:
-            unicode(dialog.class_name.text()).decode('ascii')
-        except UnicodeEncodeError:
-            dialog.class_name.setText(
-                unicode(
-                    dialog.class_name.text()).encode('ascii', 'ignore'))
-            message += (
-                'The Class name must be ASCII characters only, '
-                'the name has been modified for you. \n')
-        # check space and force CamelCase
-        if str(dialog.class_name.text()).find(' ') > -1:
-            class_name = capwords(str(dialog.class_name.text()))
-            dialog.class_name.setText(class_name.replace(' ', ''))
-            message += (
-                'The Class name must use CamelCase. '
-                'No spaces are allowed; the name has been modified for you.')
-        # noinspection PyArgumentList
-        if message != '':
-            QMessageBox.warning(
-                self.dialog, 'Information missing or invalid', message)
-        else:
-            self.dialog.accept()
-
-    def populate_template(self, specification, template_name, output_name):
+    def populate_template(self, specification, template_dir,
+                          template_name, output_name):
         """Populate the template based on user data.
 
         :param specification: Descriptive data that will be used to create
             the plugin.
         :type specification: PluginSpecification
+
+        :param template_dir: Directory where template is.
+        :type template_dir: str
 
         :param template_name: Name for the template.
         :type template_name: str
@@ -511,8 +462,7 @@ class PluginBuilder:
         :param output_name:  Name of the output file to create.
         :type output_name: str
         """
-        template_file_path = os.path.join(str(self.plugin_builder_path),
-                                          'plugin_template', template_name)
+        template_file_path = os.path.join(template_dir, template_name)
         output_name_path = os.path.join(self.plugin_path, output_name)
 
         template_file = open(template_file_path)
