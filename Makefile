@@ -29,7 +29,7 @@ PY_FILES = plugin_builder.py plugin_builder_dialog.py result_dialog.py __init__.
 
 UI_FILES = plugin_builder_dialog_base.ui results_dialog_base.ui select_tags_dialog_base.ui
 
-TEMPLATE_DIR = plugin_template
+TEMPLATE_DIR = plugin_templates
 
 EXTRAS = icon.png plugin_builder.png metadata.txt taglist.txt
 
