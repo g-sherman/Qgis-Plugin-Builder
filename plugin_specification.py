@@ -44,6 +44,11 @@ class PluginSpecification(object):
         self.qgis_minimum_version = dialog.qgis_minimum_version.text()
         self.title = dialog.title.text()
         self.plugin_version = dialog.plugin_version.text()
+
+        # remove multiple newlines/spaces from about text
+        about = dialog.about.toPlainText().replace('\n', ' ')
+        self.about = ' '.join(about.split())
+
         self.homepage = dialog.homepage.text()
         self.tracker = dialog.tracker.text()
         self.repository = dialog.repository.text()

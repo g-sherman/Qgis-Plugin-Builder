@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>601</width>
-    <height>338</height>
+    <width>624</width>
+    <height>364</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -482,6 +482,37 @@ points.&quot;</string>
       <zorder>email_address_label</zorder>
       <zorder>class_name</zorder>
       <zorder>verticalSpacer_2</zorder>
+     </widget>
+     <widget class="QWidget" name="page">
+      <layout class="QGridLayout" name="gridLayout_7">
+       <item row="0" column="0">
+        <widget class="QGroupBox" name="groupBox">
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+         <property name="title">
+          <string>About</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_6">
+          <item row="0" column="0">
+           <widget class="QPlainTextEdit" name="about">
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enter a long description for your plugin to provide details about its purpose.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="documentTitle">
+             <string/>
+            </property>
+            <property name="tabStopWidth">
+             <number>80</number>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
      </widget>
      <widget class="QWidget" name="page1">
       <layout class="QGridLayout" name="gridLayout_5">

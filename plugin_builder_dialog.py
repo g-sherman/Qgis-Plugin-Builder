@@ -61,10 +61,13 @@ class PluginBuilderDialog(QtGui.QDialog, FORM_CLASS):
 
     def next(self):
         i = self.stackedWidget.currentIndex()
-        if i < 3:
+        if i < 4:
             ok = True
             if i == 0:
                 ok = self.validate_entries()
+            if i == 1:
+                ok =  self.validate_about()
+                
             if ok:
                 self.stackedWidget.setCurrentIndex(i + 1)
         else:
@@ -130,3 +133,17 @@ class PluginBuilderDialog(QtGui.QDialog, FORM_CLASS):
                 self, 'Information missing or invalid', message)
         else:
             return True
+
+    def validate_about(self):
+        if len(self.about.toPlainText()) == 0:
+            QMessageBox.warning(
+                self,
+                "Missing About",
+                "Please enter a bit of detail about your plugin "
+                "(purpose, function, requirements, etc.).\n\n"
+                "You can modify this later by editing the 'about' tag in the "
+                "generated metadata.txt file.")
+            return False
+        else:
+            return True
+

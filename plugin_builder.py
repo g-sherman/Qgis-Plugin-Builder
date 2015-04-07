@@ -272,6 +272,8 @@ class PluginBuilder:
         metadata_file.write(
             'email=%s\n\n' % specification.email_address)
         metadata_file.write(
+            'about=%s\n\n' % specification.about)
+        metadata_file.write(
             '# End of mandatory metadata\n\n')
         metadata_file.write(
             '# Recommended items:\n\n')
