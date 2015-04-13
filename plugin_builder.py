@@ -128,7 +128,9 @@ class PluginBuilder:
         """Copy the scripts folder."""
         scripts_source = os.path.join(self.shared_dir, 'scripts')
         copy(scripts_source, os.path.join(self.plugin_path, 'scripts'))
-        # copy the i18n folder
+
+    def _prepare_i18n(self):
+        """Copy the i18n folder."""
         scripts_source = os.path.join(self.shared_dir, 'i18n')
         copy(scripts_source, os.path.join(self.plugin_path, 'i18n'))
 
@@ -430,6 +432,9 @@ class PluginBuilder:
 
         if specification.gen_scripts:
             self._prepare_scripts()
+
+        if specification.gen_i18n:
+            self._prepare_i18n()
 
         #resource = QFile(os.path.join(self.template_dir, 'resources.qrc'))
         #resource.copy(os.path.join(self.plugin_path, 'resources.qrc'))
