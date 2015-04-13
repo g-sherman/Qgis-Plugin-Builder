@@ -20,10 +20,9 @@ your own plugin.
 The steps to using Plugin Builder are fairly simple:
 
 #. Open the Plugin Builder from within QGIS
-#. Fill out the required information
-#. Click OK
+#. Fill out the required information for the selected plugin template
 #. Designate where to store your new plugin
-#. Compile your resource  file
+#. Compile your resource file
 #. Install the plugin
 #. Test it
 
@@ -37,8 +36,7 @@ field contains a hint inside it in greyed out text that will disappear when
 you start typing text into it. There is also a tooltip containing help
 information that will appear when you hover over each text field:
 
-.. image:: images/pluginbuilder.png
-   :width: 600 px
+.. image:: images/wizard_required_info.png
 
 The descriptions give you a hint about what is required for each field. The
 following sections describe the required and optional parameters in greater
@@ -46,8 +44,8 @@ detail.
 
 .. index:: parameters; required
 
-Required Parameters
-...................
+Plugin name and required information
+....................................
 
 **Class name**
   This is the name that will be used to create the Python class for
@@ -96,6 +94,39 @@ Required Parameters
   be sure to set this field accordingly to prevent problems for those running
   older versions. Version 2.0 of Plugin Builder defaults this field to 2.0.
 
+**Author/Company**
+  Put your name or company name here---this information is used
+  in writing the copyright statement in the source files of your plugin, as well
+  as being displayed in the Plugin Installer and on the
+  `QGIS plugin repository <http://plugins.qgis.org/plugins>`_.
+
+**Email address**
+  Put an address where users of your plugin can contact you.
+  This information is written to the copyright header of your source files and
+  also displayed on the QGIS plugin repository listing for your plugin.
+
+.. index:: parameters; recommended
+
+Detailed description
+....................
+
+.. image:: images/wizard_about.png
+
+**About**
+  This is a long line description of the plugin's function (purpose, function,
+  requirements, etc.).
+
+Template specific parameters
+............................
+
+.. image:: images/wizard_template.png
+
+**Template**
+  Choose which type of plugin you want to create.
+
+For the default template "Tool button with dialog" you get the following
+parameter fields:
+
 **Text for the menu item**
   This is the text that will appear in the menu.
   In the example below, the plugin name is Frog Pond and the text for the menu
@@ -109,17 +140,6 @@ Required Parameters
 
   .. image:: images/redundant_menu.png
      :align: center
-
-**Author/Company**
-  Put your name or company name here---this information is used
-  in writing the copyright statement in the source files of your plugin, as well
-  as being displayed in the Plugin Installer and on the
-  `QGIS plugin repository <http://plugins.qgis.org/plugins>`_.
-
-**Email address**
-  Put an address where users of your plugin can contact you.
-  This information is written to the copyright header of your source files and
-  also displayed on the QGIS plugin repository listing for your plugin.
 
 **Menu**
   Choose an appropriate location for your plugin's menu based on its main
@@ -135,14 +155,45 @@ Required Parameters
   If none of the specific categories apply (Database, Raster, Vector, Web), choose *Plugins*. 
   Your choice is also written to the *category* field in metadata.txt.
 
-.. index:: parameters; recommended
+Additional components
+.....................
 
-Recommended Parameters
-...................
+The Plugin Builder addes several additional components to your plugin, which are
+recommended, but not strictly required.
+
+.. image:: images/wizard_helpers.png
+
+**Internationalization**
+  A stub for adding translated texts to your plugin.
+
+**Help**
+  Creates a `Sphinx <http://sphinx-doc.org>`_ template for generating a HTML help.
+  See `Documenting your Plugin`_ for more information.
+
+**Unit tests**
+  Creates a basic set of unit tests for your plugin.
+
+**Helper scripts**
+  Adds a helper script for publishing your plugin on http://plugins.qgis.org/ and
+  additional scripts for internationalization and testing.
+
+**Makefile**
+  Adds a Makefile for building your plugin with GNU make.
+  See `Using the Makefile`_ for more information.
+
+**pb_tool**
+  Genrates a configuration for *pb_tool*, a Python command line tool for compiling 
+  and deploying QGIS plugins on Linux, Mac OS X, and Windows.
+  See `Using pb_tool`_ for more information.
+
+Publication information
+.......................
 
 There are several fields that you should seriously
-consider completing when generating a new plugin. This will help ensure your
+consider completing when publishing a new plugin. This will help ensure your
 plugin is accepted and users can be successful using it.
+
+.. image:: images/wizard_publication_info.png
 
 **Bug tracker**
   A URL pointing to the bug/issue tracker for your plugin. You can
@@ -181,8 +232,7 @@ plugin is accepted and users can be successful using it.
 Results
 =======
 
-When you click OK, Plugin Builder creates your new plugin for you and
-displays the results:
+When you click Next and select a destination for your plugin code, Plugin Builder creates your new plugin for you and displays the results:
 
 .. image:: images/plugin_results.png
 
@@ -199,7 +249,7 @@ directory.
 Compiling the resource file
 ===========================
 
-After you generate your plugin the resource file needs to be compiled before
+If your generated plugin includes a resource file, this needs to be compiled before
 it is functional in QGIS.
 
 .. index:: resource file
@@ -412,7 +462,7 @@ Documenting your Plugin
 
 .. index:: Sphinx
 
-Plugin Builder creates a `Sphinx <http://sphinx-doc.org>`_ project for you in
+Plugin Builder optionally creates a `Sphinx <http://sphinx-doc.org>`_ project for you in
 the ``help`` subdirectory of your plugin. To build the documentation you will
 need to install Sphinx using `pip <http://pypi.python.org/pypi/pip>`_
 or `easy_install <http://peak.telecommunity.com/DevCenter/EasyInstall>`_.
