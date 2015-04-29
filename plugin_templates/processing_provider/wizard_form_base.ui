@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>503</width>
-    <height>227</height>
+    <width>200</width>
+    <height>100</height>
    </rect>
   </property>
   <layout class="QGridLayout" name="gridLayout">
@@ -21,7 +21,7 @@
      </property>
      <property name="maximumSize">
       <size>
-       <width>300</width>
+       <width>16777215</width>
        <height>16777215</height>
       </size>
      </property>
@@ -46,7 +46,7 @@
      </property>
      <property name="maximumSize">
       <size>
-       <width>150</width>
+       <width>16777215</width>
        <height>16777215</height>
       </size>
      </property>
@@ -71,7 +71,7 @@
      </property>
      <property name="maximumSize">
       <size>
-       <width>150</width>
+       <width>16777215</width>
        <height>16777215</height>
       </size>
      </property>
@@ -96,7 +96,7 @@
      </property>
      <property name="maximumSize">
       <size>
-       <width>150</width>
+       <width>16777215</width>
        <height>16777215</height>
       </size>
      </property>
@@ -134,7 +134,7 @@
      </property>
      <property name="maximumSize">
       <size>
-       <width>300</width>
+       <width>16777215</width>
        <height>16777215</height>
       </size>
      </property>
@@ -159,7 +159,7 @@
      </property>
      <property name="maximumSize">
       <size>
-       <width>300</width>
+       <width>16777215</width>
        <height>16777215</height>
       </size>
      </property>
@@ -184,7 +184,7 @@
      </property>
      <property name="maximumSize">
       <size>
-       <width>300</width>
+       <width>16777215</width>
        <height>16777215</height>
       </size>
      </property>
@@ -209,7 +209,7 @@
      </property>
      <property name="maximumSize">
       <size>
-       <width>150</width>
+       <width>16777215</width>
        <height>16777215</height>
       </size>
      </property>

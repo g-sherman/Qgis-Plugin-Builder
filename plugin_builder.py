@@ -398,6 +398,7 @@ class PluginBuilder:
 
         # show the dialog
         self.dialog.show()
+        self.dialog.adjustSize()
         result = self.dialog.exec_()
         if result == QFileDialog.Rejected:
             return
