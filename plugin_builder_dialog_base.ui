@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>624</width>
-    <height>364</height>
+    <width>400</width>
+    <height>300</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -31,6 +31,37 @@ p, li { white-space: pre-wrap; }
      </property>
     </widget>
    </item>
+   <item row="2" column="0">
+    <widget class="QDialogButtonBox" name="button_box">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Help</set>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QPushButton" name="prev_button">
+     <property name="text">
+      <string>&lt;Previous</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="2">
+    <widget class="QPushButton" name="next_button">
+     <property name="text">
+      <string>Next &gt;</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="3">
+    <widget class="QDialogButtonBox" name="button_box2">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel</set>
+     </property>
+    </widget>
+   </item>
    <item row="1" column="0" colspan="4">
     <widget class="QStackedWidget" name="stackedWidget">
      <property name="frameShape">
@@ -40,46 +71,21 @@ p, li { white-space: pre-wrap; }
       <enum>QFrame::Sunken</enum>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="page0">
       <layout class="QGridLayout" name="gridLayout_3">
-       <item row="7" column="1">
-        <widget class="QLineEdit" name="email_address">
-         <property name="minimumSize">
-          <size>
-           <width>300</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>300</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="toolTip">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Your email address (used in the copyright header) e.g. jack@qgis&lt;/p&gt;&lt;p&gt;.org&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="placeholderText">
-          <string>e.g. jack@qgis.org</string>
-         </property>
-        </widget>
-       </item>
        <item row="6" column="0">
         <widget class="QLabel" name="author_label">
          <property name="minimumSize">
           <size>
-           <width>150</width>
+           <width>0</width>
            <height>0</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>150</width>
+           <width>16777215</width>
            <height>16777215</height>
           </size>
          </property>
@@ -98,13 +104,13 @@ p, li { white-space: pre-wrap; }
         <widget class="QLabel" name="plugin_version_label">
          <property name="minimumSize">
           <size>
-           <width>150</width>
+           <width>0</width>
            <height>0</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>150</width>
+           <width>16777215</width>
            <height>16777215</height>
           </size>
          </property>
@@ -129,7 +135,7 @@ p, li { white-space: pre-wrap; }
          </property>
          <property name="maximumSize">
           <size>
-           <width>60</width>
+           <width>16777215</width>
            <height>16777215</height>
           </size>
          </property>
@@ -148,13 +154,13 @@ p, li { white-space: pre-wrap; }
         <widget class="QLabel" name="class_name_label">
          <property name="minimumSize">
           <size>
-           <width>150</width>
+           <width>0</width>
            <height>0</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>150</width>
+           <width>16772215</width>
            <height>16777215</height>
           </size>
          </property>
@@ -169,69 +175,17 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="0" column="1">
-        <widget class="QLineEdit" name="class_name">
-         <property name="minimumSize">
-          <size>
-           <width>300</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>300</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="toolTip">
-          <string>This is the Python class name for your plugin.
-It should be in CamelCase e.g. PhotoLinker.</string>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="placeholderText">
-          <string>e.g. PhotoLinker</string>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="1">
-        <widget class="QLineEdit" name="author">
-         <property name="minimumSize">
-          <size>
-           <width>300</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>300</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="toolTip">
-          <string>Your name or company name (used in the copyright header) e.g.
-Acme Corp.</string>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="placeholderText">
-          <string>e.g. Acme widgets Inc.</string>
-         </property>
-        </widget>
-       </item>
        <item row="1" column="0">
         <widget class="QLabel" name="plugin_name_label">
          <property name="minimumSize">
           <size>
-           <width>150</width>
+           <width>0</width>
            <height>0</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>150</width>
+           <width>16777215</width>
            <height>16777215</height>
           </size>
          </property>
@@ -250,13 +204,13 @@ Acme Corp.</string>
         <widget class="QLabel" name="description_label">
          <property name="minimumSize">
           <size>
-           <width>150</width>
+           <width>0</width>
            <height>0</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>150</width>
+           <width>16777215</width>
            <height>16777215</height>
           </size>
          </property>
@@ -271,43 +225,17 @@ Acme Corp.</string>
          </property>
         </widget>
        </item>
-       <item row="1" column="1">
-        <widget class="QLineEdit" name="title">
-         <property name="minimumSize">
-          <size>
-           <width>300</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>300</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="toolTip">
-          <string>This is the name for your plugin that will be displayed in the QGIS
-Plugin Manager and the Plugins menu e.g. Photo Linker</string>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="placeholderText">
-          <string>e.g. Photo Linker</string>
-         </property>
-        </widget>
-       </item>
        <item row="5" column="0">
         <widget class="QLabel" name="qgis_minimum_version_label">
          <property name="minimumSize">
           <size>
-           <width>150</width>
+           <width>0</width>
            <height>0</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>150</width>
+           <width>16777215</width>
            <height>16777215</height>
           </size>
          </property>
@@ -326,13 +254,13 @@ Plugin Manager and the Plugins menu e.g. Photo Linker</string>
         <widget class="QLabel" name="module_name_label">
          <property name="minimumSize">
           <size>
-           <width>150</width>
+           <width>0</width>
            <height>0</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>150</width>
+           <width>16777215</width>
            <height>16777215</height>
           </size>
          </property>
@@ -344,32 +272,6 @@ Plugin Manager and the Plugins menu e.g. Photo Linker</string>
          </property>
          <property name="buddy">
           <cstring>module_name</cstring>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="1">
-        <widget class="QLineEdit" name="module_name">
-         <property name="minimumSize">
-          <size>
-           <width>300</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>300</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="toolTip">
-          <string>This is the python module name for your plugin. It should be lower case
-underscore separated e.g. photo_linker.</string>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="placeholderText">
-          <string>e.g. photo_linker</string>
          </property>
         </widget>
        </item>
@@ -396,7 +298,7 @@ underscore separated e.g. photo_linker.</string>
          </property>
          <property name="maximumSize">
           <size>
-           <width>60</width>
+           <width>16777215</width>
            <height>16777215</height>
           </size>
          </property>
@@ -416,13 +318,13 @@ http://semver.org) e.g. 0.1.1</string>
         <widget class="QLabel" name="email_address_label">
          <property name="minimumSize">
           <size>
-           <width>150</width>
+           <width>0</width>
            <height>0</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>150</width>
+           <width>16777215</width>
            <height>16777215</height>
           </size>
          </property>
@@ -437,17 +339,95 @@ http://semver.org) e.g. 0.1.1</string>
          </property>
         </widget>
        </item>
-       <item row="2" column="1">
-        <widget class="QLineEdit" name="description">
+       <item row="5" column="2">
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="4" column="2">
+        <spacer name="horizontalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="0" column="1" colspan="2">
+        <widget class="QLineEdit" name="class_name">
          <property name="minimumSize">
           <size>
-           <width>300</width>
+           <width>0</width>
            <height>0</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>300</width>
+           <width>16777215</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>This is the Python class name for your plugin.
+It should be in CamelCase e.g. PhotoLinker.</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="placeholderText">
+          <string>e.g. PhotoLinker</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1" colspan="2">
+        <widget class="QLineEdit" name="title">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>This is the name for your plugin that will be displayed in the QGIS
+Plugin Manager and the Plugins menu e.g. Photo Linker</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="placeholderText">
+          <string>e.g. Photo Linker</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1" colspan="2">
+        <widget class="QLineEdit" name="description">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
            <height>16777215</height>
           </size>
          </property>
@@ -461,6 +441,83 @@ points.&quot;</string>
          </property>
          <property name="placeholderText">
           <string>e.g. This plugin links points to photos</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1" colspan="2">
+        <widget class="QLineEdit" name="module_name">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>This is the python module name for your plugin. It should be lower case
+underscore separated e.g. photo_linker.</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="placeholderText">
+          <string>e.g. photo_linker</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="1" colspan="2">
+        <widget class="QLineEdit" name="author">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>Your name or company name (used in the copyright header) e.g.
+Acme Corp.</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="placeholderText">
+          <string>e.g. Acme widgets Inc.</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="1" colspan="2">
+        <widget class="QLineEdit" name="email_address">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Your email address (used in the copyright header) e.g. jack@qgis&lt;/p&gt;&lt;p&gt;.org&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="placeholderText">
+          <string>e.g. jack@qgis.org</string>
          </property>
         </widget>
        </item>
@@ -482,6 +539,8 @@ points.&quot;</string>
       <zorder>email_address_label</zorder>
       <zorder>class_name</zorder>
       <zorder>verticalSpacer_2</zorder>
+      <zorder>horizontalSpacer</zorder>
+      <zorder>horizontalSpacer_2</zorder>
      </widget>
      <widget class="QWidget" name="page">
       <layout class="QGridLayout" name="gridLayout_7">
@@ -523,13 +582,13 @@ points.&quot;</string>
         <widget class="QLabel" name="template_label">
          <property name="minimumSize">
           <size>
-           <width>150</width>
+           <width>0</width>
            <height>0</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>150</width>
+           <width>16777215</width>
            <height>16777215</height>
           </size>
          </property>
@@ -629,109 +688,8 @@ points.&quot;</string>
       </layout>
      </widget>
      <widget class="QWidget" name="page3">
-      <layout class="QGridLayout" name="gridLayout_2">
-       <item row="3" column="0">
-        <widget class="QLabel" name="repository_label">
-         <property name="minimumSize">
-          <size>
-           <width>150</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>150</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>Repository</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="2">
-        <widget class="QToolButton" name="select_tags">
-         <property name="toolTip">
-          <string>Select tags</string>
-         </property>
-         <property name="text">
-          <string>...</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QLineEdit" name="tracker">
-         <property name="minimumSize">
-          <size>
-           <width>300</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>300</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="toolTip">
-          <string>Url of your plugin's bug tracker</string>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="placeholderText">
-          <string>Consider using github.com for tracking</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="1">
-        <widget class="QLineEdit" name="repository">
-         <property name="minimumSize">
-          <size>
-           <width>300</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>300</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="toolTip">
-          <string>Url of your plugin repository (if you have one)</string>
-         </property>
-         <property name="placeholderText">
-          <string>Consider using github.com to store your code</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="1">
-        <widget class="QLineEdit" name="homepage">
-         <property name="minimumSize">
-          <size>
-           <width>300</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>300</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="toolTip">
-          <string>Url of your plugin's home page</string>
-         </property>
-         <property name="placeholderText">
-          <string>Your GitHub repository can be the home page</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="0">
+      <layout class="QFormLayout" name="formLayout">
+       <item row="0" column="0" colspan="2">
         <widget class="QLabel" name="optional_items_label">
          <property name="font">
           <font>
@@ -747,39 +705,55 @@ points.&quot;</string>
          </property>
         </widget>
        </item>
-       <item row="1" column="0">
-        <widget class="QLabel" name="tracker_label">
+       <item row="5" column="1">
+        <widget class="QLineEdit" name="homepage">
          <property name="minimumSize">
           <size>
-           <width>150</width>
+           <width>80</width>
            <height>0</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>150</width>
+           <width>16777215</width>
            <height>16777215</height>
           </size>
          </property>
-         <property name="text">
-          <string>Bug tracker</string>
+         <property name="toolTip">
+          <string>Url of your plugin's home page</string>
          </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         <property name="placeholderText">
+          <string>Your GitHub repository can be the home page</string>
          </property>
         </widget>
        </item>
-       <item row="4" column="0">
-        <widget class="QLabel" name="tags_label">
+       <item row="7" column="1">
+        <widget class="QLineEdit" name="repository">
          <property name="minimumSize">
           <size>
-           <width>150</width>
+           <width>0</width>
            <height>0</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>150</width>
+           <width>16777215</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>Url of your plugin repository (if you have one)</string>
+         </property>
+         <property name="placeholderText">
+          <string>Consider using github.com to store your code</string>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="0">
+        <widget class="QLabel" name="tags_label">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
            <height>16777215</height>
           </size>
          </property>
@@ -791,51 +765,50 @@ points.&quot;</string>
          </property>
         </widget>
        </item>
-       <item row="2" column="0">
-        <widget class="QLabel" name="homepage_label">
-         <property name="minimumSize">
-          <size>
-           <width>150</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>150</width>
-           <height>16777215</height>
-          </size>
-         </property>
+       <item row="8" column="1">
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <widget class="QLineEdit" name="tags">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="toolTip">
+            <string>A comma separated list of tags that describe the plugin features or function</string>
+           </property>
+           <property name="placeholderText">
+            <string>Select tags from a list or enter your own</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QToolButton" name="select_tags">
+           <property name="toolTip">
+            <string>Select tags</string>
+           </property>
+           <property name="text">
+            <string>...</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="10" column="1">
+        <widget class="QCheckBox" name="experimental">
          <property name="text">
-          <string>Home page</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          <string>Flag the plugin as experimental</string>
          </property>
         </widget>
        </item>
-       <item row="4" column="1">
-        <widget class="QLineEdit" name="tags">
-         <property name="minimumSize">
-          <size>
-           <width>300</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>300</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="toolTip">
-          <string>A comma separated list of tags that describe the plugin features or function</string>
-         </property>
-         <property name="placeholderText">
-          <string>Select tags from a list or enter your own</string>
-         </property>
-        </widget>
-       </item>
-       <item row="7" column="0">
+       <item row="11" column="1">
         <spacer name="verticalSpacer">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -848,46 +821,105 @@ points.&quot;</string>
          </property>
         </spacer>
        </item>
-       <item row="6" column="1">
-        <widget class="QCheckBox" name="experimental">
+       <item row="1" column="0">
+        <widget class="QLabel" name="tracker_label">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>16777215</height>
+          </size>
+         </property>
          <property name="text">
-          <string>Flag the plugin as experimental</string>
+          <string>Bug tracker</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="tracker">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>Url of your plugin's bug tracker</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="placeholderText">
+          <string>Consider using github.com for tracking</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0">
+        <widget class="QLabel" name="homepage_label">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Home page</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="0">
+        <widget class="QLabel" name="repository_label">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Repository</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
          </property>
         </widget>
        </item>
       </layout>
      </widget>
-    </widget>
-   </item>
-   <item row="2" column="0">
-    <widget class="QDialogButtonBox" name="button_box">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Help</set>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="1">
-    <widget class="QPushButton" name="prev_button">
-     <property name="text">
-      <string>&lt;Previous</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="2">
-    <widget class="QPushButton" name="next_button">
-     <property name="text">
-      <string>Next &gt;</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="3">
-    <widget class="QDialogButtonBox" name="button_box2">
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel</set>
-     </property>
     </widget>
    </item>
   </layout>
@@ -908,11 +940,8 @@ points.&quot;</string>
   <tabstop>scripts_cb</tabstop>
   <tabstop>makefile_cb</tabstop>
   <tabstop>pb_tool_cb</tabstop>
-  <tabstop>tracker</tabstop>
   <tabstop>homepage</tabstop>
   <tabstop>repository</tabstop>
-  <tabstop>select_tags</tabstop>
-  <tabstop>tags</tabstop>
  </tabstops>
  <resources/>
  <connections>
