@@ -1,6 +1,10 @@
 QGIS Plugin Builder
 ===================
 
+.. image:: https://badges.gitter.im/Join%20Chat.svg
+   :alt: Join the chat at https://gitter.im/g-sherman/Qgis-Plugin-Builder
+   :target: https://gitter.im/g-sherman/Qgis-Plugin-Builder?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
+
 .. figure:: help/source/images/wizard_required_info.png
 
 This is a QGIS plugin that generates a QGIS plugin template for use in
