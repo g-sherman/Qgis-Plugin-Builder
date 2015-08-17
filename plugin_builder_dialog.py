@@ -54,6 +54,7 @@ class PluginBuilderDialog(QtGui.QDialog, FORM_CLASS):
         self.next_button.clicked.connect(self.next)
         self.prev_button.clicked.connect(self.prev)
         self.template_cbox.currentIndexChanged.connect(self.update_template)
+        self.next_button.setFocus()
 
     def update_prev_next_buttons(self):
         i = self.stackedWidget.currentIndex()
@@ -61,17 +62,20 @@ class PluginBuilderDialog(QtGui.QDialog, FORM_CLASS):
 
     def next(self):
         i = self.stackedWidget.currentIndex()
-        if i < 4:
+        if i < 5:
             ok = True
             if i == 0:
                 ok = self.validate_entries()
             if i == 1:
-                ok =  self.validate_about()
+                ok = self.validate_about()
+            if i == 4:
+                ok = self.validate_publication()
                 
             if ok:
-                self.stackedWidget.setCurrentIndex(i + 1)
-        else:
-            self.accept()
+                if i < 4:
+                    self.stackedWidget.setCurrentIndex(i + 1)
+                else:
+                    self.accept()
 
     def prev(self):
         i = self.stackedWidget.currentIndex()
@@ -146,4 +150,18 @@ class PluginBuilderDialog(QtGui.QDialog, FORM_CLASS):
             return False
         else:
             return True
+
+    def validate_publication(self):
+        if len(self.tracker.text()) == 0 or len(self.repository.text()) == 0:
+            QMessageBox.warning(
+                self,
+                "Missing Tracker/Repository",
+                "A bug tracker and repository entry are now required. "
+                "You may enter placeholders here, but will need valid "
+                "entries prior to submitting your plugin to the QGIS "
+                "plugin repository.")
+            return False
+        else:
+            return True
+
 

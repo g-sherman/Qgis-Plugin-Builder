@@ -276,6 +276,10 @@ class PluginBuilder:
         metadata_file.write(
             'about=%s\n\n' % specification.about)
         metadata_file.write(
+            'tracker=%s\n' % specification.tracker)
+        metadata_file.write(
+            'repository=%s\n' % specification.repository)
+        metadata_file.write(
             '# End of mandatory metadata\n\n')
         metadata_file.write(
             '# Recommended items:\n\n')
@@ -289,10 +293,6 @@ class PluginBuilder:
             'tags=%s\n\n' % specification.tags)
         metadata_file.write(
             'homepage=%s\n' % specification.homepage)
-        metadata_file.write(
-            'tracker=%s\n' % specification.tracker)
-        metadata_file.write(
-            'repository=%s\n' % specification.repository)
         metadata_file.write(
             'category=%s\n' % self.template.category)
         metadata_file.write(

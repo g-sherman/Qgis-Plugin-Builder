@@ -7,6 +7,7 @@
 
 [general]
 name=Plugin Builder
+about=Create a template for a QGIS plugin
 description=Creates a QGIS plugin template for use as a starting point in plugin development
 version=Version 2.8.3
 qgisMinimumVersion=2.0

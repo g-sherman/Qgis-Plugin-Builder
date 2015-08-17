@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>457</width>
-    <height>364</height>
+    <width>494</width>
+    <height>381</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -698,7 +698,7 @@ Acme Corp.</string>
           </font>
          </property>
          <property name="text">
-          <string>Publication (recommended Items)</string>
+          <string>Publication (mandatory Items)</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -759,50 +759,6 @@ Acme Corp.</string>
         </widget>
        </item>
        <item row="2" column="0">
-        <widget class="QLabel" name="homepage_label">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>Home page</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="1">
-        <widget class="QLineEdit" name="homepage">
-         <property name="minimumSize">
-          <size>
-           <width>80</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="toolTip">
-          <string>Url of your plugin's home page</string>
-         </property>
-         <property name="placeholderText">
-          <string>Your GitHub repository can be the home page</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="0">
         <widget class="QLabel" name="repository_label">
          <property name="minimumSize">
           <size>
@@ -824,7 +780,7 @@ Acme Corp.</string>
          </property>
         </widget>
        </item>
-       <item row="3" column="1">
+       <item row="2" column="1">
         <widget class="QLineEdit" name="repository">
          <property name="minimumSize">
           <size>
@@ -846,7 +802,67 @@ Acme Corp.</string>
          </property>
         </widget>
        </item>
+       <item row="3" column="0" colspan="2">
+        <widget class="QLabel" name="optional_items_label_2">
+         <property name="font">
+          <font>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Publication (recommended Items)</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
        <item row="4" column="0">
+        <widget class="QLabel" name="homepage_label">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Home page</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="QLineEdit" name="homepage">
+         <property name="minimumSize">
+          <size>
+           <width>80</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>Url of your plugin's home page</string>
+         </property>
+         <property name="placeholderText">
+          <string>Your GitHub repository can be the home page</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0">
         <widget class="QLabel" name="tags_label">
          <property name="maximumSize">
           <size>
@@ -862,7 +878,7 @@ Acme Corp.</string>
          </property>
         </widget>
        </item>
-       <item row="4" column="1">
+       <item row="5" column="1">
         <layout class="QHBoxLayout" name="horizontalLayout_2">
          <item>
           <widget class="QLineEdit" name="tags">
@@ -898,14 +914,26 @@ Acme Corp.</string>
          </item>
         </layout>
        </item>
-       <item row="5" column="1">
-        <widget class="QCheckBox" name="experimental">
-         <property name="text">
-          <string>Flag the plugin as experimental</string>
+       <item row="6" column="0" colspan="3">
+        <widget class="QFrame" name="frame">
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
          </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_8">
+          <item row="0" column="0">
+           <widget class="QCheckBox" name="experimental">
+            <property name="text">
+             <string>Flag the plugin as experimental</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </widget>
        </item>
-       <item row="6" column="1">
+       <item row="7" column="2">
         <spacer name="verticalSpacer">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -919,6 +947,18 @@ Acme Corp.</string>
         </spacer>
        </item>
       </layout>
+      <zorder>optional_items_label</zorder>
+      <zorder>tracker_label</zorder>
+      <zorder>tracker</zorder>
+      <zorder>homepage_label</zorder>
+      <zorder>homepage</zorder>
+      <zorder>repository_label</zorder>
+      <zorder>repository</zorder>
+      <zorder>tags_label</zorder>
+      <zorder>optional_items_label_2</zorder>
+      <zorder>tags</zorder>
+      <zorder>select_tags</zorder>
+      <zorder>frame</zorder>
      </widget>
     </widget>
    </item>
@@ -933,15 +973,24 @@ Acme Corp.</string>
   <tabstop>qgis_minimum_version</tabstop>
   <tabstop>author</tabstop>
   <tabstop>email_address</tabstop>
-  <tabstop>next_button</tabstop>
-  <tabstop>i18n_cb</tabstop>
-  <tabstop>help_cb</tabstop>
-  <tabstop>tests_cb</tabstop>
-  <tabstop>scripts_cb</tabstop>
-  <tabstop>makefile_cb</tabstop>
-  <tabstop>pb_tool_cb</tabstop>
-  <tabstop>homepage</tabstop>
+  <tabstop>about</tabstop>
+  <tabstop>tracker</tabstop>
   <tabstop>repository</tabstop>
+  <tabstop>homepage</tabstop>
+  <tabstop>tags</tabstop>
+  <tabstop>experimental</tabstop>
+  <tabstop>scripts_cb</tabstop>
+  <tabstop>tests_cb</tabstop>
+  <tabstop>next_button</tabstop>
+  <tabstop>prev_button</tabstop>
+  <tabstop>button_box</tabstop>
+  <tabstop>button_box2</tabstop>
+  <tabstop>i18n_cb</tabstop>
+  <tabstop>template_cbox</tabstop>
+  <tabstop>makefile_cb</tabstop>
+  <tabstop>select_tags</tabstop>
+  <tabstop>pb_tool_cb</tabstop>
+  <tabstop>help_cb</tabstop>
  </tabstops>
  <resources/>
  <connections>
