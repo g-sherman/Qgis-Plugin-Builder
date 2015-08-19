@@ -93,7 +93,7 @@ class FakePluginSpecification(object):
             'TemplateUiFiles': '%s_dialog_base.ui' % self.module_name,
             'TemplateExtraFiles': 'icon.png',
             'TemplateQrcFiles': 'resources.qrc',
-            'TemplateRcFiles': "resources_rc.py",
+            'TemplateRcFiles': "resources.py",
             # Menu
             'TemplateMenuText': self.menu_text,
             'TemplateMenuAddMethod': 'addPluginToMenu',

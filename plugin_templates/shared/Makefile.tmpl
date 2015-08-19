@@ -52,7 +52,7 @@ EXTRAS = metadata.txt ${TemplateExtraFiles}
 
 COMPILED_RESOURCE_FILES = ${TemplateRcFiles}
 
-PEP8EXCLUDE=pydev,resources_rc.py,conf.py,third_party,ui
+PEP8EXCLUDE=pydev,resources.py,conf.py,third_party,ui
 
 
 #################################################
@@ -71,8 +71,8 @@ default: compile
 
 compile: $$(COMPILED_RESOURCE_FILES)
 
-%_rc.py : %.qrc $$(RESOURCES_SRC)
-	pyrcc4 -o $$*_rc.py  $$<
+%.py : %.qrc $$(RESOURCES_SRC)
+	pyrcc4 -o $$*.py  $$<
 
 %.qm : %.ts
 	$$(LRELEASE) $$<
