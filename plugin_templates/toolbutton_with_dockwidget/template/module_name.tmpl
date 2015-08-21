@@ -186,7 +186,9 @@ class ${TemplateClass}:
 
         # remove this statement if dockwidget is to remain
         # for reuse if plugin is reopened
-        self.dockwidget = None
+        # Commented next statement since it causes QGIS crashe
+        # when closing the docked window:
+        # self.dockwidget = None
 
         self.pluginIsActive = False
 

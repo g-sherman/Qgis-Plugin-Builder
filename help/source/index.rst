@@ -124,6 +124,12 @@ Template specific parameters
 **Template**
   Choose which type of plugin you want to create.
 
+  There are currently three templates available:
+
+  * Tool button with dialog
+  * Tool button with dock widget
+  * Processing provider
+
 For the default template "Tool button with dialog" you get the following
 parameter fields:
 

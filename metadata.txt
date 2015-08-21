@@ -9,10 +9,10 @@
 name=Plugin Builder
 about=Create a template for a QGIS plugin
 description=Creates a QGIS plugin template for use as a starting point in plugin development
-version=Version 2.10
+version=Version 2.10.1
 qgisMinimumVersion=2.0
 
-changelog=2015-08-18 Add wizard and templates for different types of plugins; rename resources_rc to resources to prevent issues when editing dialog(s) with Qt Designer
+changelog=2015-08-21 New docked widget template (courtesy worthlutz)
 
 homepage=http://g-sherman.github.io/Qgis-Plugin-Builder
 tracker=https://github.com/g-sherman/Qgis-Plugin-Builder/issues
