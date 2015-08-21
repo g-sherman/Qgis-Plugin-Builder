@@ -53,7 +53,7 @@ class ToolbuttonWithDockWidgetPluginTemplate(PluginTemplate):
             'TemplateUiFiles': '%s_dockwidget_base.ui' % specification.module_name,
             'TemplateExtraFiles': 'icon.png',
             'TemplateQrcFiles': 'resources.qrc',
-            'TemplateRcFiles': "resources_rc.py",
+            'TemplateRcFiles': "resources.py",
             # Menu
             'TemplateMenuText': menu_text,
             'TemplateMenuAddMethod': add_method,
