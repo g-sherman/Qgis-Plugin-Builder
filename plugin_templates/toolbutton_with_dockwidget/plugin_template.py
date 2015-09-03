@@ -24,7 +24,6 @@
 import os
 from ..plugin_template import PluginTemplate
 
-
 class ToolbuttonWithDockWidgetPluginTemplate(PluginTemplate):
 
     def descr(self):
@@ -35,6 +34,7 @@ class ToolbuttonWithDockWidgetPluginTemplate(PluginTemplate):
 
     def template_map(self, specification, dialog):
         menu_text = dialog.template_subframe.menu_text.text()
+
         menu = dialog.template_subframe.menu_location.currentText()
         # Munge the plugin menu function based on user choice
         if menu == 'Plugins':
@@ -45,6 +45,7 @@ class ToolbuttonWithDockWidgetPluginTemplate(PluginTemplate):
             remove_method = 'removePlugin{}Menu'.format(menu)
         self.category = menu
 
+        group_name = dialog.template_subframe.group_name.text().strip()
         dockwidget_area = dialog.template_subframe.dockwidget_area.currentText()
 
         return {
@@ -58,8 +59,9 @@ class ToolbuttonWithDockWidgetPluginTemplate(PluginTemplate):
             'TemplateMenuText': menu_text,
             'TemplateMenuAddMethod': add_method,
             'TemplateMenuRemoveMethod': remove_method,
+            'TemplateGroupName': group_name,
             # DockWidget
-            'TemplateDockWidgetArea': 'Qt.{}DockWidgetArea'.format(dockwidget_area)
+            'TemplateDockWidgetArea': 'Qt.{}DockWidgetArea'.format(dockwidget_area),
         }
 
     def template_files(self, specification):
