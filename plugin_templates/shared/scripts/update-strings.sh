@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 LOCALES=$*
 
 # Get newest .py files so we don't update strings unnecessarily
