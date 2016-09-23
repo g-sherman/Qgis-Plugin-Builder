@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>494</width>
+    <width>510</width>
     <height>381</height>
    </rect>
   </property>
@@ -384,7 +384,7 @@ http://semver.org) e.g. 0.1.1</string>
 It should be in CamelCase e.g. PhotoLinker.</string>
          </property>
          <property name="text">
-          <string/>
+          <string>Qgis3Test</string>
          </property>
          <property name="placeholderText">
           <string>e.g. PhotoLinker</string>
@@ -410,7 +410,7 @@ It should be in CamelCase e.g. PhotoLinker.</string>
 Plugin Manager and the Plugins menu e.g. Photo Linker</string>
          </property>
          <property name="text">
-          <string/>
+          <string>Qgis3Test</string>
          </property>
          <property name="placeholderText">
           <string>e.g. Photo Linker</string>
@@ -437,7 +437,7 @@ Manager e.g. &quot;The photo linker plugin lets you link photos to
 points.&quot;</string>
          </property>
          <property name="text">
-          <string/>
+          <string>Port of builder to python3</string>
          </property>
          <property name="placeholderText">
           <string>e.g. This plugin links points to photos</string>
@@ -463,7 +463,7 @@ points.&quot;</string>
 underscore separated e.g. photo_linker.</string>
          </property>
          <property name="text">
-          <string/>
+          <string>Qgis3Test</string>
          </property>
          <property name="placeholderText">
           <string>e.g. photo_linker</string>
@@ -489,7 +489,7 @@ underscore separated e.g. photo_linker.</string>
 Acme Corp.</string>
          </property>
          <property name="text">
-          <string/>
+          <string>GeoApt LLC</string>
          </property>
          <property name="placeholderText">
           <string>e.g. Acme widgets Inc.</string>
@@ -514,7 +514,7 @@ Acme Corp.</string>
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Your email address (used in the copyright header) e.g. jack@qgis&lt;/p&gt;&lt;p&gt;.org&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="text">
-          <string/>
+          <string>gsherman@geoapt.com</string>
          </property>
          <property name="placeholderText">
           <string>e.g. jack@qgis.org</string>
@@ -562,6 +562,9 @@ Acme Corp.</string>
             </property>
             <property name="documentTitle">
              <string/>
+            </property>
+            <property name="plainText">
+             <string>This is the port of Plugin Builder to QGIS 3 API</string>
             </property>
             <property name="tabStopWidth">
              <number>80</number>
@@ -751,7 +754,7 @@ Acme Corp.</string>
           <string>Url of your plugin's bug tracker</string>
          </property>
          <property name="text">
-          <string/>
+          <string>http://bugs</string>
          </property>
          <property name="placeholderText">
           <string>Consider using github.com for tracking</string>
@@ -796,6 +799,9 @@ Acme Corp.</string>
          </property>
          <property name="toolTip">
           <string>Url of your plugin repository (if you have one)</string>
+         </property>
+         <property name="text">
+          <string>http://repo</string>
          </property>
          <property name="placeholderText">
           <string>Consider using github.com to store your code</string>
@@ -857,6 +863,9 @@ Acme Corp.</string>
          <property name="toolTip">
           <string>Url of your plugin's home page</string>
          </property>
+         <property name="text">
+          <string>http://homepage</string>
+         </property>
          <property name="placeholderText">
           <string>Your GitHub repository can be the home page</string>
          </property>
@@ -896,6 +905,9 @@ Acme Corp.</string>
            </property>
            <property name="toolTip">
             <string>A comma separated list of tags that describe the plugin features or function</string>
+           </property>
+           <property name="text">
+            <string>python</string>
            </property>
            <property name="placeholderText">
             <string>Select tags from a list or enter your own</string>
@@ -956,8 +968,6 @@ Acme Corp.</string>
       <zorder>repository</zorder>
       <zorder>tags_label</zorder>
       <zorder>optional_items_label_2</zorder>
-      <zorder>tags</zorder>
-      <zorder>select_tags</zorder>
       <zorder>frame</zorder>
      </widget>
     </widget>

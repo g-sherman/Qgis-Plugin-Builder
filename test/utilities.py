@@ -32,10 +32,10 @@ def get_qgis_app():
     """
 
     try:
-        from PyQt4 import QtGui, QtCore
+        from PyQt5 import QtGui, QtCore
         from qgis.core import QgsApplication
         from qgis.gui import QgsMapCanvas
-        from qgis_interface import QgisInterface
+        from .qgis_interface import QgisInterface
     except ImportError:
         return None, None, None, None
 
@@ -116,7 +116,7 @@ def temp_dir(sub_dir='work'):
         # Ensure that the dir is world writable
         # Umask sets the new mask and returns the old
         old_mask = os.umask(0000)
-        os.makedirs(path, 0777)
+        os.makedirs(path, 0o777)
         # Reinstate the old mask for tmp
         os.umask(old_mask)
     return path
@@ -163,7 +163,7 @@ def unique_filename(**kwargs):
         # Umask sets the new mask and returns the old
         umask = os.umask(0000)
         # Ensure that the dir is world writable by explicitly setting mode
-        os.makedirs(kwargs['dir'], 0777)
+        os.makedirs(kwargs['dir'], 0o777)
         # Reinstate the old mask for tmp dir
         os.umask(umask)
     # Now we have the working dir set up go on and return the filename

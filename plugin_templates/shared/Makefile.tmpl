@@ -74,7 +74,7 @@ default: compile
 compile: $$(COMPILED_RESOURCE_FILES)
 
 %.py : %.qrc $$(RESOURCES_SRC)
-	pyrcc4 -o $$*.py  $$<
+	pyrcc5 -o $$*.py  $$<
 
 %.qm : %.ts
 	$$(LRELEASE) $$<
@@ -113,7 +113,7 @@ deploy: compile doc transcompile
 	cp -vfr i18n $$(HOME)/$$(QGISDIR)/python/plugins/$$(PLUGINNAME)
 	cp -vfr $$(HELP) $$(HOME)/$$(QGISDIR)/python/plugins/$$(PLUGINNAME)/help
 	# Copy extra directories if any
-	$(foreach EXTRA_DIR,$(EXTRA_DIRS), cp -R $(EXTRA_DIR) $(HOME)/$(QGISDIR)/python/plugins/$(PLUGINNAME)/;)
+	(foreach EXTRA_DIR,(EXTRA_DIRS), cp -R (EXTRA_DIR) (HOME)/(QGISDIR)/python/plugins/(PLUGINNAME)/;)
 
 
 # The dclean target removes compiled python files from plugin directory

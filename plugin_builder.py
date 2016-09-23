@@ -27,24 +27,25 @@ import errno
 import shutil
 from string import Template
 import codecs
-import ConfigParser
+import configparser
 
 # Import the PyQt and QGIS libraries
-from PyQt4.QtCore import QFileInfo, QUrl, QFile, QDir, QSettings
-from PyQt4.QtGui import (
-    QAction, QIcon, QFileDialog, QMessageBox, QDesktopServices,
-    QStandardItemModel, QStandardItem)
-from qgis.core import QgsApplication
+from PyQt5.QtCore import QFileInfo, QUrl, QFile, QDir, QSettings
+from PyQt5.QtWidgets import (
+    QAction, QFileDialog, QMessageBox) 
+
+from PyQt5.QtGui import QIcon, QDesktopServices, QStandardItemModel, QStandardItem
+from qgis.core import QgsApplication, QgsMessageLog
 # Initialize Qt resources from file resources.py
 # Do not remove this import even though your IDE / pylint may report it unused
 # noinspection PyUnresolvedReferences
-import resources
+from .resources import *
 
 # Import the code for the dialog
-from plugin_builder_dialog import PluginBuilderDialog
-from result_dialog import ResultDialog
-from select_tags_dialog import SelectTagsDialog
-from plugin_specification import PluginSpecification
+from .plugin_builder_dialog import PluginBuilderDialog
+from .result_dialog import ResultDialog
+from .select_tags_dialog import SelectTagsDialog
+from .plugin_specification import PluginSpecification
 
 
 class PluginBuilder:
@@ -199,14 +200,14 @@ class PluginBuilder:
         :type specification: PluginSpecification
         """
         for template_name, output_name in \
-                self.template.template_files(specification).iteritems():
+                self.template.template_files(specification).items():
             self.populate_template(
                 specification, self.template_dir,
                 template_name, output_name)
 
         # copy the non-generated files to the new plugin dir
         for template_file, output_name in \
-                self.template.copy_files(specification).iteritems():
+                self.template.copy_files(specification).items():
             file = QFile(os.path.join(self.template_dir, template_file))
             file.copy(os.path.join(self.plugin_path, output_name))
 
@@ -387,7 +388,7 @@ class PluginBuilder:
         self.dialog = PluginBuilderDialog()
 
         # get version
-        cfg = ConfigParser.ConfigParser()
+        cfg = configparser.ConfigParser()
         cfg.read(os.path.join(self.plugin_builder_path, 'metadata.txt'))
         version = cfg.get('general', 'version')
         self.dialog.setWindowTitle('QGIS Plugin Builder - {}'.format(version))
@@ -511,4 +512,4 @@ def copy(source, destination):
         if e.errno == errno.ENOTDIR:
             shutil.copy(source, destination)
         else:
-            print('Directory not copied. Error: %s' % e)
+            print(('Directory not copied. Error: %s' % e))

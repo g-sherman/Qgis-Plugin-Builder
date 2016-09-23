@@ -27,12 +27,12 @@ from qgis.core import QgsProviderRegistry
 
 
 from test.utilities import get_qgis_app
-from utilities import temp_dir, unique_filename
+from .utilities import temp_dir, unique_filename
 
 QGIS_APP = get_qgis_app()
 
 from plugin_builder import PluginBuilder, copy
-from qgis_interface import QgisInterface
+from .qgis_interface import QgisInterface
 
 
 class FakePluginSpecification(object):
@@ -166,7 +166,7 @@ class BuilderTest(unittest.TestCase):
         results_popped, template_module_name = builder._prepare_results_html(
             self.specification)
         self.assertIn('You just built a plugin for QGIS!', results_popped)
-        self.assertEquals(template_module_name, 'fake_module')
+        self.assertEqual(template_module_name, 'fake_module')
 
     def test_prepare_readme(self):
         """Test we can generate the readme ok."""

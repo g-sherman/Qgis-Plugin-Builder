@@ -22,16 +22,16 @@
 """
 
 import os
-from PyQt4 import QtGui, uic
-from PyQt4.QtGui import QMessageBox, QFrame
+from PyQt5 import QtGui, uic
+from PyQt5.QtWidgets import QMessageBox, QFrame, QDialog
 from string import capwords
-from plugin_templates import templates
+from .plugin_templates import templates
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'plugin_builder_dialog_base.ui'))
 
 
-class PluginBuilderDialog(QtGui.QDialog, FORM_CLASS):
+class PluginBuilderDialog(QDialog, FORM_CLASS):
     """Dialog for defining the new plugin properties.
 
     Note we use multiple inheritance so you can reference any gui elements
@@ -51,7 +51,7 @@ class PluginBuilderDialog(QtGui.QDialog, FORM_CLASS):
         self.update_prev_next_buttons()
         self.update_template()
         self.stackedWidget.currentChanged.connect(self.update_prev_next_buttons)
-        self.next_button.clicked.connect(self.next)
+        self.next_button.clicked.connect(self.__next__)
         self.prev_button.clicked.connect(self.prev)
         self.template_cbox.currentIndexChanged.connect(self.update_template)
         self.next_button.setFocus()
@@ -60,7 +60,7 @@ class PluginBuilderDialog(QtGui.QDialog, FORM_CLASS):
         i = self.stackedWidget.currentIndex()
         self.prev_button.setEnabled(i > 0)
 
-    def next(self):
+    def __next__(self):
         i = self.stackedWidget.currentIndex()
         if i < 5:
             ok = True
@@ -115,11 +115,9 @@ class PluginBuilderDialog(QtGui.QDialog, FORM_CLASS):
             message += 'Version numbers must be numeric.\n'
         # validate plugin name
         # check that we have only ascii char in class name
-        try:
-            unicode(self.class_name.text()).decode('ascii')
-        except UnicodeEncodeError:
+        if not all(ord(c) < 128 for c in self.class_name.text()):
             self.class_name.setText(
-                unicode(
+                str(
                     self.class_name.text()).encode('ascii', 'ignore'))
             message += (
                 'The Class name must be ASCII characters only, '
