@@ -56,12 +56,20 @@ class QgisLegendInterface(QObject):
         self.lgroups.append(groupname)
 
     def groups(self):
+        """Handle request for legend groupnames
+        :return list of string groupnames"""
         return self.lgroups
 
     def moveLayer(self, lyr, groupIndex):
+        """Stub to handle moving a layer into a group by index
+        :lyr  the layer object
+        :groupIndex the index of the group in the legend"""
         pass
 
     def setLayerVisible(self, lyr, isvis):
+        """Stub to handle setting the visibility of a layer
+        :lyr layer object
+        :isvis bool to set visible"""
         pass
 
 
@@ -190,7 +198,6 @@ class QgisInterface(QObject):
 
     def setActiveLayer(self, layer):
         """Get pointer to the active layer (layer selected in the legend)."""
-        # noinspection PyArgumentList
         self.active_layer = layer
 
     def addToolBarIcon(self, action):
@@ -240,9 +247,10 @@ class QgisInterface(QObject):
         pass
 
     def legendInterface(self):
-        """Get the legend."""
+        """Get stub for  QgsLegendInterface."""
         return self.legend
 
     def messageBar(self):
+        """get stub for QgsMessageBar"""
         return QgisMessageBar()
 
