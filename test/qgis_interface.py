@@ -73,7 +73,8 @@ class QgisLegendInterface(QObject):
         """Stub to handle setting the visibility of a layer
         :lyr layer object
         :isvis bool to set visible"""
-        pass
+        return self.lgroups
+
 
 
 #noinspection PyMethodMayBeStatic,PyPep8Naming
@@ -254,6 +255,6 @@ class QgisInterface(QObject):
         return self.legend
 
     def messageBar(self):
-        """get stub for QgsMessageBar"""
+        """get the stub for QgsMessageBar"""
         return QgisMessageBar()
 
