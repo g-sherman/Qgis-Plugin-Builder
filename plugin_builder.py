@@ -449,7 +449,8 @@ class PluginBuilder:
         self._prepare_metadata(specification)
         # show the results
         results_dialog = ResultDialog()
-        results_dialog.web_view.setHtml(results_popped)
+        results_dialog.textBrowser.setOpenExternalLinks(True)
+        results_dialog.textBrowser.setHtml(results_popped)
         results_dialog.show()
         results_dialog.exec_()
 

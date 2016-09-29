@@ -58,8 +58,6 @@ class ${TemplateClass}:
             if qVersion() > '4.3.3':
                 QCoreApplication.installTranslator(self.translator)
 
-        # Create the dialog (after translation) and keep reference
-        self.dlg = ${TemplateClass}Dialog()
 
         # Declare instance attributes
         self.actions = []
@@ -133,6 +131,9 @@ class ${TemplateClass}:
             added to self.actions list.
         :rtype: QAction
         """
+
+        # Create the dialog (after translation) and keep reference
+        self.dlg = ${TemplateClass}Dialog()
 
         icon = QIcon(icon_path)
         action = QAction(icon, text, parent)
