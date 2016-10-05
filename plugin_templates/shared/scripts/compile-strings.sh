@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 LRELEASE=$1
 LOCALES=$2
 
