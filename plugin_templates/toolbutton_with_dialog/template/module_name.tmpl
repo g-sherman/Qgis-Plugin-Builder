@@ -58,7 +58,6 @@ class ${TemplateClass}:
             if qVersion() > '4.3.3':
                 QCoreApplication.installTranslator(self.translator)
 
-
         # Declare instance attributes
         self.actions = []
         self.menu = self.tr(u'&${TemplateTitle}')
@@ -132,9 +131,6 @@ class ${TemplateClass}:
         :rtype: QAction
         """
 
-        # Create the dialog (after translation) and keep reference
-        self.dlg = ${TemplateClass}Dialog()
-
         icon = QIcon(icon_path)
         action = QAction(icon, text, parent)
         action.triggered.connect(callback)
@@ -168,7 +164,6 @@ class ${TemplateClass}:
             callback=self.run,
             parent=self.iface.mainWindow())
 
-
     def unload(self):
         """Removes the plugin menu item and icon from QGIS GUI."""
         for action in self.actions:
@@ -179,15 +174,18 @@ class ${TemplateClass}:
         # remove the toolbar
         del self.toolbar
 
-
     def run(self):
         """Run method that performs all the real work"""
+        # Create the dialog (after translation) and keep reference
+        dlg = ${TemplateClass}Dialog()
         # show the dialog
-        self.dlg.show()
+        dlg.show()
         # Run the dialog event loop
-        result = self.dlg.exec_()
+        result = dlg.exec_()
         # See if OK was pressed
         if result:
             # Do something useful here - delete the line containing pass and
             # substitute with your code.
             pass
+         del dlg
+
