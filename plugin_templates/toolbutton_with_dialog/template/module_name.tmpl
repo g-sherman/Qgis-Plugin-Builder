@@ -58,6 +58,15 @@ class ${TemplateClass}:
             if qVersion() > '4.3.3':
                 QCoreApplication.installTranslator(self.translator)
 
+        # Provide the information needed by initGui invoking add_action.
+        # Each dictionary defines a dialog box and an action.
+        # Edit this and add more according to your needs.
+        self.dialogs = [
+            {'icon': ':/plugins/${TemplateClass}/icon.png',
+             'class': ${TemplateClass},
+             'text': self.tr(u'$TemplateMenuText'),
+             # 'instance' item is defined at run-time
+             }, ]
 
         # Declare instance attributes
         self.actions = []
@@ -65,6 +74,13 @@ class ${TemplateClass}:
         # TODO: We are going to let the user set this up in a future iteration
         self.toolbar = self.iface.addToolBar(u'${TemplateClass}')
         self.toolbar.setObjectName(u'${TemplateClass}')
+
+
+    def load_and_run(self, dialog_def):
+        if 'instance' not in dialog_def:
+            dialog_def['instance'] = dialog_def['class'](iface=self.iface)
+        return dialog_def['instance'].run()
+
 
     # noinspection PyMethodMayBeStatic
     def tr(self, message):
@@ -132,9 +148,6 @@ class ${TemplateClass}:
         :rtype: QAction
         """
 
-        # Create the dialog (after translation) and keep reference
-        self.dlg = ${TemplateClass}Dialog()
-
         icon = QIcon(icon_path)
         action = QAction(icon, text, parent)
         action.triggered.connect(callback)
@@ -158,15 +171,17 @@ class ${TemplateClass}:
 
         return action
 
+
     def initGui(self):
         """Create the menu entries and toolbar icons inside the QGIS GUI."""
 
-        icon_path = ':/plugins/${TemplateClass}/icon.png'
-        self.add_action(
-            icon_path,
-            text=self.tr(u'$TemplateMenuText'),
-            callback=self.run,
-            parent=self.iface.mainWindow())
+        from functools import partial
+        for dialog_def in self.dialogs:
+            self.add_action(
+                dialog_def['icon'],
+                text=dialog_def['text'],
+                callback=partial(self.load_and_run, dialog_def),
+                parent=self.iface.mainWindow())
 
 
     def unload(self):
@@ -178,16 +193,3 @@ class ${TemplateClass}:
             self.iface.removeToolBarIcon(action)
         # remove the toolbar
         del self.toolbar
-
-
-    def run(self):
-        """Run method that performs all the real work"""
-        # show the dialog
-        self.dlg.show()
-        # Run the dialog event loop
-        result = self.dlg.exec_()
-        # See if OK was pressed
-        if result:
-            # Do something useful here - delete the line containing pass and
-            # substitute with your code.
-            pass

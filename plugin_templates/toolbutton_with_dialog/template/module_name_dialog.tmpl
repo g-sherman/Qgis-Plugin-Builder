@@ -30,7 +30,7 @@ FORM_CLASS, _ = uic.loadUiType(os.path.join(
 
 
 class ${TemplateClass}Dialog(QtGui.QDialog, FORM_CLASS):
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, iface=None):
         """Constructor."""
         super(${TemplateClass}Dialog, self).__init__(parent)
         # Set up the user interface from Designer.
@@ -38,4 +38,18 @@ class ${TemplateClass}Dialog(QtGui.QDialog, FORM_CLASS):
         # self.<objectname>, and you can use autoconnect slots - see
         # http://qt-project.org/doc/qt-4.8/designer-using-a-ui-file.html
         # #widgets-and-dialogs-with-auto-connect
+        self.iface = iface
         self.setupUi(self)
+
+
+    def run(self):
+        """Run method that performs all the real work"""
+        # show the dialog
+        self.show()
+        # Run the dialog event loop
+        result = self.exec_()
+        # See if OK was pressed
+        if result:
+            # Do something useful here - delete the line containing pass and
+            # substitute with your code.
+            pass
