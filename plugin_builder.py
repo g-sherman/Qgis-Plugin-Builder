@@ -64,7 +64,7 @@ class PluginBuilder:
         self.iface = iface
         # noinspection PyArgumentList
         self.user_plugin_dir = QFileInfo(
-            QgsApplication.qgisUserDbFilePath()).path() + 'python/plugins'
+            QgsApplication.qgisUserDatabaseFilePath()).path() + 'python/plugins'
         self.plugin_builder_path = os.path.dirname(__file__)
 
         # class members

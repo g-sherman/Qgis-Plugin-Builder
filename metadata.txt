@@ -6,13 +6,14 @@
 # This file should be included when you package your plugin.
 
 [general]
-name=Plugin Builder
+name=Plugin Builder 3
 about=Create a template for a QGIS plugin
 description=Creates a QGIS plugin template for use as a starting point in plugin development
-version=Version 2.10.1
-qgisMinimumVersion=2.0
+version=3.0.1
+qgisMinimumVersion=2.99
+qgisMaximumVersion=3.99
 
-changelog=2015-08-21 New docked widget template (courtesy worthlutz)
+changelog=Fix change in qgisUserDatabaseFilePath
 
 homepage=http://g-sherman.github.io/Qgis-Plugin-Builder
 tracker=https://github.com/g-sherman/Qgis-Plugin-Builder/issues
