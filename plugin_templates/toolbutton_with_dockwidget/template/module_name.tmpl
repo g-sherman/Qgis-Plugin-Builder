@@ -21,12 +21,13 @@
  ***************************************************************************/
 """
 from PyQt5.QtCore import QSettings, QTranslator, qVersion, QCoreApplication, Qt
-from PyQt5.QtGui import QAction, QIcon
+from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QAction
 # Initialize Qt resources from file resources.py
-import resources
+from .resources import *
 
 # Import the code for the DockWidget
-from ${TemplateModuleName}_dockwidget import ${TemplateClass}DockWidget
+from .${TemplateModuleName}_dockwidget import ${TemplateClass}DockWidget
 import os.path
 
 
@@ -230,4 +231,3 @@ class ${TemplateClass}:
             # TODO: fix to allow choice of dock location
             self.iface.addDockWidget(${TemplateDockWidgetArea}, self.dockwidget)
             self.dockwidget.show()
-
