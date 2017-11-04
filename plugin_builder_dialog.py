@@ -23,6 +23,7 @@
 
 import os
 from PyQt5 import QtGui, uic
+from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QMessageBox, QFrame, QDialog
 from string import capwords
 from .plugin_templates import templates
@@ -161,5 +162,12 @@ class PluginBuilderDialog(QDialog, FORM_CLASS):
             return False
         else:
             return True
+
+    def keyPressEvent(self, event):
+        # prevent escape from closing the dialog
+        if event.key() == Qt.Key_Escape:
+            #QDialog.keyPressEvent(event)
+            pass
+
 
 

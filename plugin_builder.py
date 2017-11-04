@@ -64,7 +64,7 @@ class PluginBuilder:
         self.iface = iface
         # noinspection PyArgumentList
         self.user_plugin_dir = QFileInfo(
-            QgsApplication.qgisUserDatabaseFilePath()).path() + 'python/plugins'
+            QgsApplication.qgisUserDatabaseFilePath()).path() + '/python/plugins'
         self.plugin_builder_path = os.path.dirname(__file__)
 
         # class members
@@ -339,10 +339,11 @@ class PluginBuilder:
 
     def _create_plugin_directory(self):
         """Create the plugin directory using the class name."""
-        # remove spaces from the plugin name
+        # Remove spaces from the plugin name and make it all lower case
+        # to be a nice package name
         self.plugin_path = os.path.join(
             str(self.plugin_path),
-            str(self.dialog.class_name.text()))
+            str(self.dialog.class_name.text().lower()))
         QDir().mkdir(self.plugin_path)
 
     def _last_used_path(self):
@@ -513,3 +514,4 @@ def copy(source, destination):
             shutil.copy(source, destination)
         else:
             print(('Directory not copied. Error: %s' % e))
+
