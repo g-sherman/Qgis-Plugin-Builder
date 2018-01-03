@@ -30,7 +30,7 @@ __copyright__ = '(C) $TemplateYear by $TemplateAuthor'
 
 __revision__ = '$TemplateVCSFormat'
 
-from PyQt5.QtCore import QSettings, QCoreApplication
+from PyQt5.QtCore import QCoreApplication
 from qgis.core import (QgsProcessing,
                        QgsFeatureSink,
                        QgsProcessingAlgorithm,
@@ -56,8 +56,8 @@ class ${TemplateClass}Algorithm(QgsProcessingAlgorithm):
     # used when calling the algorithm from another algorithm, or when
     # calling from the QGIS console.
 
-    OUTPUT_LAYER = 'OUTPUT_LAYER'
-    INPUT_LAYER = 'INPUT_LAYER'
+    OUTPUT = 'OUTPUT'
+    INPUT = 'INPUT'
 
     def initAlgorithm(self, config):
         """
@@ -65,20 +65,22 @@ class ${TemplateClass}Algorithm(QgsProcessingAlgorithm):
         with some other properties.
         """
 
-        # We add the input vector layer. It can have any kind of geometry
-        # It is a mandatory (not optional) one, hence the False argument
+        # We add the input vector features source. It can have any kind of
+        # geometry.
         self.addParameter(
             QgsProcessingParameterFeatureSource(
-                self.INPUT_LAYER,
+                self.INPUT,
                 self.tr('Input layer'),
                 [QgsProcessing.TypeVectorAnyGeometry]
             )
         )
 
-        # We add a vector layer as output
+        # We add a feature sink in which to store our processed features (this
+        # usually takes the form of a newly created vector layer when the
+        # algorithm is run in QGIS).
         self.addParameter(
             QgsProcessingParameterFeatureSink(
-                self.OUTPUT_LAYER,
+                self.OUTPUT,
                 self.tr('Output layer')
             )
         )
@@ -88,9 +90,11 @@ class ${TemplateClass}Algorithm(QgsProcessingAlgorithm):
         Here is where the processing itself takes place.
         """
 
-        # Retrieve the source and sink
-        source = self.parameterAsSource(parameters, self.INPUT_LAYER, context)
-        (sink, dest_id) = self.parameterAsSink(parameters, self.OUTPUT_LAYER,
+        # Retrieve the feature source and sink. The 'dest_id' variable is used
+        # to uniquely identify the feature sink, and must be included in the
+        # dictionary returned by the processAlgorithm function.
+        source = self.parameterAsSource(parameters, self.INPUT, context)
+        (sink, dest_id) = self.parameterAsSink(parameters, self.OUTPUT,
                 context, source.fields(), source.wkbType(), source.sourceCrs())
 
         # Compute the number of steps to display within the progress bar and
@@ -109,7 +113,13 @@ class ${TemplateClass}Algorithm(QgsProcessingAlgorithm):
             # Update the progress bar
             feedback.setProgress(int(current * total))
 
-        return {self.OUTPUT_LAYER: dest_id}
+        # Return the results of the algorithm. In this case our only result is
+        # the feature sink which contains the processed features, but some
+        # algorithms may return multiple feature sinks, calculated numeric
+        # statistics, etc. These should all be included in the returned
+        # dictionary, with keys matching the feature corresponding parameter
+        # or output names.
+        return {self.OUTPUT: dest_id}
 
     def name(self):
         """
@@ -133,7 +143,17 @@ class ${TemplateClass}Algorithm(QgsProcessingAlgorithm):
         Returns the name of the group this algorithm belongs to. This string
         should be localised.
         """
-        return self.tr('$TemplateAlgoGroup')
+        return self.tr(self.groupId())
+
+    def groupId(self):
+        """
+        Returns the unique ID of the group this algorithm belongs to. This
+        string should be fixed for the algorithm, and must not be localised.
+        The group id should be unique within each provider. Group id should
+        contain lowercase alphanumeric characters only and no spaces or other
+        formatting characters.
+        """
+        return '$TemplateAlgoGroup'
 
     def tr(self, string):
         return QCoreApplication.translate('Processing', string)
