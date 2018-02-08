@@ -264,10 +264,10 @@ it is functional in QGIS.
 The resource file contains definitions of media used in your plugin. Upon
 generation, this contains one entry for icon.png, the icon file for the plugin.
 
-To compile the resource file into Python code, use the ``pyrcc4`` utility
+To compile the resource file into Python code, use the ``pyrcc5`` utility
 that comes as part of your PyQt installation::
 
-  pyrcc4 -o resources.py resources.qrc
+  pyrcc5 -o resources.py resources.qrc
 
 
 Once the resource file is compiled, the generated plugin can be loaded in QGIS.
