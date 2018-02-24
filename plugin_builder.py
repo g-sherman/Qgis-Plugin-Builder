@@ -145,6 +145,7 @@ class PluginBuilder:
         # Create sphinx default project for help
         QDir().mkdir(self.plugin_path + '/help')
         QDir().mkdir(self.plugin_path + '/help/build')
+        QDir().mkdir(self.plugin_path + '/help/build/html')
         QDir().mkdir(self.plugin_path + '/help/source')
         QDir().mkdir(self.plugin_path + '/help/source/_static')
         QDir().mkdir(self.plugin_path + '/help/source/_templates')
@@ -386,7 +387,7 @@ class PluginBuilder:
     def run(self):
         """Run method that performs all the real work"""
         # create and show the dialog
-        self.dialog = PluginBuilderDialog()
+        self.dialog = PluginBuilderDialog(stored_output_path=self._last_used_path())
 
         # get version
         cfg = configparser.ConfigParser()
@@ -408,13 +409,7 @@ class PluginBuilder:
         specification = PluginSpecification(self.dialog)
         # get the location for the plugin
         # noinspection PyCallByClass,PyTypeChecker
-        self.plugin_path = QFileDialog.getExistingDirectory(
-            self.dialog, 'Select the Directory for your Plugin', self._last_used_path())
-        if self.plugin_path == '':
-            return
-        else:
-            if not self._get_plugin_path():
-                return False
+        self.plugin_path = self.dialog.output_directory.text()
 
         self._set_last_used_path(self.plugin_path)
         self._create_plugin_directory()

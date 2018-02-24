@@ -23,8 +23,8 @@
 
 import os
 from PyQt5 import QtGui, uic
-from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QMessageBox, QFrame, QDialog
+from PyQt5.QtCore import Qt, QFileInfo
+from PyQt5.QtWidgets import QMessageBox, QFrame, QDialog, QFileDialog
 from string import capwords
 from .plugin_templates import templates
 
@@ -40,7 +40,7 @@ class PluginBuilderDialog(QDialog, FORM_CLASS):
     so that qt autoconnect slots work.
 
     """
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, stored_output_path=''):
         """Constructor."""
         super(PluginBuilderDialog, self).__init__(parent)
         # Set up the user interface from Designer.
@@ -55,7 +55,11 @@ class PluginBuilderDialog(QDialog, FORM_CLASS):
         self.next_button.clicked.connect(self.__next__)
         self.prev_button.clicked.connect(self.prev)
         self.template_cbox.currentIndexChanged.connect(self.update_template)
+        self.btn_select_output.clicked.connect(self.select_directory)
         self.next_button.setFocus()
+        self.output_directory.setText(stored_output_path)
+        self.last_path = stored_output_path
+
 
     def update_prev_next_buttons(self):
         i = self.stackedWidget.currentIndex()
@@ -63,7 +67,7 @@ class PluginBuilderDialog(QDialog, FORM_CLASS):
 
     def __next__(self):
         i = self.stackedWidget.currentIndex()
-        if i < 5:
+        if i < 6:
             ok = True
             if i == 0:
                 ok = self.validate_entries()
@@ -71,16 +75,23 @@ class PluginBuilderDialog(QDialog, FORM_CLASS):
                 ok = self.validate_about()
             if i == 4:
                 ok = self.validate_publication()
-                
+            if i == 5:
+                ok = self.validate_output_directory()
             if ok:
-                if i < 4:
+                if i < 5:
                     self.stackedWidget.setCurrentIndex(i + 1)
+                    if i == 4:
+                        self.next_button.setText('Generate')
+                        if self.output_directory.text() != '':
+                            self.show_output_info(os.path.join(self.output_directory.text(), self.module_name.text().lower()))
                 else:
                     self.accept()
 
     def prev(self):
         i = self.stackedWidget.currentIndex()
         self.stackedWidget.setCurrentIndex(i - 1)
+        if i-1 != 5:
+            self.next_button.setText('Next>')
 
     def template(self):
         return self.templates[self.template_cbox.currentIndex()]
@@ -162,6 +173,46 @@ class PluginBuilderDialog(QDialog, FORM_CLASS):
             return False
         else:
             return True
+
+    def select_directory(self):
+        plugin_path = QFileDialog.getExistingDirectory(
+            self, 'Select the Directory for your Plugin', self.last_path)
+        self.output_directory.setText(plugin_path)
+        full_output = os.path.join(plugin_path, self.module_name.text().lower())
+        self.lbl_full_output_path.setText(os.path.join(plugin_path, self.module_name.text().lower()))
+        self.show_output_info(full_output)
+
+    def show_output_info(self, full_output):
+        if QFileInfo(full_output).exists():
+           self.lbl_full_output_path.setText(full_output +"\nYour plugin will overwrite the existing contents!")
+           self.lbl_full_output_path.setStyleSheet("QLabel { color : red;  font-weight : bold;}")
+        else:
+            self.lbl_full_output_path.setStyleSheet("QLabel { color : black; }")
+
+
+
+    def validate_output_directory(self):
+        good_dir = False
+        if len(self.output_directory.text()) > 0:
+            if QFileInfo(self.output_directory.text()).exists():
+
+                if QFileInfo(self.output_directory.text()).isWritable():
+                    good_dir = True
+                else:
+                    msg = "Your output directory is write-protected."
+            else:
+                msg = "Your output directory does not exist."
+
+        else:
+                msg = "Please select an output directory."
+
+
+        if not good_dir:
+                QMessageBox.warning(
+                    None, 'Error', msg)
+
+        return good_dir
+
 
     def keyPressEvent(self, event):
         # prevent escape from closing the dialog
