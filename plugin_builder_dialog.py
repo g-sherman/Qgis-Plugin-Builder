@@ -22,8 +22,9 @@
 """
 
 import os
-from PyQt4 import QtGui, uic
-from PyQt4.QtGui import QMessageBox, QFrame
+from PyQt4 import uic, Qt
+from PyQt4.QtGui import QMessageBox, QFrame, QFileDialog, QDialog
+from PyQt4.QtCore import QFileInfo
 from string import capwords
 from plugin_templates import templates
 
@@ -31,7 +32,7 @@ FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'plugin_builder_dialog_base.ui'))
 
 
-class PluginBuilderDialog(QtGui.QDialog, FORM_CLASS):
+class PluginBuilderDialog(QDialog, FORM_CLASS):
     """Dialog for defining the new plugin properties.
 
     Note we use multiple inheritance so you can reference any gui elements

@@ -51,7 +51,7 @@ compile: $(PY_UI_FILES) $(RESOURCE_FILES)
 # The deploy  target only works on unix like operating system where
 # the Python plugin directory is located at:
 # $HOME/$(DOTQGIS)/python/plugins
-deploy: compile
+deploy: 
 	mkdir -p $(HOME)/$(DOTQGIS)/python/plugins/$(PLUGINNAME)
 	mkdir -p $(HOME)/$(DOTQGIS)/python/plugins/$(PLUGINNAME)/help
 	cp -vf $(PY_FILES) $(HOME)/$(DOTQGIS)/python/plugins/$(PLUGINNAME)
