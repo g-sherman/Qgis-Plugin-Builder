@@ -29,7 +29,7 @@ def classFactory(iface):
     """Load PluginBuilder class from file PluginBuilder.
 
     :param iface: A QGIS interface instance.
-    :type iface: QgsInterface
+    :type iface: QgisInterface
     """
     from .plugin_builder import PluginBuilder
     return PluginBuilder(iface)

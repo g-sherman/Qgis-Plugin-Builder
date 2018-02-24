@@ -9,10 +9,11 @@
 name=Plugin Builder
 about=Create a template for a QGIS plugin
 description=Creates a QGIS plugin template for use as a starting point in plugin development
-version=Version 2.16.0
+version=Version 2.18.0
 qgisMinimumVersion=2.0
+qgisMaximumVersion=2.90
 
-changelog=2015-09-29 Remove webkit dependency; Delay init of dialog until called for by the toolbutton
+changelog=Modify wizard to allow editing any aspect of plugin up until clicking Generate
 
 homepage=http://g-sherman.github.io/Qgis-Plugin-Builder
 tracker=https://github.com/g-sherman/Qgis-Plugin-Builder/issues

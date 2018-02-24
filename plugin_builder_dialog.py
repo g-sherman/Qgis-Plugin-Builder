@@ -22,9 +22,9 @@
 """
 
 import os
-from PyQt4 import uic, Qt
+from PyQt4 import uic
 from PyQt4.QtGui import QMessageBox, QFrame, QFileDialog, QDialog
-from PyQt4.QtCore import QFileInfo
+from PyQt4.QtCore import QFileInfo, Qt
 from string import capwords
 from plugin_templates import templates
 
@@ -219,6 +219,5 @@ class PluginBuilderDialog(QDialog, FORM_CLASS):
     def keyPressEvent(self, event):
         # prevent escape from closing the dialog
         if event.key() == Qt.Key_Escape:
-            #QDialog.keyPressEvent(event)
             pass
 

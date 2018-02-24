@@ -56,7 +56,7 @@ class PluginBuilder:
         :param iface: An interface instance that will be passed to this class
             which provides the hook by which you can manipulate the QGIS
             application at run time.
-        :type iface: QgsInterface
+        :type iface: QgisInterface
 
         """
         # Save reference to the QGIS interface
