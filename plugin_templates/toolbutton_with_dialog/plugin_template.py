@@ -35,6 +35,7 @@ class ToolbuttonWithDialogPluginTemplate(PluginTemplate):
 
     def template_map(self, specification, dialog):
         menu_text = dialog.template_subframe.menu_text.text()
+
         menu = dialog.template_subframe.menu_location.currentText()
         # Munge the plugin menu function based on user choice
         if menu == 'Plugins':
@@ -44,6 +45,9 @@ class ToolbuttonWithDialogPluginTemplate(PluginTemplate):
             add_method = 'addPluginTo{}Menu'.format(menu)
             remove_method = 'removePlugin{}Menu'.format(menu)
         self.category = menu
+
+        group_name = dialog.template_subframe.group_name.text().strip()
+
         return {
             # Makefile
             'TemplatePyFiles': '%s_dialog.py' % specification.module_name,
@@ -55,6 +59,7 @@ class ToolbuttonWithDialogPluginTemplate(PluginTemplate):
             'TemplateMenuText': menu_text,
             'TemplateMenuAddMethod': add_method,
             'TemplateMenuRemoveMethod': remove_method,
+            'TemplateGroupName': group_name,
         }
 
     def template_files(self, specification):

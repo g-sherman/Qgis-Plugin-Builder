@@ -21,7 +21,8 @@
  ***************************************************************************/
 """
 from PyQt4.QtCore import QSettings, QTranslator, qVersion, QCoreApplication, Qt
-from PyQt4.QtGui import QAction, QIcon
+from PyQt4.QtGui import QAction, QIcon, QToolBar
+
 # Initialize Qt resources from file resources.py
 import resources
 
@@ -63,10 +64,21 @@ class ${TemplateClass}:
 
         # Declare instance attributes
         self.actions = []
-        self.menu = self.tr(u'&${TemplateTitle}')
-        # TODO: We are going to let the user set this up in a future iteration
-        self.toolbar = self.iface.addToolBar(u'${TemplateClass}')
-        self.toolbar.setObjectName(u'${TemplateClass}')
+
+        # The groupName statement is created from a template in PluginBuilder
+        # from user input. If no group name is entered the left side of
+        # the 'or' will be an empty string
+        self.groupName = self.tr(u'${TemplateGroupName}' or u'${TemplateTitle}')
+
+        self.menu = self.groupName
+        self.toolbar = self.iface.mainWindow().findChild(QToolBar, self.groupName)
+        if not self.toolbar:
+            self.toolbar = self.iface.addToolBar(self.groupName)
+            self.toolbar.setObjectName(self.groupName)
+
+            # set toolbar color (light blue #ADD8E6 173,216,230)
+            # NOTE: color set in 1st plugin of the group loaded will be used
+            self.toolbar.setStyleSheet("QToolBar{background-color:#ADD8E6; border: 0px solid black}")
 
         #print "** INITIALIZING ${TemplateClass}"
 
@@ -199,10 +211,8 @@ class ${TemplateClass}:
         #print "** UNLOAD ${TemplateClass}"
 
         for action in self.actions:
-            self.iface.${TemplateMenuRemoveMethod}(
-                self.tr(u'&${TemplateTitle}'),
-                action)
-            self.iface.removeToolBarIcon(action)
+            self.iface.${TemplateMenuRemoveMethod}(self.groupName, action)
+            self.toolbar.removeAction(action)
         # remove the toolbar
         del self.toolbar
 
