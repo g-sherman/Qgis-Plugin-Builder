@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # coding=utf-8
-"""This script uploads a plugin package on the server.
+"""This script uploads a plugin package to the plugin repository.
         Authors: A. Pasotti, V. Picavet
         git sha              : $TemplateVCSFormat
 """
@@ -10,10 +10,12 @@ import getpass
 import xmlrpc.client
 from optparse import OptionParser
 
+standard_library.install_aliases()
+
 # Configuration
-PROTOCOL = 'http'
+PROTOCOL = 'https'
 SERVER = 'plugins.qgis.org'
-PORT = '80'
+PORT = '443'
 ENDPOINT = '/plugins/RPC2/'
 VERBOSE = False
 
@@ -24,20 +26,21 @@ def main(parameters, arguments):
     :param parameters: Command line parameters.
     :param arguments: Command line arguments.
     """
-    address = "%s://%s:%s@%s:%s%s" % (
-        PROTOCOL,
-        parameters.username,
-        parameters.password,
-        parameters.server,
-        parameters.port,
-        ENDPOINT)
+    address = "{protocol}://{username}:{password}@{server}:{port}{endpoint}".format(
+        protocol=PROTOCOL,
+        username=parameters.username,
+        password=parameters.password,
+        server=parameters.server,
+        port=parameters.port,
+        endpoint=ENDPOINT)
     print("Connecting to: %s" % hide_password(address))
 
     server = xmlrpc.client.ServerProxy(address, verbose=VERBOSE)
 
     try:
-        plugin_id, version_id = server.plugin.upload(
-            xmlrpc.client.Binary(open(arguments[0]).read()))
+        with open(arguments[0], 'rb') as handle:
+            plugin_id, version_id = server.plugin.upload(
+                xmlrpc.client.Binary(handle.read()))
         print("Plugin ID: %s" % plugin_id)
         print("Version ID: %s" % version_id)
     except xmlrpc.client.ProtocolError as err:
@@ -96,6 +99,7 @@ if __name__ == "__main__":
         # interactive mode
         username = getpass.getuser()
         print("Please enter user name [%s] :" % username, end=' ')
+
         res = input()
         if res != "":
             options.username = res
