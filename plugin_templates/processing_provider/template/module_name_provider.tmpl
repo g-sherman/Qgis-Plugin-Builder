@@ -41,8 +41,8 @@ class ${TemplateClass}Provider(AlgorithmProvider):
     def __init__(self):
         AlgorithmProvider.__init__(self)
 
-        # Deactivate provider by default
-        self.activate = False
+        # Activate provider by default
+        self.activate = True
 
         # Load algorithms
         self.alglist = [${TemplateClass}Algorithm()]
