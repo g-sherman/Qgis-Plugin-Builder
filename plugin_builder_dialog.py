@@ -31,7 +31,7 @@ from .plugin_templates import templates
 
 sys.path.append(os.path.dirname(__file__))
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
-    os.path.dirname(__file__), 'geomAttribute_window_base.ui'), resource_suffix='')
+    os.path.dirname(__file__), 'plugin_builder_dialog_base.ui'), resource_suffix='')
 
 
 class PluginBuilderDialog(QDialog, FORM_CLASS):
