@@ -22,14 +22,16 @@
 """
 
 import os
+import sys
 from PyQt5 import QtGui, uic
 from PyQt5.QtCore import Qt, QFileInfo
 from PyQt5.QtWidgets import QMessageBox, QFrame, QDialog, QFileDialog
 from string import capwords
 from .plugin_templates import templates
 
+sys.path.append(os.path.dirname(__file__))
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
-    os.path.dirname(__file__), 'plugin_builder_dialog_base.ui'))
+    os.path.dirname(__file__), 'geomAttribute_window_base.ui'), resource_suffix='')
 
 
 class PluginBuilderDialog(QDialog, FORM_CLASS):
