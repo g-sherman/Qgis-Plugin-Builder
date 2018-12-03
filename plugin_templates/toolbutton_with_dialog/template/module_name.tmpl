@@ -65,6 +65,10 @@ class ${TemplateClass}:
         self.actions = []
         self.menu = self.tr(u'&${TemplateTitle}')
 
+        # Check if plugin was started the first time in current QGIS session
+        # Will be set False once it was started
+        self.first_start = True
+
     # noinspection PyMethodMayBeStatic
     def tr(self, message):
         """Get the translation for a string using Qt translation API.
@@ -179,8 +183,10 @@ class ${TemplateClass}:
         """Run method that performs all the real work"""
 
         # Create the dialog with elements (after translation) and keep reference
-        # Only create GUI in callback, so that it will only load when the plugin is started
-        dlg = ${TemplateClass}Dialog()
+        # Only create GUI ONCE in callback, so that it will only load when the plugin is started
+        if self.first_start == True:
+            self.first_start = False
+            dlg = ${TemplateClass}Dialog()
 
         # show the dialog
         dlg.show()
