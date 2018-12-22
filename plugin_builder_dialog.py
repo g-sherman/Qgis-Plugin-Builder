@@ -146,6 +146,8 @@ class PluginBuilderDialog(QDialog, FORM_CLASS):
             QMessageBox.warning(
                 self, 'Information missing or invalid', message)
         else:
+            if self.last_path:
+                self.lbl_full_output_path.setText(os.path.join(self.last_path, self.module_name.text()))
             return True
 
     def validate_about(self):
