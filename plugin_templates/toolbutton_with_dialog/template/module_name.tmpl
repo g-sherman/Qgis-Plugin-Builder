@@ -61,15 +61,13 @@ class ${TemplateClass}:
             if qVersion() > '4.3.3':
                 QCoreApplication.installTranslator(self.translator)
 
-        # Create the dialog (after translation) and keep reference
-        self.dlg = ${TemplateClass}Dialog()
-
         # Declare instance attributes
         self.actions = []
         self.menu = self.tr(u'&${TemplateTitle}')
-        # TODO: We are going to let the user set this up in a future iteration
-        self.toolbar = self.iface.addToolBar(u'${TemplateClass}')
-        self.toolbar.setObjectName(u'${TemplateClass}')
+
+        # Check if plugin was started the first time in current QGIS session
+        # Will be set False once it was started
+        self.first_start = True
 
     # noinspection PyMethodMayBeStatic
     def tr(self, message):
@@ -149,7 +147,8 @@ class ${TemplateClass}:
             action.setWhatsThis(whats_this)
 
         if add_to_toolbar:
-            self.toolbar.addAction(action)
+            # Adds plugin icon to Plugins toolbar
+            self.iface.addToolBarIcon(action)
 
         if add_to_menu:
             self.iface.${TemplateMenuAddMethod}(
@@ -178,16 +177,21 @@ class ${TemplateClass}:
                 self.tr(u'&${TemplateTitle}'),
                 action)
             self.iface.removeToolBarIcon(action)
-        # remove the toolbar
-        del self.toolbar
 
 
     def run(self):
         """Run method that performs all the real work"""
+
+        # Create the dialog with elements (after translation) and keep reference
+        # Only create GUI ONCE in callback, so that it will only load when the plugin is started
+        if self.first_start == True:
+            self.first_start = False
+            dlg = ${TemplateClass}Dialog()
+
         # show the dialog
-        self.dlg.show()
+        dlg.show()
         # Run the dialog event loop
-        result = self.dlg.exec_()
+        result = dlg.exec_()
         # See if OK was pressed
         if result:
             # Do something useful here - delete the line containing pass and
