@@ -114,12 +114,6 @@ class PluginBuilder:
             replacement keys/values.
         :type specification: PluginSpecification
         """
-        self.populate_template(
-            specification, self.shared_dir,
-            'help/source/conf.py.tmpl', 'help/source/conf.py')
-        self.populate_template(
-            specification, self.shared_dir,
-            'help/source/index.rst.tmpl', 'help/source/index.rst')
         # copy the unit tests folder
         test_source = os.path.join(self.shared_dir, 'test')
         test_destination = os.path.join(self.plugin_path, 'test')
@@ -425,6 +419,13 @@ class PluginBuilder:
         self._prepare_code(specification)
         if specification.gen_help:
             self._prepare_help()
+            # create the sphinx config file and sample index.rst file
+            self.populate_template(
+                specification, self.shared_dir,
+                'help/source/conf.py.tmpl', 'help/source/conf.py')
+            self.populate_template(
+                specification, self.shared_dir,
+                'help/source/index.rst.tmpl', 'help/source/index.rst')
         if specification.gen_tests:
             self._prepare_tests(specification)
 
