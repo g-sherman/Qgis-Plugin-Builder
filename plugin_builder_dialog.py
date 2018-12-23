@@ -22,10 +22,11 @@
 """
 
 import os
+from string import capwords
+
 from PyQt5 import QtGui, uic
 from PyQt5.QtCore import Qt, QFileInfo
 from PyQt5.QtWidgets import QMessageBox, QFrame, QDialog, QFileDialog
-from string import capwords
 from .plugin_templates import templates
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
@@ -173,8 +174,7 @@ class PluginBuilderDialog(QDialog, FORM_CLASS):
                 "entries prior to submitting your plugin to the QGIS "
                 "plugin repository.")
             return False
-        else:
-            return True
+        return True
 
     def select_directory(self):
         plugin_path = QFileDialog.getExistingDirectory(
@@ -186,8 +186,9 @@ class PluginBuilderDialog(QDialog, FORM_CLASS):
 
     def show_output_info(self, full_output):
         if QFileInfo(full_output).exists():
-           self.lbl_full_output_path.setText(full_output +"\nYour plugin will overwrite the existing contents!")
-           self.lbl_full_output_path.setStyleSheet("QLabel { color : red;  font-weight : bold;}")
+            self.lbl_full_output_path.setText(full_output +
+                                              "\nYour plugin will overwrite the existing contents!")
+            self.lbl_full_output_path.setStyleSheet("QLabel { color : red;  font-weight : bold;}")
         else:
             self.lbl_full_output_path.setStyleSheet("QLabel { color : black; }")
 
@@ -206,12 +207,10 @@ class PluginBuilderDialog(QDialog, FORM_CLASS):
                 msg = "Your output directory does not exist."
 
         else:
-                msg = "Please select an output directory."
-
+            msg = "Please select an output directory."
 
         if not good_dir:
-                QMessageBox.warning(
-                    None, 'Error', msg)
+            QMessageBox.warning(None, 'Error', msg)
 
         return good_dir
 
@@ -221,6 +220,3 @@ class PluginBuilderDialog(QDialog, FORM_CLASS):
         if event.key() == Qt.Key_Escape:
             #QDialog.keyPressEvent(event)
             pass
-
-
-
