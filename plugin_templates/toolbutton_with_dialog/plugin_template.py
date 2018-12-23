@@ -23,7 +23,7 @@
 
 import os
 from ..plugin_template import PluginTemplate
-
+from ...qgis_dirs import deployment_dir
 
 class ToolbuttonWithDialogPluginTemplate(PluginTemplate):
 
@@ -51,6 +51,7 @@ class ToolbuttonWithDialogPluginTemplate(PluginTemplate):
             'TemplateExtraFiles': 'icon.png',
             'TemplateQrcFiles': 'resources.qrc',
             'TemplateRcFiles': "resources.py",
+            'TemplateQGISDir': deployment_dir,
             # Menu
             'TemplateMenuText': menu_text,
             'TemplateMenuAddMethod': add_method,

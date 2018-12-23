@@ -16,6 +16,8 @@ qgisMaximumVersion=3.99
 changelog=3.0.4 2018-12-25: Move dialog creation to run method.
       * Move help file generation files to proper method
       * Include missing tags file
+      * Attempt to compile resources.qrc when plugin is generated (requires pyrcc5 in path)
+      * Set deployment directory in Makefile based on user OS (pb_tool is preferred over make)
     3.0.3 2018-02-23: Redesign of UI to allow better editing prior to generation.
 
 homepage=http://g-sherman.github.io/Qgis-Plugin-Builder

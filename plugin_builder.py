@@ -33,14 +33,14 @@ import subprocess
 # Import the PyQt and QGIS libraries
 from PyQt5.QtCore import QFileInfo, QUrl, QFile, QDir, QSettings
 from PyQt5.QtWidgets import (
-    QAction, QFileDialog, QMessageBox) 
+    QAction, QFileDialog, QMessageBox)
 
 from PyQt5.QtGui import QIcon, QDesktopServices, QStandardItemModel, QStandardItem
 from qgis.core import QgsApplication, QgsMessageLog
 # Initialize Qt resources from file resources.py
 # Do not remove this import even though your IDE / pylint may report it unused
 # noinspection PyUnresolvedReferences
-from .resources import *
+from .resources import *  # noqa: F401
 
 # Import the code for the dialog
 from .plugin_builder_dialog import PluginBuilderDialog
@@ -49,7 +49,7 @@ from .select_tags_dialog import SelectTagsDialog
 from .plugin_specification import PluginSpecification
 
 
-class PluginBuilder:
+class PluginBuilder(object):
     """A QGIS plugin that allows you to build QGIS plugins."""
 
     def __init__(self, iface):
@@ -204,8 +204,8 @@ class PluginBuilder:
         # copy the non-generated files to the new plugin dir
         for template_file, output_name in \
                 self.template.copy_files(specification).items():
-            file = QFile(os.path.join(self.template_dir, template_file))
-            file.copy(os.path.join(self.plugin_path, output_name))
+            t_file = QFile(os.path.join(self.template_dir, template_file))
+            t_file.copy(os.path.join(self.plugin_path, output_name))
 
     def _prepare_readme(self, specification, template_module_name):
         """Prepare the README file.
@@ -341,12 +341,15 @@ class PluginBuilder:
         QDir().mkdir(self.plugin_path)
 
     def _last_used_path(self):
+        """Return the last used plugin path from settings"""
         return QSettings().value('PluginBuilder/last_path', '.')
 
     def _set_last_used_path(self, value):
+        """Set the last used plugin path for future use"""
         QSettings().setValue('PluginBuilder/last_path', value)
 
     def _select_tags(self):
+        """Select tags for the new plugin from the tags dialog"""
         tag_dialog = SelectTagsDialog()
         # if the user has their own taglist, use it
         user_tag_list = os.path.join(os.path.expanduser("~"), '.plugin_tags.txt')
@@ -354,7 +357,7 @@ class PluginBuilder:
             tag_file = user_tag_list
         else:
             tag_file = os.path.join(str(self.plugin_builder_path),
-                                          'taglist.txt')
+                                    'taglist.txt')
 
         with open(tag_file) as tf:
             tags = tf.readlines()
@@ -447,7 +450,7 @@ class PluginBuilder:
         # Attempt to compile the resource file
         try:
             cmd = ['pyrcc5', '-o', os.path.join(self.plugin_path, 'resources.py'),
-                os.path.join(self.plugin_path, 'resources.qrc')]
+                   os.path.join(self.plugin_path, 'resources.qrc')]
             subprocess.check_call(cmd)
         except subprocess.CalledProcessError as err:
             QMessageBox.warning(
@@ -459,7 +462,7 @@ class PluginBuilder:
                 "The resource compiler pyrcc5 was not found in your path. "
                 "You'll have to manually compile the resources.qrc file with pyrcc5 "
                 "before installing your plugin.")
-        
+
         # show the results
         results_dialog = ResultDialog()
         results_dialog.web_view.setHtml(results_popped)
@@ -524,5 +527,5 @@ def copy(source, destination):
         if e.errno == errno.ENOTDIR:
             shutil.copy(source, destination)
         else:
-            print(('Directory not copied. Error: %s' % e))
+            print('Directory not copied. Error: %s' % e)
 
