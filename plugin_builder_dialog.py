@@ -165,7 +165,9 @@ class PluginBuilderDialog(QDialog, FORM_CLASS):
             return True
 
     def validate_publication(self):
-        if len(self.tracker.text()) == 0 or len(self.repository.text()) == 0:
+        url_tracker = self.tracker.text()
+        url_repo = self.repository.text()
+        if not url_tracker or not url_repo:
             QMessageBox.warning(
                 self,
                 "Missing Tracker/Repository",
@@ -173,6 +175,13 @@ class PluginBuilderDialog(QDialog, FORM_CLASS):
                 "You may enter placeholders here, but will need valid "
                 "entries prior to submitting your plugin to the QGIS "
                 "plugin repository.")
+            return False
+        elif url_tracker[0:4] != 'http' or url_repo[0:4] != 'http':
+            QMessageBox.warning(
+                self,
+                "Malformed URL(s)",
+                "Your tracker and repository URLs must begin with http. "
+                "Use a fully qualified URL.")
             return False
         return True
 
