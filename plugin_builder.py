@@ -22,24 +22,29 @@
 """
 # Import Python stuff
 import os
-import sys
+
 import errno
 import shutil
 from string import Template
 import codecs
 import configparser
+import subprocess
 
 # Import the PyQt and QGIS libraries
 from PyQt5.QtCore import QFileInfo, QUrl, QFile, QDir, QSettings
 from PyQt5.QtWidgets import (
-    QAction, QFileDialog, QMessageBox) 
+    QAction, QFileDialog, QMessageBox)
 
-from PyQt5.QtGui import QIcon, QDesktopServices, QStandardItemModel, QStandardItem
-from qgis.core import QgsApplication, QgsMessageLog
+from PyQt5.QtGui import (QIcon,
+                         QDesktopServices,
+                         QStandardItemModel,
+                         QStandardItem
+                         )
+from qgis.core import QgsApplication
 # Initialize Qt resources from file resources.py
 # Do not remove this import even though your IDE / pylint may report it unused
 # noinspection PyUnresolvedReferences
-from .resources import *
+from .resources import *  #pylint: disable=W0401,W0614
 
 # Import the code for the dialog
 from .plugin_builder_dialog import PluginBuilderDialog
@@ -64,13 +69,17 @@ class PluginBuilder:
         self.iface = iface
         # noinspection PyArgumentList
         self.user_plugin_dir = QFileInfo(
-            QgsApplication.qgisUserDatabaseFilePath()).path() + '/python/plugins'
+            QgsApplication.qgisUserDatabaseFilePath()).path() + \
+            '/python/plugins'
         self.plugin_builder_path = os.path.dirname(__file__)
 
         # class members
         self.action = None
         self.dialog = None
         self.plugin_path = None
+        self.template = None
+        self.shared_dir = None
+        self.template_dir = None
 
     # noinspection PyPep8Naming
     def initGui(self):
@@ -107,19 +116,13 @@ class PluginBuilder:
                 return False
         return True
 
-    def _prepare_tests(self, specification):
+    def _prepare_tests(self):
         """Populate and write help files.
 
         :param specification: Specification instance containing template
             replacement keys/values.
         :type specification: PluginSpecification
         """
-        self.populate_template(
-            specification, self.shared_dir,
-            'help/source/conf.py.tmpl', 'help/source/conf.py')
-        self.populate_template(
-            specification, self.shared_dir,
-            'help/source/index.rst.tmpl', 'help/source/index.rst')
         # copy the unit tests folder
         test_source = os.path.join(self.shared_dir, 'test')
         test_destination = os.path.join(self.plugin_path, 'test')
@@ -209,8 +212,8 @@ class PluginBuilder:
         # copy the non-generated files to the new plugin dir
         for template_file, output_name in \
                 self.template.copy_files(specification).items():
-            file = QFile(os.path.join(self.template_dir, template_file))
-            file.copy(os.path.join(self.plugin_path, output_name))
+            t_file = QFile(os.path.join(self.template_dir, template_file))
+            t_file.copy(os.path.join(self.plugin_path, output_name))
 
     def _prepare_readme(self, specification, template_module_name):
         """Prepare the README file.
@@ -339,29 +342,31 @@ class PluginBuilder:
         return results_popped, template_module_name
 
     def _create_plugin_directory(self):
-        """Create the plugin directory using the class name."""
-        # Remove spaces from the plugin name and make it all lower case
-        # to be a nice package name
+        """Create the plugin directory using the module name."""
         self.plugin_path = os.path.join(
             str(self.plugin_path),
-            str(self.dialog.class_name.text().lower()))
+            str(self.dialog.module_name.text().lower()))
         QDir().mkdir(self.plugin_path)
 
     def _last_used_path(self):
+        """Return the last used plugin path from settings"""
         return QSettings().value('PluginBuilder/last_path', '.')
 
     def _set_last_used_path(self, value):
+        """Set the last used plugin path for future use"""
         QSettings().setValue('PluginBuilder/last_path', value)
 
     def _select_tags(self):
+        """Select tags for the new plugin from the tags dialog"""
         tag_dialog = SelectTagsDialog()
         # if the user has their own taglist, use it
-        user_tag_list = os.path.join(os.path.expanduser("~"), '.plugin_tags.txt')
+        user_tag_list = os.path.join(os.path.expanduser("~"),
+                                     '.plugin_tags.txt')
         if os.path.exists(user_tag_list):
             tag_file = user_tag_list
         else:
             tag_file = os.path.join(str(self.plugin_builder_path),
-                                          'taglist.txt')
+                                    'taglist.txt')
 
         with open(tag_file) as tf:
             tags = tf.readlines()
@@ -387,7 +392,8 @@ class PluginBuilder:
     def run(self):
         """Run method that performs all the real work"""
         # create and show the dialog
-        self.dialog = PluginBuilderDialog(stored_output_path=self._last_used_path())
+        self.dialog = PluginBuilderDialog(
+            stored_output_path=self._last_used_path())
 
         # get version
         cfg = configparser.ConfigParser()
@@ -425,8 +431,15 @@ class PluginBuilder:
         self._prepare_code(specification)
         if specification.gen_help:
             self._prepare_help()
+            # create the sphinx config file and sample index.rst file
+            self.populate_template(
+                specification, self.shared_dir,
+                'help/source/conf.py.tmpl', 'help/source/conf.py')
+            self.populate_template(
+                specification, self.shared_dir,
+                'help/source/index.rst.tmpl', 'help/source/index.rst')
         if specification.gen_tests:
-            self._prepare_tests(specification)
+            self._prepare_tests()
 
         if specification.gen_scripts:
             self._prepare_scripts()
@@ -444,6 +457,24 @@ class PluginBuilder:
 
         self._prepare_readme(specification, template_module_name)
         self._prepare_metadata(specification)
+        # Attempt to compile the resource file
+        try:
+            cmd = ['pyrcc5', '-o',
+                   os.path.join(self.plugin_path, 'resources.py'),
+                   os.path.join(self.plugin_path, 'resources.qrc')]
+            subprocess.check_call(cmd)
+        except subprocess.CalledProcessError:
+            QMessageBox.warning(
+                None, 'Unable to Compile resources.qrc',
+                'There was an error compiling your resources.qrc file. '
+                'Compile it manually using pyrcc5.')
+        except FileNotFoundError:
+            QMessageBox.warning(
+                None, 'Unable to Compile resources.qrc',
+                "The resource compiler pyrcc5 was not found in your path. "
+                "You'll have to manually compile the resources.qrc file "
+                "with pyrcc5 before installing your plugin.")
+
         # show the results
         results_dialog = ResultDialog()
         results_dialog.web_view.setHtml(results_popped)
@@ -508,5 +539,4 @@ def copy(source, destination):
         if e.errno == errno.ENOTDIR:
             shutil.copy(source, destination)
         else:
-            print(('Directory not copied. Error: %s' % e))
-
+            print('Directory not copied. Error: %s' % e)

@@ -22,10 +22,11 @@
 """
 
 import os
+from string import capwords
+
 from PyQt5 import QtGui, uic
 from PyQt5.QtCore import Qt, QFileInfo
 from PyQt5.QtWidgets import QMessageBox, QFrame, QDialog, QFileDialog
-from string import capwords
 from .plugin_templates import templates
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
@@ -146,6 +147,8 @@ class PluginBuilderDialog(QDialog, FORM_CLASS):
             QMessageBox.warning(
                 self, 'Information missing or invalid', message)
         else:
+            if self.last_path:
+                self.lbl_full_output_path.setText(os.path.join(self.last_path, self.module_name.text()))
             return True
 
     def validate_about(self):
@@ -162,7 +165,9 @@ class PluginBuilderDialog(QDialog, FORM_CLASS):
             return True
 
     def validate_publication(self):
-        if len(self.tracker.text()) == 0 or len(self.repository.text()) == 0:
+        url_tracker = self.tracker.text()
+        url_repo = self.repository.text()
+        if not url_tracker or not url_repo:
             QMessageBox.warning(
                 self,
                 "Missing Tracker/Repository",
@@ -171,8 +176,14 @@ class PluginBuilderDialog(QDialog, FORM_CLASS):
                 "entries prior to submitting your plugin to the QGIS "
                 "plugin repository.")
             return False
-        else:
-            return True
+        elif url_tracker[0:4] != 'http' or url_repo[0:4] != 'http':
+            QMessageBox.warning(
+                self,
+                "Malformed URL(s)",
+                "Your tracker and repository URLs must begin with http. "
+                "Use a fully qualified URL.")
+            return False
+        return True
 
     def select_directory(self):
         plugin_path = QFileDialog.getExistingDirectory(
@@ -184,8 +195,9 @@ class PluginBuilderDialog(QDialog, FORM_CLASS):
 
     def show_output_info(self, full_output):
         if QFileInfo(full_output).exists():
-           self.lbl_full_output_path.setText(full_output +"\nYour plugin will overwrite the existing contents!")
-           self.lbl_full_output_path.setStyleSheet("QLabel { color : red;  font-weight : bold;}")
+            self.lbl_full_output_path.setText(full_output +
+                                              "\nYour plugin will overwrite the existing contents!")
+            self.lbl_full_output_path.setStyleSheet("QLabel { color : red;  font-weight : bold;}")
         else:
             self.lbl_full_output_path.setStyleSheet("QLabel { color : black; }")
 
@@ -204,12 +216,10 @@ class PluginBuilderDialog(QDialog, FORM_CLASS):
                 msg = "Your output directory does not exist."
 
         else:
-                msg = "Please select an output directory."
-
+            msg = "Please select an output directory."
 
         if not good_dir:
-                QMessageBox.warning(
-                    None, 'Error', msg)
+            QMessageBox.warning(None, 'Error', msg)
 
         return good_dir
 
@@ -219,6 +229,3 @@ class PluginBuilderDialog(QDialog, FORM_CLASS):
         if event.key() == Qt.Key_Escape:
             #QDialog.keyPressEvent(event)
             pass
-
-
-
