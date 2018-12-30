@@ -66,8 +66,8 @@ class ${TemplateClass}:
         self.menu = self.tr(u'&${TemplateTitle}')
 
         # Check if plugin was started the first time in current QGIS session
-        # Will be set False once it was started
-        self.first_start = True
+        # Must be set in initGui() to survive plugin reloads
+        self.first_start = None
 
     # noinspection PyMethodMayBeStatic
     def tr(self, message):
@@ -168,6 +168,9 @@ class ${TemplateClass}:
             text=self.tr(u'$TemplateMenuText'),
             callback=self.run,
             parent=self.iface.mainWindow())
+
+        # will be set False in run()
+        self.first_start = None
 
 
     def unload(self):
