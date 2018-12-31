@@ -170,7 +170,7 @@ class ${TemplateClass}:
             parent=self.iface.mainWindow())
 
         # will be set False in run()
-        self.first_start = None
+        self.first_start = True
 
 
     def unload(self):
@@ -189,12 +189,12 @@ class ${TemplateClass}:
         # Only create GUI ONCE in callback, so that it will only load when the plugin is started
         if self.first_start == True:
             self.first_start = False
-            dlg = ${TemplateClass}Dialog()
+            self.dlg = ${TemplateClass}Dialog()
 
         # show the dialog
-        dlg.show()
+        self.dlg.show()
         # Run the dialog event loop
-        result = dlg.exec_()
+        result = self.dlg.exec_()
         # See if OK was pressed
         if result:
             # Do something useful here - delete the line containing pass and
