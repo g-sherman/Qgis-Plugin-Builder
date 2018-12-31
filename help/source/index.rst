@@ -20,9 +20,9 @@ your own plugin.
 The steps to using Plugin Builder are fairly simple:
 
 #. Open the Plugin Builder from within QGIS
-#. Fill out the required information for the selected plugin template
+#. Fill out the required information for the selected plugin template, working your way through each step
 #. Designate where to store your new plugin
-#. Compile your resource file
+#. If automatic compilation failed during plugin generation, manually compile your resource file using pyrcc5
 #. Install the plugin
 #. Test it
 
@@ -92,7 +92,7 @@ Plugin name and required information
   This is the minimum version of QGIS required for your
   plugin to work. If your plugin uses features only present in a newer version,
   be sure to set this field accordingly to prevent problems for those running
-  older versions. Version 2.0 of Plugin Builder defaults this field to 2.0.
+  older versions. Version 3.x of Plugin Builder defaults this field to 3.0.
 
 **Author/Company**
   Put your name or company name here---this information is used
@@ -107,7 +107,7 @@ Plugin name and required information
 
 .. index:: parameters; recommended
 
-Detailed description
+About
 ....................
 
 .. image:: images/wizard_about.png
@@ -115,6 +115,8 @@ Detailed description
 **About**
   This is a long line description of the plugin's function (purpose, function,
   requirements, etc.).
+
+  This field is required.
 
 Template specific parameters
 ............................
@@ -190,6 +192,9 @@ recommended, but not strictly required.
 **pb_tool**
   Genrates a configuration for *pb_tool*, a Python command line tool for compiling 
   and deploying QGIS plugins on Linux, Mac OS X, and Windows.
+
+  It is **strongly recommended** that you use ``pb_tool`` rather than ``make`` for building and deploying your plugins.
+  
   See `Using pb_tool`_ for more information.
 
 Publication information
@@ -235,10 +240,26 @@ plugin is accepted and users can be successful using it.
   allows users to filter out experimental plugins in the Plugin Installer if
   they choose not to live on the bleeding edge.
 
+Generating
+==========
+
+.. image:: images/generating.png
+
+Choose the location for your generated plugin. Once you select the directory, the complete path for your plugin is displayed.
+
+When you click **Generate**, Plugin Builder will attempt to build your ``resources.py`` file using ``pyrcc5``.
+
+If ``pyrcc5`` is not found in your path, you'll see:
+
+  .. image:: images/compile_failed.png
+     :align: center
+
+If the compilation fails, you'll have to compile it manually as shown in the results dialog.
+
 Results
 =======
 
-When you click Next and select a destination for your plugin code, Plugin Builder creates your new plugin for you and displays the results:
+Once generated, Plugin Builder displays the results:
 
 .. image:: images/plugin_results.png
 
@@ -255,19 +276,22 @@ directory.
 Compiling the resource file
 ===========================
 
-If your generated plugin includes a resource file, this needs to be compiled before
-it is functional in QGIS.
+The resource file contains definitions of media used in your plugin. Upon
+generation, this contains one entry for icon.png, the icon file for the plugin.
+
+The resource file needs to be compiled before it is functional in QGIS.
+
+Plugin Builder attempts to compile it for you during generation, but it that fails (i.e. ``pyrcc5`` isn't found), you'll
+have to do it manually.
 
 .. index:: resource file
    double: compiling; resource file
 
-The resource file contains definitions of media used in your plugin. Upon
-generation, this contains one entry for icon.png, the icon file for the plugin.
 
-To compile the resource file into Python code, use the ``pyrcc4`` utility
+To compile the resource file into Python code, use the ``pyrcc5`` utility
 that comes as part of your PyQt installation::
 
-  pyrcc4 -o resources.py resources.qrc
+  pyrcc5 -o resources.py resources.qrc
 
 
 Once the resource file is compiled, the generated plugin can be loaded in QGIS.
@@ -503,9 +527,6 @@ repository.
 When you add it to the repository, your plugin will show up in the Plugin
 Installer in QGIS, making it available for download and install by the
 community.
-
-.. Indices and tables
-======================
 
 .. * :ref:`genindex`
 
