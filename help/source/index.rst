@@ -332,6 +332,11 @@ Since each plugin must be contained in its own subdirectory in
 ``.qgis2/python/plugins``, make sure you copy the directory, not the files in
 the directory.
 
+Using ``pb_tool`` will automatically detect the proper location to place your plugin when you use::
+
+ pb_tool deploy
+
+
 If your operating system supports gmake (GNU make), you can use the deploy
 target of the Makefile in your plugin directory to deploy directly to
 ``.qgis2/python/plugins``::
