@@ -316,20 +316,18 @@ The Copy Method
 ................
 
 To deploy in this fashion, simply copy your plugin directory to the location
-of your QGIS plugins. By platform, this location is:
+of your QGIS plugins. By platform, this location is found in your home directory under:
 
-* Linux: ``.qgis2/python/plugins`` in your home directory, typically found at
-    ``/home/gsherman/.qgis2/python/plugins``
+*   Linux:
+        ``.local/share/QGIS/QGIS3/profiles/default/python/plugins``
+*   Mac OS X:
+        ``Library/Application Support/QGIS/QGIS3/profiles/default/python/plugins``
+*   Windows:
+        ``AppData\Roaming\QGIS\QGIS3\profiles\default\python\plugins``
 
-* Mac OS X: ``.qgis2/python/plugins`` in your home directory, typically
-      ``/Users/gsherman/.qgis2/python/plugins``
 
-* Windows: ``%HOMEPATH%\.qgis2\python\plugins``, by default,
-       * ``C:\Users\gsherman\.qgis2\python\plugins`` on versions later than XP,
-       * ``C:\Documents and Settings\gsherman\.qgis2\python\plugins`` on XP
-
-Since each plugin must be contained in its own subdirectory in
-``.qgis2/python/plugins``, make sure you copy the directory, not the files in
+Since each plugin must be contained in its own subdirectory,
+make sure you copy the directory, not the files in
 the directory.
 
 Using ``pb_tool`` will automatically detect the proper location to place your plugin when you use::
@@ -338,8 +336,8 @@ Using ``pb_tool`` will automatically detect the proper location to place your pl
 
 
 If your operating system supports gmake (GNU make), you can use the deploy
-target of the Makefile in your plugin directory to deploy directly to
-``.qgis2/python/plugins``::
+target of the Makefile in your plugin directory. You must edit the Makefile and set QGISDIR to point to full path of
+your plugin directory for your operating system, then you can use::
 
   make deploy
 

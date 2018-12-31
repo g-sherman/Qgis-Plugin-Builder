@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>QGIS Plugin Builder &#8212; QGIS Plugin Builder 2.10 documentation</title>
+    <title>QGIS Plugin Builder &#8212; QGIS Plugin Builder 3.0.x documentation</title>
     <link rel="stylesheet" href="_static/pyramid.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '2.10',
+        VERSION:     '3.0.x',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -38,7 +38,7 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li class="nav-item nav-item-0"><a href="#">QGIS Plugin Builder 2.10 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="#">QGIS Plugin Builder 3.0.x documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -304,38 +304,34 @@ where your development plugin(s) are located</li>
 <div class="section" id="the-copy-method">
 <span id="index-9"></span><h2>The Copy Method<a class="headerlink" href="#the-copy-method" title="Permalink to this headline">¶</a></h2>
 <p>To deploy in this fashion, simply copy your plugin directory to the location
-of your QGIS plugins. By platform, this location is:</p>
+of your QGIS plugins. By platform, this location is found in your home directory under:</p>
 <ul class="simple">
 <li><dl class="first docutils">
-<dt>Linux: <code class="docutils literal"><span class="pre">.qgis2/python/plugins</span></code> in your home directory, typically found at</dt>
-<dd><code class="docutils literal"><span class="pre">/home/gsherman/.qgis2/python/plugins</span></code></dd>
+<dt>Linux:</dt>
+<dd><code class="docutils literal"><span class="pre">.local/share/QGIS/QGIS3/profiles/default/python/plugins</span></code></dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>Mac OS X: <code class="docutils literal"><span class="pre">.qgis2/python/plugins</span></code> in your home directory, typically</dt>
-<dd><code class="docutils literal"><span class="pre">/Users/gsherman/.qgis2/python/plugins</span></code></dd>
+<dt>Mac OS X:</dt>
+<dd><code class="docutils literal"><span class="pre">Library/Application</span> <span class="pre">Support/QGIS/QGIS3/profiles/default/python/plugins</span></code></dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>Windows: <code class="docutils literal"><span class="pre">%HOMEPATH%\.qgis2\python\plugins</span></code>, by default,</dt>
-<dd><ul class="first last">
-<li><code class="docutils literal"><span class="pre">C:\Users\gsherman\.qgis2\python\plugins</span></code> on versions later than XP,</li>
-<li><code class="docutils literal"><span class="pre">C:\Documents</span> <span class="pre">and</span> <span class="pre">Settings\gsherman\.qgis2\python\plugins</span></code> on XP</li>
-</ul>
-</dd>
+<dt>Windows:</dt>
+<dd><code class="docutils literal"><span class="pre">AppData\Roaming\QGIS\QGIS3\profiles\default\python\plugins</span></code></dd>
 </dl>
 </li>
 </ul>
-<p>Since each plugin must be contained in its own subdirectory in
-<code class="docutils literal"><span class="pre">.qgis2/python/plugins</span></code>, make sure you copy the directory, not the files in
+<p>Since each plugin must be contained in its own subdirectory,
+make sure you copy the directory, not the files in
 the directory.</p>
 <p>Using <code class="docutils literal"><span class="pre">pb_tool</span></code> will automatically detect the proper location to place your plugin when you use:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pb_tool</span> <span class="n">deploy</span>
 </pre></div>
 </div>
 <p>If your operating system supports gmake (GNU make), you can use the deploy
-target of the Makefile in your plugin directory to deploy directly to
-<code class="docutils literal"><span class="pre">.qgis2/python/plugins</span></code>:</p>
+target of the Makefile in your plugin directory. You must edit the Makefile and set QGISDIR to point to full path of
+your plugin directory for your operating system, then you can use:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">deploy</span>
 </pre></div>
 </div>
@@ -570,11 +566,11 @@ community.</p>
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              >index</a></li>
-        <li class="nav-item nav-item-0"><a href="#">QGIS Plugin Builder 2.10 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="#">QGIS Plugin Builder 3.0.x documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2011-2015, Gary Sherman.
+        &#169; Copyright 2011-2019, Gary Sherman.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
     </div>
   </body>
