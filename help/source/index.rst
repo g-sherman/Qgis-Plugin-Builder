@@ -378,37 +378,6 @@ interface and add the needed code to make it do something useful.
 .. index:: Makefile
    double: Makefile; using
 
-Using the Makefile
-==================
-The make file can be used to compile and deploy your plugin, assuming you are
-using an operating environment that supports
-`GNU make <http://gnu.org/software/make>`_. It also provides a number of other
-actions to aid in plugin development.
-
-.. index:: targets
-   double: Makefile; targets
-
-The following targets are supported
-
-:clean: Delete the compiled UI and resource files
-:compile: Compile the resource and UI files. This is the default target.
-:dclean: Same as ``derase`` but also removes any .svn entries
-:deploy: Deploy the plugin
-:derase: Remove the deployed plugin
-:doc: Build the documentation using Sphinx
-:package: Package the plugin using git archive
-:transclean: Delete all .qm (translation) files
-:transcompile: Compile translation files into .qm format
-:transup: Update the .ts (translation) files
-:upload: Upload the plugin to the QGIS repository
-:zip: Deploy the plugin and create a zip file suitable for uploading to the
-    QGIS repository
-:test: Run unit tests and produce a coverage report.
-:pep8: Run python PEP8 check and produce a report.
-:pylint: Run python pylint check and produce a report listing any violations.
-
-.. index:: documentation
-.. index:: Plugin; documenting
 
 Using pb_tool
 =============
@@ -490,9 +459,41 @@ http://g-sherman.github.io/plugin_build_tool
 For help on getting started using *pb_tool* with Plugin Builder, see:
 http://spatialgalaxy.com/2014/10/09/qgis-plugin-development-with-pb-tool
 
+Using the Makefile
+==================
+The make file can be used to compile and deploy your plugin, assuming you are
+using an operating environment that supports
+`GNU make <http://gnu.org/software/make>`_. It also provides a number of other
+actions to aid in plugin development.
+
+.. index:: targets
+   double: Makefile; targets
+
+The following targets are supported
+
+:clean: Delete the compiled UI and resource files
+:compile: Compile the resource and UI files. This is the default target.
+:dclean: Same as ``derase`` but also removes any .svn entries
+:deploy: Deploy the plugin
+:derase: Remove the deployed plugin
+:doc: Build the documentation using Sphinx
+:package: Package the plugin using git archive
+:transclean: Delete all .qm (translation) files
+:transcompile: Compile translation files into .qm format
+:transup: Update the .ts (translation) files
+:upload: Upload the plugin to the QGIS repository
+:zip: Deploy the plugin and create a zip file suitable for uploading to the
+    QGIS repository
+:test: Run unit tests and produce a coverage report.
+:pep8: Run python PEP8 check and produce a report.
+:pylint: Run python pylint check and produce a report listing any violations.
+
+
 Documenting your Plugin
 =======================
 
+.. index:: documentation
+.. index:: Plugin; documenting
 .. index:: Sphinx
 
 Plugin Builder optionally creates a `Sphinx <http://sphinx-doc.org>`_ project for you in

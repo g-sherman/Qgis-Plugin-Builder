@@ -359,53 +359,8 @@ before deploying and testing.</p>
 <p>Once the generated plugin is working it’s your turn to customize the user
 interface and add the needed code to make it do something useful.</p>
 </div>
-<div class="section" id="using-the-makefile">
-<span id="index-14"></span><h1>Using the Makefile<a class="headerlink" href="#using-the-makefile" title="Permalink to this headline">¶</a></h1>
-<p>The make file can be used to compile and deploy your plugin, assuming you are
-using an operating environment that supports
-<a class="reference external" href="http://gnu.org/software/make">GNU make</a>. It also provides a number of other
-actions to aid in plugin development.</p>
-<p id="index-15">The following targets are supported</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">clean:</th><td class="field-body">Delete the compiled UI and resource files</td>
-</tr>
-<tr class="field-even field"><th class="field-name">compile:</th><td class="field-body">Compile the resource and UI files. This is the default target.</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">dclean:</th><td class="field-body">Same as <code class="docutils literal"><span class="pre">derase</span></code> but also removes any .svn entries</td>
-</tr>
-<tr class="field-even field"><th class="field-name">deploy:</th><td class="field-body">Deploy the plugin</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">derase:</th><td class="field-body">Remove the deployed plugin</td>
-</tr>
-<tr class="field-even field"><th class="field-name">doc:</th><td class="field-body">Build the documentation using Sphinx</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">package:</th><td class="field-body">Package the plugin using git archive</td>
-</tr>
-<tr class="field-even field"><th class="field-name">transclean:</th><td class="field-body">Delete all .qm (translation) files</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">transcompile:</th><td class="field-body">Compile translation files into .qm format</td>
-</tr>
-<tr class="field-even field"><th class="field-name">transup:</th><td class="field-body">Update the .ts (translation) files</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">upload:</th><td class="field-body">Upload the plugin to the QGIS repository</td>
-</tr>
-<tr class="field-even field"><th class="field-name">zip:</th><td class="field-body">Deploy the plugin and create a zip file suitable for uploading to the
-QGIS repository</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">test:</th><td class="field-body">Run unit tests and produce a coverage report.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">pep8:</th><td class="field-body">Run python PEP8 check and produce a report.</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">pylint:</th><td class="field-body">Run python pylint check and produce a report listing any violations.</td>
-</tr>
-</tbody>
-</table>
-<span class="target" id="index-16"></span></div>
 <div class="section" id="using-pb-tool">
-<span id="index-17"></span><h1>Using pb_tool<a class="headerlink" href="#using-pb-tool" title="Permalink to this headline">¶</a></h1>
+<span id="index-14"></span><h1>Using pb_tool<a class="headerlink" href="#using-pb-tool" title="Permalink to this headline">¶</a></h1>
 <p><em>pb_tool</em> is a Python command line tool for compiling and deploying QGIS plugins on Linux, Mac OS X, and Windows.</p>
 <div class="section" id="features">
 <h2>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h2>
@@ -477,9 +432,54 @@ Commands:
 <a class="reference external" href="http://spatialgalaxy.com/2014/10/09/qgis-plugin-development-with-pb-tool">http://spatialgalaxy.com/2014/10/09/qgis-plugin-development-with-pb-tool</a></p>
 </div>
 </div>
+<div class="section" id="using-the-makefile">
+<h1>Using the Makefile<a class="headerlink" href="#using-the-makefile" title="Permalink to this headline">¶</a></h1>
+<p>The make file can be used to compile and deploy your plugin, assuming you are
+using an operating environment that supports
+<a class="reference external" href="http://gnu.org/software/make">GNU make</a>. It also provides a number of other
+actions to aid in plugin development.</p>
+<p id="index-15">The following targets are supported</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">clean:</th><td class="field-body">Delete the compiled UI and resource files</td>
+</tr>
+<tr class="field-even field"><th class="field-name">compile:</th><td class="field-body">Compile the resource and UI files. This is the default target.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">dclean:</th><td class="field-body">Same as <code class="docutils literal"><span class="pre">derase</span></code> but also removes any .svn entries</td>
+</tr>
+<tr class="field-even field"><th class="field-name">deploy:</th><td class="field-body">Deploy the plugin</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">derase:</th><td class="field-body">Remove the deployed plugin</td>
+</tr>
+<tr class="field-even field"><th class="field-name">doc:</th><td class="field-body">Build the documentation using Sphinx</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">package:</th><td class="field-body">Package the plugin using git archive</td>
+</tr>
+<tr class="field-even field"><th class="field-name">transclean:</th><td class="field-body">Delete all .qm (translation) files</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">transcompile:</th><td class="field-body">Compile translation files into .qm format</td>
+</tr>
+<tr class="field-even field"><th class="field-name">transup:</th><td class="field-body">Update the .ts (translation) files</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">upload:</th><td class="field-body">Upload the plugin to the QGIS repository</td>
+</tr>
+<tr class="field-even field"><th class="field-name">zip:</th><td class="field-body">Deploy the plugin and create a zip file suitable for uploading to the
+QGIS repository</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">test:</th><td class="field-body">Run unit tests and produce a coverage report.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">pep8:</th><td class="field-body">Run python PEP8 check and produce a report.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">pylint:</th><td class="field-body">Run python pylint check and produce a report listing any violations.</td>
+</tr>
+</tbody>
+</table>
+</div>
 <div class="section" id="documenting-your-plugin">
 <h1>Documenting your Plugin<a class="headerlink" href="#documenting-your-plugin" title="Permalink to this headline">¶</a></h1>
-<p>Plugin Builder optionally creates a <a class="reference external" href="http://sphinx-doc.org">Sphinx</a> project for you in
+<span class="target" id="index-16"></span><span class="target" id="index-17"></span><p>Plugin Builder optionally creates a <a class="reference external" href="http://sphinx-doc.org">Sphinx</a> project for you in
 the <code class="docutils literal"><span class="pre">help</span></code> subdirectory of your plugin. To build the documentation you will
 need to install Sphinx using <a class="reference external" href="http://pypi.python.org/pypi/pip">pip</a>
 or <a class="reference external" href="http://peak.telecommunity.com/DevCenter/EasyInstall">easy_install</a>.
@@ -535,13 +535,13 @@ community.</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#testing">Testing</a></li>
-<li><a class="reference internal" href="#using-the-makefile">Using the Makefile</a></li>
 <li><a class="reference internal" href="#using-pb-tool">Using pb_tool</a><ul>
 <li><a class="reference internal" href="#features">Features</a></li>
 <li><a class="reference internal" href="#installation">Installation</a></li>
 <li><a class="reference internal" href="#usage">Usage</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#using-the-makefile">Using the Makefile</a></li>
 <li><a class="reference internal" href="#documenting-your-plugin">Documenting your Plugin</a></li>
 <li><a class="reference internal" href="#the-repository">The Repository</a></li>
 </ul>
