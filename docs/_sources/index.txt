@@ -20,9 +20,9 @@ your own plugin.
 The steps to using Plugin Builder are fairly simple:
 
 #. Open the Plugin Builder from within QGIS
-#. Fill out the required information for the selected plugin template, working your way through each step
+#. Fill out the required information for the selected plugin template
 #. Designate where to store your new plugin
-#. If automatic compilation failed during plugin generation, manually compile your resource file using pyrcc5
+#. Compile your resource file
 #. Install the plugin
 #. Test it
 
@@ -92,7 +92,7 @@ Plugin name and required information
   This is the minimum version of QGIS required for your
   plugin to work. If your plugin uses features only present in a newer version,
   be sure to set this field accordingly to prevent problems for those running
-  older versions. Version 3.x of Plugin Builder defaults this field to 3.0.
+  older versions. Version 2.0 of Plugin Builder defaults this field to 2.0.
 
 **Author/Company**
   Put your name or company name here---this information is used
@@ -107,7 +107,7 @@ Plugin name and required information
 
 .. index:: parameters; recommended
 
-About
+Detailed description
 ....................
 
 .. image:: images/wizard_about.png
@@ -115,8 +115,6 @@ About
 **About**
   This is a long line description of the plugin's function (purpose, function,
   requirements, etc.).
-
-  This field is required.
 
 Template specific parameters
 ............................
@@ -192,9 +190,6 @@ recommended, but not strictly required.
 **pb_tool**
   Genrates a configuration for *pb_tool*, a Python command line tool for compiling 
   and deploying QGIS plugins on Linux, Mac OS X, and Windows.
-
-  It is **strongly recommended** that you use ``pb_tool`` rather than ``make`` for building and deploying your plugins.
-  
   See `Using pb_tool`_ for more information.
 
 Publication information
@@ -240,26 +235,10 @@ plugin is accepted and users can be successful using it.
   allows users to filter out experimental plugins in the Plugin Installer if
   they choose not to live on the bleeding edge.
 
-Generating
-==========
-
-.. image:: images/generating.png
-
-Choose the location for your generated plugin. Once you select the directory, the complete path for your plugin is displayed.
-
-When you click **Generate**, Plugin Builder will attempt to build your ``resources.py`` file using ``pyrcc5``.
-
-If ``pyrcc5`` is not found in your path, you'll see:
-
-  .. image:: images/compile_failed.png
-     :align: center
-
-If the compilation fails, you'll have to compile it manually as shown in the results dialog.
-
 Results
 =======
 
-Once generated, Plugin Builder displays the results:
+When you click Next and select a destination for your plugin code, Plugin Builder creates your new plugin for you and displays the results:
 
 .. image:: images/plugin_results.png
 
@@ -276,22 +255,19 @@ directory.
 Compiling the resource file
 ===========================
 
-The resource file contains definitions of media used in your plugin. Upon
-generation, this contains one entry for icon.png, the icon file for the plugin.
-
-The resource file needs to be compiled before it is functional in QGIS.
-
-Plugin Builder attempts to compile it for you during generation, but it that fails (i.e. ``pyrcc5`` isn't found), you'll
-have to do it manually.
+If your generated plugin includes a resource file, this needs to be compiled before
+it is functional in QGIS.
 
 .. index:: resource file
    double: compiling; resource file
 
+The resource file contains definitions of media used in your plugin. Upon
+generation, this contains one entry for icon.png, the icon file for the plugin.
 
-To compile the resource file into Python code, use the ``pyrcc5`` utility
+To compile the resource file into Python code, use the ``pyrcc4`` utility
 that comes as part of your PyQt installation::
 
-  pyrcc5 -o resources.py resources.qrc
+  pyrcc4 -o resources.py resources.qrc
 
 
 Once the resource file is compiled, the generated plugin can be loaded in QGIS.
@@ -316,28 +292,25 @@ The Copy Method
 ................
 
 To deploy in this fashion, simply copy your plugin directory to the location
-of your QGIS plugins. By platform, this location is found in your home directory under:
+of your QGIS plugins. By platform, this location is:
 
-*   Linux:
-        ``.local/share/QGIS/QGIS3/profiles/default/python/plugins``
-*   Mac OS X:
-        ``Library/Application Support/QGIS/QGIS3/profiles/default/python/plugins``
-*   Windows:
-        ``AppData\Roaming\QGIS\QGIS3\profiles\default\python\plugins``
+* Linux: ``.qgis2/python/plugins`` in your home directory, typically found at
+    ``/home/gsherman/.qgis2/python/plugins``
 
+* Mac OS X: ``.qgis2/python/plugins`` in your home directory, typically
+      ``/Users/gsherman/.qgis2/python/plugins``
 
-Since each plugin must be contained in its own subdirectory,
-make sure you copy the directory, not the files in
+* Windows: ``%HOMEPATH%\.qgis2\python\plugins``, by default,
+       * ``C:\Users\gsherman\.qgis2\python\plugins`` on versions later than XP,
+       * ``C:\Documents and Settings\gsherman\.qgis2\python\plugins`` on XP
+
+Since each plugin must be contained in its own subdirectory in
+``.qgis2/python/plugins``, make sure you copy the directory, not the files in
 the directory.
 
-Using ``pb_tool`` will automatically detect the proper location to place your plugin when you use::
-
- pb_tool deploy
-
-
 If your operating system supports gmake (GNU make), you can use the deploy
-target of the Makefile in your plugin directory. You must edit the Makefile and set QGISDIR to point to full path of
-your plugin directory for your operating system, then you can use::
+target of the Makefile in your plugin directory to deploy directly to
+``.qgis2/python/plugins``::
 
   make deploy
 
@@ -378,6 +351,37 @@ interface and add the needed code to make it do something useful.
 .. index:: Makefile
    double: Makefile; using
 
+Using the Makefile
+==================
+The make file can be used to compile and deploy your plugin, assuming you are
+using an operating environment that supports
+`GNU make <http://gnu.org/software/make>`_. It also provides a number of other
+actions to aid in plugin development.
+
+.. index:: targets
+   double: Makefile; targets
+
+The following targets are supported
+
+:clean: Delete the compiled UI and resource files
+:compile: Compile the resource and UI files. This is the default target.
+:dclean: Same as ``derase`` but also removes any .svn entries
+:deploy: Deploy the plugin
+:derase: Remove the deployed plugin
+:doc: Build the documentation using Sphinx
+:package: Package the plugin using git archive
+:transclean: Delete all .qm (translation) files
+:transcompile: Compile translation files into .qm format
+:transup: Update the .ts (translation) files
+:upload: Upload the plugin to the QGIS repository
+:zip: Deploy the plugin and create a zip file suitable for uploading to the
+    QGIS repository
+:test: Run unit tests and produce a coverage report.
+:pep8: Run python PEP8 check and produce a report.
+:pylint: Run python pylint check and produce a report listing any violations.
+
+.. index:: documentation
+.. index:: Plugin; documenting
 
 Using pb_tool
 =============
@@ -459,41 +463,9 @@ http://g-sherman.github.io/plugin_build_tool
 For help on getting started using *pb_tool* with Plugin Builder, see:
 http://spatialgalaxy.com/2014/10/09/qgis-plugin-development-with-pb-tool
 
-Using the Makefile
-==================
-The make file can be used to compile and deploy your plugin, assuming you are
-using an operating environment that supports
-`GNU make <http://gnu.org/software/make>`_. It also provides a number of other
-actions to aid in plugin development.
-
-.. index:: targets
-   double: Makefile; targets
-
-The following targets are supported
-
-:clean: Delete the compiled UI and resource files
-:compile: Compile the resource and UI files. This is the default target.
-:dclean: Same as ``derase`` but also removes any .svn entries
-:deploy: Deploy the plugin
-:derase: Remove the deployed plugin
-:doc: Build the documentation using Sphinx
-:package: Package the plugin using git archive
-:transclean: Delete all .qm (translation) files
-:transcompile: Compile translation files into .qm format
-:transup: Update the .ts (translation) files
-:upload: Upload the plugin to the QGIS repository
-:zip: Deploy the plugin and create a zip file suitable for uploading to the
-    QGIS repository
-:test: Run unit tests and produce a coverage report.
-:pep8: Run python PEP8 check and produce a report.
-:pylint: Run python pylint check and produce a report listing any violations.
-
-
 Documenting your Plugin
 =======================
 
-.. index:: documentation
-.. index:: Plugin; documenting
 .. index:: Sphinx
 
 Plugin Builder optionally creates a `Sphinx <http://sphinx-doc.org>`_ project for you in
@@ -531,6 +503,9 @@ repository.
 When you add it to the repository, your plugin will show up in the Plugin
 Installer in QGIS, making it available for download and install by the
 community.
+
+.. Indices and tables
+======================
 
 .. * :ref:`genindex`
 
