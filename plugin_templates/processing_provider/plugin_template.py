@@ -23,6 +23,7 @@
 
 import os
 from ..plugin_template import PluginTemplate
+from ...qgis_dirs import deployment_dir
 
 
 class ProcessingProviderPluginTemplate(PluginTemplate):
@@ -37,6 +38,9 @@ class ProcessingProviderPluginTemplate(PluginTemplate):
         self.category = 'Analysis'
         frame = dialog.template_subframe
         return {
+            # Makefile
+            'TemplateQGISDir': deployment_dir,
+            # Processing
             'TemplateAlgoName': frame.algo_name_text.text(),
             'TemplateAlgoGroup': frame.algo_group_text.text(),
             'TemplateProviderName': frame.provider_name_text.text(),
