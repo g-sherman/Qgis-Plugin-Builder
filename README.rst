@@ -1,3 +1,9 @@
+NOTE
+====
+
+**QGIS 3 development now takes place in master branch.**
+**QGIS 2 version of the plugin is in the LTR_2.x branch**
+
 QGIS Plugin Builder
 ===================
 
