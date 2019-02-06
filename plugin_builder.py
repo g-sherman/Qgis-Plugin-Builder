@@ -258,11 +258,7 @@ class PluginBuilder:
         metadata_file = codecs.open(os.path.join(
             str(self.plugin_path), 'metadata.txt'), 'w', 'utf-8')
         metadata_comment = (
-            '# This file contains metadata for your plugin. Since \n'
-            '# version 2.0 of QGIS this is the proper way to supply \n'
-            '# information about a plugin. The old method of \n'
-            '# embedding metadata in __init__.py will \n'
-            '# is no longer supported since version 2.0.\n\n'
+            '# This file contains metadata for your plugin.\n\n'
             '# This file should be included when you package your plugin.'
             '# Mandatory items:\n\n')
         metadata_file.write(metadata_comment)
