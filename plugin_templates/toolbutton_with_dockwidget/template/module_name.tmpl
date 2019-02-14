@@ -21,7 +21,7 @@
  *                                                                         *
  ***************************************************************************/
 """
-from qgis.PyQt.QtCore import QSettings, QTranslator, qVersion, QCoreApplication, Qt
+from qgis.PyQt.QtCore import QSettings, QTranslator, QCoreApplication, Qt
 from qgis.PyQt.QtGui import QIcon
 from qgis.PyQt.QtWidgets import QAction
 # Initialize Qt resources from file resources.py
@@ -59,9 +59,7 @@ class ${TemplateClass}:
         if os.path.exists(locale_path):
             self.translator = QTranslator()
             self.translator.load(locale_path)
-
-            if qVersion() > '4.3.3':
-                QCoreApplication.installTranslator(self.translator)
+            QCoreApplication.installTranslator(self.translator)
 
         # Declare instance attributes
         self.actions = []
