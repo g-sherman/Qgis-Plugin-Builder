@@ -23,7 +23,7 @@ def get_qgis_app():
     """
 
     try:
-        from PyQt5 import QtGui, QtCore
+        from qgis.PyQt import QtGui, QtCore
         from qgis.core import QgsApplication
         from qgis.gui import QgsMapCanvas
         from .qgis_interface import QgisInterface

@@ -24,9 +24,9 @@
 import os
 from string import capwords
 
-from PyQt5 import QtGui, uic
-from PyQt5.QtCore import Qt, QFileInfo
-from PyQt5.QtWidgets import QMessageBox, QFrame, QDialog, QFileDialog
+from qgis.PyQt import QtGui, uic
+from qgis.PyQt.QtCore import Qt, QFileInfo
+from qgis.PyQt.QtWidgets import QMessageBox, QFrame, QDialog, QFileDialog
 from .plugin_templates import templates
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
