@@ -34,7 +34,7 @@ import os
 import sys
 import inspect
 
-from qgis.core import QgsProcessingAlgorithm, QgsApplication
+from qgis.core import Qgis, QgsProcessingAlgorithm, QgsApplication
 from .${TemplateModuleName}_provider import ${TemplateClass}Provider
 
 cmd_folder = os.path.split(inspect.getfile(inspect.currentframe()))[0]
@@ -46,10 +46,16 @@ if cmd_folder not in sys.path:
 class ${TemplateClass}Plugin(object):
 
     def __init__(self):
+        self.provider = None
+
+    def initProcessing(self):
+        """Init Processing provider for QGIS >= 3.8."""
         self.provider = ${TemplateClass}Provider()
+        QgsApplication.processingRegistry().addProvider(self.provider)
 
     def initGui(self):
-        QgsApplication.processingRegistry().addProvider(self.provider)
+        if Qgis.QGIS_VERSION_INT < 30800:
+            self.initProcessing()
 
     def unload(self):
         QgsApplication.processingRegistry().removeProvider(self.provider)
