@@ -31,11 +31,11 @@ import configparser
 import subprocess
 
 # Import the PyQt and QGIS libraries
-from PyQt5.QtCore import QFileInfo, QUrl, QFile, QDir, QSettings
-from PyQt5.QtWidgets import (
+from qgis.PyQt.QtCore import QFileInfo, QUrl, QFile, QDir, QSettings
+from qgis.PyQt.QtWidgets import (
     QAction, QFileDialog, QMessageBox)
 
-from PyQt5.QtGui import (QIcon,
+from qgis.PyQt.QtGui import (QIcon,
                          QDesktopServices,
                          QStandardItemModel,
                          QStandardItem
