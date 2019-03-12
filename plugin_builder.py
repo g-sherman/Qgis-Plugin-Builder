@@ -255,6 +255,8 @@ class PluginBuilder:
             replacement keys/values.
         :type specification: PluginSpecification
         """
+        processing_provider = (
+            specification.template_map.TemplateHasProcessingProvider)
         metadata_file = codecs.open(os.path.join(
             str(self.plugin_path), 'metadata.txt'), 'w', 'utf-8')
         metadata_comment = (
@@ -284,6 +286,9 @@ class PluginBuilder:
             '# End of mandatory metadata\n\n')
         metadata_file.write(
             '# Recommended items:\n\n')
+        metadata_file.write(
+            'hasProcessingProvider={}\n'.format(
+                'yes' if processing_provider else 'no'))
         metadata_file.write(
             '# Uncomment the following line and add your changelog:\n')
         metadata_file.write(

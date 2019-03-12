@@ -40,6 +40,8 @@ class ProcessingProviderPluginTemplate(PluginTemplate):
         return {
             # Makefile
             'TemplateQGISDir': deployment_dir,
+            # Metadata
+            'TemplateHasProcessingProvider': True,
             # Processing
             'TemplateAlgoName': frame.algo_name_text.text(),
             'TemplateAlgoGroup': frame.algo_group_text.text(),
