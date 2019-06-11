@@ -311,6 +311,17 @@ class PluginBuilder:
             '# deprecated flag (applies to the whole plugin, not '
             'just a single version)\n')
         metadata_file.write('deprecated=%s\n\n' % specification.deprecated)
+        metadata_file.write(
+            '# Since QGIS 3.8, a comma separated list of plugins to be '
+            'installed\n')
+        metadata_file.write('# (or upgraded) can be specified.\n')
+        metadata_file.write('Check the documentation for more information.\n')
+        metadata_file.write('# plugin_dependencies=\n\n')
+        metadata_file.write(
+            'Category of the plugin: Raster, Vector, Database or Web\n')
+        metadata_file.write('# category=\n\n')
+        metadata_file.write('# If the plugin can run on QGIS Server.\n')
+        metadata_file.write('server=False\n\n')
         metadata_file.close()
 
     def _prepare_results_html(self, specification):
