@@ -37,10 +37,10 @@ from .${TemplateModuleName}_algorithm import ${TemplateClass}Algorithm
 class ${TemplateClass}Provider(QgsProcessingProvider):
 
     def __init__(self):
+        """
+        Default constructor.
+        """
         QgsProcessingProvider.__init__(self)
-
-        # Load algorithms
-        self.alglist = [${TemplateClass}Algorithm()]
 
     def unload(self):
         """
@@ -53,8 +53,9 @@ class ${TemplateClass}Provider(QgsProcessingProvider):
         """
         Loads all algorithms belonging to this provider.
         """
-        for alg in self.alglist:
-            self.addAlgorithm( alg )
+        self.addAlgorithm(${TemplateClass}Algorithm())
+        # add additional algorithms here
+        # self.addAlgorithm(MyOtherAlgorithm())
 
     def id(self):
         """
@@ -72,6 +73,13 @@ class ${TemplateClass}Provider(QgsProcessingProvider):
         This string should be short (e.g. "Lastools") and localised.
         """
         return self.tr('$TemplateProviderName')
+
+    def icon(self):
+        """
+        Should return a QIcon which is used for your provider inside
+        the Processing toolbox.
+        """
+        return QgsProcessingProvider.icon(self)
 
     def longName(self):
         """
