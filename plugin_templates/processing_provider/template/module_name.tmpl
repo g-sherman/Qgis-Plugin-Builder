@@ -34,7 +34,7 @@ import os
 import sys
 import inspect
 
-from qgis.core import Qgis, QgsProcessingAlgorithm, QgsApplication
+from qgis.core import QgsProcessingAlgorithm, QgsApplication
 from .${TemplateModuleName}_provider import ${TemplateClass}Provider
 
 cmd_folder = os.path.split(inspect.getfile(inspect.currentframe()))[0]
@@ -54,8 +54,7 @@ class ${TemplateClass}Plugin(object):
         QgsApplication.processingRegistry().addProvider(self.provider)
 
     def initGui(self):
-        if Qgis.QGIS_VERSION_INT < 30800:
-            self.initProcessing()
+        self.initProcessing()
 
     def unload(self):
         QgsApplication.processingRegistry().removeProvider(self.provider)
