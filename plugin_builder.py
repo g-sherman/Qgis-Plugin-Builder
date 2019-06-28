@@ -256,7 +256,7 @@ class PluginBuilder:
         :type specification: PluginSpecification
         """
         processing_provider = (
-            specification.template_map.TemplateHasProcessingProvider)
+            specification.template_map['TemplateHasProcessingProvider'])
         metadata_file = codecs.open(os.path.join(
             str(self.plugin_path), 'metadata.txt'), 'w', 'utf-8')
         metadata_comment = (
@@ -315,7 +315,7 @@ class PluginBuilder:
             '# Since QGIS 3.8, a comma separated list of plugins to be '
             'installed\n')
         metadata_file.write('# (or upgraded) can be specified.\n')
-        metadata_file.write('Check the documentation for more information.\n')
+        metadata_file.write('# Check the documentation for more information.\n')
         metadata_file.write('# plugin_dependencies=\n\n')
         metadata_file.write(
             'Category of the plugin: Raster, Vector, Database or Web\n')
