@@ -9,11 +9,15 @@
 name=Plugin Builder 3
 about=Create a template for a QGIS plugin
 description=Creates a QGIS plugin template for use as a starting point in plugin development
-version=3.0.5
+version=3.2
 qgisMinimumVersion=2.99
 qgisMaximumVersion=3.99
 
-changelog=3.0.5 2018-12-31:
+changelog=3.2 2019-06-28
+      * Bug fixes
+    3.1 2018-12-31
+      * Fix issue with reload on generated plugins
+    3.0.5 2018-12-31:
       * Fix issue with reload on generated plugins
     3.0.4 2018-12-25:
       * Move dialog creation to run method.
