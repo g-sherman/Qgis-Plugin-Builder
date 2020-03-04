@@ -32,6 +32,50 @@ from qgis.core import QgsMapLayerRegistry
 from qgis.gui import QgsMapCanvasLayer
 LOGGER = logging.getLogger('InaSAFE')
 
+class QgisMessageBar(QObject):
+    """Class to simulate some QgsMessageBar behavior from unit testing.
+
+    This class is here for enabling us to run unit tests only,
+    so most methods are simply stubs.
+    """
+    def popWidget(self):
+        pass
+
+class QgisLegendInterface(QObject):
+    """Class to simulate some QgsLegendInterface behavior from unit testing.
+
+    This class is here for enabling us to run unit tests only,
+    so most methods are simply stubs.
+    """
+    def __init__(self):
+        """Constructor
+        """
+        QObject.__init__(self)
+        self.lgroups = []
+
+    def addGroup(self, groupname):
+        """Handle groups being added to the legend.
+           Added group strings will be returned when groups() is called."""
+        self.lgroups.append(groupname)
+
+    def groups(self):
+        """Handle request for legend groupnames
+        :return list of string groupnames"""
+        return self.lgroups
+
+    def moveLayer(self, lyr, groupIndex):
+        """Stub to handle moving a layer into a group by index
+        :lyr  the layer object
+        :groupIndex the index of the group in the legend"""
+        pass
+
+    def setLayerVisible(self, lyr, isvis):
+        """Stub to handle setting the visibility of a layer
+        :lyr layer object
+        :isvis bool to set visible"""
+        return self.lgroups
+
+
 
 #noinspection PyMethodMayBeStatic,PyPep8Naming
 class QgisInterface(QObject):
@@ -57,9 +101,10 @@ class QgisInterface(QObject):
         QgsMapLayerRegistry.instance().layerWasAdded.connect(self.addLayer)
         # noinspection PyArgumentList
         QgsMapLayerRegistry.instance().removeAll.connect(self.removeAllLayers)
-
+        self.active_layer = None
         # For processing module
         self.destCrs = None
+        self.legend = QgisLegendInterface()
 
     @pyqtSlot('QStringList')
     def addLayers(self, layers):
@@ -153,9 +198,11 @@ class QgisInterface(QObject):
     def activeLayer(self):
         """Get pointer to the active layer (layer selected in the legend)."""
         # noinspection PyArgumentList
-        layers = QgsMapLayerRegistry.instance().mapLayers()
-        for item in layers:
-            return layers[item]
+        return self.active_layer
+
+    def setActiveLayer(self, layer):
+        """Get pointer to the active layer (layer selected in the legend)."""
+        self.active_layer = layer
 
     def addToolBarIcon(self, action):
         """Add an icon to the plugins toolbar.
@@ -204,5 +251,10 @@ class QgisInterface(QObject):
         pass
 
     def legendInterface(self):
-        """Get the legend."""
-        return self.canvas
+        """Get stub for  QgsLegendInterface."""
+        return self.legend
+
+    def messageBar(self):
+        """get the stub for QgsMessageBar"""
+        return QgisMessageBar()
+
