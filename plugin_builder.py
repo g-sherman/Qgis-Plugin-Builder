@@ -112,12 +112,7 @@ class PluginBuilder:
         return True
 
     def _prepare_tests(self):
-        """Populate and write help files.
-
-        :param specification: Specification instance containing template
-            replacement keys/values.
-        :type specification: PluginSpecification
-        """
+        """Copy test files."""
         # copy the unit tests folder
         test_source = os.path.join(self.shared_dir, 'test')
         test_destination = os.path.join(self.plugin_path, 'test')
