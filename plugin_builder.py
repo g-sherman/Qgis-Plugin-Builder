@@ -39,7 +39,7 @@ from qgis.core import QgsApplication
 # Initialize Qt resources from file resources.py
 # Do not remove this import even though your IDE / pylint may report it unused
 # noinspection PyUnresolvedReferences
-from .resources import *  #pylint: disable=W0401,W0614
+from .resources import *  # pylint: disable=W0401,W0614
 
 # Import the code for the dialog
 from .plugin_builder_dialog import PluginBuilderDialog
