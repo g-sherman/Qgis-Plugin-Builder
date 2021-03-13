@@ -20,7 +20,7 @@
  *                                                                         *
  ***************************************************************************/
 """
-# Import Python stuff
+
 import os
 
 import errno
@@ -32,19 +32,14 @@ import subprocess
 
 # Import the PyQt and QGIS libraries
 from qgis.PyQt.QtCore import QFileInfo, QUrl, QFile, QDir, QSettings
-from qgis.PyQt.QtWidgets import (
-    QAction, QFileDialog, QMessageBox)
+from qgis.PyQt.QtWidgets import QAction, QFileDialog, QMessageBox
 
-from qgis.PyQt.QtGui import (QIcon,
-                         QDesktopServices,
-                         QStandardItemModel,
-                         QStandardItem
-                         )
+from qgis.PyQt.QtGui import QIcon, QDesktopServices, QStandardItemModel, QStandardItem
 from qgis.core import QgsApplication
 # Initialize Qt resources from file resources.py
 # Do not remove this import even though your IDE / pylint may report it unused
 # noinspection PyUnresolvedReferences
-from .resources import *  #pylint: disable=W0401,W0614
+from .resources import *  # pylint: disable=W0401,W0614
 
 # Import the code for the dialog
 from .plugin_builder_dialog import PluginBuilderDialog
@@ -117,12 +112,7 @@ class PluginBuilder:
         return True
 
     def _prepare_tests(self):
-        """Populate and write help files.
-
-        :param specification: Specification instance containing template
-            replacement keys/values.
-        :type specification: PluginSpecification
-        """
+        """Copy test files."""
         # copy the unit tests folder
         test_source = os.path.join(self.shared_dir, 'test')
         test_destination = os.path.join(self.plugin_path, 'test')
